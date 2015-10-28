@@ -11,13 +11,17 @@
 #import "Book.h"
 #import "User.h"
 #import "AgeRange.h"
+#import <CoreText/CoreText.h>
+#import <QuartzCore/QuartzCore.h>
+#import "CLImageEditor.h"
+
 #import "ChooseTemplateViewController.h"
 @class CreateBookViewController;
 @class Book;
 @class User;
 @class AgeRange;
 @class ChooseTemplateViewController;
-@interface BookTitleViewController : UIViewController<UIImagePickerControllerDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITextViewDelegate>
+@interface BookTitleViewController : UIViewController<UIImagePickerControllerDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITextViewDelegate,CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate>
 {
     Book *book;
     User *user;

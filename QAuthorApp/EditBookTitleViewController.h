@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface EditBookTitleViewController : UIViewController
+#import "Constant.h"
+#import "Book.h"
+#import "BookDetails.h"
+@interface EditBookTitleViewController : UIViewController<UIActionSheetDelegate>
 - (IBAction)onCoverPicTapped:(id)sender;
+@property (strong,nonatomic)Book *bookObj;
 @property (weak, nonatomic) IBOutlet UIImageView *coverPic;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextField *genreTextField;

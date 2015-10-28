@@ -21,6 +21,7 @@
 #import <Social/Social.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import "EditBookTitleViewController.h"
 @class AgeRange;
 @class CreateBookViewController;
 @class BookTitleViewController;
@@ -29,6 +30,7 @@
 @class BookDetailsViewController;
 @class BookLikes;
 @class ChooseTemplateViewController;
+@class EditBookTitleViewController;
 @interface HomeViewController : UIViewController<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UISearchDisplayDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate>{
     NSMutableArray *booksArray,*authorNamesArr,*searchResults,*filterdArray,*bObjectIdArr,*followingsArr;
     Book *bookObj;
@@ -48,8 +50,10 @@
 @property (nonatomic, strong) BookTitleViewController *bookTitleVC;
 @property (nonatomic, strong) ChooseTemplateViewController *chooseTemplateVC;
 @property (nonatomic, strong) BookDetailsViewController *bookDetailVC;
+@property (nonatomic, strong) EditBookTitleViewController *editBookTitleVC;
 @property (strong,nonatomic) BookListTableViewCell *bookListCell;
 -(void)btnLikeClicked:(id)sender;
+-(void)btnEditClicked:(id)sender;
 -(void)btnCommentClicked:(id)sender;
 -(void)btnShareClicked:(UIButton *)sender;
 -(void)fetchAllBooks;

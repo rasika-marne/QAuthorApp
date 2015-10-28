@@ -229,6 +229,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     ownPhotoTap = YES;
+    
     UIImage * pImage=[info objectForKey:UIImagePickerControllerOriginalImage];
     UIImageOrientation orient = pImage.imageOrientation;
     if (orient != UIImageOrientationUp) {
@@ -238,14 +239,62 @@
         UIGraphicsEndImageContext();
         pImage = normalizedImage;
     }
-    selectedTemplate = pImage;
-        [self.bookCoverImg setImage:pImage];
-    self.bookCoverImg.contentMode = UIViewContentModeScaleAspectFit;
-        [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    
+   // [picker dismissViewControllerAnimated:YES completion:nil];
+    
+
+    // UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    CLImageEditor *editor=[[CLImageEditor alloc] initWithImage:pImage delegate:self];
+    //[self.navigationController pushViewController:editor animated:YES];
+    //[picker presentViewController:editor animated:YES completion:nil];
+    [picker pushViewController:editor animated:YES];
+    
+
     // UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     
 }
+#pragma mark - CLImageEditor Delegate
+
+- (void)imageEditor:(CLImageEditor *)editor didFinishEdittingWithImage:(UIImage *)image
+{
+    //[self.m_oImage setImage:image forState:UIControlStateNormal];
+    UIImage *lowResImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 0.02)];
+    [self.bookCoverImg setImage:lowResImage];
+    selectedTemplate = lowResImage;
+    // [self.bookCoverImg setImage:pImage];
+    
+    
+    self.bookCoverImg.contentMode = UIViewContentModeScaleAspectFit;
+    [self refreshImageView];
+    
+    [editor dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imageEditor:(CLImageEditor *)editor willDismissWithImageView:(UIImageView *)imageView canceled:(BOOL)canceled
+{
+    [self refreshImageView];
+}
+- (void)refreshImageView
+{
+    [self resetImageViewFrame];
+    //[self resetZoomScaleWithAnimate:NO];
+}
+
+- (void)resetImageViewFrame
+{
+    CGSize size = (self.bookCoverImg.image) ? self.bookCoverImg.image.size : self.bookCoverImg.frame.size;
+    CGFloat ratio = MIN(self.view.frame.size.width / size.width, self.view.frame.size.height / size.height);
+    CGFloat W = ratio * size.width;
+    CGFloat H = ratio * size.height;
+    self.bookCoverImg.frame = CGRectMake(0, 0, W, H);
+    self.bookCoverImg.superview.bounds = self.bookCoverImg.bounds;
+}
+
+
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
      book.title = self.bookTitleTextField.text;

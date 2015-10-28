@@ -540,6 +540,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
   //  NSLog(@"authorId:%@",bookObj.authorId);
     if (myBooksClicked == YES) {
         self.bookListCell.editButton.hidden = NO;
+        [self.bookListCell.editButton addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
+        self.bookListCell.editButton.tag = indexPath.row;
     }
     else
     {
@@ -606,7 +608,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     
 }
-
+-(void)btnEditClicked:(UIButton *)sender{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
+    bookObj = [booksArray objectAtIndex:indexPath.row];
+    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.editBookTitleVC = (EditBookTitleViewController*)
+    [storyboard instantiateViewControllerWithIdentifier:@"EditBookTitleViewController"];
+    self.editBookTitleVC.bookObj = [Book createEmptyObject];
+    self.editBookTitleVC.bookObj = bookObj;
+    [self.navigationController pushViewController:self.editBookTitleVC animated:YES];
+}
 -(void)btnBuyClicked:(UIButton *)sender{
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     bookObj = [booksArray objectAtIndex:indexPath.row];

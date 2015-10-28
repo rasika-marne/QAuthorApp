@@ -13,9 +13,23 @@
 @end
 
 @implementation EditBookTitleViewController
-@synthesize coverPic,titleTextField,genreTextField,descTextView;
+@synthesize coverPic,titleTextField,genreTextField,descTextView,bookObj;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    PFFile *imageFile = bookObj.coverPic;
+    if (imageFile && ![bookObj.coverPic isEqual:[NSNull null]]) {
+        [bookObj.coverPic getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if (data) {
+                [coverPic setImage:[UIImage imageWithData:data]];
+            }
+            
+        }];
+    }
+    titleTextField.text = bookObj.title;
+    genreTextField.text = bookObj.genre;
+    descTextView.text = bookObj.shortDesc;
+    
+
     // Do any additional setup after loading the view.
 }
 
@@ -35,6 +49,10 @@
 */
 
 - (IBAction)onCoverPicTapped:(id)sender {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
+    [sheet showInView:self.view.window];
+    
+
 }
 - (IBAction)onSaveButtonClicked:(id)sender {
 }

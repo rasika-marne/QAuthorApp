@@ -443,7 +443,6 @@
 		FD2CDCD71BB5078300AD50AF /* QAuthorApp */ = {
 			isa = PBXGroup;
 			children = (
-				FD9C6A581BD79A8500849E75 /* Edit Book */,
 				FDAF88A31BCF7876002F276A /* Dashboard View */,
 				FDC6E4901BCB908900E34EB5 /* Constant */,
 				FD7B8DEB1BCBBE6A0065925D /* Storyboard */,
@@ -451,6 +450,7 @@
 				FDC6E48E1BCB903800E34EB5 /* Page Curl Class */,
 				FDC6E48D1BCB901A00E34EB5 /* App Delegate */,
 				FDC6E48C1BCB8FFD00E34EB5 /* Book Details */,
+				FD9C6A581BD79A8500849E75 /* Edit Book */,
 				FDC6E48B1BCB8FE000E34EB5 /* Create Book */,
 				FDC6E48A1BCB8FCB00E34EB5 /* Edit Profile */,
 				FDC6E4891BCB8FB600E34EB5 /* Registration */,
