@@ -13,7 +13,7 @@
 @end
 
 @implementation EditBookTitleViewController
-@synthesize coverPic,titleTextField,genreTextField,descTextView,bookObj;
+@synthesize coverPic,titleTextField,genreTextField,descTextView,bookObj,genreSelect;
 - (void)viewDidLoad {
     [super viewDidLoad];
     PFFile *imageFile = bookObj.coverPic;
@@ -31,6 +31,53 @@
     
 
     // Do any additional setup after loading the view.
+}
+-(void)viewWillAppear:(BOOL)animated{
+    PFQuery *query = [PFQuery queryWithClassName:BOOK_GENRE];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        if (!error) {
+            for (NSString *str in [objects valueForKey:@"genre"]) {
+                [self.pickerData addObject:str];
+            }
+            NSLog(@"picker data: %@", self.pickerData);
+            genreSelect = [[UIPickerView alloc] initWithFrame:CGRectMake(10, 200, 300, 200)];
+            genreSelect.showsSelectionIndicator = YES;
+            // languageSelect.hidden = NO;
+            genreSelect.delegate = self;
+            self.genreTextField.inputView = genreSelect;
+            //self.pickerData = genreArr;
+            // The find succeeded. The first 100 objects are available in objects
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+
+}
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView; {
+    return 1;
+}
+//Rows in each Column
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component; {
+    return [self.pickerData count];
+}
+
+////-----------UIPickerViewDelegate
+// these methods return either a plain NSString, a NSAttributedString, or a view (e.g UILabel) to display the row for the component.
+-(NSString*) pickerView:(UIPickerView*)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [self.pickerData objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
+{
+    //Write the required logic here that should happen after you select a row in Picker View.
+    self.genreTextField.text = [self.pickerData objectAtIndex:row];
+    [[self view]endEditing:YES];
+    
+    //    [languageSelect removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning {

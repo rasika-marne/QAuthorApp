@@ -21,7 +21,7 @@
 @class User;
 @class AgeRange;
 @class ChooseTemplateViewController;
-@interface BookTitleViewController : UIViewController<UIImagePickerControllerDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITextViewDelegate,CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate>
+@interface BookTitleViewController : UIViewController<UIImagePickerControllerDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITextViewDelegate,CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate,UINavigationControllerDelegate>
 {
     Book *book;
     User *user;

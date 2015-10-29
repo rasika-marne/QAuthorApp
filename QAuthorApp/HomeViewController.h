@@ -31,6 +31,7 @@
 @class BookLikes;
 @class ChooseTemplateViewController;
 @class EditBookTitleViewController;
+@class GADBannerView;
 @interface HomeViewController : UIViewController<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UISearchDisplayDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate>{
     NSMutableArray *booksArray,*authorNamesArr,*searchResults,*filterdArray,*bObjectIdArr,*followingsArr;
     Book *bookObj;
@@ -39,6 +40,7 @@
     AgeRange *ageRange;
     BOOL myBooksClicked,professionalClicked;
 }
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar1;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *bookSegments;
 @property (nonatomic, retain) UIPickerView *ageRangeSelect;

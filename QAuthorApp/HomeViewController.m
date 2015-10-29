@@ -5,7 +5,7 @@
 //  Created by Rasika  on 9/25/15.
 //  Copyright (c) 2015 Rasika . All rights reserved.
 //
-
+@import GoogleMobileAds;
 #import "HomeViewController.h"
 #import "AppDelegate.h"
 @interface HomeViewController ()
@@ -16,6 +16,11 @@
 @synthesize pickerData;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.bannerView.adUnitID = @"ca-app-pub-5468147316620707/4430610672";
+    self.bannerView.rootViewController = self;
+    
+    GADRequest *request = [GADRequest request];
+    [self.bannerView loadRequest:request];
     self.bookSegments.selectedSegmentIndex =0;
     myBooksClicked = NO;
     professionalClicked = NO;

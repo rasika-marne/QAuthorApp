@@ -94,6 +94,7 @@
 		FD3E51B11BCFB634004E0B6A /* YMCAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3E51AE1BCFB634004E0B6A /* YMCAudioPlayer.m */; };
 		FD41A7771BCB7C6E003B3C98 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD41A7761BCB7C6E003B3C98 /* FacebookSDK.framework */; };
 		FD4C575D1BC28B68002BA93F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4C575C1BC28B68002BA93F /* UIKit.framework */; };
+		FD58B0541BE0C7A000021D01 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD58B0531BE0C7A000021D01 /* GoogleMobileAds.framework */; };
 		FD7B8DF11BCBC6DD0065925D /* BookComment.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7B8DF01BCBC6DD0065925D /* BookComment.m */; };
 		FD7B8DF41BCBD53D0065925D /* BookLikes.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7B8DF31BCBD53D0065925D /* BookLikes.m */; };
 		FD7C6C9B1BBA887E00887E2D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7C6C9A1BBA887E00887E2D /* AdSupport.framework */; };
@@ -308,6 +309,7 @@
 		FD3E51AE1BCFB634004E0B6A /* YMCAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YMCAudioPlayer.m; path = ../YMCAudioPlayer.m; sourceTree = "<group>"; };
 		FD41A7761BCB7C6E003B3C98 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = facebooksdk/FacebookSDK.framework; sourceTree = "<group>"; };
 		FD4C575C1BC28B68002BA93F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FD58B0531BE0C7A000021D01 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		FD7B8DEF1BCBC6DD0065925D /* BookComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookComment.h; sourceTree = "<group>"; };
 		FD7B8DF01BCBC6DD0065925D /* BookComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookComment.m; sourceTree = "<group>"; };
 		FD7B8DF21BCBD53D0065925D /* BookLikes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookLikes.h; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 				FD2CDD061BB5176200AD50AF /* MobileCoreServices.framework in Frameworks */,
 				FD2CDD041BB5175600AD50AF /* SystemConfiguration.framework in Frameworks */,
 				FD2CDD021BB5174D00AD50AF /* CFNetwork.framework in Frameworks */,
+				FD58B0541BE0C7A000021D01 /* GoogleMobileAds.framework in Frameworks */,
 				FD2CDCFF1BB5171000AD50AF /* Parse.framework in Frameworks */,
 				FD41A7771BCB7C6E003B3C98 /* FacebookSDK.framework in Frameworks */,
 			);
@@ -493,6 +496,7 @@
 		FD2CDD0B1BB5177500AD50AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD58B0531BE0C7A000021D01 /* GoogleMobileAds.framework */,
 				FD41A7761BCB7C6E003B3C98 /* FacebookSDK.framework */,
 				FDE4D8C41BC682C100BFB646 /* QuickLook.framework */,
 				FD4C575C1BC28B68002BA93F /* UIKit.framework */,

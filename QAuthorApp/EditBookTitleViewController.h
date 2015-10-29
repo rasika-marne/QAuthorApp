@@ -10,13 +10,15 @@
 #import "Constant.h"
 #import "Book.h"
 #import "BookDetails.h"
-@interface EditBookTitleViewController : UIViewController<UIActionSheetDelegate>
+@interface EditBookTitleViewController : UIViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 - (IBAction)onCoverPicTapped:(id)sender;
 @property (strong,nonatomic)Book *bookObj;
 @property (weak, nonatomic) IBOutlet UIImageView *coverPic;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextField *genreTextField;
 @property (weak, nonatomic) IBOutlet UITextView *descTextView;
+@property (nonatomic, retain) UIPickerView *genreSelect;
+@property (nonatomic, retain)  NSMutableArray *pickerData;
 - (IBAction)onSaveButtonClicked:(id)sender;
 
 @end
