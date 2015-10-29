@@ -163,7 +163,7 @@
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="164" sectionHeaderHeight="2" sectionFooterHeight="2" translatesAutoresizingMaskIntoConstraints="NO" id="a8Z-zg-Lcz">
                                 <rect key="frame" x="5" y="118" width="590" height="374"/>
-                                <color key="backgroundColor" red="0.84241253400000005" green="0.84241253400000005" blue="0.84241253400000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookListTableViewCell" rowHeight="164" id="Zxc-Jt-MtR" customClass="BookListTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
