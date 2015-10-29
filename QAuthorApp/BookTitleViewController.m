@@ -16,6 +16,7 @@
 @synthesize genreSelect,BackImage,backImg1;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor: RGB(114, 197, 213)]; 
     ownPhotoTap = NO;
     self.navigationItem.title = @"Create Book";
     BackImage.image = backImg1;
@@ -175,8 +176,8 @@
                     [storyboard instantiateViewControllerWithIdentifier:@"CreateBookViewController"];
                     NSLog(@"book obj:%@",book);
                     NSLog(@"book title obj:%@",book.title);
-                    self.createBookVC.backImg1 = [[UIImage alloc]init];
-                    self.createBookVC.backImg1 = backImg1;
+                   // self.createBookVC.backImg1 = [[UIImage alloc]init];
+                    //self.createBookVC.backImg1 = backImg1;
                     self.createBookVC.bookObj = [Book createEmptyObject];
                     self.createBookVC.bookObj = book;
                     [self.navigationController pushViewController:self.createBookVC animated:YES];

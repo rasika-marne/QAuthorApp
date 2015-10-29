@@ -16,6 +16,7 @@
 @synthesize imageView1,textView1,ViewToPDF,bookObj,bookDetailsObj,backImage,backImg1;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor: RGB(114, 197, 213)]; 
     NSLog(@"book obj:%@",bookObj);
     backImage.image = backImg1;
 

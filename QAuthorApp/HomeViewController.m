@@ -16,6 +16,7 @@
 @synthesize pickerData;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor: RGB(114, 197, 213)]; 
     self.bannerView.adUnitID = @"ca-app-pub-5468147316620707/4430610672";
     self.bannerView.rootViewController = self;
     

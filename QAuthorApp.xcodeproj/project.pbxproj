@@ -455,7 +455,6 @@
 				FDC6E48C1BCB8FFD00E34EB5 /* Book Details */,
 				FD9C6A581BD79A8500849E75 /* Edit Book */,
 				FDC6E48B1BCB8FE000E34EB5 /* Create Book */,
-				FDC6E48A1BCB8FCB00E34EB5 /* Edit Profile */,
 				FDC6E4891BCB8FB600E34EB5 /* Registration */,
 				FDC6E4881BCB8FA300E34EB5 /* Home View */,
 				FDC6E4871BCB8ABF00E34EB5 /* Login View */,
@@ -922,6 +921,7 @@
 			children = (
 				FD7D4E421BB90C6300DD3F76 /* RegistrationViewController.h */,
 				FD7D4E431BB90C6300DD3F76 /* RegistrationViewController.m */,
+				FDC6E48A1BCB8FCB00E34EB5 /* Edit Profile */,
 			);
 			name = Registration;
 			sourceTree = "<group>";

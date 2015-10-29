@@ -16,6 +16,7 @@
 @synthesize userNameTextField,pswrdTextField;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor: RGB(114, 197, 213)]; 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleFBSessionStateChangeWithNotification:)
                                                  name:@"SessionStateChangeNotification"
