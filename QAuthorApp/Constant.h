@@ -101,7 +101,7 @@ typedef void (^UserIdResultBlock)(id object, NSError *error);
 #define TEXT_CONTENT                @"textContent"
 #define IMAGE_CONTENT               @"imageContent"
 #define AUDIO_CONTENT               @"audioContent"
-
+#define PAGE_PDF                    @"pagePDF"
 
 
 //---------- AgeRange Constant -------//

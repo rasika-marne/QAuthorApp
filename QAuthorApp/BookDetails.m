@@ -10,7 +10,7 @@
 
 @implementation BookDetails
 @synthesize objectId,bookId,pageNumber,textContent,imageContent;
-@synthesize audioContent;
+@synthesize audioContent,pagePDF;
 
 +(BookDetails *)createEmptyObject{
     BookDetails *note=[[BookDetails alloc]initWithClassName:BOOK_DETAILS];
@@ -30,7 +30,7 @@
     
     note.imageContent = [pobj objectForKey:IMAGE_CONTENT];
     note.audioContent = [pobj objectForKey:AUDIO_CONTENT];
-    
+    note.pagePDF = [pobj objectForKey:PAGE_PDF];
 
     
     return note;
@@ -56,7 +56,10 @@
     if (self.audioContent) {
         [pObj setObject:self.audioContent forKey:AUDIO_CONTENT];
     }
-    
+    if (self.pagePDF) {
+        [pObj setObject:self.pagePDF forKey:PAGE_PDF];
+    }
+
     return pObj;
 }
 

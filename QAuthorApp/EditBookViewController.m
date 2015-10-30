@@ -20,10 +20,6 @@
     count = 1;
       self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
     bookDetailsArr = [[NSMutableArray alloc]init];
-    
-    // Do any additional setup after loading the view.
-}
--(void)viewWillAppear:(BOOL)animated{
     //get book details
     BookDetails *bookDet = [BookDetails createEmptyObject];
     [bookDet fetchBookDetailBlockForBook:bookId block1:^(NSMutableArray *objects, NSError *error) {
@@ -41,17 +37,21 @@
                     
                 }];
             }
-
+            
             textView1.text = b1.textContent;
             
         }
     }];
+
+    // Do any additional setup after loading the view.
 }
+-(void)viewWillAppear:(BOOL)animated{
+   }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)createPdftoShare:(UIView *)view{
+-(NSString*)createPdftoShare:(UIView *)view{
     
     
     
@@ -83,6 +83,7 @@
     [view.layer renderInContext:pdfContext];
     CGContextEndPage (pdfContext);
     CGContextRelease (pdfContext);
+    return filePath;
 }
 - (CGContextRef) createPDFContext:(CGRect)inMediaBox path:(CFStringRef) path{
     CGContextRef myOutContext = NULL;
@@ -380,7 +381,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             UIImage *image = [self scaleAndRotateImage:imageView1.image];
             NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
             
-            PFFile *imgFile = [PFFile fileWithName:@"CoverPage.jpg" data:imageData];
+            PFFile *imgFile = [PFFile fileWithName:[NSString stringWithFormat:@"page%d.jpg",count] data:imageData];
             if (imageView1 !=nil) {
                 [object setObject:imgFile forKey:IMAGE_CONTENT];
             }
@@ -398,6 +399,12 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
                 PFFile *audioFile = [PFFile fileWithName:[NSString stringWithFormat:@"audio%d.caf",count] data:data];
                 [object setValue:audioFile forKey:AUDIO_CONTENT];
             }
+            NSString *path= [self createPdftoShare:self.viewForPdf];
+            NSData *myData1 = [NSData dataWithContentsOfFile:path];
+            PFFile *pdf = [PFFile fileWithName:[NSString stringWithFormat:@"page%d.pdf",count] data:myData1];
+            NSLog(@"book id:%@",bookId);
+            [object setValue:pdf forKey:PAGE_PDF];
+
             [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 [APP_DELEGATE stopActivityIndicator];
                 if (!error) {
@@ -407,6 +414,9 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
                                                           cancelButtonTitle:@"OK"
                                                           otherButtonTitles:nil];
                     [alert show];
+                   
+                    
+                    
                     //alert.tag = 11;
                     
                 }

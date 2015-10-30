@@ -58,7 +58,7 @@
 }
 
 
--(void)createPdftoShare:(UIView *)view{
+-(NSString*)createPdftoShare:(UIView *)view{
     
     
     
@@ -90,6 +90,7 @@
     [view.layer renderInContext:pdfContext];
     CGContextEndPage (pdfContext);
     CGContextRelease (pdfContext);
+    return filePath;
 }
 - (CGContextRef) createPDFContext:(CGRect)inMediaBox path:(CFStringRef) path{
     CGContextRef myOutContext = NULL;
@@ -127,8 +128,10 @@
 }
 
 - (IBAction)onClickAddPagesBtn:(id)sender{
-    
+    NSString *path = [self createPdftoShare:ViewToPDF];
+    NSData *myData = [NSData dataWithContentsOfFile:path];
     NSLog(@"book id:%@",bookObj.objectId);
+    bookDetailsObj.pagePDF = [PFFile fileWithName:[NSString stringWithFormat:@"Page%d.pdf",count] data:myData];
     bookDetailsObj.bookId = bookObj.objectId;
     bookDetailsObj.pageNumber = [NSNumber numberWithInteger:count];
     bookDetailsObj.textContent = textView1.text;
@@ -162,7 +165,8 @@
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
-            [self createPdftoShare:ViewToPDF];
+           
+            
             count++;
             self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
           
@@ -176,10 +180,13 @@
     
    // imageView1.image = [UIImage imageNamed:@"BookCover.jpg"];
     
-    }
+}
 
 - (IBAction)onFinishBookBtn:(id)sender{
-    [self createPdftoShare:ViewToPDF];
+    NSString *path = [self createPdftoShare:ViewToPDF];
+    NSData *myData1 = [NSData dataWithContentsOfFile:path];
+    NSLog(@"book id:%@",bookObj.objectId);
+    bookDetailsObj.pagePDF = [PFFile fileWithName:[NSString stringWithFormat:@"Page%d.pdf",count] data:myData1];
     NSMutableArray *pathsArr = [[NSMutableArray alloc]init];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *layOutPath=[NSString stringWithFormat:@"%@/Merged/PDF",[paths objectAtIndex:0]];
@@ -199,7 +206,7 @@
         
         // Now let's update it with some new data. In this case, only cheatMode and score
         // will get sent to the cloud. playerName hasn't changed.
-        gObj[PDF_FILE] = [PFFile fileWithData:myData];
+        gObj[PDF_FILE] = [PFFile fileWithName:@"Book.pdf" data:myData];
         [gObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(!error){
                 NSLog(@"book updated!!");

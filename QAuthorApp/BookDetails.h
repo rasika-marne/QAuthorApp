@@ -19,7 +19,7 @@ typedef void (^arrayResultBlock)(NSMutableArray *objects, NSError *error);
 
 @property (nonatomic, strong) PFFile *imageContent;
 @property (nonatomic, strong) PFFile *audioContent;
-
+@property (nonatomic, strong) PFFile *pagePDF;
 
 
 -(PFObject*)convertBookDetailsToPFObject;
