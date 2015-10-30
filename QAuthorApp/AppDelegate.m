@@ -140,7 +140,7 @@
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     self.uniNavController = self.navigationController;
     self.window.rootViewController = self.navigationController;
-    
+     self.navigationController.navigationBar.barTintColor =NAVBARCOLOR;
     // [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"PINForManagerAndCoach"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:KMessageCount];
     

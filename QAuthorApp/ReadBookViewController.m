@@ -17,6 +17,7 @@
 @synthesize modelController = _modelController;
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
     bookDetailsArray = [[NSMutableArray alloc]init];
     bookDet = [BookDetails createEmptyObject];
        self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];

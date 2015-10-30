@@ -16,6 +16,7 @@
 @synthesize pickerData,countrySelect,authorSelect;
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
     self.navigationItem.title = @"Registration";
     authorNameArr = [[NSMutableArray alloc]init];
     SWRevealViewController *revealController = [self revealViewController];

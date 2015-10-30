@@ -150,7 +150,7 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:soundFilePath]) {
         NSURL *url = [NSURL fileURLWithPath:soundFilePath];
         NSData *data = [NSData dataWithContentsOfURL:url];
-        bookDetailsObj.audioContent = [PFFile fileWithName:[NSString stringWithFormat:@"audio%d.jpg",count] data:data];
+        bookDetailsObj.audioContent = [PFFile fileWithName:[NSString stringWithFormat:@"audio%d.caf",count] data:data];
     }
     [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
     [bookDetailsObj saveBookDetailsBlock:^(id object, NSError *error) {

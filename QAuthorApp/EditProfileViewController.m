@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
     self.navigationItem.title = @"Edit Profile";
     authorNameArr = [[NSMutableArray alloc]init];
     SWRevealViewController *revealController = [self revealViewController];

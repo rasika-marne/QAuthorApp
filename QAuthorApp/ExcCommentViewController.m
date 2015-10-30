@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     bComment = [BookComment createEmptyObject];
+     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     

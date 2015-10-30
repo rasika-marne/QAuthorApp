@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
     // Do any additional setup after loading the view.
 }
 

@@ -277,7 +277,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             if ([bookDetailsArr count]>count) {
                 count++;
                 BookDetails *b2 = [BookDetails createEmptyObject];
-                b2 = [bookDetailsArr objectAtIndex:count];
+                b2 = [bookDetailsArr objectAtIndex:count-1];
                 self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
                 PFFile *imageFile = b2.imageContent;
                 if (imageFile && ![b2.imageContent isEqual:[NSNull null]]) {
@@ -296,7 +296,244 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         }
     }
 }
+- (IBAction)recordAudio:(id)sender
+{
+    [self resignKeyboard];
+    UIButton *button=(UIButton*)sender;
+    if (button.tag == RECORD_BUTTON_TAG) {
+        [self startRecording];
+        button.tag = STOP_RECORDING_BUTTON_TAG;
+    }
+    else{
+        [self stop];
+        self.recordAudioButton.hidden = NO;
+        button.tag = RECORD_BUTTON_TAG;
+    }
+    
+}
+-(void)resignKeyboard
+{
+    if (activeTextView) {
+        [activeTextView resignFirstResponder];
+        activeTextView = nil;
+    }
+}
+
+#pragma mark - Start Audio Recording
+
+-(void)startRecording
+{
+    if (self.storySoundFilePath.length>0) {
+        UIAlertView * alert=[[UIAlertView alloc]initWithTitle:@"Alert" message:@"Already recorded file is available, Are you sure you want record new file?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        alert.tag = AUDIO_RECORD_BUTTON_INDEX;
+        [alert show];
+        
+    }
+    else{
+        //self.isForRecordAudio = NO;
+        [self.recordAudioButton setBackgroundImage:[UIImage imageNamed:RECORD_AUDIO_START_BUTTON] forState:UIControlStateNormal];
+        if (!self.audioPlayerObject) {
+            self.audioPlayerObject = [[StoryAudioPlayer alloc]init];
+        }
+        [self.audioPlayerObject recordAudio:[self saveSoundFile]];
+        
+    }
+    
+}
+#pragma mark - Stop Audio Recording / Playing
+
+-(void)stop
+{
+    
+    [self.recordAudioButton setBackgroundImage:[UIImage imageNamed:RECORD_AUDIO_BUTTON] forState:UIControlStateNormal];
+   // self.listenRecorAudioButton.hidden = NO;
+    if (!self.audioPlayerObject) {
+        self.audioPlayerObject = [[StoryAudioPlayer alloc]init];
+    }
+    [self.audioPlayerObject stopRecording];
+    //self.isForRecordAudio = YES;
+}
+#pragma mark - Save Audio File
+
+-(NSURL*) saveSoundFile
+{
+    SaveFile* saveFileObject = [[SaveFile alloc]init];
+    self.storyId = [NSString stringWithFormat:@"%d",count];
+    NSURL* soundFileURL = [saveFileObject saveSoundFile:self.storyId];
+    return soundFileURL;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    activeTextView = textView;
+    
+    textView.text = @"";
+}
 
 - (IBAction)onSaveButtonClicked:(id)sender {
+    [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
+    PFQuery *query = [PFQuery queryWithClassName:BOOK_DETAILS];
+    [query whereKey:BOOK_ID equalTo:bookId];
+    [query whereKey:PAGE_NUMBER equalTo:[NSNumber numberWithInt:count]];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (!error) {
+            [object setValue:textView1.text forKey:TEXT_CONTENT];
+            UIImage *image = [self scaleAndRotateImage:imageView1.image];
+            NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
+            
+            PFFile *imgFile = [PFFile fileWithName:@"CoverPage.jpg" data:imageData];
+            if (imageView1 !=nil) {
+                [object setObject:imgFile forKey:IMAGE_CONTENT];
+            }
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *docsDir;
+            docsDir = [NSString stringWithFormat:@"%@/%@", [paths objectAtIndex:0],ROOTFILENAME];
+            
+            
+            // NSString *documentsDirectoryPath = [paths objectAtIndex:0];
+            NSString *soundFilePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"audio%d.caf",count]];
+            //NSString* audioFilePath = ;
+            if ([[NSFileManager defaultManager] fileExistsAtPath:soundFilePath]) {
+                NSURL *url = [NSURL fileURLWithPath:soundFilePath];
+                NSData *data = [NSData dataWithContentsOfURL:url];
+                PFFile *audioFile = [PFFile fileWithName:[NSString stringWithFormat:@"audio%d.caf",count] data:data];
+                [object setValue:audioFile forKey:AUDIO_CONTENT];
+            }
+            [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                [APP_DELEGATE stopActivityIndicator];
+                if (!error) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                    message:@"Page Edited successfully!!!"
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                    //alert.tag = 11;
+                    
+                }
+                else{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                    message:@"ERROR!!!"
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                }
+                
+
+            }];
+
+        }
+        
+
+    }];
+
 }
+- (UIImage *)scaleAndRotateImage:(UIImage *)image {
+    int kMaxResolution = 640; // Or whatever
+    
+    CGImageRef imgRef = image.CGImage;
+    
+    CGFloat width = CGImageGetWidth(imgRef);
+    CGFloat height = CGImageGetHeight(imgRef);
+    
+    
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    CGRect bounds = CGRectMake(0, 0, width, height);
+    if (width > kMaxResolution || height > kMaxResolution) {
+        CGFloat ratio = width/height;
+        if (ratio > 1) {
+            bounds.size.width = kMaxResolution;
+            bounds.size.height = roundf(bounds.size.width / ratio);
+        }
+        else {
+            bounds.size.height = kMaxResolution;
+            bounds.size.width = roundf(bounds.size.height * ratio);
+        }
+    }
+    
+    CGFloat scaleRatio = bounds.size.width / width;
+    CGSize imageSize = CGSizeMake(CGImageGetWidth(imgRef), CGImageGetHeight(imgRef));
+    CGFloat boundHeight;
+    UIImageOrientation orient = image.imageOrientation;
+    switch(orient) {
+            
+        case UIImageOrientationUp: //EXIF = 1
+            transform = CGAffineTransformIdentity;
+            break;
+            
+        case UIImageOrientationUpMirrored: //EXIF = 2
+            transform = CGAffineTransformMakeTranslation(imageSize.width, 0.0);
+            transform = CGAffineTransformScale(transform, -1.0, 1.0);
+            break;
+            
+        case UIImageOrientationDown: //EXIF = 3
+            transform = CGAffineTransformMakeTranslation(imageSize.width, imageSize.height);
+            transform = CGAffineTransformRotate(transform, M_PI);
+            break;
+            
+        case UIImageOrientationDownMirrored: //EXIF = 4
+            transform = CGAffineTransformMakeTranslation(0.0, imageSize.height);
+            transform = CGAffineTransformScale(transform, 1.0, -1.0);
+            break;
+            
+        case UIImageOrientationLeftMirrored: //EXIF = 5
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeTranslation(imageSize.height, imageSize.width);
+            transform = CGAffineTransformScale(transform, -1.0, 1.0);
+            transform = CGAffineTransformRotate(transform, 3.0 * M_PI / 2.0);
+            break;
+            
+        case UIImageOrientationLeft: //EXIF = 6
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeTranslation(0.0, imageSize.width);
+            transform = CGAffineTransformRotate(transform, 3.0 * M_PI / 2.0);
+            break;
+            
+        case UIImageOrientationRightMirrored: //EXIF = 7
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeScale(-1.0, 1.0);
+            transform = CGAffineTransformRotate(transform, M_PI / 2.0);
+            break;
+            
+        case UIImageOrientationRight: //EXIF = 8
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeTranslation(imageSize.height, 0.0);
+            transform = CGAffineTransformRotate(transform, M_PI / 2.0);
+            break;
+            
+        default:
+            [NSException raise:NSInternalInconsistencyException format:@"Invalid image orientation"];
+            
+    }
+    
+    UIGraphicsBeginImageContext(bounds.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    if (orient == UIImageOrientationRight || orient == UIImageOrientationLeft) {
+        CGContextScaleCTM(context, -scaleRatio, scaleRatio);
+        CGContextTranslateCTM(context, -height, 0);
+    }
+    else {
+        CGContextScaleCTM(context, scaleRatio, -scaleRatio);
+        CGContextTranslateCTM(context, 0, -height);
+    }
+    
+    CGContextConcatCTM(context, transform);
+    
+    CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, width, height), imgRef);
+    UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return imageCopy;
+}
+
 @end

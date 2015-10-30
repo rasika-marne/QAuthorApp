@@ -63,6 +63,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
     if ([self.audioPlayer isPlaying] == YES) {
         [self.audioPlayer pauseAudio];
     }

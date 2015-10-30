@@ -31,7 +31,7 @@
 #define IS_POPULATED_INTEGER(str) (str && [str isKindOfClass:] && [(str) length] > 0)
 #define TRIM_CHARACTER_SET [NSCharacterSet whitespaceAndNewlineCharacterSet]
 #define APP_DELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
-#define NAVBARCOLOR [UIColor  colorWithRed:68.0/255.0f green:98.0/255.0f blue:162.0/255.0f alpha:1.0f]
+#define NAVBARCOLOR [UIColor  colorWithRed:17.0/255.0f green:65.0/255.0f blue:97.0/255.0f alpha:1.0f]
 #define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 //Facebook credentials
 #define FbClientID @"423047544565291"

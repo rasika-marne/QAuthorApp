@@ -16,6 +16,7 @@
 @synthesize bookObj1,authorName;
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
     self.navigationItem.title = @"Book Details";
     
     SWRevealViewController *revealController = [self revealViewController];
