@@ -9,7 +9,7 @@
 #import "ExcCommentViewController.h"
 #import "ExcCommentTableViewCell.h"
 #import "Constant.h"
-
+#import <UIKit/UIKit.h>
 @interface ExcCommentViewController ()
 
 @end
@@ -22,7 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     bComment = [BookComment createEmptyObject];
-     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
+    [self navigationMethod];
+    [self.view setBackgroundColor: RGB];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     
@@ -42,6 +43,19 @@
 {
         [self fetchExceptionData];
     
+}
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    self.title=@"Comment View";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

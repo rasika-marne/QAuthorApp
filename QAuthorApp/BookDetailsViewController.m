@@ -16,8 +16,9 @@
 @synthesize bookObj1,authorName;
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
-    self.navigationItem.title = @"Book Details";
+     [self.view setBackgroundColor: RGB];
+    [self navigationMethod];
+    
     
     SWRevealViewController *revealController = [self revealViewController];
     UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
@@ -33,7 +34,20 @@
     self.bookTitleLbl.text = bookObj1.title;
     // Do any additional setup after loading the view.
 }
-
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    //self.title=@"Home";
+    self.navigationItem.title = @"Book Details";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

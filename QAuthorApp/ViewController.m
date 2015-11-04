@@ -16,7 +16,8 @@
 @synthesize userNameTextField,pswrdTextField;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor: RGB(114, 197, 213)]; 
+    [self navigationMethod];
+    [self.view setBackgroundColor: RGB]; 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleFBSessionStateChangeWithNotification:)
                                                  name:@"SessionStateChangeNotification"
@@ -97,7 +98,7 @@
 
                 [APP_DELEGATE stopActivityIndicator];
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                [defaults setValue:APP_DELEGATE.loggedInUser.objectId forKey:@"userId"];
+                [defaults setValue:APP_DELEGATE.loggedInUser.objectId forKey:USER_ID];
                  [defaults setValue:@"Yes" forKey:@"LoginUserSucessFlag"];
                 
                 [defaults synchronize];
@@ -105,6 +106,7 @@
                 [APP_DELEGATE saveLoggedInUserId:APP_DELEGATE.loggedInUser.objectId andPwd:[self.pswrdTextField.text stringByTrimmingCharactersInSet:TRIM_CHARACTER_SET] andUserName:[self.userNameTextField.text stringByTrimmingCharactersInSet:TRIM_CHARACTER_SET]];
                 NSString *userName = [NSString stringWithFormat:@"%@ %@",[object valueForKey:@"firstName"],[object valueForKey:@"lastName"]];
                 [[NSUserDefaults standardUserDefaults]setValue:userName forKey:@"UserName"];
+                
                 PFInstallation *currentInstallation = [PFInstallation currentInstallation];
                 [currentInstallation setObject:APP_DELEGATE.loggedInUser.objectId forKey:@"userId"];
                 [currentInstallation saveInBackground];
@@ -255,6 +257,20 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         // In case an error has occurred, then just log the error and update the UI accordingly.
         NSLog(@"Error: %@", [error localizedDescription]);
     }
+}
+
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    self.title=@"Login";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
 #pragma mark - Parse Error Alert
 

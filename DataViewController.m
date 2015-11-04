@@ -49,13 +49,13 @@
 #import "PDFView.h"
 #import "PDFScrollView.h"
 #import "TiledPDFView.h"
-
+#import <UIKit/UIKit.h>
 @interface DataViewController ()
 
 @end
 
 @implementation DataViewController
-@synthesize audioFile;
+@synthesize audioFile,bookId;
 -(void) dealloc {
     if( self.page != NULL ) CGPDFPageRelease( self.page );
 }
@@ -63,7 +63,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
+    [self navigationMethod];
+     [self.view setBackgroundColor: RGB]; 
     if ([self.audioPlayer isPlaying] == YES) {
         [self.audioPlayer pauseAudio];
     }
@@ -72,6 +73,7 @@
    // bookDetailsArray = [[NSMutableArray alloc]init];
     self.audioPlayer = [[YMCAudioPlayer alloc] init];
     PFQuery *query = [PFQuery queryWithClassName:BOOK_DETAILS];
+    [query whereKey:BOOK_ID equalTo:SELECTEDBOOKID];
     [query whereKey:PAGE_NUMBER equalTo:[NSNumber numberWithInt:self.pageNumber]];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!error) {
@@ -91,6 +93,19 @@
 
     if( self.page != NULL ) CGPDFPageRetain( self.page );
     [self.scrollView setPDFPage:self.page];
+}
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+   // self.title=@"Login";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
 - (BOOL)prefersStatusBarHidden
 {

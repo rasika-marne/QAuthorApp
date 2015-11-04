@@ -17,7 +17,8 @@
 @synthesize modelController = _modelController;
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
+     [self.view setBackgroundColor: RGB];
+    [self navigationMethod];
     bookDetailsArray = [[NSMutableArray alloc]init];
     bookDet = [BookDetails createEmptyObject];
        self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
@@ -47,7 +48,19 @@
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
     // Do any additional setup after loading the view.
 }
-
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    //self.title=@"";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

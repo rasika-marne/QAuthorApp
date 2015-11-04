@@ -16,9 +16,27 @@
 @synthesize bookId,imageView1,textView1;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor: RGB(114, 197, 213)]; 
-    count = 1;
-      self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
+    [self navigationMethod];
+    [self.view setBackgroundColor: RGB];
+
+    //remove files from merged/pdf directory
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *layOutPath=[NSString stringWithFormat:@"%@/Merged/PDF",[paths objectAtIndex:0]];
+    
+    
+    NSError *error = nil;
+    for (NSString *file in [fm contentsOfDirectoryAtPath:layOutPath error:&error]) {
+        BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@%@", layOutPath, file] error:&error];
+        if (!success || error) {
+            // it failed.
+        }
+    }
+    
+
+    pagePDFArr = [[NSMutableArray alloc]init];
+       count = 1;
+    self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
     bookDetailsArr = [[NSMutableArray alloc]init];
     //get book details
     BookDetails *bookDet = [BookDetails createEmptyObject];
@@ -35,15 +53,67 @@
                         [imageView1 setImage:[UIImage imageWithData:data]];
                     }
                     
+                    
                 }];
             }
+            for (int i=0; i<[bookDetailsArr count]; i++) {
+                BookDetails *bDetObj = [BookDetails createEmptyObject];
+                bDetObj = [bookDetailsArr objectAtIndex:i];
+                PFFile *pagePDF = bDetObj.pagePDF;
+                [pagePDFArr addObject:pagePDF];
+            }
             
+            //downloads files from parse to merged/pdf directory
+            for (int i =0; i<[pagePDFArr count]; i++) {
+                PFFile *pagePdf = [pagePDFArr objectAtIndex:i];
+                [pagePdf getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    if ( data )
+                    {
+                        
+                        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                        NSString *layOutPath=[NSString stringWithFormat:@"%@/Merged/PDF",[paths objectAtIndex:0]];
+                        
+                        //NSString *directroyPath = nil;
+                        //directroyPath = [APP_DELEGATE SharedPDFFilesFolderPath];
+                        
+                        NSString *filePath = [layOutPath stringByAppendingPathComponent:[NSString stringWithFormat:@"/page%d.pdf",i+1]];
+                        [[NSFileManager defaultManager] createFileAtPath:filePath
+                                                                contents:data
+                                                              attributes:nil];
+                        //if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+                            //[data writeToFile:filePath atomically:YES];
+                       // }
+                        
+                        
+                    }
+                    
+
+                }];
+                //NSURL  *url = [NSURL URLWithString:pagePdf.url];
+               
+            }
+            
+
             textView1.text = b1.textContent;
             
         }
     }];
-
+    
+    
     // Do any additional setup after loading the view.
+}
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+   // self.title=@"Home";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
 -(void)viewWillAppear:(BOOL)animated{
    }
@@ -116,6 +186,7 @@
         CFURLRef pdfURL =  CFURLCreateFromFileSystemRepresentation(NULL, [source UTF8String],[source length], NO);
         
         //file ref
+        
         CGPDFDocumentRef pdfRef = CGPDFDocumentCreateWithURL(pdfURL);
         numberOfPages = CGPDFDocumentGetNumberOfPages(pdfRef);
         
@@ -259,6 +330,7 @@
 
 
 - (IBAction)onNextPageClicked:(id)sender {
+    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
                                                     message:@"Do you want to edit next page?"
                                                    delegate:self
@@ -406,17 +478,56 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             [object setValue:pdf forKey:PAGE_PDF];
 
             [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                [APP_DELEGATE stopActivityIndicator];
+               
                 if (!error) {
+                    [APP_DELEGATE stopActivityIndicator];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
                                                                     message:@"Page Edited successfully!!!"
                                                                    delegate:self
                                                           cancelButtonTitle:@"OK"
                                                           otherButtonTitles:nil];
                     [alert show];
-                   
+                    BookDetails *b1 = [BookDetails convertPFObjectToBookDetails:object];
+                    if (b1.pageNumber == [NSNumber numberWithInt:count]) {
+                        [pagePDFArr replaceObjectAtIndex:count-1 withObject:pdf];
+                    }
                     
                     
+                       // break;
+                    NSMutableArray *pathsArr = [[NSMutableArray alloc]init];
+                    NSArray *paths1 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                    NSString *layOutPath1=[NSString stringWithFormat:@"%@/Merged/PDF",[paths1 objectAtIndex:0]];
+                    
+
+                    for (int i=1; i<=[bookDetailsArr count]; i++) {
+                        NSString *filePath = [layOutPath1 stringByAppendingPathComponent:[NSString stringWithFormat:@"/page%d.pdf",i]];
+                        [pathsArr addObject:filePath];
+                    }
+                    NSLog(@"path arr:%@",pathsArr);
+                    NSString *mergePdf = [self joinPDF:pathsArr];
+                    //NSString *pdfPath = [self joinPDF:pagePDFArr];
+                    NSLog(@"path:%@",mergePdf);
+                    NSData *myData = [NSData dataWithContentsOfFile:mergePdf];
+                    [APP_DELEGATE startActivityIndicator:self.view];
+                    PFQuery *query = [PFQuery queryWithClassName:BOOK];
+                    [query getObjectInBackgroundWithId:bookId block:^(PFObject *gObj, NSError *error) {
+                        
+                        // Now let's update it with some new data. In this case, only cheatMode and score
+                        // will get sent to the cloud. playerName hasn't changed.
+                        gObj[PDF_FILE] = [PFFile fileWithName:@"Book.pdf" data:myData];
+                        [gObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if(!error){
+                                [APP_DELEGATE stopActivityIndicator];
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                                message:@"Book Updated successfully!!!"
+                                                                               delegate:self
+                                                                      cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil];
+                                [alert show];
+
+                            }
+                        }];
+                    }];
                     //alert.tag = 11;
                     
                 }

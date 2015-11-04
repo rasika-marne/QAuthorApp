@@ -17,8 +17,9 @@
 #import "SaveFile.h"
 @interface EditBookViewController : UIViewController<CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>{
     int count;
-    NSMutableArray *bookDetailsArr;
+    NSMutableArray *bookDetailsArr,*pagePDFArr;
     UITextView* activeTextView;
+   
 
 }
 @property (weak, nonatomic) IBOutlet UIView *viewForPdf;

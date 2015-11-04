@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD048FF91BE8E89800C0088C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD048FF81BE8E89800C0088C /* SignUpViewController.m */; };
 		FD2CDCDB1BB5078300AD50AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2CDCDA1BB5078300AD50AF /* main.m */; };
 		FD2CDCDE1BB5078300AD50AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2CDCDD1BB5078300AD50AF /* AppDelegate.m */; };
 		FD2CDCE11BB5078300AD50AF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2CDCE01BB5078300AD50AF /* ViewController.m */; };
@@ -156,6 +157,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD048FF71BE8E89800C0088C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		FD048FF81BE8E89800C0088C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		FD2CDCD51BB5078300AD50AF /* QAuthorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QAuthorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD2CDCD91BB5078300AD50AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD2CDCDA1BB5078300AD50AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -423,6 +426,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD048FF61BE8E88000C0088C /* Sign Up */ = {
+			isa = PBXGroup;
+			children = (
+				FD048FF71BE8E89800C0088C /* SignUpViewController.h */,
+				FD048FF81BE8E89800C0088C /* SignUpViewController.m */,
+			);
+			name = "Sign Up";
+			sourceTree = "<group>";
+		};
 		FD2CDCCC1BB5078300AD50AF = {
 			isa = PBXGroup;
 			children = (
@@ -446,6 +458,7 @@
 		FD2CDCD71BB5078300AD50AF /* QAuthorApp */ = {
 			isa = PBXGroup;
 			children = (
+				FD048FF61BE8E88000C0088C /* Sign Up */,
 				FDAF88A31BCF7876002F276A /* Dashboard View */,
 				FDC6E4901BCB908900E34EB5 /* Constant */,
 				FD7B8DEB1BCBBE6A0065925D /* Storyboard */,
@@ -1193,6 +1206,7 @@
 				FD2CDDB11BB561B600AD50AF /* UIView+Frame.m in Sources */,
 				FD2CDDB41BB561B600AD50AF /* CLEmoticonTool.m in Sources */,
 				FD2CDDB31BB561B600AD50AF /* NSUserDefaults+StoryData.m in Sources */,
+				FD048FF91BE8E89800C0088C /* SignUpViewController.m in Sources */,
 				FD2CDDAA1BB561B600AD50AF /* CLImageToolInfo+Private.m in Sources */,
 				FD3E51A81BCFB1B5004E0B6A /* PDFScrollView.m in Sources */,
 				FD2CDDAE1BB561B600AD50AF /* CLSplineInterpolator.m in Sources */,

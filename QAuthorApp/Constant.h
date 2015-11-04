@@ -32,9 +32,13 @@
 #define TRIM_CHARACTER_SET [NSCharacterSet whitespaceAndNewlineCharacterSet]
 #define APP_DELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 #define NAVBARCOLOR [UIColor  colorWithRed:17.0/255.0f green:65.0/255.0f blue:97.0/255.0f alpha:1.0f]
-#define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+#define NAVIGATIONRGB [UIColor colorWithRed:17/255.0 green:65/255.0 blue:97/255.0 alpha:1]
+#define RGB [UIColor colorWithRed:114/255.0 green:197/255.0 blue:213/255.0 alpha:1]
+//#define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 //Facebook credentials
 #define FbClientID @"423047544565291"
+
+#define AD_Unit_id @"ca-app-pub-5468147316620707/4430610672"
 // Debugging
 #ifdef DEBUG
 #   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);

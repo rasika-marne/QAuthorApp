@@ -16,8 +16,9 @@
 @synthesize coverPic,titleTextField,genreTextField,descTextView,bookObj,genreSelect;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor: RGB(114, 197, 213)]; 
-      self.navigationItem.title = @"Edit Book";
+    [self navigationMethod];
+    [self.view setBackgroundColor: RGB]; 
+    
     self.pickerData = [[NSMutableArray alloc]init];
     PFFile *imageFile = bookObj.coverPic;
     if (imageFile && ![bookObj.coverPic isEqual:[NSNull null]]) {
@@ -34,6 +35,19 @@
     
 
     // Do any additional setup after loading the view.
+}
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    self.navigationItem.title = @"Edit Book";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
 -(void)viewWillAppear:(BOOL)animated{
     if (selectedTemplate != nil) {

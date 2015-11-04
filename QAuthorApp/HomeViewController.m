@@ -16,8 +16,9 @@
 @synthesize pickerData;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor: RGB(114, 197, 213)]; 
-    self.bannerView.adUnitID = @"ca-app-pub-5468147316620707/4430610672";
+    [self navigationMethod];
+    [self.view setBackgroundColor: RGB];
+    self.bannerView.adUnitID = AD_Unit_id;
     self.bannerView.rootViewController = self;
     
     GADRequest *request = [GADRequest request];
@@ -152,7 +153,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    NSString *userId = [def valueForKey:@"userId"];
+    NSString *userId = [def valueForKey:USER_ID];
     if([userId length] > 0){
         PFQuery *query = [PFUser query];
         [query whereKey:USER_OBJECT_ID equalTo:userId];
@@ -191,7 +192,7 @@
     
 }
 -(void)fetchMyFavorites{
-   
+   bObjectIdArr = [[NSMutableArray alloc]init];
     User *user = APP_DELEGATE.loggedInUser;
     NSMutableArray *favAuthors = [[NSMutableArray alloc]init];
     if ([user.favoriteAuthor1 length]>0) {
@@ -220,6 +221,7 @@
             
             authorNamesArr = [[NSMutableArray alloc]init];
             for (Book *bObj in booksArray) {
+                [bObjectIdArr addObject:bObj.objectId];
                 User *userObj=[User convertPFObjectToUser:bObj.authorId forNote:NO];
                 authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
                              ];
@@ -250,6 +252,7 @@
     
 }
 -(void)fetchProfessionalBooks{
+    bObjectIdArr = [[NSMutableArray alloc]init];
     professionalClicked = YES;
     PFQuery *query2 = [PFQuery queryWithClassName:BOOK];
     [query2 whereKey:TYPE equalTo:@"Professional"];
@@ -268,6 +271,7 @@
             
             authorNamesArr = [[NSMutableArray alloc]init];
             for (Book *bObj in booksArray) {
+                [bObjectIdArr addObject:bObj.objectId];
                 User *userObj=[User convertPFObjectToUser:bObj.authorId forNote:NO];
                 authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
                              ];
@@ -303,7 +307,7 @@
 }
 -(void)fetchMyBooks{
      
-    
+    bObjectIdArr = [[NSMutableArray alloc]init];
     myBooksClicked = YES;
    // PFQuery *query1 = [PFQuery queryWithClassName:USER];
     
@@ -325,6 +329,7 @@
             
             authorNamesArr = [[NSMutableArray alloc]init];
             for (Book *bObj in booksArray) {
+                [bObjectIdArr addObject:bObj.objectId];
                 User *userObj=[User convertPFObjectToUser:bObj.authorId forNote:NO];
                 authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
                              ];
@@ -363,6 +368,7 @@
 
 }
 -(void)fetchMyFeeds{
+    bObjectIdArr = [[NSMutableArray alloc]init];
     followingsArr = [[NSMutableArray alloc]init];
     PFQuery *query = [PFQuery queryWithClassName:FAN_FOLLOWERS];
     [query whereKey:FOLLOWERS equalTo:[PFUser currentUser].objectId];
@@ -396,6 +402,7 @@
                                 
                                 authorNamesArr = [[NSMutableArray alloc]init];
                                 for (Book *bObj in booksArray) {
+                                    [bObjectIdArr addObject:bObj.objectId];
                                     User *userObj=[User convertPFObjectToUser:bObj.authorId forNote:NO];
                                     authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
                                                  ];
@@ -567,7 +574,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         self.bookListCell.buyButton.hidden = YES;
     }
 
-
+   [tableView setSeparatorColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"line"]]];
     self.bookListCell.userNameLbl.text = [authorNamesArr objectAtIndex:indexPath.row];
     self.bookListCell.bokkNameLbl.text = bookObj.title;
     self.bookListCell.bookDesc.text = bookObj.shortDesc;
@@ -598,7 +605,19 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
     return self.bookListCell;
 }
-
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    self.title=@"Home";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
      SELECTEDBOOKID=[[NSString alloc]initWithString:[bObjectIdArr objectAtIndex:indexPath.row]];
     bookObj = [booksArray objectAtIndex:indexPath.row];

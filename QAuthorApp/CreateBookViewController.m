@@ -16,12 +16,13 @@
 @synthesize imageView1,textView1,ViewToPDF,bookObj,bookDetailsObj,backImage,backImg1;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor: RGB(114, 197, 213)]; 
+    [self navigationMethod];
+    [self.view setBackgroundColor: RGB];
     NSLog(@"book obj:%@",bookObj);
     backImage.image = backImg1;
 
     count = 1;
-    self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
+   
     
     SWRevealViewController *revealController = [self revealViewController];
     UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
@@ -51,7 +52,19 @@
     //[self.navigationController.navigationBar setHidden:YES];
       // Do any additional setup after loading the view.
 }
-
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -231,7 +244,7 @@
                 if ([[NSFileManager defaultManager] fileExistsAtPath:soundFilePath]) {
                     NSURL *url = [NSURL fileURLWithPath:soundFilePath];
                     NSData *data = [NSData dataWithContentsOfURL:url];
-                    bookDetailsObj.audioContent = [PFFile fileWithName:[NSString stringWithFormat:@"audio%d.jpg",count] data:data];
+                    bookDetailsObj.audioContent = [PFFile fileWithName:[NSString stringWithFormat:@"audio%d.caf",count] data:data];
                 }
                 [bookDetailsObj saveBookDetailsBlock:^(id object, NSError *error) {
                     if (!error) {

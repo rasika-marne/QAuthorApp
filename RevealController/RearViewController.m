@@ -49,11 +49,14 @@
 {
 	[super viewDidLoad];
     //[self refreshCallForCount];
+    [self navigationMethod];
+    [self.view setBackgroundColor: RGB];
+
 	NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSNumber *cnt = [def valueForKey:KMessageCount];
     messageCnt = cnt.intValue;
-	self.title = NSLocalizedString(@"Menu", nil);
-    self.navigationController.navigationBar.barTintColor = NAVBARCOLOR;
+	//self.title = NSLocalizedString(@"Menu", nil);
+    //self.navigationController.navigationBar.barTintColor = NAVBARCOLOR;
     
     /*if ([APP_DELEGATE.menuTableString isEqualToString:@"Club"]) {
         self.rearTableView.frame = CGRectMake(35, 0, 285, 460); //changed on 19 Jan 15
@@ -65,6 +68,19 @@
     {
         self.rearTableView.frame = CGRectMake(35, 0, 285, 284);
     }*/
+}
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+     self.title=@"Menu";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -82,7 +98,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	//static NSString *cellIdentifier = @"Cell";
-    
+    UIView* bview = [[UIView alloc] init];
+    bview.backgroundColor = [UIColor clearColor];
+    [tableView setBackgroundView:bview];
     int row = (int)indexPath.row;
     
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
@@ -92,7 +110,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    
+    cell.backgroundColor = [UIColor clearColor];
     /*CellRearTableView *cell = (CellRearTableView *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
         NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"CellRearTableView" owner:self options:nil];

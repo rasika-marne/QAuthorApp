@@ -16,8 +16,9 @@
 @synthesize pickerData,countrySelect,authorSelect;
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [self.view setBackgroundColor: RGB(114, 197, 213)]; 
-    self.navigationItem.title = @"Registration";
+    [self navigationMethod];
+     [self.view setBackgroundColor: RGB];
+    
     authorNameArr = [[NSMutableArray alloc]init];
     SWRevealViewController *revealController = [self revealViewController];
     UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
@@ -49,6 +50,19 @@
     // languageSelect.hidden = NO;
     authorSelect.delegate = self;
     // Do any additional setup after loading the view.
+}
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    self.navigationItem.title = @"Registration";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
 -(void)viewWillAppear:(BOOL)animated{
     PFQuery *query1 = [PFQuery queryWithClassName:@"FavoriteAuthor"];

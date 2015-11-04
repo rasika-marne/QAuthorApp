@@ -16,7 +16,7 @@
 #import "EditProfileViewController.h"
 #import <netinet/in.h>
 #import <sys/socket.h>
-
+#import "SignUpViewController.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 //#import <FBSDKCoreKit/FBSDKCoreKit.h>
 //#import <PFFacebookUtils.h>
@@ -25,10 +25,12 @@
 @class HomeViewController;
 @class User;
 @class EditProfileViewController;
+@class SignUpViewController;
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ViewController *viewController;
+@property (strong, nonatomic) SignUpViewController *signUpVC;
 @property (strong, nonatomic) HomeViewController *homeVC;
 @property (strong, nonatomic) EditProfileViewController *editVC;
 @property (strong, nonatomic) UINavigationController *uniNavController;

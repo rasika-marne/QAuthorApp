@@ -18,13 +18,18 @@
     
     
     [super viewDidLoad];
-    self.navigationController.navigationBar.hidden = NO;
+    fanObj = [FanFollowers createEmptyObject];
+    [self navigationMethod];
+    //self.navigationController.navigationBar.hidden = NO;
     
     SWRevealViewController *revealController = [self revealViewController];
     UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
     self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
     
-    if ([SelectedSegmentvalue isEqualToString:@"Dashboard"]) {
+    self.authorsButton.selected = YES;
+    [self tempFetchFollowings];
+    //[self fetchAuthors];
+  /*  if ([SelectedSegmentvalue isEqualToString:@"Dashboard"]) {
         [self fetchAuthors];
 
         self.segment.selectedSegmentIndex=0;
@@ -41,7 +46,40 @@
         [self fetchFollowing];
         self.navigationItem.title = @"Following";
         self.segment.selectedSegmentIndex=2;
-    }
+    }*/
+}
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    // self.title=@"Login";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
+}
+- (IBAction)onclickAuthorBtn:(id)sender {
+    
+    SelectedSegmentvalue=nil;
+    SelectedSegmentvalue=@"Dashboard";
+    self.navigationItem.title = @"Dashboard";
+    [self fetchAuthors];}
+
+- (IBAction)onClickFollowersBtn:(id)sender {
+    SelectedSegmentvalue=nil;
+    SelectedSegmentvalue=@"Followers";
+    self.navigationItem.title = @"Followers";
+    [self fetchFollowers];
+}
+
+- (IBAction)onClickFollowingBtn:(id)sender {
+    SelectedSegmentvalue=nil;
+    SelectedSegmentvalue=@"Following";
+    [self fetchFollowing];
+    self.navigationItem.title = @"Following";
 }
 -(void)tempFetchFollowings{
     
@@ -49,34 +87,40 @@
     [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
     autorsArray=[[NSMutableArray alloc]init];
     PFQuery *query2 = [PFQuery queryWithClassName:FAN_FOLLOWERS];
-    [query2 whereKey:FAN_USER_ID equalTo:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID]];
+    [query2 whereKey:FOLLOWERS equalTo:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID]];
     
     [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         if (!error) {
             for(PFObject *obj in objects){
                 
-                [tempFollowingArr addObject:[obj objectForKey:@"followings"]];
+                [tempFollowingArr addObject:[obj objectForKey:FAN_USER_ID]];
             }
-            
+            NSLog(@"temp arr:%@",tempFollowingArr);
+            [self fetchAuthors];
         }}];
+    //NSLog(@"temp arr:%@",tempFollowingArr);
 
 }
 -(void)fetchAuthors{
     
     SelectedSegmentvalue=nil;
     SelectedSegmentvalue=@"Dashboard";
-    [self tempFetchFollowings];
+   // [self tempFetchFollowings];
     [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
     autorsArray = [[NSMutableArray alloc]init];
     tempauthIdarr= [[NSMutableArray alloc]init];
     flagArray=[[NSMutableArray alloc]init];
-    
+   // PFUser *currentUser= [PFUser cu];
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSString *userId = [def valueForKey:USER_ID];
     PFQuery *query=[PFUser query];
+    [query whereKey:ROLE equalTo:@"author"];
+    [query whereKey:USER_OBJECT_ID notEqualTo:userId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         if (!error) {
-            
+             [APP_DELEGATE stopActivityIndicator];
             NSLog(@"books arr cnt:%lu",(unsigned long)[objects count]);
             if ([objects count]==0) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
@@ -90,9 +134,7 @@
             else{
                 
                 for (PFObject *obj in objects) {
-                    if ([[obj objectForKey:@"objectId"] isEqualToString:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID]]) {
-                        
-                    }else{
+                   // Use *fObj = [FanFollowers convertPFObjectToFans:obj];
                         if ([tempFollowingArr containsObject:obj.objectId]) {
                             [flagArray addObject:@"1"];
                         }else{
@@ -101,30 +143,32 @@
                         }
                         [tempauthIdarr addObject:obj.objectId];
                         [autorsArray addObject:obj];
-                    }
+                    
                 }
                 
                 [self.authorTableview reloadData];
             }
-            
-            [APP_DELEGATE stopActivityIndicator];
+            NSLog(@"flagArr:%@",flagArray);
+           
         }
     }];
 }
 -(void)fetchFollowers{
     SelectedSegmentvalue=nil;
     SelectedSegmentvalue=@"Followers";
-        [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
-        autorsArray=[[NSMutableArray alloc]init];
-        PFQuery *query = [PFQuery queryWithClassName:@"FanFollowers"];
-    [query whereKey:@"userId" equalTo:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID]];
+    [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
+    autorsArray=[[NSMutableArray alloc]init];
+    PFQuery *query = [PFQuery queryWithClassName:FAN_FOLLOWERS];
+    [query whereKey:FAN_USER_ID equalTo:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID]];
     
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             if (!error) {
                 
                 for(PFObject *obj in objects){
-                    NSString *idstr=[obj objectForKey:@"followers"];
+                    //FanFollowers *fObj = [FanFollowers createEmptyObject];
+                    //fObj = [FanFollowers convertPFObjectToFans:obj];
+                    NSString *idstr=[obj objectForKey:FOLLOWERS];
                     if ([idstr isEqualToString:@"<null>"] || [idstr isEqualToString:@""] || [idstr isEqualToString:@"(null)"]||[idstr  isKindOfClass:[NSNull class]]  || idstr == nil) {
                     }else{
                     [autorsArray addObject:obj];
@@ -164,15 +208,15 @@
     autorsArray=[[NSMutableArray alloc]init];
     flagArray=[[NSMutableArray alloc]init];
 
-    PFQuery *query = [PFQuery queryWithClassName:@"FanFollowers"];
-    [query whereKey:@"userId" equalTo:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID]];
+    PFQuery *query = [PFQuery queryWithClassName:FAN_FOLLOWERS];
+    [query whereKey:FOLLOWERS equalTo:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID]];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         if (!error) {
             
             for(PFObject *obj in objects){
-                NSString *idstr=[obj objectForKey:@"followings"];
+                NSString *idstr=[obj objectForKey:FAN_USER_ID];
                 if ([idstr isEqualToString:@"<null>"] || [idstr isEqualToString:@""] || [idstr isEqualToString:@"(null)"]||[idstr  isKindOfClass:[NSNull class]]  || idstr == nil) {
                 }else{
                     
@@ -197,7 +241,7 @@
             //[self displayTable:objects];
             
         } else {
-            
+             [flagArray addObject:@"0"];
             // Log details of the failure
             /*UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:ALERT
              message:[error.userInfo objectForKey:NSLocalizedString(@"common_error_str", nil)]
@@ -217,7 +261,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+   // fanObj = [autorsArray objectAtIndex:indexPath.row];
     static NSString *simpleTableIdentifier = @"DCTableViewCell";
     
     DCTableViewCell *cell = (DCTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -227,8 +271,11 @@
         cell = [nib objectAtIndex:0];
         
     }
+    cell.profilePic.layer.cornerRadius = 20;
+    cell.profilePic.clipsToBounds = YES;
     [cell.followBtn addTarget:self action:@selector(FollowbtnAction:) forControlEvents:UIControlEventTouchUpInside];
     cell.followBtn.tag=indexPath.row;
+     [tableView setSeparatorColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"line"]]];
     if (autorsArray.count!=0) {
         if ([SelectedSegmentvalue isEqualToString:@"Dashboard"]) {
         
@@ -241,28 +288,49 @@
             
              cell.authornameLbl.text=[NSString stringWithFormat:@"%@ %@",[[autorsArray objectAtIndex:indexPath.row]valueForKey:@"first_name"],[[autorsArray objectAtIndex:indexPath.row]valueForKey:@"last_name"]];
         }
-    
-        PFFile * imageFile = [[autorsArray objectAtIndex:indexPath.row] valueForKey:@"profilePic"]; // note the modern Obj-C syntax
+                    PFFile * imageFile = [[autorsArray objectAtIndex:indexPath.row] valueForKey:@"profilePic"]; // note the modern Obj-C syntax
     
         if (imageFile && ![[[autorsArray objectAtIndex:indexPath.row] valueForKey:@"profilePic"] isEqual:[NSNull null]]) {
         
         [[[autorsArray objectAtIndex:indexPath.row] valueForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             if (data) {
                 [cell.profilePic setImage:[UIImage imageWithData:data]];
+               
+
                 }
             }];
           }
-            
+            NSString *cityStr = [NSString stringWithFormat:@"%@, %@",[[autorsArray objectAtIndex:indexPath.row] valueForKey:CITY],[[autorsArray objectAtIndex:indexPath.row] valueForKey:COUNTRY]];
+            cell.cityLabel.text = cityStr;
+            //cell.countryLabel.text = [[autorsArray objectAtIndex:indexPath.row] valueForKey:COUNTRY];
+            //NSString *tempAge = [NSString stringWithFormat:<#(NSString *), ...#>];
+            NSNumber *age = [[autorsArray objectAtIndex:indexPath.row] valueForKey:AGE];
+            cell.ageLabel.text = [age stringValue];
             if ([[flagArray objectAtIndex:indexPath.row] isEqualToString:@"1"]) {
                 
                 [cell.followBtn setTitle:@"-Unfollow" forState:UIControlStateNormal];
+                // [cell.followBtn addTarget:self action:@selector(UnFollow:) forControlEvents:UIControlEventTouchUpInside];
+                
             }else{
-                [cell.followBtn setTitle:@"-Follow" forState:UIControlStateSelected];
+                [cell.followBtn setTitle:@"+Follow" forState:UIControlStateNormal];
+              //  [cell.followBtn addTarget:self action:@selector(Follow:) forControlEvents:UIControlEventTouchUpInside];
             }
+            cell.followBtn.tag = indexPath.row;
     }
         if ([SelectedSegmentvalue isEqualToString:@"Followers"]) {
+            PFQuery *query1 = [PFQuery queryWithClassName:FAN_FOLLOWERS];
+            [query1 whereKey:FOLLOWERS  equalTo:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID]];
+            [query1 whereKey:FAN_USER_ID equalTo:[[autorsArray objectAtIndex:indexPath.row] valueForKey:@"followers"]];
+            [query1 getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                if (object) {
+                    cell.followBtn.hidden=YES;
+                }
+                else{
+                    cell.followBtn.hidden=NO;
+                }
+            }];
             
-            cell.followBtn.hidden=YES;
+            
             NSString *idstr=[[autorsArray objectAtIndex:indexPath.row] valueForKey:@"followers"];
             if ([idstr isEqualToString:@"<null>"] || [idstr isEqualToString:@""] || [idstr isEqualToString:@"(null)"]||[idstr  isKindOfClass:[NSNull class]]  || idstr == nil) {}else{
             PFQuery *query=[PFUser query];
@@ -272,14 +340,19 @@
                     
                     cell.authornameLbl.text=[NSString stringWithFormat:@"%@ %@",[object objectForKey:@"first_name"],[object objectForKey:@"last_name"]];
                     
-                    PFFile * imageFile = [object objectForKey:@"profilePic"]; // note the modern Obj-C syntax
+                    PFFile * imageFile = [object objectForKey:PROFILE_PIC]; // note the modern Obj-C syntax
+                    NSString *cityStr = [NSString stringWithFormat:@"%@, %@",[object objectForKey:CITY ],[object objectForKey:COUNTRY]];
+                    cell.cityLabel.text = cityStr;
+                   
+                    NSNumber *age =[object objectForKey:AGE];
+                    cell.ageLabel.text = [age stringValue];
                     
                     if (imageFile && ![[object objectForKey:@"profilePic"] isEqual:[NSNull null]]) {
                         
                         [[object objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                             if (data) {
                                 [cell.profilePic setImage:[UIImage imageWithData:data]];
-                            }
+                                                            }
                         }];
                     }
                 }
@@ -302,12 +375,18 @@
                     cell.authornameLbl.text=[NSString stringWithFormat:@"%@ %@",[object objectForKey:@"first_name"],[object objectForKey:@"last_name"]];
                     
                     PFFile * imageFile = [object objectForKey:@"profilePic"]; // note the modern Obj-C syntax
+                    NSString *cityStr = [NSString stringWithFormat:@"%@, %@",[object objectForKey:CITY ],[object objectForKey:COUNTRY]];
+                    cell.cityLabel.text = cityStr;
                     
+                    NSNumber *age =[object objectForKey:AGE];
+                    cell.ageLabel.text = [age stringValue];
                     if (imageFile && ![[object objectForKey:@"profilePic"] isEqual:[NSNull null]]) {
                         
                         [[object objectForKey:@"profilePic"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                             if (data) {
                                 [cell.profilePic setImage:[UIImage imageWithData:data]];
+                                cell.profilePic.layer.cornerRadius = 0.5f;
+                                cell.profilePic.clipsToBounds = YES;
                             }
                         }];
                     }
@@ -316,7 +395,7 @@
                         
                         [cell.followBtn setTitle:@"-Unfollow" forState:UIControlStateNormal];
                     }else{
-                        [cell.followBtn setTitle:@"-Follow" forState:UIControlStateSelected];
+                        [cell.followBtn setTitle:@"+Follow" forState:UIControlStateNormal];
                     }
                 }
             }];
@@ -345,12 +424,14 @@
 -(void)Follow:(NSString *)followingId{
     
     NSLog(@"Start Following");
-    
+  //  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
+   // PFObject *obj = [autorsArray objectAtIndex:indexPath.row];
+   // NSLog(@"object:%@",obj);
     [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
     
-    PFObject *userObject = [PFObject objectWithClassName:@"FanFollowers"];
-    [userObject setValue:followingId forKey:@"followings"];
-    [userObject setValue:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID] forKey:@"userId"];
+    PFObject *userObject = [PFObject objectWithClassName:FAN_FOLLOWERS];
+    [userObject setValue:followingId forKey:FAN_USER_ID];
+    [userObject setValue:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID] forKey:FOLLOWERS];
     
     //1.Followers: add entry for user with its following_id
     [userObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -379,13 +460,14 @@
 
 -(void)UnFollow:(NSString *)followingId{
     
-    NSLog(@"Stop Following");
-    
+    NSLog(@"Stop unFollowing");
+   // NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
+   // PFObject *obj = [autorsArray objectAtIndex:indexPath.row];
     [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
     
-    PFQuery *userQuery = [PFQuery queryWithClassName:@"FanFollowers"];
-    [userQuery whereKey:@"userId" equalTo:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID]];
-    [userQuery whereKey:@"followings" equalTo:followingId];
+    PFQuery *userQuery = [PFQuery queryWithClassName:FAN_FOLLOWERS];
+    [userQuery whereKey:FOLLOWERS equalTo:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID]];
+    [userQuery whereKey:FAN_USER_ID equalTo:followingId];
     
     [userQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         
@@ -430,6 +512,8 @@
 
     }
 }
+
+
 
 - (IBAction)segmentSwitch:(UISegmentedControl *)sender{
     

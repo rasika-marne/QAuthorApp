@@ -9,7 +9,7 @@
 #import "DCTableViewCell.h"
 
 @implementation DCTableViewCell
-
+@synthesize followBtn,authornameLbl,ageLabel,cityLabel,countryLabel;
 - (void)awakeFromNib {
     // Initialization code
 }

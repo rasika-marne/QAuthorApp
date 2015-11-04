@@ -150,9 +150,9 @@
 -(void)firstTimeLogin
 {
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    self.viewController = (ViewController *)
-    [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    self.signUpVC = (SignUpViewController *)
+    [storyboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.signUpVC];
     self.uniNavController = self.navigationController;
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
