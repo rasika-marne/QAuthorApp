@@ -103,78 +103,82 @@
     [tableView setBackgroundView:bview];
     int row = (int)indexPath.row;
     
-    static NSString *simpleTableIdentifier = @"SimpleTableItem";
+   // static NSString *simpleTableIdentifier = @"SimpleTableItem";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+  //  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
+  //  if (cell == nil) {
+    //    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    //}
+    static NSString *simpleTableIdentifier = @"CellRearTableView";
+    
+    CellRearTableView *cell = (CellRearTableView *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CellRearTableView" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+        
     }
+    [tableView setSeparatorColor:NAVIGATIONRGB];
     cell.backgroundColor = [UIColor clearColor];
-    /*CellRearTableView *cell = (CellRearTableView *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if(cell == nil) {
-        NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"CellRearTableView" owner:self options:nil];
-        cell = [cellArray lastObject];
-    }*/
-
 	[self setrows:row cl:cell];
 	
 	return cell;
 }
--(void)setrows:(int)row cl:(UITableViewCell*)cell
+-(void)setrows:(int)row cl:(CellRearTableView *)cell
 {
     //if ([APP_DELEGATE.menuTableString isEqualToString:@"Parent"]) {
         if (row == 0)
         {
-            cell.textLabel.text = @"Create Book";
-           // cell.image.image = [UIImage imageNamed:@"menu_my_profile.png"];
+            cell.lblname.text = @"Create Book";
+            cell.imageVw.image = [UIImage imageNamed:@"create-book-1"];
         }
         else if (row == 1)
         {
-            cell.textLabel.text = @"Edit Profile";
-           // cell.image.image = [UIImage imageNamed:@"menu_team_list.png"];
+            cell.lblname.text = @"Edit Profile";
+            cell.imageVw.image = [UIImage imageNamed:@"edit_profile"];
         }
         else if (row == 2)
         {
-            cell.textLabel.text = @"Followers";
+            cell.lblname.text = @"Followers";
 
-            //cell.image.image = [UIImage imageNamed:@"menu_inbox.png"];
+            cell.imageVw.image = [UIImage imageNamed:@"followers-3"];
         }
         else if (row == 3)
         {
-            cell.textLabel.text = @"Followings";
+            cell.lblname.text = @"Followings";
 
-           // cell.image.image = [UIImage imageNamed:@"menu_log_out.png"];
+            cell.imageVw.image = [UIImage imageNamed:@"follwing"];
         }
         else if (row == 4)
         {
-            cell.textLabel.text = @"Dashboard";
+            cell.lblname.text = @"Dashboard";
             
-            // cell.image.image = [UIImage imageNamed:@"menu_log_out.png"];
+             cell.imageVw.image = [UIImage imageNamed:@"dashboard"];
         }
         else if (row == 5)
         {
-            cell.textLabel.text = @"My Books";
+            cell.lblname.text = @"My Books";
             
-            // cell.image.image = [UIImage imageNamed:@"menu_log_out.png"];
+             cell.imageVw.image = [UIImage imageNamed:@"my-book"];
         }
         else if (row == 6)
         {
-            cell.textLabel.text = @"Professional";
+            cell.lblname.text = @"Professional";
             
-            // cell.image.image = [UIImage imageNamed:@"menu_log_out.png"];
+             cell.imageVw.image = [UIImage imageNamed:@"F-book"];
         }
         else if (row == 7)
         {
-            cell.textLabel.text = @"Help";
+            cell.lblname.text = @"Help";
             
-            // cell.image.image = [UIImage imageNamed:@"menu_log_out.png"];
+             cell.imageVw.image = [UIImage imageNamed:@"help"];
         }
         else if (row == 8)
         {
-            cell.textLabel.text = @"Logout";
+            cell.lblname.text = @"Logout";
             
-            // cell.image.image = [UIImage imageNamed:@"menu_log_out.png"];
+             cell.imageVw.image = [UIImage imageNamed:@"log-out"];
         }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

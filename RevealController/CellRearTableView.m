@@ -9,7 +9,7 @@
 #import "CellRearTableView.h"
 
 @implementation CellRearTableView
-
+@synthesize imageVw,lblname;
 - (void)awakeFromNib
 {
     // Initialization code

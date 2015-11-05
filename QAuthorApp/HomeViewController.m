@@ -179,6 +179,11 @@
                     self.navigationController.navigationBar.hidden = NO;
                     self.navigationItem.title = @"Home";
                     self.bookSegments.hidden = NO;
+                    //[[UISegmentedControl appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                             //[UIColor whiteColor],UITextAttributeTextColor, nil]
+                                                                 //  forState:UIControlStateSelected];
+                    
+                    
                     
                 }
                 
@@ -540,6 +545,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     
     bookObj = [booksArray objectAtIndex:indexPath.row];
+    
+   // NSLog(@"%@", bookObj.createdAt);
     static NSString *simpleTableIdentifier = @"BookListTableViewCell";
     
     self.bookListCell = (BookListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -555,10 +562,28 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         self.bookListCell.editButton.hidden = NO;
         [self.bookListCell.editButton addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
         self.bookListCell.editButton.tag = indexPath.row;
+        self.bookListCell.createdDateLbl.hidden = YES;
     }
     else
     {
         self.bookListCell.editButton.hidden = YES;
+        self.bookListCell.createdDateLbl.hidden = NO;
+       
+        NSDateFormatter *df = [NSDateFormatter new];
+        [df setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
+        df.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+        NSDate *date = bookObj.createdAt;
+        df.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:[NSTimeZone localTimeZone].secondsFromGMT];
+       [df setDateFormat:@"dd-MMMM-YYYY"];
+        NSString *localDateString = [df stringFromDate:date];
+        self.bookListCell.createdDateLbl.text = localDateString;
+        
+       /* PFObject *bObj = [bookObj convertBooksToPFObject];
+         NSDate *created = bObj.createdAt;
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"dd - MMMM - YYYY"];*/
+        //self.bookListCell.createdDateLbl.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:created]];
+
     }
     if (professionalClicked == YES) {
         self.bookListCell.priceLbl.hidden = NO;

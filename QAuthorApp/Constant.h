@@ -39,6 +39,13 @@
 #define FbClientID @"423047544565291"
 
 #define AD_Unit_id @"ca-app-pub-5468147316620707/4430610672"
+
+//Custom Font
+#define FONTNAME @"AvenirLTStd-Light"
+#define FONTSIZE @"14.00"
+
+#define BOLDFONTNAME @"AvenirLTStd-Heavy"
+#define BOLDFONTSIZE @"16"
 // Debugging
 #ifdef DEBUG
 #   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
@@ -94,6 +101,7 @@ typedef void (^UserIdResultBlock)(id object, NSError *error);
 #define AUTHOR_NAME         @"authorName"
 #define ECOMMERCE_URL       @"eCommerceUrl"
 #define PRICE               @"price"
+#define CREATED_AT          @"createdAt"
 
 
 //---------- BookDetails Constant -------//

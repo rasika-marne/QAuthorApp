@@ -35,6 +35,13 @@
 	<string>QAut­h­o­r­A­p­p­l­i­c­a­tion</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+    <key>UIAppFonts</key>
+    <array>
+        <string>AvenirLTStd-Light.otf</string>
+        <string>AvenirLTStd-Heavy.otf</string>
+        <string>AvenirLTStd-LightOblique_0.otf</string>
+        <string>AvenirLTStd-HeavyOblique_0.otf</string>
+    </array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

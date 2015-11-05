@@ -10,7 +10,7 @@
 
 @implementation BookListTableViewCell
 @synthesize bookCoverImg,bookDesc,userNameLbl,likeButton,commentButton,shareButton,bokkNameLbl;
-@synthesize likesCntLbl,commentsCntLbl,genreNameLbl,ageRangeLbl,editButton,buyButton,priceLbl;
+@synthesize likesCntLbl,commentsCntLbl,genreNameLbl,ageRangeLbl,editButton,buyButton,priceLbl,createdDateLbl;
 - (void)awakeFromNib {
     // Initialization code
 }

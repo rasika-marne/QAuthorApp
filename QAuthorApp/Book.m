@@ -9,7 +9,7 @@
 #import "Book.h"
 
 @implementation Book
-@synthesize objectId,title,genre,authorId,status,shortDesc,type;
+@synthesize objectId,title,genre,authorId,status,shortDesc,type,createdAt;
 @synthesize coverPic,noOfComments,noOfLikes,ageFrom,ageTo,pdfFile,eCommerceUrl,price,authorName;
 
 +(Book *)createEmptyObject{
@@ -21,7 +21,7 @@
     //  User *user = [User createEmptyUser];
     Book *note=[Book createEmptyObject];
     note.objectId = pobj.objectId;
-
+    note.createdAt = pobj.createdAt;
     note.title = IS_POPULATED_STRING([pobj objectForKey:TITLE])?[pobj objectForKey:TITLE]:@"";
     note.genre = IS_POPULATED_STRING([pobj objectForKey:GENRE])?[pobj objectForKey:GENRE]:@"";
     note.type = IS_POPULATED_STRING([pobj objectForKey:TYPE])?[pobj objectForKey:TYPE]:@"";
@@ -42,7 +42,7 @@
     
     note.coverPic = [pobj objectForKey:COVER_PAGE];
     note.pdfFile = [pobj objectForKey:PDF_FILE];
-
+    
 
     return note;
     
@@ -55,7 +55,7 @@
     if (self.objectId) {
         [pObj setObjectId:self.objectId];
     }
-    // [pObj setObject:IS_POPULATED_STRING(self.createdAt)?self.createdAt:@"" forKey:INBOX_OBJECT_CREATED];
+    [pObj setObject:self.createdAt forKey:CREATED_AT];
     [pObj setObject:IS_POPULATED_STRING(self.title)?self.title:@"" forKey:TITLE];
     [pObj setObject:IS_POPULATED_STRING(self.genre)?self.genre:@"" forKey:GENRE];
     [pObj setObject:IS_POPULATED_STRING(self.type)?self.type:@"" forKey:TYPE];
@@ -68,6 +68,7 @@
     [pObj setObject:self.ageFrom?self.ageFrom:[NSNumber numberWithInt:0] forKey:AGE_FROM];
     [pObj setObject:self.ageTo?self.ageTo:[NSNumber numberWithInt:0] forKey:AGE_TO];
     [pObj setObject:self.noOfLikes?self.noOfLikes:[NSNumber numberWithInt:0] forKey:NUMBER_OF_LIKES];
+   // [pObj setObject:IS_POPULATED_STRING(self.createdAt)?self.createdAt:@"" forKey:CREATED_AT];
     [pObj setObject:self.noOfComments?self.noOfComments:[NSNumber numberWithInt:0] forKey:NUMBER_OF_COMMENTS];
    // [pObj setObject:IS_POPULATED_STRING(self.authorId)?self.authorId:@"" forKey:AUTHOR_ID];
     [pObj setObject:IS_POPULATED_STRING(self.status)?self.status:@"" forKey:STATUS];

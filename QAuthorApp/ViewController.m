@@ -147,13 +147,34 @@
 - (void)alertView:(UIAlertView *)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 11) {
+        
         if (buttonIndex == 0) {
-            [PFUser requestPasswordResetForEmailInBackground: [alertView textFieldAtIndex:0].text];
+            
+            if ([[alertView textFieldAtIndex:0].text length]==0){
+                
+                [[[UIAlertView alloc]initWithTitle:@"Alert" message:@"Email id sohouldn't be null" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+            }else if ([self NSStringIsValidEmail:[alertView textFieldAtIndex:0].text]==NO){
+                
+                [[[UIAlertView alloc]initWithTitle:@"Alert" message:@"Please enter valid email id" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+                
+            }else {
+                [PFUser requestPasswordResetForEmailInBackground: [alertView textFieldAtIndex:0].text];
+            }
             
         }
     }
     
 }
+-(BOOL) NSStringIsValidEmail:(NSString *)checkString
+{
+    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+    NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
 - (IBAction)onClickSignUp:(id)sender{
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.registartionVC = (RegistrationViewController *)

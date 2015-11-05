@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *genreNameLbl;
 @property (weak, nonatomic) IBOutlet UILabel *ageRangeLbl;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UILabel *createdDateLbl;
 
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @property (weak, nonatomic) IBOutlet UILabel *priceLbl;

@@ -10,5 +10,5 @@
 
 @interface CellRearTableView : UITableViewCell
 @property(strong,nonatomic)IBOutlet UILabel *lblname;
-@property(strong,nonatomic)IBOutlet UIImageView *image;
+@property(strong,nonatomic)IBOutlet UIImageView *imageVw;
 @end

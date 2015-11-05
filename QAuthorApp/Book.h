@@ -12,6 +12,7 @@
 @class User;
 typedef void (^AuthorIdResultBlock)(id object, NSError *error);
 typedef void (^arrayResultBlock)(NSMutableArray *objects, NSError *error);
+
 @interface Book : PFObject
 @property (nonatomic, strong) NSString *objectId;
 @property (nonatomic, strong) NSString *title;
@@ -21,6 +22,7 @@ typedef void (^arrayResultBlock)(NSMutableArray *objects, NSError *error);
 @property (nonatomic, strong) NSString *authorName;
 @property (nonatomic, strong) NSString *eCommerceUrl;
 @property (nonatomic, strong) NSString *price;
+@property (nonatomic, strong) NSDate *createdAt;
 @property (nonatomic, strong) PFUser *authorId;
 
 @property (nonatomic, strong) PFFile *coverPic;
