@@ -10,5 +10,5 @@
 
 @interface editProfileCustomeCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UITextField *editTxtFld;
-
+@property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 @end

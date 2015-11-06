@@ -98,26 +98,36 @@
         self.cell = [nib objectAtIndex:0];
         
     }
+    UIView* bview = [[UIView alloc] init];
+    bview.backgroundColor = [UIColor clearColor];
+    [tableView setBackgroundView:bview];
+    self.cell.backgroundColor=[UIColor clearColor];
     self.cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    
     
     if(indexPath.row ==0)
     {
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"First name*";
+        self.cell.iconImage.image=[UIImage imageNamed:@"email"];
+        
         
     } else if (indexPath.row ==1) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Last Name*";
+        self.cell.iconImage.image=[UIImage imageNamed:@"email"];
+        
     } else if (indexPath.row == 2) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Email (Username)*";
+        self.cell.iconImage.image=[UIImage imageNamed:@"email"];
+        
     } else if (indexPath.row== 3) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Child Age*";
+        self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
         
         //self.createStaffCell.nameTxtFld.text=self.txtUserRole;
     } else if (indexPath.row == 4) {
@@ -125,56 +135,75 @@
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Country*";
         self.cell.editTxtFld.inputView = countrySelect;
+        self.cell.iconImage.image=[UIImage imageNamed:@"location"];
+        
     } else if (indexPath.row == 5) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"City*";
+        self.cell.iconImage.image=[UIImage imageNamed:@"city"];
+        
     }else if (indexPath.row == 6) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Language";
+        self.cell.iconImage.image=[UIImage imageNamed:@"language"];
+        
     }else if (indexPath.row == 7) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Favorite Author 1";
         self.cell.editTxtFld.inputView = authorSelect;
+        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        
+        
     }else if (indexPath.row == 8) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Favorite Author 2";
         self.cell.editTxtFld.inputView = authorSelect;
+        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        
     }else if (indexPath.row == 9) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Favorite Author 3";
         self.cell.editTxtFld.inputView = authorSelect;
+        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
     }else if (indexPath.row == 10) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"New Author 1";
-      //  self.cell.editTxtFld.inputView = authorSelect;
+        //  self.cell.editTxtFld.inputView = authorSelect;
+        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        
+        
     }else if (indexPath.row == 11) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"New Author 2";
         //self.cell.editTxtFld.inputView = authorSelect;
+        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        
     }else if (indexPath.row == 12) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Password*";
         self.cell.editTxtFld.secureTextEntry = YES;
+        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
     }else if (indexPath.row == 13) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Confirm Password*";
         self.cell.editTxtFld.secureTextEntry = YES;
+        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
+        
     }
     
     
     return self.cell;
     // 8796218363
 }
-
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView; {
     return 1;
 }

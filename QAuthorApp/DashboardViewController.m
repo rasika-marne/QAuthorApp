@@ -28,7 +28,7 @@
     
     self.authorsButton.selected = YES;
     [self tempFetchFollowings];
-    //[self fetchAuthors];
+   // [self fetchAuthors];
   /*  if ([SelectedSegmentvalue isEqualToString:@"Dashboard"]) {
         [self fetchAuthors];
 
@@ -103,56 +103,73 @@
 
 }
 -(void)fetchAuthors{
-    
-    SelectedSegmentvalue=nil;
-    SelectedSegmentvalue=@"Dashboard";
    // [self tempFetchFollowings];
+    tempFollowingArr=[[NSMutableArray alloc]init];
     [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
-    autorsArray = [[NSMutableArray alloc]init];
-    tempauthIdarr= [[NSMutableArray alloc]init];
-    flagArray=[[NSMutableArray alloc]init];
-   // PFUser *currentUser= [PFUser cu];
-    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    NSString *userId = [def valueForKey:USER_ID];
-    PFQuery *query=[PFUser query];
-    [query whereKey:ROLE equalTo:@"author"];
-    [query whereKey:USER_OBJECT_ID notEqualTo:userId];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    autorsArray=[[NSMutableArray alloc]init];
+    PFQuery *query2 = [PFQuery queryWithClassName:FAN_FOLLOWERS];
+    [query2 whereKey:FOLLOWERS equalTo:[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID]];
+    
+    [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         if (!error) {
-             [APP_DELEGATE stopActivityIndicator];
-            NSLog(@"books arr cnt:%lu",(unsigned long)[objects count]);
-            if ([objects count]==0) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                                message:@"No Data available."
-                                                               delegate:self
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
+            for(PFObject *obj in objects){
                 
+                [tempFollowingArr addObject:[obj objectForKey:FAN_USER_ID]];
             }
-            else{
+            NSLog(@"temp arr:%@",tempFollowingArr);
+            SelectedSegmentvalue=nil;
+            SelectedSegmentvalue=@"Dashboard";
+            // [self tempFetchFollowings];
+            [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
+            autorsArray = [[NSMutableArray alloc]init];
+            tempauthIdarr= [[NSMutableArray alloc]init];
+            flagArray=[[NSMutableArray alloc]init];
+            // PFUser *currentUser= [PFUser cu];
+            NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+            NSString *userId = [def valueForKey:USER_ID];
+            PFQuery *query=[PFUser query];
+            [query whereKey:ROLE equalTo:@"author"];
+            [query whereKey:USER_OBJECT_ID notEqualTo:userId];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 
-                for (PFObject *obj in objects) {
-                   // Use *fObj = [FanFollowers convertPFObjectToFans:obj];
-                        if ([tempFollowingArr containsObject:obj.objectId]) {
-                            [flagArray addObject:@"1"];
-                        }else{
-                            [flagArray addObject:@"0"];
-
+                if (!error) {
+                    [APP_DELEGATE stopActivityIndicator];
+                    NSLog(@"books arr cnt:%lu",(unsigned long)[objects count]);
+                    if ([objects count]==0) {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                        message:@"No Data available."
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                        
+                    }
+                    else{
+                        
+                        for (PFObject *obj in objects) {
+                            // Use *fObj = [FanFollowers convertPFObjectToFans:obj];
+                            if ([tempFollowingArr containsObject:obj.objectId]) {
+                                [flagArray addObject:@"1"];
+                            }else{
+                                [flagArray addObject:@"0"];
+                                
+                            }
+                            [tempauthIdarr addObject:obj.objectId];
+                            [autorsArray addObject:obj];
+                            
                         }
-                        [tempauthIdarr addObject:obj.objectId];
-                        [autorsArray addObject:obj];
+                        
+                        [self.authorTableview reloadData];
+                    }
+                    NSLog(@"flagArr:%@",flagArray);
                     
                 }
-                
-                [self.authorTableview reloadData];
-            }
-            NSLog(@"flagArr:%@",flagArray);
-           
-        }
-    }];
-}
+            }];
+
+            //[self fetchAuthors];
+        }}];
+   }
 -(void)fetchFollowers{
     SelectedSegmentvalue=nil;
     SelectedSegmentvalue=@"Followers";
@@ -233,10 +250,12 @@
                 
                 
             } else {
-                
+                NSLog(@"followings arr:%@",autorsArray);
+                 NSLog(@"flag arr:%@",flagArray);
                 [self.authorTableview reloadData];
                 
             }
+            
             [APP_DELEGATE stopActivityIndicator];
             //[self displayTable:objects];
             
@@ -331,9 +350,10 @@
             }];
             
             
-            NSString *idstr=[[autorsArray objectAtIndex:indexPath.row] valueForKey:@"followers"];
+            NSString *idstr=[[autorsArray objectAtIndex:indexPath.row] valueForKey:FOLLOWERS];
             if ([idstr isEqualToString:@"<null>"] || [idstr isEqualToString:@""] || [idstr isEqualToString:@"(null)"]||[idstr  isKindOfClass:[NSNull class]]  || idstr == nil) {}else{
             PFQuery *query=[PFUser query];
+                [query whereKey:ROLE equalTo:@"author"];
             [query getObjectInBackgroundWithId:idstr block:^(PFObject *object, NSError *error) {
                 
                 if (!error) {
@@ -364,14 +384,15 @@
             
             
             cell.followBtn.hidden=NO;
-            NSString *idstr=[[autorsArray objectAtIndex:indexPath.row] valueForKey:@"followings"];
+            NSString *idstr=[[autorsArray objectAtIndex:indexPath.row] valueForKey:FAN_USER_ID];
             if ([idstr isEqualToString:@"<null>"] || [idstr isEqualToString:@""] || [idstr isEqualToString:@"(null)"]||[idstr  isKindOfClass:[NSNull class]]  || idstr == nil) {}else{
               
                 PFQuery *query=[PFUser query];
+                [query whereKey:ROLE equalTo:@"author"];
                 [query getObjectInBackgroundWithId:idstr block:^(PFObject *object, NSError *error) {
                 
                 if (!error) {
-                    
+                    NSLog(@"object:%@",object);
                     cell.authornameLbl.text=[NSString stringWithFormat:@"%@ %@",[object objectForKey:@"first_name"],[object objectForKey:@"last_name"]];
                     
                     PFFile * imageFile = [object objectForKey:@"profilePic"]; // note the modern Obj-C syntax

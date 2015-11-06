@@ -189,6 +189,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    
     static NSString *simpleTableIdentifier = @"editProfileCustomeCell";
     
     self.cell = (editProfileCustomeCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -198,29 +199,41 @@
         self.cell = [nib objectAtIndex:0];
         
     }
+    UIView* bview = [[UIView alloc] init];
+    bview.backgroundColor = [UIColor clearColor];
+    [tableView setBackgroundView:bview];
+    self.cell.backgroundColor=[UIColor clearColor];
+    
     self.cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
-
+    
     if(indexPath.row ==0)
     {
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = user.firstName;
+        self.cell.iconImage.image=[UIImage imageNamed:@"email"];
         
     } else if (indexPath.row ==1) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = user.lastName;
-
+        self.cell.iconImage.image=[UIImage imageNamed:@"email"];
+        
+        
     } else if (indexPath.row == 2) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = user.email;
-
+        self.cell.iconImage.image=[UIImage imageNamed:@"email"];
+        
+        
     } else if (indexPath.row== 3) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = [user.age stringValue];
-
+        self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
+        
+        
         
         //self.createStaffCell.nameTxtFld.text=self.txtUserRole;
     } else if (indexPath.row == 4) {
@@ -228,58 +241,76 @@
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = user.country;
         self.cell.editTxtFld.inputView = countrySelect;
-
+        self.cell.iconImage.image=[UIImage imageNamed:@"location"];
+        
+        
     } else if (indexPath.row == 5) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = user.city;
-
+        self.cell.iconImage.image=[UIImage imageNamed:@"city"];
+        
+        
     }else if (indexPath.row == 6) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = user.language;
-
+        self.cell.iconImage.image=[UIImage imageNamed:@"language"];
+        
     }else if (indexPath.row == 7) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = user.favoriteAuthor1;
         self.cell.editTxtFld.inputView = authorSelect;
-
+        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        
+        
     }else if (indexPath.row == 8) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = user.favoriteAuthor2;
         self.cell.editTxtFld.inputView = authorSelect;
-
+        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        
+        
     }else if (indexPath.row == 9) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = user.favoriteAuthor3;
         self.cell.editTxtFld.inputView = authorSelect;
-
+        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        
+        
     }else if (indexPath.row == 10) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = user.nwAuthor1;
-
+        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        
+        
     }else if (indexPath.row == 11) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.text = user.nwAuthor2;
-
+        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        
+        
     }else if (indexPath.row == 12) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Password*";
+        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
+        
     }else if (indexPath.row == 13) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Confirm Password*";
+        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
+        
     }
     
     
     return self.cell;
-    // 8796218363
 }
 #pragma mark- Actionsheet delegate
 
