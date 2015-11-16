@@ -78,6 +78,9 @@
         self.templateButton.hidden = NO;
         self.ownPhoto.hidden = NO;
         self.orLabel.hidden = NO;
+        self.templateLbl.hidden = NO;
+        self.ownImgLbl.hidden = NO;
+        self.circlrImg.hidden = NO;
     }
     else{
         
@@ -86,6 +89,9 @@
         self.templateButton.hidden = YES;
         self.ownPhoto.hidden = YES;
         self.orLabel.hidden = YES;
+        self.templateLbl.hidden = YES;
+        self.ownImgLbl.hidden = YES;
+        self.circlrImg.hidden = YES;
 
     }
 }

@@ -57,16 +57,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        CATiledLayer *tiledLayer = (CATiledLayer *)[self layer];
+       // CATiledLayer *tiledLayer = (CATiledLayer *)[self layer];
         /*
          levelsOfDetail and levelsOfDetailBias determine how the layer is rendered at different zoom levels. This only matters while the view is zooming, because once the the view is done zooming a new TiledPDFView is created at the correct size and scale.
          */
-        tiledLayer.levelsOfDetail = 4;
-        tiledLayer.levelsOfDetailBias = 3;
-        tiledLayer.tileSize = CGSizeMake(512.0, 512.0);
+       // tiledLayer.levelsOfDetail = 4;
+       // tiledLayer.levelsOfDetailBias = 3;
+       // tiledLayer.tileSize = CGSizeMake(512.0, 512.0);
         self.myScale = scale;
-        self.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        self.layer.borderWidth = 5;
+        //self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+       // self.layer.borderWidth = 5;
     }
     return self;
 }

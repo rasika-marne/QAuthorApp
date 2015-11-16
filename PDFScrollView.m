@@ -132,14 +132,16 @@
     // Center horizontally.
     
     if (frameToCenter.size.width < boundsSize.width)
-        frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / 2;
+        frameToCenter.origin.x = 31;
+        //frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / 2;
     else
         frameToCenter.origin.x = 0;
     
     // Center vertically.
     
     if (frameToCenter.size.height < boundsSize.height)
-        frameToCenter.origin.y = (boundsSize.height - frameToCenter.size.height) / 2;
+        frameToCenter.origin.y = 20;
+       // frameToCenter.origin.y = (boundsSize.height - frameToCenter.size.height) / 2;
     else
         frameToCenter.origin.y = 0;
     

@@ -29,6 +29,9 @@
     BOOL ownPhotoTap;
    // NSMutableArray *genreArr;
 }
+@property (weak, nonatomic) IBOutlet UIImageView *circlrImg;
+@property (weak, nonatomic) IBOutlet UILabel *ownImgLbl;
+@property (weak, nonatomic) IBOutlet UILabel *templateLbl;
 @property (weak, nonatomic) IBOutlet UILabel *orLabel;
 @property (weak, nonatomic) IBOutlet UIButton *templateButton;
 @property (weak, nonatomic) IBOutlet UIButton *ownPhoto;
