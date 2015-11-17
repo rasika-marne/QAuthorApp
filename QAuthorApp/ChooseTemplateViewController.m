@@ -60,6 +60,11 @@
    
     [self createBook];
 }
+
+- (IBAction)onClickCancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
 - (IBAction)onTemplate2Click:(id)sender {
     flag =2;
     

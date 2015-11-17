@@ -44,7 +44,7 @@
         
     }
     
-
+   [application setApplicationIconBadgeNumber:0];
        return YES;
 }
 /*- (BOOL)application:(UIApplication *)application
@@ -243,7 +243,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     
-    
+    [application setApplicationIconBadgeNumber:0];
     if ([FBSession activeSession].state == FBSessionStateCreatedTokenLoaded) {
         [self openActiveSessionWithPermissions:nil allowLoginUI:NO];
     }

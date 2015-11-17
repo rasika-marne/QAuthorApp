@@ -79,8 +79,8 @@
     NSLog(@"%s",__PRETTY_FUNCTION__);
     self.decelerationRate = UIScrollViewDecelerationRateFast;
     self.delegate = self;
-    self.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.layer.borderWidth = 5;    
+    //self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+   // self.layer.borderWidth = 5;
     self.minimumZoomScale = .25;
     self.maximumZoomScale = 5;
 }
@@ -97,6 +97,7 @@
         self.pageRect = self.bounds;
     } else {
         self.pageRect = CGPDFPageGetBoxRect( _PDFPage, kCGPDFMediaBox );
+        //_PDFScale = self.pageRect.size.width;
         _PDFScale = self.frame.size.width/self.pageRect.size.width;
         self.pageRect = CGRectMake( self.pageRect.origin.x, self.pageRect.origin.y, self.pageRect.size.width*_PDFScale, self.pageRect.size.height*_PDFScale );
     }
@@ -125,7 +126,7 @@
     
     // Center the image as it becomes smaller than the size of the screen.
     
-    CGSize boundsSize = self.bounds.size;
+   /* CGSize boundsSize = self.bounds.size;
         
     CGRect frameToCenter = self.tiledPDFView.frame;
     
@@ -148,11 +149,11 @@
     self.tiledPDFView.frame = frameToCenter;
     self.backgroundImageView.frame = frameToCenter;
     
-    /*
+    
      To handle the interaction between CATiledLayer and high resolution screens, set the tiling view's contentScaleFactor to 1.0.
      If this step were omitted, the content scale factor would be 2.0 on high resolution screens, which would cause the CATiledLayer to ask for tiles of the wrong scale.
-     */
-    self.tiledPDFView.contentScaleFactor = 1.0;
+    
+    self.tiledPDFView.contentScaleFactor = 1.0;*/
 }
 
 

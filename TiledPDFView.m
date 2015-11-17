@@ -91,7 +91,7 @@
     NSLog(@"%s myScale:%f",__PRETTY_FUNCTION__,self.myScale);
     
     // Fill the background with white.
-    CGContextSetRGBFillColor(context, 1.0,1.0,1.0,1.0);
+    CGContextSetRGBFillColor(context, 114.0,197.0,213.0,1.0);
     CGContextFillRect(context, self.bounds);
  
     // Print a blank page and return if our page is null.

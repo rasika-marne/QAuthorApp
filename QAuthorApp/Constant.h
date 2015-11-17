@@ -20,9 +20,9 @@
 #define  RECORD_BUTTON_TAG 111
 #define  STOP_RECORDING_BUTTON_TAG 222
 #define AUDIO_RECORD_BUTTON_INDEX   1
-#define RECORD_AUDIO_START_BUTTON @"recordvoice-start-button.png"
+#define RECORD_AUDIO_START_BUTTON @"audio_record"
 #define IS_OS_8_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-#define RECORD_AUDIO_BUTTON  @"recordvoice.png"
+#define RECORD_AUDIO_BUTTON  @"audio"
 #define OBJECT_ID @"objectId"
 
 #define USER_ID @"UserId"

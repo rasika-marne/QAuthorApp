@@ -20,7 +20,7 @@
     [self.view setBackgroundColor: RGB];
     ownPhotoTap = NO;
    
-    BackImage.image = backImg1;
+  
     SWRevealViewController *revealController = [self revealViewController];
     UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
     self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
@@ -28,15 +28,10 @@
     book = [Book createEmptyObject];
     user =[User createEmptyUser];
     user = APP_DELEGATE.loggedInUser;
-    [user.profilePic getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        [self.authorImg setImage:[UIImage imageWithData:data]];
-        self.authorImg.contentMode =UIViewContentModeScaleAspectFit;
-        
-    }];
+   
     //book.authorId = user;
     
-    self.authorNameLbl.text = user.firstName;
-       PFQuery *query = [PFQuery queryWithClassName:BOOK_GENRE];
+    PFQuery *query = [PFQuery queryWithClassName:BOOK_GENRE];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         if (!error) {
@@ -155,14 +150,14 @@
             //rangeArr = objects;
             for (int i=0; i<[objects count]; i++) {
                 ageRange = [objects objectAtIndex:i];
-                if (([user.age intValue] > [ageRange.ageFrom intValue]) && ([user.age intValue] < [ageRange.ageTo intValue])) {
+                if (([user.age intValue] >= [ageRange.ageFrom intValue]) && ([user.age intValue] <= [ageRange.ageTo intValue])) {
                     book.ageFrom = ageRange.ageFrom;
                     book.ageTo = ageRange.ageTo;
                     break;
                 }
             }
             book.title = self.bookTitleTextField.text;
-            if (self.bookCoverImg.image != [UIImage imageNamed:@"BookCover.jpg"]) {
+            if (self.bookCoverImg.image != [UIImage imageNamed:@"book-1"]) {
                 UIImage *image = [self scaleAndRotateImage:self.bookCoverImg.image];
                 NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
                 book.coverPic = [PFFile fileWithName:@"CoverPage.jpg" data:imageData];

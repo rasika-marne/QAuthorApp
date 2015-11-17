@@ -21,7 +21,7 @@
 #import "BookDetails.h"
 @class Book;
 @class BookDetails;
-@interface CreateBookViewController : UIViewController<UITextViewDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate>{
+@interface CreateBookViewController : UIViewController<UITextViewDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate,CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate>{
     int count;
     UITextView* activeTextView;
     BOOL m_bPhotoWasChanged;
@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView1;
 @property (nonatomic, strong) StoryAudioPlayer *audioPlayerObject;
 //@property (nonatomic, strong) ViewBookViewController *viewBookVC;
+@property (weak, nonatomic) IBOutlet UILabel *chooseOwnLbl;
 
 @property (nonatomic, strong) NSString* storySoundFilePath;
 @property (weak, nonatomic) IBOutlet UIView *ViewToPDF;

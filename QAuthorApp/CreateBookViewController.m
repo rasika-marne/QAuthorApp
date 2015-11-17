@@ -15,13 +15,18 @@
 @implementation CreateBookViewController
 @synthesize imageView1,textView1,ViewToPDF,bookObj,bookDetailsObj,backImage,backImg1;
 - (void)viewDidLoad {
+    
+    
     [super viewDidLoad];
-    [self navigationMethod];
-    [self.view setBackgroundColor: RGB];
-    NSLog(@"book obj:%@",bookObj);
-    backImage.image = backImg1;
-
     count = 1;
+    [self navigationMethod];
+    self.m_oImage.hidden = NO;
+    self.chooseOwnLbl.hidden = NO;
+    [self.view setBackgroundColor: RGB];
+    NSLog(@"book obj title:%@",bookObj.title);
+    //backImage.image = backImg1;
+
+    
    
     
     SWRevealViewController *revealController = [self revealViewController];
@@ -32,26 +37,7 @@
     
     //bookObj = [Book createEmptyObject];
     bookDetailsObj = [BookDetails createEmptyObject];
-    /*bookObj.status = @"active";
-    NSLog(@"Book obj:%@",bookObj);
-    [bookObj saveBooksBlock:^(Book *object, NSError *error) {
-        if (!error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"Book created Successfully!!"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            NSLog(@"Book obj id:%@",object.objectId);
-            bookObj = object;
-        
-        }
-    }];*/
-    
-
-    //[self.navigationController.navigationBar setHidden:YES];
-      // Do any additional setup after loading the view.
-}
+   }
 -(void)navigationMethod{
     [self.view setBackgroundColor: RGB]; //will give a UIColor
     self.navigationItem.hidesBackButton = YES;
@@ -148,7 +134,7 @@
     bookDetailsObj.bookId = bookObj.objectId;
     bookDetailsObj.pageNumber = [NSNumber numberWithInteger:count];
     bookDetailsObj.textContent = textView1.text;
-    if (imageView1.image != [UIImage imageNamed:@"BookCover.jpg"]) {
+    if (imageView1.image != [UIImage imageNamed:@"book-1"]) {
         UIImage *image = [self scaleAndRotateImage:imageView1.image];
         NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
         bookDetailsObj.imageContent = [PFFile fileWithName:[NSString stringWithFormat:@"page%d.jpg",count] data:imageData];
@@ -184,8 +170,10 @@
             self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
           
             textView1.text = @"Type story....";
-            // [self.m_oImage setImage:[UIImage imageNamed:@"BookCover.jpg"] forState:UIControlStateNormal];
-            [imageView1 setImage:[UIImage imageNamed:@"BookCover.jpg"]];
+            self.chooseOwnLbl.hidden = NO;
+            self.m_oImage.hidden = NO;
+            [self.m_oImage setBackgroundImage:[UIImage imageNamed:@"won-img"] forState:UIControlStateNormal];
+            [imageView1 setImage:[UIImage imageNamed:@"book-1"]];
             
         }
 
@@ -227,7 +215,7 @@
                 bookDetailsObj.bookId = bookObj.objectId;
                 bookDetailsObj.pageNumber = [NSNumber numberWithInteger:count];
                 bookDetailsObj.textContent = textView1.text;
-                if (imageView1.image != [UIImage imageNamed:@"BookCover.jpg"]) {
+                if (imageView1.image != [UIImage imageNamed:@"book-1"]) {
                     UIImage *image = [self scaleAndRotateImage:imageView1.image];
                     NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
                     bookDetailsObj.imageContent = [PFFile fileWithName:[NSString stringWithFormat:@"page%d.jpg",count] data:imageData];
@@ -357,7 +345,7 @@
     //    // Finalize the output file
     CGPDFContextClose(writeContext);
     CGContextRelease(writeContext);
-    NSFileManager *fm = [NSFileManager defaultManager];
+   // NSFileManager *fm = [NSFileManager defaultManager];
     //NSString *directory = [[self documentsDirectory] stringByAppendingPathComponent:@"Photos/"];
    /* NSError *error = nil;
     for (NSString *file in [fm contentsOfDirectoryAtPath:layOutPath error:&error]) {
@@ -393,12 +381,6 @@
     
 }
 
-#pragma mark - Play RecordedAudo File
-
-- (IBAction)playRecordedAudioFile:(id)sender {
-    
-    [self listenAudio];
-}
 -(void)resignKeyboard
 {
     if (activeTextView) {
@@ -486,6 +468,15 @@
 
 - (void)imageEditor:(CLImageEditor *)editor didFinishEdittingWithImage:(UIImage *)image
 {
+    if (image) {
+        self.m_oImage.hidden = YES;
+        self.chooseOwnLbl.hidden = YES;
+    }
+    else
+    {
+        self.m_oImage.hidden = NO;
+        self.chooseOwnLbl.hidden = NO;
+    }
     //[self.m_oImage setImage:image forState:UIControlStateNormal];
     UIImage *lowResImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 0.02)];
     [imageView1 setImage:lowResImage];
@@ -540,7 +531,7 @@
 }
 #pragma mark - Listen Audio
 
--(void)listenAudio
+/*-(void)listenAudio
 {
     if (!self.audioPlayerObject) {
         self.audioPlayerObject = [[StoryAudioPlayer alloc]init];
@@ -563,7 +554,7 @@
     AudioServicesDisposeSystemSoundID(audioEffect);
     [self.audioPlayerObject playAudio:soundURL];
     //self.isForRecordAudio = NO;
-}
+}*/
 
 #pragma mark - Stop Audio Recording / Playing
 

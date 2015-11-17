@@ -55,7 +55,10 @@
     if (self.objectId) {
         [pObj setObjectId:self.objectId];
     }
-    [pObj setObject:self.createdAt forKey:CREATED_AT];
+    if (self.createdAt) {
+        [pObj setObject:self.createdAt forKey:CREATED_AT];
+    }
+    
     [pObj setObject:IS_POPULATED_STRING(self.title)?self.title:@"" forKey:TITLE];
     [pObj setObject:IS_POPULATED_STRING(self.genre)?self.genre:@"" forKey:GENRE];
     [pObj setObject:IS_POPULATED_STRING(self.type)?self.type:@"" forKey:TYPE];
