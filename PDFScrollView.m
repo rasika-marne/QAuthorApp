@@ -96,7 +96,7 @@
     if( PDFPage == NULL ) {
         self.pageRect = self.bounds;
     } else {
-        self.pageRect = CGPDFPageGetBoxRect( _PDFPage, kCGPDFMediaBox );
+        self.pageRect = CGPDFPageGetBoxRect( _PDFPage, kCGPDFTrimBox );
         //_PDFScale = self.pageRect.size.width;
         _PDFScale = self.frame.size.width/self.pageRect.size.width;
         self.pageRect = CGRectMake( self.pageRect.origin.x, self.pageRect.origin.y, self.pageRect.size.width*_PDFScale, self.pageRect.size.height*_PDFScale );

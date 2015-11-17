@@ -60,7 +60,7 @@
 	CGContextSaveGState( context );
 
     // First fill the background with white.
-	CGContextSetRGBFillColor( context, 1, 1.0, 1.0, 1.0 );
+	CGContextSetRGBFillColor( context, 114.0, 197.0, 213.0, 1.0 );
     CGContextFillRect( context, self.bounds );
 
 	// Flip the context so that the PDF page is rendered
