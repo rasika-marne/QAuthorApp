@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD03CDC81BFC449D00A438C3 /* ViewProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD03CDC71BFC449D00A438C3 /* ViewProfileViewController.m */; };
+		FD03CDCA1BFC8DE600A438C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD03CDC91BFC8DE600A438C3 /* GoogleService-Info.plist */; };
+		FD03CE9D1BFC99C500A438C3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03CE9C1BFC99C500A438C3 /* CoreData.framework */; };
+		FD03CE9F1BFC99CE00A438C3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03CE9E1BFC99CE00A438C3 /* libz.dylib */; };
+		FD03CEAE1BFC9AF800A438C3 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03CEAC1BFC9AF800A438C3 /* libAdIdAccess.a */; };
+		FD03CEAF1BFC9AF800A438C3 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD03CEAD1BFC9AF800A438C3 /* libGoogleAnalyticsServices.a */; };
 		FD048FF91BE8E89800C0088C /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD048FF81BE8E89800C0088C /* SignUpViewController.m */; };
 		FD1367271BEB4AC300F9639F /* AvenirLTStd-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD13671B1BEB4AC300F9639F /* AvenirLTStd-Black.otf */; };
 		FD1367281BEB4AC300F9639F /* AvenirLTStd-BlackOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD13671C1BEB4AC300F9639F /* AvenirLTStd-BlackOblique.otf */; };
@@ -169,6 +175,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD03CDC61BFC449D00A438C3 /* ViewProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewProfileViewController.h; sourceTree = "<group>"; };
+		FD03CDC71BFC449D00A438C3 /* ViewProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewProfileViewController.m; sourceTree = "<group>"; };
+		FD03CDC91BFC8DE600A438C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FD03CE9C1BFC99C500A438C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FD03CE9E1BFC99CE00A438C3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		FD03CEA11BFC9ACB00A438C3 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		FD03CEA21BFC9ACB00A438C3 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		FD03CEA31BFC9ACB00A438C3 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		FD03CEA41BFC9ACB00A438C3 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		FD03CEA51BFC9ACB00A438C3 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		FD03CEA61BFC9ACB00A438C3 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		FD03CEA71BFC9ACB00A438C3 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		FD03CEA81BFC9ACB00A438C3 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		FD03CEA91BFC9ACB00A438C3 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		FD03CEAA1BFC9ACB00A438C3 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		FD03CEAC1BFC9AF800A438C3 /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdIdAccess.a; sourceTree = "<group>"; };
+		FD03CEAD1BFC9AF800A438C3 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		FD048FF71BE8E89800C0088C /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		FD048FF81BE8E89800C0088C /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		FD13671B1BEB4AC300F9639F /* AvenirLTStd-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirLTStd-Black.otf"; sourceTree = "<group>"; };
@@ -415,6 +438,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD03CE9F1BFC99CE00A438C3 /* libz.dylib in Frameworks */,
+				FD03CE9D1BFC99C500A438C3 /* CoreData.framework in Frameworks */,
 				FDE4D8C51BC682C100BFB646 /* QuickLook.framework in Frameworks */,
 				FD4C575D1BC28B68002BA93F /* UIKit.framework in Frameworks */,
 				FD7C6CA31BBA890600887E2D /* libz.1.1.3.dylib in Frameworks */,
@@ -426,6 +451,8 @@
 				FD2CDD081BB5176800AD50AF /* Security.framework in Frameworks */,
 				FD2CDD061BB5176200AD50AF /* MobileCoreServices.framework in Frameworks */,
 				FD2CDD041BB5175600AD50AF /* SystemConfiguration.framework in Frameworks */,
+				FD03CEAE1BFC9AF800A438C3 /* libAdIdAccess.a in Frameworks */,
+				FD03CEAF1BFC9AF800A438C3 /* libGoogleAnalyticsServices.a in Frameworks */,
 				FD2CDD021BB5174D00AD50AF /* CFNetwork.framework in Frameworks */,
 				FD58B0541BE0C7A000021D01 /* GoogleMobileAds.framework in Frameworks */,
 				FD2CDCFF1BB5171000AD50AF /* Parse.framework in Frameworks */,
@@ -450,6 +477,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD03CEA01BFC9ACB00A438C3 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				FD03CEA11BFC9ACB00A438C3 /* GAI.h */,
+				FD03CEA21BFC9ACB00A438C3 /* GAIDictionaryBuilder.h */,
+				FD03CEA31BFC9ACB00A438C3 /* GAIEcommerceFields.h */,
+				FD03CEA41BFC9ACB00A438C3 /* GAIEcommerceProduct.h */,
+				FD03CEA51BFC9ACB00A438C3 /* GAIEcommerceProductAction.h */,
+				FD03CEA61BFC9ACB00A438C3 /* GAIEcommercePromotion.h */,
+				FD03CEA71BFC9ACB00A438C3 /* GAIFields.h */,
+				FD03CEA81BFC9ACB00A438C3 /* GAILogger.h */,
+				FD03CEA91BFC9ACB00A438C3 /* GAITrackedViewController.h */,
+				FD03CEAA1BFC9ACB00A438C3 /* GAITracker.h */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		FD03CEAB1BFC9AD000A438C3 /* Google_Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				FD03CEA01BFC9ACB00A438C3 /* Library */,
+			);
+			name = Google_Analytics;
+			sourceTree = "<group>";
+		};
 		FD048FF61BE8E88000C0088C /* Sign Up */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +533,7 @@
 		FD2CDCCC1BB5078300AD50AF = {
 			isa = PBXGroup;
 			children = (
+				FD03CEAB1BFC9AD000A438C3 /* Google_Analytics */,
 				FD13671A1BEB4AC300F9639F /* Custom font */,
 				FDED84FC1BC7C87A000FA50B /* Images */,
 				FD2CDCD71BB5078300AD50AF /* QAuthorApp */,
@@ -518,6 +571,7 @@
 				FD7D4E471BB933A600DD3F76 /* Models */,
 				FD2CDCE51BB5078400AD50AF /* Images.xcassets */,
 				FD2CDCE71BB5078400AD50AF /* LaunchScreen.xib */,
+				FD03CDC91BFC8DE600A438C3 /* GoogleService-Info.plist */,
 				FD2CDCD81BB5078300AD50AF /* Supporting Files */,
 			);
 			path = QAuthorApp;
@@ -552,6 +606,10 @@
 		FD2CDD0B1BB5177500AD50AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD03CEAC1BFC9AF800A438C3 /* libAdIdAccess.a */,
+				FD03CEAD1BFC9AF800A438C3 /* libGoogleAnalyticsServices.a */,
+				FD03CE9E1BFC99CE00A438C3 /* libz.dylib */,
+				FD03CE9C1BFC99C500A438C3 /* CoreData.framework */,
 				FD58B0531BE0C7A000021D01 /* GoogleMobileAds.framework */,
 				FD41A7761BCB7C6E003B3C98 /* FacebookSDK.framework */,
 				FDE4D8C41BC682C100BFB646 /* QuickLook.framework */,
@@ -939,6 +997,8 @@
 				FDAF88A51BCF7890002F276A /* DashboardViewController.m */,
 				FDAF88A61BCF7890002F276A /* DCTableViewCell.h */,
 				FDAF88A71BCF7890002F276A /* DCTableViewCell.m */,
+				FD03CDC61BFC449D00A438C3 /* ViewProfileViewController.h */,
+				FD03CDC71BFC449D00A438C3 /* ViewProfileViewController.m */,
 			);
 			name = "Dashboard View";
 			sourceTree = "<group>";
@@ -1187,6 +1247,7 @@
 				FD2CDDC01BB561B600AD50AF /* recordvoice-start-button@2x.png in Resources */,
 				FD9C6A551BD7913900849E75 /* Text-Edit-icon.png in Resources */,
 				FD2CDCE91BB5078400AD50AF /* LaunchScreen.xib in Resources */,
+				FD03CDCA1BFC8DE600A438C3 /* GoogleService-Info.plist in Resources */,
 				FDA4A9621BCD267700AE1433 /* ReadbookImage.png in Resources */,
 				FD2CDDC21BB561B600AD50AF /* recordvoice@2x.png in Resources */,
 				FD7D4E461BB9179F00DD3F76 /* ProfilePic.png in Resources */,
@@ -1242,6 +1303,7 @@
 				FD9F7B871BC3E6F1002D629F /* CellRearTableView.m in Sources */,
 				FD9F7B891BC3E6F1002D629F /* RearViewController.m in Sources */,
 				FD9F55351BBBD6CB008C6BEF /* EditProfileViewController.m in Sources */,
+				FD03CDC81BFC449D00A438C3 /* ViewProfileViewController.m in Sources */,
 				FD2CDDB01BB561B600AD50AF /* UIImage+Utility.m in Sources */,
 				FD2CDDA71BB561B600AD50AF /* CLCircleView.m in Sources */,
 				FD2CDCE11BB5078300AD50AF /* ViewController.m in Sources */,
@@ -1447,6 +1509,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Rasika Shinde (P93UJJZVQB)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1456,6 +1519,11 @@
 				);
 				INFOPLIST_FILE = QAuthorApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleAnalyticsServicesiOS_3.14",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1f9e9900-a3dd-4800-b3bf-ed534fa49ec3";
 			};
@@ -1465,6 +1533,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Rasika Shinde (P93UJJZVQB)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1474,6 +1543,11 @@
 				);
 				INFOPLIST_FILE = QAuthorApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleAnalyticsServicesiOS_3.14",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1f9e9900-a3dd-4800-b3bf-ed534fa49ec3";
 			};

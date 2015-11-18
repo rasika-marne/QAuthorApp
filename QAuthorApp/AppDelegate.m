@@ -8,14 +8,39 @@
 
 #import "AppDelegate.h"
 #import "RearViewController.h"
-@interface AppDelegate ()<SWRevealViewControllerDelegate>
 
+static NSString *const kTrackingId = @"UA-70308797-1";
+static NSString *const kAllowTracking = @"allowTracking";
+@interface AppDelegate ()<SWRevealViewControllerDelegate>
+@property(nonatomic, assign) BOOL okToWait;
+@property(nonatomic, copy) void (^dispatchHandler)(GAIDispatchResult result);
 @end
+// Used for sending Google Analytics traffic in the background.
 
 @implementation AppDelegate
 @synthesize viewController,loggedInUser,activitityIndicator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Configure tracker from GoogleService-Info.plist.
+    NSDictionary *appDefaults = @{kAllowTracking: @(YES)};
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    // User must be able to opt out of tracking
+    [GAI sharedInstance].optOut =
+    ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
+    
+    // If your app runs for long periods of time in the foreground, you might consider turning
+    // on periodic dispatching.  This app doesn't, so it'll dispatch all traffic when it goes
+    // into the background instead.  If you wish to dispatch periodically, we recommend a 120
+    // second dispatch interval.
+    // [GAI sharedInstance].dispatchInterval = 120;
+    [GAI sharedInstance].dispatchInterval = -1;
+    
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    self.tracker = [[GAI sharedInstance] trackerWithName:@"QAuthor"
+                                              trackingId:kTrackingId];
+    
+  // remove before app release
+
     // Override point for customization after application launch.
         [Parse setApplicationId:PARSE_APP_ID clientKey:PARSE_CLIENT_KEY];
     
@@ -47,6 +72,44 @@
    [application setApplicationIconBadgeNumber:0];
        return YES;
 }
+
+- (void)sendHitsInBackground {
+    self.okToWait = YES;
+    __weak AppDelegate *weakSelf = self;
+    __block UIBackgroundTaskIdentifier backgroundTaskId =
+    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        weakSelf.okToWait = NO;
+    }];
+    
+    if (backgroundTaskId == UIBackgroundTaskInvalid) {
+        return;
+    }
+    
+    self.dispatchHandler = ^(GAIDispatchResult result) {
+        // If the last dispatch succeeded, and we're still OK to stay in the background then kick off
+        // again.
+        if (result == kGAIDispatchGood && weakSelf.okToWait ) {
+            [[GAI sharedInstance] dispatchWithCompletionHandler:weakSelf.dispatchHandler];
+        } else {
+            [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskId];
+        }
+    };
+    [[GAI sharedInstance] dispatchWithCompletionHandler:self.dispatchHandler];
+}
+
+-(void)application:(UIApplication *)application
+performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    [self sendHitsInBackground];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+// We'll try to dispatch any hits queued for dispatch as the app goes into the background.
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [self sendHitsInBackground];
+}
+
 /*- (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -232,17 +295,15 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
+
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    
+    [GAI sharedInstance].optOut =
+    ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
     [application setApplicationIconBadgeNumber:0];
     if ([FBSession activeSession].state == FBSessionStateCreatedTokenLoaded) {
         [self openActiveSessionWithPermissions:nil allowLoginUI:NO];

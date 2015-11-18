@@ -35,7 +35,8 @@
 @interface HomeViewController : UIViewController<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UISearchDisplayDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate>{
     NSMutableArray *booksArray,*authorNamesArr,*searchResults,*filterdArray,*bObjectIdArr,*followingsArr;
     Book *bookObj;
-    NSInteger likeCount,commentCount;
+    int movementDistance;
+    NSInteger likeCount,commentCount,count;
     NSString *authorName;
     AgeRange *ageRange;
     BOOL myBooksClicked,professionalClicked;

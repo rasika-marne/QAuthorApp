@@ -16,6 +16,7 @@
 @synthesize pickerData;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    count = -1;
     [self navigationMethod];
     [self.view setBackgroundColor: RGB];
     self.bannerView.adUnitID = AD_Unit_id;
@@ -630,19 +631,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
     return self.bookListCell;
 }
--(void)navigationMethod{
-    [self.view setBackgroundColor: RGB]; //will give a UIColor
-    self.navigationItem.hidesBackButton = YES;
-    self.navigationController.navigationBar.hidden = NO;
-    self.title=@"Home";
-    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
-    
-    
-    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
-    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
-    
-    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
-}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
      SELECTEDBOOKID=[[NSString alloc]initWithString:[bObjectIdArr objectAtIndex:indexPath.row]];
     bookObj = [booksArray objectAtIndex:indexPath.row];
@@ -657,6 +646,55 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     //[PFUser requestPasswordResetForEmailInBackground: [alertView textFieldAtIndex:0].text];
     
     
+}
+- (void)tableView:(UITableView *)tableView
+  willDisplayCell:(UITableViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (count<indexPath.row) {
+        count = count+3;
+        if (indexPath.row==count) {
+            count = count+3;
+            //[self animateTextField:self.bannerView up:YES];
+        }
+        else
+            [self animateTextField:self.bannerView up:NO];
+    }
+    else if (count>indexPath.row){
+        count = count-3;
+        if (indexPath.row==count) {
+            count = count-3;
+            [self animateTextField:self.bannerView up:YES];
+        }
+        else
+            [self animateTextField:self.bannerView up:NO];
+
+    }
+    
+}
+- (void)animateTextField:(GADBannerView*)bannerView up:(BOOL)up {
+    
+    movementDistance = 200;
+    
+    const float movementDuration = 0.9f;
+    int movement = (up ? -movementDistance : movementDistance);
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    bannerView.frame = CGRectOffset(bannerView.frame, 0, movement);
+    [UIView commitAnimations];
+}
+-(void)navigationMethod{
+    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    self.title=@"Home";
+    self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
 -(void)btnEditClicked:(UIButton *)sender{
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];

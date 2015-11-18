@@ -12,6 +12,7 @@
 #import "HomeViewController.h"
 #import "User.h"
 #import "MBProgressHUD.h"
+#import "GAI.h"
 //#import "MenuViewController.h"
 #import "EditProfileViewController.h"
 #import <netinet/in.h>
@@ -37,7 +38,7 @@
 @property (strong, nonatomic) UITabBarController *tabBarController;
 @property (strong, nonatomic) UINavigationController *navigationController;
 @property (strong, nonatomic) UINavigationController *homeNavigationController;
-
+@property(nonatomic, strong) id<GAITracker> tracker;
 @property (strong, nonatomic) UINavigationController *profileNavigationController;
 @property (strong, nonatomic) UINavigationController *menuNavigationController;
 

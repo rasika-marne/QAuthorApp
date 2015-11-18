@@ -52,7 +52,7 @@
     [self.view setBackgroundColor: RGB]; //will give a UIColor
     self.navigationItem.hidesBackButton = YES;
     self.navigationController.navigationBar.hidden = NO;
-    // self.title=@"Login";
+     self.title=@"Dashboard";
     self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
     
     
@@ -429,6 +429,24 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *idstr;
+    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.viewProfileVC = (ViewProfileViewController*)
+    [storyboard instantiateViewControllerWithIdentifier:@"ViewProfileViewController"];
+    if ([SelectedSegmentvalue isEqualToString:@"Dashboard"]) {
+         idstr=[[autorsArray objectAtIndex:indexPath.row] valueForKey:OBJECT_ID];
+       
+    }
+    else if ([SelectedSegmentvalue isEqualToString:@"Followers"]){
+         idstr=[[autorsArray objectAtIndex:indexPath.row] valueForKey:FOLLOWERS];
+        
+    }
+    else if ([SelectedSegmentvalue isEqualToString:@"Following"]){
+        idstr=[[autorsArray objectAtIndex:indexPath.row] valueForKey:FAN_USER_ID];
+        
+    }
+    self.viewProfileVC.userId = idstr;
+     [self.navigationController pushViewController:self.viewProfileVC animated:YES];
     /*
     
     bookObj = [booksArray objectAtIndex:indexPath.row];

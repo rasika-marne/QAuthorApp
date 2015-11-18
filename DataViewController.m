@@ -64,7 +64,7 @@
 {
     [super viewDidLoad];
     [self navigationMethod];
-     [self.view setBackgroundColor: RGB]; 
+    // [self.view setBackgroundColor: RGB];
     if ([self.audioPlayer isPlaying] == YES) {
         [self.audioPlayer pauseAudio];
     }
@@ -95,7 +95,7 @@
     [self.scrollView setPDFPage:self.page];
 }
 -(void)navigationMethod{
-    [self.view setBackgroundColor: RGB]; //will give a UIColor
+   // [self.view setBackgroundColor: RGB]; //will give a UIColor
     self.navigationItem.hidesBackButton = YES;
     self.navigationController.navigationBar.hidden = NO;
    // self.title=@"Login";

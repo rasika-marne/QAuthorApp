@@ -10,6 +10,7 @@
 #import "Constant.h"
 #import "FanFollowers.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ViewProfileViewController.h"
 @interface DashboardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
     NSMutableArray *tempFollowingArr,*tempauthIdarr,*flagArray;
     bool btnFollowClick;
@@ -20,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *authorsButton;
 @property (weak, nonatomic) IBOutlet UIButton *followersButton;
 @property (weak, nonatomic) IBOutlet UIButton *followingsButton;
-
+@property (nonatomic, strong) ViewProfileViewController *viewProfileVC;
 @property (weak, nonatomic) IBOutlet UITableView *authorTableview;
 - (IBAction)onclickAuthorBtn:(id)sender;
 - (IBAction)onClickFollowersBtn:(id)sender;

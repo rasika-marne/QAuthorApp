@@ -17,7 +17,7 @@
 @synthesize modelController = _modelController;
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [self.view setBackgroundColor: RGB];
+     //[self.view setBackgroundColor: RGB];
     [self navigationMethod];
     bookDetailsArray = [[NSMutableArray alloc]init];
     bookDet = [BookDetails createEmptyObject];
@@ -49,7 +49,7 @@
     // Do any additional setup after loading the view.
 }
 -(void)navigationMethod{
-    [self.view setBackgroundColor: RGB]; //will give a UIColor
+    //[self.view setBackgroundColor: RGB]; //will give a UIColor
     self.navigationItem.hidesBackButton = YES;
     self.navigationController.navigationBar.hidden = NO;
     //self.title=@"";
