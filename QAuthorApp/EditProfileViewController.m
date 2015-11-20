@@ -141,6 +141,7 @@
         }
         else if (selectedIndex == 8 ) {
             self.txtFavAuth2=@"";
+            self.txtNewAuth2 = [[NSString alloc]init];
             self.txtFavAuth2= [authorNameArr objectAtIndex:row];
             self.cell = (editProfileCustomeCell*)[self.editProfileTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]];
             self.cell.editTxtFld.text=self.txtFavAuth2;
@@ -390,6 +391,27 @@
                 [object setObject:self.txtCity forKey:CITY];
                 [object setObject:self.txtCountry forKey:COUNTRY];
                 [object setObject:self.txtLang forKey:LANGUAGE];
+                 if (self.txtfavAuth1 != nil){
+                    //[object setObject:self.txtfavAuth1 forKey:FAVORITE_AUTHOR1];
+                }
+                else {
+                    self.txtfavAuth1 = user.favoriteAuthor1;
+                    
+                }
+                if (self.txtFavAuth2 != nil) {
+                    
+                }
+                else {
+                    self.txtFavAuth2 = user.favoriteAuthor2;
+                    
+                }
+                if (self.txtFavAuth3 != nil) {
+                   
+                }
+                else{
+                    self.txtFavAuth3 = user.favoriteAuthor3;
+                    
+                }
                 [object setObject:self.txtfavAuth1 forKey:FAVORITE_AUTHOR1];
                 [object setObject:self.txtFavAuth2 forKey:FAVORITE_AUTHOR2];
                 [object setObject:self.txtFavAuth3 forKey:FAVORITE_AUTHOR3];
@@ -454,7 +476,7 @@
     }
     return NO;
 }
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+/*-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     
     switch (textField.tag)
@@ -482,7 +504,7 @@
         case 6:
             self.txtfavAuth1=[[NSString alloc]initWithFormat:@"%@",textField.text];
             break;
-        /*case 7:
+        case 7:
             self.txtFavAuth2=[[NSString alloc]initWithFormat:@"%@",textField.text];
             break;
             
@@ -492,7 +514,7 @@
             
         case 9:
             self.txtNewAuth1=[[NSString alloc]initWithFormat:@"%@",textField.text];
-            break;*/
+            break;
             
         case 10:
             self.txtNewAuth2=[[NSString alloc]initWithFormat:@"%@",textField.text];
@@ -506,7 +528,7 @@
             
     }
     return YES;
-}
+}*/
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     
     

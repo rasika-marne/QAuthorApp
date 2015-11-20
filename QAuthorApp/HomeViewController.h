@@ -20,6 +20,8 @@
 #import "ChooseTemplateViewController.h"
 #import <Social/Social.h>
 #import <MessageUI/MessageUI.h>
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import "EditBookTitleViewController.h"
 @class AgeRange;
@@ -32,7 +34,7 @@
 @class ChooseTemplateViewController;
 @class EditBookTitleViewController;
 @class GADBannerView;
-@interface HomeViewController : UIViewController<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UISearchDisplayDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate>{
+@interface HomeViewController : GAITrackedViewController<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UISearchDisplayDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate>{
     NSMutableArray *booksArray,*authorNamesArr,*searchResults,*filterdArray,*bObjectIdArr,*followingsArr;
     Book *bookObj;
     int movementDistance;

@@ -21,23 +21,7 @@ static NSString *const kAllowTracking = @"allowTracking";
 @synthesize viewController,loggedInUser,activitityIndicator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Configure tracker from GoogleService-Info.plist.
-    NSDictionary *appDefaults = @{kAllowTracking: @(YES)};
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
-    // User must be able to opt out of tracking
-    [GAI sharedInstance].optOut =
-    ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
-    
-    // If your app runs for long periods of time in the foreground, you might consider turning
-    // on periodic dispatching.  This app doesn't, so it'll dispatch all traffic when it goes
-    // into the background instead.  If you wish to dispatch periodically, we recommend a 120
-    // second dispatch interval.
-    // [GAI sharedInstance].dispatchInterval = 120;
-    [GAI sharedInstance].dispatchInterval = -1;
-    
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    self.tracker = [[GAI sharedInstance] trackerWithName:@"QAuthor"
-                                              trackingId:kTrackingId];
+    [self setGoogleAnalytics];
     
   // remove before app release
 
@@ -71,6 +55,31 @@ static NSString *const kAllowTracking = @"allowTracking";
     
    [application setApplicationIconBadgeNumber:0];
        return YES;
+}
+-(void) setGoogleAnalytics{
+    
+    // Initialize tracker.
+    self.tracker = [[GAI sharedInstance] trackerWithName:@"QAuthor app"
+                                              trackingId:kTrackingId];
+    
+    NSDictionary *appDefaults = @{kAllowTracking: @(YES)};
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    // User must be able to opt out of tracking
+    
+    [GAI sharedInstance].optOut =
+    ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
+    
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 5;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    [[GAI sharedInstance] setTrackUncaughtExceptions:YES];
 }
 
 - (void)sendHitsInBackground {

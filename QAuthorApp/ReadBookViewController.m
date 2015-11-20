@@ -10,6 +10,7 @@
 #import "ModelController.h"
 @interface ReadBookViewController ()
 @property (readonly, strong, nonatomic) ModelController *modelController;
+@property(nonatomic, strong) GADInterstitial *interstitial;
 @end
 
 @implementation ReadBookViewController
@@ -17,7 +18,8 @@
 @synthesize modelController = _modelController;
 - (void)viewDidLoad {
     [super viewDidLoad];
-     //[self.view setBackgroundColor: RGB];
+   
+
     [self navigationMethod];
     bookDetailsArray = [[NSMutableArray alloc]init];
     bookDet = [BookDetails createEmptyObject];

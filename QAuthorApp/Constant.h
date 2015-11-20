@@ -39,6 +39,8 @@
 #define FbClientID @"423047544565291"
 
 #define AD_Unit_id @"ca-app-pub-5468147316620707/4430610672"
+#define AD_Full_Screen_Unit_id @"ca-app-pub-5468147316620707/6861942679"
+
 
 //Custom Font
 #define FONTNAME @"AvenirLTStd-Light"

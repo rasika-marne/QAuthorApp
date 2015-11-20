@@ -30,6 +30,8 @@
             <string>AvenirLTStd-Heavy</string>
             <string>AvenirLTStd-Heavy</string>
             <string>AvenirLTStd-Heavy</string>
+            <string>AvenirLTStd-Heavy</string>
+            <string>AvenirLTStd-Heavy</string>
         </mutableArray>
         <mutableArray key="AvenirLTStd-Light.otf">
             <string>AvenirLTStd-Light</string>
@@ -2107,7 +2109,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XOt-kI-Qch">
                                 <rect key="frame" x="69" y="562" width="463" height="30"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Save">
+                                <fontDescription key="fontDescription" name="AvenirLTStd-Heavy" family="Avenir LT Std" pointSize="15"/>
+                                <state key="normal" title="Save" backgroundImage="sign-in">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -2292,7 +2295,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ivP-hc-Zls"/>
                                 </constraints>
-                                <state key="normal" title="Register">
+                                <fontDescription key="fontDescription" name="AvenirLTStd-Heavy" family="Avenir LT Std" pointSize="15"/>
+                                <state key="normal" title="Register" backgroundImage="sign-in">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>

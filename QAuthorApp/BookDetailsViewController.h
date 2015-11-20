@@ -5,7 +5,7 @@
 //  Created by Rasika  on 10/8/15.
 //  Copyright (c) 2015 Rasika . All rights reserved.
 //
-
+@import GoogleMobileAds;
 #import <UIKit/UIKit.h>
 #import "Constant.h"
 #import "Book.h"
@@ -13,7 +13,7 @@
 #import "ReadBookViewController.h"
 @class Book;
 @class ReadBookViewController;
-@interface BookDetailsViewController : UIViewController<MFMailComposeViewControllerDelegate>
+@interface BookDetailsViewController : UIViewController<MFMailComposeViewControllerDelegate,GADInterstitialDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *bookCoverImg;
 @property (weak, nonatomic) IBOutlet UILabel *authorNameLbl;
 @property (weak, nonatomic) IBOutlet UILabel *bookGenreLbl;

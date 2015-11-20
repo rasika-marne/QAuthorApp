@@ -5,14 +5,14 @@
 //  Created by Rasika  on 10/15/15.
 //  Copyright (c) 2015 Rasika . All rights reserved.
 //
-
+@import GoogleMobileAds;
 #import <UIKit/UIKit.h>
 #import "YMCAudioPlayer.h"
 #import "Book.h"
 #import "BookDetails.h"
 #import "DataViewController.h"
 @class YMCAudioPlayer;
-@interface ReadBookViewController : UIViewController<UIPageViewControllerDelegate>{
+@interface ReadBookViewController : UIViewController<UIPageViewControllerDelegate,GADInterstitialDelegate>{
     BookDetails *bookDet;
 }
 

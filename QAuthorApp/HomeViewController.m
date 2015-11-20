@@ -8,14 +8,16 @@
 @import GoogleMobileAds;
 #import "HomeViewController.h"
 #import "AppDelegate.h"
-@interface HomeViewController ()
+static NSString *const kGAIScreenName = @"Screen";
 
+@interface HomeViewController ()
 @end
 
 @implementation HomeViewController
 @synthesize pickerData;
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
     count = -1;
     [self navigationMethod];
     [self.view setBackgroundColor: RGB];
@@ -78,6 +80,11 @@
         }
     }
     
+}
+-(void)viewDidAppear:(BOOL)animated{
+    
+    self.screenName = @"Home Screen";
+    [super viewDidAppear:animated];
 }
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView; {
     return 1;
@@ -153,6 +160,11 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Home Screen"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    [super viewWillAppear:animated];
+    //self.screenName = @"Home Screen";
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSString *userId = [def valueForKey:USER_ID];
     if([userId length] > 0){
@@ -774,6 +786,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                         
                         [self fetchAllBooks];
                     }
+                    else
+                    {
+                        
+                    }
                     
                 }];
                 
@@ -784,8 +800,18 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     }];
     
    // bookObj = [booksArray objectAtIndex:indexPath.row];
-    }
-
+}
+-(void)logButtonPress:(UIButton *)button{
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker set:kGAIScreenName value:@"Home Screen"];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                          action:@"touch"
+                                                           label:@"share"
+                                                           value:nil] build]];
+    [tracker set:kGAIScreenName value:nil];
+}
 -(void)btnCommentClicked:(UIButton *)sender{
    
     
@@ -796,6 +822,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }
 -(void)btnShareClicked:(UIButton *)sender{
+   // [self logButtonPress:sender];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     bookObj = [booksArray objectAtIndex:indexPath.row];
     

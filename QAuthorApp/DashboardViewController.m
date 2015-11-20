@@ -27,7 +27,22 @@
     self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
     
     self.authorsButton.selected = YES;
+    if ([SelectedSegmentvalue isEqualToString:@"Dashboard"]) {
+        //[self fetchAuthors];
+
     [self tempFetchFollowings];
+    }
+    if ([SelectedSegmentvalue isEqualToString:@"Followers"]){
+        [self fetchFollowers];
+        self.navigationItem.title = @"Followers";
+        //self.segment.selectedSegmentIndex=1;
+    }
+    
+    if ([SelectedSegmentvalue isEqualToString:@"Following"]){
+        [self fetchFollowing];
+        self.navigationItem.title = @"Following";
+       // self.segment.selectedSegmentIndex=2;
+    }
    // [self fetchAuthors];
   /*  if ([SelectedSegmentvalue isEqualToString:@"Dashboard"]) {
         [self fetchAuthors];

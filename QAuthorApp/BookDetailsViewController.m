@@ -9,7 +9,7 @@
 #import "BookDetailsViewController.h"
 
 @interface BookDetailsViewController ()
-
+@property(nonatomic, strong) GADInterstitial *interstitial;
 @end
 
 @implementation BookDetailsViewController
@@ -34,6 +34,39 @@
     self.bookTitleLbl.text = bookObj1.title;
     // Do any additional setup after loading the view.
 }
+-(void)viewDidAppear:(BOOL)animated{
+   
+    
+    //if ([self.interstitial isReady]) {
+      //  [self.interstitial presentFromRootViewController:self];
+   // }
+}
+- (void)interstitialDidReceiveAd:(GADInterstitial *)interstitial {
+    [self.interstitial presentFromRootViewController:self];
+
+}
+
+/*- (GADInterstitial *)createAndLoadInterstitial {
+    GADInterstitial *interstitial = [[GADInterstitial alloc] initWithAdUnitID:AD_Full_Screen_Unit_id];
+    
+    interstitial.delegate = self;
+    GADRequest *request = [GADRequest request];
+    [interstitial loadRequest:request];
+    //request.testDevices = @[@"2077ef9a63d2b398840261c8221a0c9b"];
+    
+    return interstitial;
+}*/
+- (void)interstitialWillDismissScreen:(GADInterstitial *)interstitial {
+    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.readBookVC = (ReadBookViewController *)
+    [storyboard instantiateViewControllerWithIdentifier:@"ReadBookViewController"];
+    self.readBookVC.bookObj2 = bookObj1;
+    [self.navigationController pushViewController:self.readBookVC animated:YES];
+}
+- (void)interstitialDidDismissScreen:(GADInterstitial *)interstitial {
+    // [self.interstitial delete:interstitial];
+}
+
 -(void)navigationMethod{
     [self.view setBackgroundColor: RGB]; //will give a UIColor
     self.navigationItem.hidesBackButton = YES;
@@ -53,11 +86,20 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)onReadBookButtonClick:(id)sender{
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    // self.interstitial = [self createAndLoadInterstitial];
+   self.interstitial = [[GADInterstitial alloc] initWithAdUnitID:AD_Full_Screen_Unit_id];
+    
+    self.interstitial.delegate = self;
+    GADRequest *request = [GADRequest request];
+    [self.interstitial loadRequest:request];
+
+    //if ([self.interstitial isReady]) {
+                 // }
+  /*  UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.readBookVC = (ReadBookViewController *)
     [storyboard instantiateViewControllerWithIdentifier:@"ReadBookViewController"];
     self.readBookVC.bookObj2 = bookObj1;
-    [self.navigationController pushViewController:self.readBookVC animated:YES];
+    [self.navigationController pushViewController:self.readBookVC animated:YES];*/
 
 }
 - (IBAction)onDownloadBookButtonClick:(id)sender{
