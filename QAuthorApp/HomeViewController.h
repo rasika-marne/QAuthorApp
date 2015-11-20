@@ -50,6 +50,7 @@
 @property (nonatomic, retain)  NSMutableArray *pickerData;
 @property (weak, nonatomic) IBOutlet UITextField *ageRangeTextField;
 @property (weak, nonatomic) IBOutlet UITableView *bookListTableView;
+@property (weak, nonatomic) IBOutlet UIView *viewForBanner;
 
 //@property (nonatomic, strong) CreateBookViewController *createBookVC;
 @property (nonatomic, strong) BookTitleViewController *bookTitleVC;

@@ -17,7 +17,7 @@ static NSString *const kGAIScreenName = @"Screen";
 @synthesize pickerData;
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    self.viewForBanner.hidden = YES;
     count = -1;
     [self navigationMethod];
     [self.view setBackgroundColor: RGB];
@@ -659,35 +659,51 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     
 }
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+}
 - (void)tableView:(UITableView *)tableView
   willDisplayCell:(UITableViewCell *)cell
 forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (count<indexPath.row) {
-        count = count+3;
-        if (indexPath.row==count) {
-            count = count+3;
-            //[self animateTextField:self.bannerView up:YES];
+    if (IPAD) {
+        // iPad
+    } else {
+        // iPhone / iPod Touch
+        if (count<indexPath.row) {
+            count = count+5;
+            if (indexPath.row==count) {
+                count = count+5;
+                [self animateTextField:self.viewForBanner up:YES];
+                if ([self.viewForBanner isHidden]==YES) {
+                    self.viewForBanner.hidden = NO;
+                }
+                
+            }
+            else
+                [self animateTextField:self.viewForBanner up:NO];
         }
-        else
-            [self animateTextField:self.bannerView up:NO];
-    }
-    else if (count>indexPath.row){
-        count = count-3;
-        if (indexPath.row==count) {
-            count = count-3;
-            [self animateTextField:self.bannerView up:YES];
+        else if (count>indexPath.row){
+            count = count-5;
+            if (indexPath.row==count) {
+                count = count-5;
+                [self animateTextField:self.viewForBanner up:YES];
+                if ([self.viewForBanner isHidden]==YES) {
+                    self.viewForBanner.hidden = NO;
+                }
+            }
+            else
+                [self animateTextField:self.viewForBanner up:NO];
+            
         }
-        else
-            [self animateTextField:self.bannerView up:NO];
 
     }
     
 }
-- (void)animateTextField:(GADBannerView*)bannerView up:(BOOL)up {
-    
-    movementDistance = 200;
-    
-    const float movementDuration = 0.9f;
+- (void)animateTextField:(UIView*)bannerView up:(BOOL)up {
+   
+    movementDistance = 64;
+     [self.view bringSubviewToFront:bannerView];
+    const float movementDuration = 0.8f;
     int movement = (up ? -movementDistance : movementDistance);
     [UIView beginAnimations: @"anim" context: nil];
     [UIView setAnimationBeginsFromCurrentState: YES];

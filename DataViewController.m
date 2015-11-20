@@ -98,7 +98,7 @@
    // [self.view setBackgroundColor: RGB]; //will give a UIColor
     self.navigationItem.hidesBackButton = YES;
     self.navigationController.navigationBar.hidden = NO;
-   // self.title=@"Login";
+    self.title=[NSString stringWithFormat:@"Page %d",self.pageNumber];
     self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
     
     
