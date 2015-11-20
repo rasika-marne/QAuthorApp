@@ -64,6 +64,8 @@
 {
     [super viewDidLoad];
     [self navigationMethod];
+   
+self.title=[NSString stringWithFormat:@"Page %d",self.pageNumber];
     // [self.view setBackgroundColor: RGB];
     if ([self.audioPlayer isPlaying] == YES) {
         [self.audioPlayer pauseAudio];

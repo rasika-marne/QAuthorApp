@@ -91,7 +91,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   return 9;
+   return 10;
    
 }
 
@@ -128,53 +128,58 @@
 -(void)setrows:(int)row cl:(CellRearTableView *)cell
 {
     //if ([APP_DELEGATE.menuTableString isEqualToString:@"Parent"]) {
-        if (row == 0)
+    if (row == 0)
+    {
+        cell.lblname.text = @"Home";
+        cell.imageVw.image = [UIImage imageNamed:@"home"];
+    }
+       else if (row == 1)
         {
             cell.lblname.text = @"Create Book";
             cell.imageVw.image = [UIImage imageNamed:@"create-book-1"];
         }
-        else if (row == 1)
+        else if (row == 2)
         {
             cell.lblname.text = @"Edit Profile";
             cell.imageVw.image = [UIImage imageNamed:@"edit_profile"];
         }
-        else if (row == 2)
+        else if (row == 3)
         {
             cell.lblname.text = @"Followers";
 
             cell.imageVw.image = [UIImage imageNamed:@"followers-3"];
         }
-        else if (row == 3)
+        else if (row == 4)
         {
             cell.lblname.text = @"Followings";
 
             cell.imageVw.image = [UIImage imageNamed:@"follwing"];
         }
-        else if (row == 4)
+        else if (row == 5)
         {
             cell.lblname.text = @"Dashboard";
             
              cell.imageVw.image = [UIImage imageNamed:@"dashboard"];
         }
-        else if (row == 5)
+        else if (row == 6)
         {
             cell.lblname.text = @"My Books";
             
              cell.imageVw.image = [UIImage imageNamed:@"my-book"];
         }
-        else if (row == 6)
+        else if (row == 7)
         {
             cell.lblname.text = @"Professional";
             
              cell.imageVw.image = [UIImage imageNamed:@"F-book"];
         }
-        else if (row == 7)
+        else if (row == 8)
         {
             cell.lblname.text = @"Help";
             
              cell.imageVw.image = [UIImage imageNamed:@"help"];
         }
-        else if (row == 8)
+        else if (row == 9)
         {
             cell.lblname.text = @"Logout";
             
@@ -194,8 +199,25 @@
     
     SWRevealViewController *revealController = self.revealViewController;
     UINavigationController *frontNavigationController = (id)revealController.frontViewController;
-    
     if (row == 0)
+    {
+        if ( ![frontNavigationController.topViewController isKindOfClass:[HomeViewController class]] )
+        {
+            HomeViewController *demoController1 =
+            (HomeViewController *)
+            [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+            
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:demoController1];
+            
+            [revealController pushFrontViewController:navigationController animated:YES];
+        }
+        else
+        {
+            [revealController revealToggle:self];
+        }
+    }
+    else if (row == 1)
     {
         if ( ![frontNavigationController.topViewController isKindOfClass:[BookTitleViewController class]] )
         {
@@ -213,7 +235,7 @@
             [revealController revealToggle:self];
         }
     }
-    else if (row == 1)
+    else if (row == 2)
     {
         EditProfileViewController *demoController2 =
         (EditProfileViewController *)
@@ -223,7 +245,7 @@
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:demoController2];
         [revealController pushFrontViewController:navigationController animated:YES];
     }
-    else if (row == 2)
+    else if (row == 3)
     {
         SelectedSegmentvalue=nil;
         SelectedSegmentvalue=@"Followers";
@@ -236,7 +258,7 @@
         [revealController pushFrontViewController:navigationController animated:YES];
         
     }
-    else if (row == 3)
+    else if (row == 4)
     {
         SelectedSegmentvalue=nil;
         SelectedSegmentvalue=@"Following";
@@ -249,7 +271,7 @@
         [revealController pushFrontViewController:navigationController animated:YES];
         
     }
-    else if (row == 4)
+    else if (row == 5)
     {
         SelectedSegmentvalue=nil;
         SelectedSegmentvalue=@"Dashboard";
@@ -262,7 +284,7 @@
         [revealController pushFrontViewController:navigationController animated:YES];
         
     }
-    else if (row == 5)
+    else if (row == 6)
     {
         SelectedSegmentvalue=nil;
         SelectedSegmentvalue=@"My Books";
@@ -276,7 +298,7 @@
         
 
     }
-    else if (row == 6)
+    else if (row == 7)
     {
         SelectedSegmentvalue=nil;
         SelectedSegmentvalue=@"Professional";
@@ -291,13 +313,13 @@
 
         
     }
-    else if (row == 7)
+    else if (row == 8)
     {
         SelectedSegmentvalue=nil;
         SelectedSegmentvalue=@"Help";
 
     }
-    else if (row == 8)
+    else if (row == 9)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Do you want to logout?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
         alert.tag = 8000;

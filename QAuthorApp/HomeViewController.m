@@ -667,12 +667,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (IPAD) {
         // iPad
-    } else {
-        // iPhone / iPod Touch
         if (count<indexPath.row) {
+           // NSLog(@"count %d",count);
             count = count+5;
             if (indexPath.row==count) {
-                count = count+5;
+                //count = count+5;
                 [self animateTextField:self.viewForBanner up:YES];
                 if ([self.viewForBanner isHidden]==YES) {
                     self.viewForBanner.hidden = NO;
@@ -685,7 +684,39 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
         else if (count>indexPath.row){
             count = count-5;
             if (indexPath.row==count) {
-                count = count-5;
+                //NSLog(@"count %d",count);
+                //count = count-5;
+                [self animateTextField:self.viewForBanner up:YES];
+                if ([self.viewForBanner isHidden]==YES) {
+                    self.viewForBanner.hidden = NO;
+                }
+            }
+            else
+                [self animateTextField:self.viewForBanner up:NO];
+            
+        }
+
+    } else {
+        // iPhone / iPod Touch
+        if (count<indexPath.row) {
+            NSLog(@"count %d",count);
+            count = count+5;
+            if (indexPath.row==count) {
+               // count = count+5;
+                [self animateTextField:self.viewForBanner up:YES];
+                if ([self.viewForBanner isHidden]==YES) {
+                    self.viewForBanner.hidden = NO;
+                }
+                
+            }
+            else
+                [self animateTextField:self.viewForBanner up:NO];
+        }
+        else if (count>indexPath.row){
+            count = count-5;
+            if (indexPath.row==count) {
+                NSLog(@"count %d",count);
+                //count = count-5;
                 [self animateTextField:self.viewForBanner up:YES];
                 if ([self.viewForBanner isHidden]==YES) {
                     self.viewForBanner.hidden = NO;

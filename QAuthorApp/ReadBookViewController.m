@@ -21,6 +21,9 @@
    
 
     [self navigationMethod];
+    SWRevealViewController *revealController = [self revealViewController];
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
     bookDetailsArray = [[NSMutableArray alloc]init];
     bookDet = [BookDetails createEmptyObject];
        self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
