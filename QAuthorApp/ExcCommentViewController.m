@@ -23,6 +23,8 @@
     [super viewDidLoad];
     bComment = [BookComment createEmptyObject];
     [self navigationMethod];
+    user = [User createEmptyUser];
+    user = APP_DELEGATE.loggedInUser;
     [self.view setBackgroundColor: RGB];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
@@ -83,10 +85,10 @@
     if (indexPath.row==self.commentListArray.count) {
         
         cell.commentTextView.editable=YES;
-        cell.commentTextView.text=@"";
+        //cell.commentTextView.text=@"";
         cell.dateNTimeLabel.text=self.currentDateNTimeSTR;
-        cell.nameLabel.text=[[NSUserDefaults standardUserDefaults]stringForKey:@"loggedInFirstName"];
-
+        cell.nameLabel.text=[[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
+      //  cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@",[user valueForKey:FIRST_NAME],[user valueForKey:LAST_NAME]];
         cell.doneBtn.hidden=NO;
         [cell.doneBtn setTitle:@"Done" forState:UIControlStateNormal];
         [cell.doneBtn addTarget:self action:@selector(commentDoneAction) forControlEvents:UIControlEventTouchUpInside];
@@ -192,7 +194,8 @@
          [query whereKey:COMMENT_BOOK_ID equalTo:SELECTEDBOOKID];
         bComment.bookID = SELECTEDBOOKID;
         bComment.userId = [[PFUser currentUser] objectId];
-        bComment.userName = [[NSUserDefaults standardUserDefaults]stringForKey:@"loggedInFirstName"];
+        bComment.userName = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
+       // bComment.userName =[NSString stringWithFormat:@"%@ %@",[user valueForKey:FIRST_NAME],[user valueForKey:LAST_NAME]];
         bComment.comment = commentStr;
         [bComment saveBookCommentsBlock:^(id object, NSError *error) {
             if (!error) {

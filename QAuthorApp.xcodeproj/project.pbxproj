@@ -26,6 +26,13 @@
 		FD1367301BEB4AC300F9639F /* AvenirLTStd-MediumOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD1367241BEB4AC300F9639F /* AvenirLTStd-MediumOblique.otf */; };
 		FD1367311BEB4AC300F9639F /* AvenirLTStd-Oblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD1367251BEB4AC300F9639F /* AvenirLTStd-Oblique.otf */; };
 		FD1367321BEB4AC300F9639F /* AvenirLTStd-Roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD1367261BEB4AC300F9639F /* AvenirLTStd-Roman.otf */; };
+		FD1DAB9C1C04656A00D45379 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2CDDC61BB561FE00AD50AF /* AssetsLibrary.framework */; };
+		FD1DAB9D1C04657500D45379 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2CDDCA1BB561FE00AD50AF /* CoreText.framework */; };
+		FD1DAB9F1C04658600D45379 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1DAB9E1C04658600D45379 /* StoreKit.framework */; };
+		FD1DABA11C04659100D45379 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1DABA01C04659100D45379 /* OpenGLES.framework */; };
+		FD1DABA31C0465AB00D45379 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1DABA21C0465AB00D45379 /* libz.1.2.5.dylib */; };
+		FD1DABA41C04665D00D45379 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2CDDC51BB561FE00AD50AF /* Accelerate.framework */; };
+		FD1DABA71C046FC700D45379 /* Main-ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD1DABA51C046FC700D45379 /* Main-ipad.storyboard */; };
 		FD2CDCDB1BB5078300AD50AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2CDCDA1BB5078300AD50AF /* main.m */; };
 		FD2CDCDE1BB5078300AD50AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2CDCDD1BB5078300AD50AF /* AppDelegate.m */; };
 		FD2CDCE11BB5078300AD50AF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2CDCE01BB5078300AD50AF /* ViewController.m */; };
@@ -206,6 +213,10 @@
 		FD1367241BEB4AC300F9639F /* AvenirLTStd-MediumOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirLTStd-MediumOblique.otf"; sourceTree = "<group>"; };
 		FD1367251BEB4AC300F9639F /* AvenirLTStd-Oblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirLTStd-Oblique.otf"; sourceTree = "<group>"; };
 		FD1367261BEB4AC300F9639F /* AvenirLTStd-Roman.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirLTStd-Roman.otf"; sourceTree = "<group>"; };
+		FD1DAB9E1C04658600D45379 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		FD1DABA01C04659100D45379 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FD1DABA21C0465AB00D45379 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		FD1DABA61C046FC700D45379 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "QAuthorApp/Base.lproj/Main-ipad.storyboard"; sourceTree = "<group>"; };
 		FD2CDCD51BB5078300AD50AF /* QAuthorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QAuthorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD2CDCD91BB5078300AD50AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD2CDCDA1BB5078300AD50AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -438,6 +449,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD1DABA41C04665D00D45379 /* Accelerate.framework in Frameworks */,
+				FD1DABA31C0465AB00D45379 /* libz.1.2.5.dylib in Frameworks */,
+				FD1DABA11C04659100D45379 /* OpenGLES.framework in Frameworks */,
+				FD1DAB9F1C04658600D45379 /* StoreKit.framework in Frameworks */,
+				FD1DAB9D1C04657500D45379 /* CoreText.framework in Frameworks */,
+				FD1DAB9C1C04656A00D45379 /* AssetsLibrary.framework in Frameworks */,
 				FD03CE9F1BFC99CE00A438C3 /* libz.dylib in Frameworks */,
 				FD03CE9D1BFC99C500A438C3 /* CoreData.framework in Frameworks */,
 				FDE4D8C51BC682C100BFB646 /* QuickLook.framework in Frameworks */,
@@ -606,6 +623,9 @@
 		FD2CDD0B1BB5177500AD50AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD1DABA21C0465AB00D45379 /* libz.1.2.5.dylib */,
+				FD1DABA01C04659100D45379 /* OpenGLES.framework */,
+				FD1DAB9E1C04658600D45379 /* StoreKit.framework */,
 				FD03CEAC1BFC9AF800A438C3 /* libAdIdAccess.a */,
 				FD03CEAD1BFC9AF800A438C3 /* libGoogleAnalyticsServices.a */,
 				FD03CE9E1BFC99CE00A438C3 /* libz.dylib */,
@@ -917,6 +937,7 @@
 		FD7B8DEB1BCBBE6A0065925D /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				FD1DABA51C046FC700D45379 /* Main-ipad.storyboard */,
 				FD2CDCE21BB5078400AD50AF /* Main.storyboard */,
 			);
 			name = Storyboard;
@@ -1248,6 +1269,7 @@
 				FD9C6A551BD7913900849E75 /* Text-Edit-icon.png in Resources */,
 				FD2CDCE91BB5078400AD50AF /* LaunchScreen.xib in Resources */,
 				FD03CDCA1BFC8DE600A438C3 /* GoogleService-Info.plist in Resources */,
+				FD1DABA71C046FC700D45379 /* Main-ipad.storyboard in Resources */,
 				FDA4A9621BCD267700AE1433 /* ReadbookImage.png in Resources */,
 				FD2CDDC21BB561B600AD50AF /* recordvoice@2x.png in Resources */,
 				FD7D4E461BB9179F00DD3F76 /* ProfilePic.png in Resources */,
@@ -1404,6 +1426,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		FD1DABA51C046FC700D45379 /* Main-ipad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD1DABA61C046FC700D45379 /* Base */,
+			);
+			name = "Main-ipad.storyboard";
+			path = ..;
+			sourceTree = "<group>";
+		};
 		FD2CDCE21BB5078400AD50AF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1461,6 +1492,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "1f9e9900-a3dd-4800-b3bf-ed534fa49ec3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1498,6 +1530,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "1f9e9900-a3dd-4800-b3bf-ed534fa49ec3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1523,6 +1556,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalyticsServicesiOS_3.14",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AviarySDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1f9e9900-a3dd-4800-b3bf-ed534fa49ec3";
@@ -1547,6 +1581,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalyticsServicesiOS_3.14",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AviarySDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1f9e9900-a3dd-4800-b3bf-ed534fa49ec3";

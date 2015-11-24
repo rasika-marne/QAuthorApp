@@ -129,8 +129,12 @@ performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionH
                                           //             annotation:annotation];
 }*/
 -(void)doLogin{
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
+    UIStoryboard *storyboard;
+    if (IPAD) {
+    storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+       storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
    // if ([InternetConnection isInternetConnectionAvailable] ) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *flag = [defaults valueForKey:@"LoginUserSucessFlag"];
@@ -191,6 +195,12 @@ performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionH
 -(void)clearLoggedInUserDetail{
     
     NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Password"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"UserName"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"loggedInUser"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"LoginUserSucessFlag"];
+
     [userDefault setObject:nil forKey:USER_ID];
     [userDefault setObject:nil forKey:@"Password"];
     [userDefault setObject:nil forKey:@"UserName"];
@@ -202,14 +212,17 @@ performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionH
     [PFUser logOut];
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     [def setObject:nil forKey:@"loggedInUser"];
-    if (self.viewController) {
-        self.viewController = nil;
+    [def setValue:nil forKey:@"LoginUserSucessFlag"];
+    [def synchronize];
+    [self clearLoggedInUserDetail];
+    if (self.signUpVC) {
+        self.signUpVC = nil;
     }
     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    self.viewController = (ViewController *)
-    [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+    self.signUpVC = (SignUpViewController *)
+    [storyboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
     
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.signUpVC];
     self.uniNavController = self.navigationController;
     self.window.rootViewController = self.navigationController;
      self.navigationController.navigationBar.barTintColor =NAVBARCOLOR;
@@ -221,7 +234,13 @@ performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionH
 
 -(void)firstTimeLogin
 {
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+   // UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.signUpVC = (SignUpViewController *)
     [storyboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.signUpVC];

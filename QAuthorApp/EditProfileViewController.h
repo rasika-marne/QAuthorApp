@@ -11,12 +11,13 @@
 #import "Constant.h"
 #import "User.h"
 @class User;
-@interface EditProfileViewController : UIViewController<UITextFieldDelegate,UIImagePickerControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>{
+@interface EditProfileViewController : UIViewController<UITextFieldDelegate,UIImagePickerControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UINavigationControllerDelegate,UIActionSheetDelegate>{
     
     User *user;
     int movementDistance;
      NSMutableArray *userIdArr,*authorNameArr;
     NSInteger selectedIndex;
+    NSMutableDictionary *dictionary;
 }
 @property (weak, nonatomic) IBOutlet UITableView *editProfileTableView;
 @property (nonatomic, retain) UIPickerView *countrySelect;

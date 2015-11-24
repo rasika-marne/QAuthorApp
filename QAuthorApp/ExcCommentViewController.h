@@ -16,6 +16,7 @@
     int movementDistance;
     NSString *commentStr;
     BookComment *bComment;
+    User *user;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *excCommentTableView;

@@ -1005,7 +1005,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
         
         filterdArray =[[NSMutableArray alloc]init];
         filterdArray = [[searchResults filteredArrayUsingPredicate:finalPredicate] mutableCopy];
-        
+      //  NSLog(@"count:%d",[filterdArray count]);
         booksArray=nil;
         booksArray=[[NSMutableArray alloc]initWithArray:filterdArray];
         

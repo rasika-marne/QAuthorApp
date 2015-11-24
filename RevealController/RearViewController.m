@@ -94,7 +94,11 @@
    return 10;
    
 }
-
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *view = [[UIView alloc] init];
+    
+    return view;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	//static NSString *cellIdentifier = @"Cell";
@@ -201,8 +205,9 @@
     UINavigationController *frontNavigationController = (id)revealController.frontViewController;
     if (row == 0)
     {
-        if ( ![frontNavigationController.topViewController isKindOfClass:[HomeViewController class]] )
-        {
+        SelectedSegmentvalue=nil;
+        SelectedSegmentvalue=@"Home";
+        
             HomeViewController *demoController1 =
             (HomeViewController *)
             [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
@@ -211,11 +216,8 @@
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:demoController1];
             
             [revealController pushFrontViewController:navigationController animated:YES];
-        }
-        else
-        {
-            [revealController revealToggle:self];
-        }
+       
+    
     }
     else if (row == 1)
     {

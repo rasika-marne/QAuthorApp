@@ -108,7 +108,7 @@
     {
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"First name*";
-        self.cell.iconImage.image=[UIImage imageNamed:@"email"];
+        self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
         
         
     } else if (indexPath.row ==1) {
@@ -123,33 +123,48 @@
         self.cell.editTxtFld.placeholder=@"Email (Username)*";
         self.cell.iconImage.image=[UIImage imageNamed:@"email"];
         
-    } else if (indexPath.row== 3) {
+    }
+    else if (indexPath.row == 3) {
+        
+        self.cell.editTxtFld.tag=indexPath.row;
+        self.cell.editTxtFld.placeholder=@"Password*";
+        self.cell.editTxtFld.secureTextEntry = YES;
+        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
+    }else if (indexPath.row == 4) {
+        
+        self.cell.editTxtFld.tag=indexPath.row;
+        self.cell.editTxtFld.placeholder=@"Confirm Password*";
+        self.cell.editTxtFld.secureTextEntry = YES;
+        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
+        
+    }
+    else if (indexPath.row== 5) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Child Age*";
         self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
         
         //self.createStaffCell.nameTxtFld.text=self.txtUserRole;
-    } else if (indexPath.row == 4) {
+    } else if (indexPath.row == 6) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Country*";
         self.cell.editTxtFld.inputView = countrySelect;
         self.cell.iconImage.image=[UIImage imageNamed:@"location"];
         
-    } else if (indexPath.row == 5) {
+    } else if (indexPath.row == 7) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"City*";
         self.cell.iconImage.image=[UIImage imageNamed:@"city"];
         
-    }else if (indexPath.row == 6) {
+    }else if (indexPath.row == 8) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Language";
         self.cell.iconImage.image=[UIImage imageNamed:@"language"];
         
-    }else if (indexPath.row == 7) {
+    }else if (indexPath.row == 9) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Favorite Author 1";
@@ -157,20 +172,20 @@
         self.cell.iconImage.image=[UIImage imageNamed:@"author"];
         
         
-    }else if (indexPath.row == 8) {
+    }else if (indexPath.row == 10) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Favorite Author 2";
         self.cell.editTxtFld.inputView = authorSelect;
         self.cell.iconImage.image=[UIImage imageNamed:@"author"];
         
-    }else if (indexPath.row == 9) {
+    }else if (indexPath.row == 11) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"Favorite Author 3";
         self.cell.editTxtFld.inputView = authorSelect;
         self.cell.iconImage.image=[UIImage imageNamed:@"author"];
-    }else if (indexPath.row == 10) {
+    }else if (indexPath.row == 12) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"New Author 1";
@@ -178,25 +193,12 @@
         self.cell.iconImage.image=[UIImage imageNamed:@"author"];
         
         
-    }else if (indexPath.row == 11) {
+    }else if (indexPath.row == 13) {
         
         self.cell.editTxtFld.tag=indexPath.row;
         self.cell.editTxtFld.placeholder=@"New Author 2";
         //self.cell.editTxtFld.inputView = authorSelect;
         self.cell.iconImage.image=[UIImage imageNamed:@"author"];
-        
-    }else if (indexPath.row == 12) {
-        
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Password*";
-        self.cell.editTxtFld.secureTextEntry = YES;
-        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
-    }else if (indexPath.row == 13) {
-        
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Confirm Password*";
-        self.cell.editTxtFld.secureTextEntry = YES;
-        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
         
     }
     
@@ -240,24 +242,24 @@
     }
     else if (pickerView.tag == 12){
         
-        if (selectedIndex == 7 ) {
+        if (selectedIndex == 9 ) {
             self.txtfavAuth1=@"";
             self.txtfavAuth1= [authorNameArr objectAtIndex:row];
-            self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0]];
+            self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
             self.cell.editTxtFld.text=self.txtfavAuth1;
             
         }
-        else if (selectedIndex == 8 ) {
+        else if (selectedIndex == 10 ) {
             self.txtFavAuth2=@"";
             self.txtFavAuth2= [authorNameArr objectAtIndex:row];
-            self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]];
+            self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]];
             self.cell.editTxtFld.text=self.txtFavAuth2;
             
         }
-        else if (selectedIndex == 9 ) {
+        else if (selectedIndex == 11 ) {
             self.txtFavAuth3=@"";
             self.txtFavAuth3= [authorNameArr objectAtIndex:row];
-            self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
+            self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:11 inSection:0]];
             self.cell.editTxtFld.text=self.txtFavAuth3;
             
         }
