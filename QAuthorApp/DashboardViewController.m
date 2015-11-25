@@ -305,6 +305,7 @@
         cell = [nib objectAtIndex:0];
         
     }
+    cell.backgroundColor = RGB;
     cell.profilePic.layer.cornerRadius = 20;
     cell.profilePic.clipsToBounds = YES;
     [cell.followBtn addTarget:self action:@selector(FollowbtnAction:) forControlEvents:UIControlEventTouchUpInside];
