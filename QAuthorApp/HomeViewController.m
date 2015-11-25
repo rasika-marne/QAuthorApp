@@ -48,6 +48,13 @@ static NSString *const kGAIScreenName = @"Screen";
     
      
     }];
+    PFQuery *query = [PFQuery queryWithClassName:@"AuthorOfWeek"];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (object) {
+            
+            self.authorOftheWeekLbl.text = [NSString stringWithFormat:@"'%@' Writer of the Week.",[object objectForKey:@"authorName"]];
+        }
+    }];
     self.ageRangeSelect = [[UIPickerView alloc] initWithFrame:CGRectMake(10, 200, 300, 200)];
     self.ageRangeSelect.showsSelectionIndicator = YES;
     // languageSelect.hidden = NO;
@@ -55,7 +62,13 @@ static NSString *const kGAIScreenName = @"Screen";
     self.ageRangeTextField.inputView = self.ageRangeSelect;   // [self.menuContainerViewController setPanMode:MFSideMenuPanModeDefault];
     
     SWRevealViewController *revealController = [self revealViewController];
-    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+    UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+  
+    
     self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
 
     // Do any additional setup after loading the view.
@@ -539,7 +552,14 @@ static NSString *const kGAIScreenName = @"Screen";
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 10) {
         if (buttonIndex == 0) {
-            UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UIStoryboard *storyboard;
+            if (IPAD) {
+                storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+            }
+            else
+                storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+           // UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
             self.bookTitleVC = (BookTitleViewController *)
             [storyboard instantiateViewControllerWithIdentifier:@"BookTitleViewController"];
             
@@ -612,7 +632,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         self.bookListCell.buyButton.hidden = YES;
     }
 
-   [tableView setSeparatorColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"line"]]];
+  // [tableView setSeparatorColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"line"]]];
     self.bookListCell.userNameLbl.text = [authorNamesArr objectAtIndex:indexPath.row];
     self.bookListCell.bokkNameLbl.text = bookObj.title;
     self.bookListCell.bookDesc.text = bookObj.shortDesc;
@@ -647,7 +667,14 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
      SELECTEDBOOKID=[[NSString alloc]initWithString:[bObjectIdArr objectAtIndex:indexPath.row]];
     bookObj = [booksArray objectAtIndex:indexPath.row];
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+   // UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.bookDetailVC = (BookDetailsViewController*)
     [storyboard instantiateViewControllerWithIdentifier:@"BookDetailsViewController"];
     self.bookDetailVC.bookObj1 = [Book createEmptyObject];
@@ -658,6 +685,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     //[PFUser requestPasswordResetForEmailInBackground: [alertView textFieldAtIndex:0].text];
     
     
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *view = [[UIView alloc] init];
+    
+    return view;
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
@@ -758,7 +790,14 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 -(void)btnEditClicked:(UIButton *)sender{
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     bookObj = [booksArray objectAtIndex:indexPath.row];
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.editBookTitleVC = (EditBookTitleViewController*)
     [storyboard instantiateViewControllerWithIdentifier:@"EditBookTitleViewController"];
     self.editBookTitleVC.bookObj = [Book createEmptyObject];
@@ -863,7 +902,14 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
    
     
     SELECTEDBOOKID=[[NSString alloc]initWithString:[bObjectIdArr objectAtIndex:[sender tag]]];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ExcCommentViewController *excCommentVc = (ExcCommentViewController *) [storyboard instantiateViewControllerWithIdentifier:@"ExcCommentViewController"];
     [self  presentViewController:excCommentVc animated:YES completion:nil];
     

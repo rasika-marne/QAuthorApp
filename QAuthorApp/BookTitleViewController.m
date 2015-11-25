@@ -245,8 +245,14 @@
     //user = [def objectForKey:@"loggedInUser"];
     
     user = APP_DELEGATE.loggedInUser;
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
-     UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+     //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ageRange = [AgeRange createEmptyObject];
     NSLog(@"user age:%d",[user.age intValue]);
     // NSArray *rangeArr;
@@ -542,7 +548,14 @@
 */
 
 - (IBAction)onClickChooseTemplate:(id)sender {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.chooseTemplateVC = (ChooseTemplateViewController *) [storyboard instantiateViewControllerWithIdentifier:@"ChooseTemplateViewController"];
     [self  presentViewController:self.chooseTemplateVC animated:YES completion:nil];
 }

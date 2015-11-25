@@ -199,7 +199,14 @@
 
 -(void)didselectCell:(int)row
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+   // UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     SWRevealViewController *revealController = self.revealViewController;
     UINavigationController *frontNavigationController = (id)revealController.frontViewController;

@@ -212,7 +212,14 @@
         return;
     }
     else if (buttonIndex == 2){
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIStoryboard *storyboard;
+        if (IPAD) {
+            storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+        }
+        else
+            storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+       // UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         self.chooseTemplateVC = (ChooseTemplateViewController *) [storyboard instantiateViewControllerWithIdentifier:@"ChooseTemplateViewController"];
         [self  presentViewController:self.chooseTemplateVC animated:YES completion:nil];
     }
@@ -353,7 +360,14 @@
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 11) {
         if (buttonIndex == 1) {
-            UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UIStoryboard *storyboard;
+            if (IPAD) {
+                storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+            }
+            else
+                storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+            //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
             self.editBookVC = (EditBookViewController*)
             [storyboard instantiateViewControllerWithIdentifier:@"EditBookViewController"];
             self.editBookVC.bookId = bookObj.objectId;

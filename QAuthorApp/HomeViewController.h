@@ -43,6 +43,7 @@
     AgeRange *ageRange;
     BOOL myBooksClicked,professionalClicked;
 }
+@property (weak, nonatomic) IBOutlet UILabel *authorOftheWeekLbl;
 @property (weak, nonatomic) IBOutlet GADBannerView *bannerView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar1;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *bookSegments;

@@ -445,7 +445,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *idstr;
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.viewProfileVC = (ViewProfileViewController*)
     [storyboard instantiateViewControllerWithIdentifier:@"ViewProfileViewController"];
     if ([SelectedSegmentvalue isEqualToString:@"Dashboard"]) {

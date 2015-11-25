@@ -136,14 +136,28 @@
 
 
 - (IBAction)onClickSignupwithEmail:(id)sender {
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+   // UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.registrationView = (RegistrationViewController *)
     [storyboard instantiateViewControllerWithIdentifier:@"RegistrationViewController"];
     [self.navigationController pushViewController:self.registrationView animated:YES];
 }
 
 - (IBAction)onClickLoginBtn:(id)sender {
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.viewController = (ViewController *)
     [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     [self.navigationController pushViewController:self.viewController animated:YES];

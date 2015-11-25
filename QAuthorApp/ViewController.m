@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "RearViewController.h"
+#define kOFFSET_FOR_KEYBOARD 200.0
 @interface ViewController ()
 
 @end
@@ -30,15 +31,112 @@
     self.navigationController.navigationBar.hidden = NO;
     // Do any additional setup after loading the view, typically from a nib.
 }
+//-(void)viewWillAppear:(BOOL)animated{
+    // register for keyboard notifications
+    /*[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // unregister for keyboard notifications while not visible.
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+}*/
+
+-(void)keyboardWillShow {
+    // Animate the current view out of the way
+    if (self.view.frame.origin.y >= 0)
+    {
+        [self setViewMovedUp:YES];
+    }
+    else if (self.view.frame.origin.y < 0)
+    {
+        [self setViewMovedUp:NO];
+    }
+}
+
+-(void)keyboardWillHide {
+    if (self.view.frame.origin.y >= 0)
+    {
+        [self setViewMovedUp:YES];
+    }
+    else if (self.view.frame.origin.y < 0)
+    {
+        [self setViewMovedUp:NO];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+-(void)textFieldDidBeginEditing:(UITextField *)sender
+{
+    // if ([sender isEqual:mailTf])
+    // {
+    //move the main view, so that the keyboard does not hide it.
     
+    //textViewBegin = NO;
+    sender.text = @"";
+    [self animateTextField: sender up: YES];
+   // if  (self.view.frame.origin.y >= 0)
+   // {
+      //  [self setViewMovedUp:YES];
+   // }
+    // }
+}
+- (void)animateTextField:(UITextField*)textField up:(BOOL)up {
+    
+    if (textField.tag == 1) {
+        if (IPAD) {
+            movementDistance = 150;
+        }
+        else
+            movementDistance = 80;
+        
+        
+    }
+    else if (textField.tag == 2) {
+        if (IPAD) {
+            movementDistance = 170;
+        }
+        else
+            movementDistance = 100;
+        //movementDistance = 170;
+    }
+    const float movementDuration = 0.3f;
+    int movement = (up ? -movementDistance : movementDistance);
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    //[self animateTextField: textField up: NO];
     [textField resignFirstResponder];
     return YES;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    
+    [self animateTextField: textField up: NO];
+    
 }
 - (IBAction)onClickSignIn:(id)sender
 {
@@ -110,8 +208,14 @@
                 PFInstallation *currentInstallation = [PFInstallation currentInstallation];
                 [currentInstallation setObject:APP_DELEGATE.loggedInUser.objectId forKey:@"userId"];
                 [currentInstallation saveInBackground];
-                
-                UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                UIStoryboard *storyboard;
+                if (IPAD) {
+                    storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+                }
+                else
+                    storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+               // UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 self.homeVC = (HomeViewController *)
                 [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
                 UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeVC];
@@ -176,13 +280,47 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 }
 
 - (IBAction)onClickSignUp:(id)sender{
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.registartionVC = (RegistrationViewController *)
     [storyboard instantiateViewControllerWithIdentifier:@"RegistrationViewController"];
     
     [self.navigationController pushViewController:self.registartionVC animated:YES];
 }
-
+//method to move the view up/down whenever the keyboard is shown/dismissed
+-(void)setViewMovedUp:(BOOL)movedUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    
+    CGRect rect = self.view.frame;
+    if (movedUp)
+    {
+        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
+        // 2. increase the size of the view so that the area behind the keyboard is covered up.
+        
+        
+            rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+            rect.size.height += kOFFSET_FOR_KEYBOARD;
+        
+        
+    }
+    else
+    {
+        // revert back to the normal state.
+        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+    }
+    self.view.frame = rect;
+    
+    [UIView commitAnimations];
+}
 #pragma mark
 #pragma mark ======================= LoginWithFacebookBtn =============================
 

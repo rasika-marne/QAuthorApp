@@ -218,7 +218,14 @@ performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionH
     if (self.signUpVC) {
         self.signUpVC = nil;
     }
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+   // UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.signUpVC = (SignUpViewController *)
     [storyboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
     

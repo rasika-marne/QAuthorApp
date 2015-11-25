@@ -25,6 +25,7 @@
 @class RegistrationViewController;
 @interface ViewController : UIViewController<UIAlertViewDelegate,SWRevealViewControllerDelegate,FBLoginViewDelegate>{
       NSString *USER_FB_ID_STR, *USER_FB_EMAIL_STR;
+    int movementDistance;
 }
 
 

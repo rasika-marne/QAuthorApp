@@ -57,7 +57,14 @@
     return interstitial;
 }*/
 - (void)interstitialWillDismissScreen:(GADInterstitial *)interstitial {
-    UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.readBookVC = (ReadBookViewController *)
     [storyboard instantiateViewControllerWithIdentifier:@"ReadBookViewController"];
     self.readBookVC.bookObj2 = bookObj1;
