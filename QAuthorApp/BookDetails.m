@@ -84,6 +84,7 @@
 {
     PFQuery *query=[PFQuery queryWithClassName:BOOK_DETAILS];
     [query whereKey:BOOK_ID equalTo:bookId1];
+    [query orderByAscending:PAGE_NUMBER];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSMutableArray *results=[[NSMutableArray alloc] init];

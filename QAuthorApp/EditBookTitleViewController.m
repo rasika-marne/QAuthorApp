@@ -18,6 +18,15 @@
     [super viewDidLoad];
     [self navigationMethod];
     [self.view setBackgroundColor: RGB]; 
+    SWRevealViewController *revealController = [self revealViewController];
+    UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+    
+    
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
     
     self.pickerData = [[NSMutableArray alloc]init];
     PFFile *imageFile = bookObj.coverPic;
@@ -70,7 +79,11 @@
         }
    // }
 }
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+   // book.title = self.bookTitleTextField.text;
+    [textField resignFirstResponder];
+    return YES;
+}
 //method to move the view up/down whenever the keyboard is shown/dismissed
 -(void)setViewMovedUp:(BOOL)movedUp
 {
@@ -375,6 +388,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             
         }
     }
+    
 }
 - (UIImage *)scaleAndRotateImage:(UIImage *)image {
     int kMaxResolution = 640; // Or whatever
@@ -482,5 +496,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     UIGraphicsEndImageContext();
     
     return imageCopy;
+}
+
+- (IBAction)onClickCancel:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                    message:@"Do you want to edit book details?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"No"
+                                          otherButtonTitles:@"Yes",nil];
+    [alert show];
+    alert.tag = 11;
+
 }
 @end

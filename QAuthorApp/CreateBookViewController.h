@@ -50,7 +50,7 @@
 - (IBAction)onClickAddPagesBtn:(id)sender;
 - (IBAction)onFinishBookBtn:(id)sender;
 - (IBAction)recordAudio:(id)sender;
-- (IBAction)playRecordedAudioFile:(id)sender;
+
 - (IBAction)viewBookBtnClick:(id)sender;
 - (IBAction)onPhotoTap:(id)sender;
 - (UIImage *)scaleAndRotateImage:(UIImage *)image;

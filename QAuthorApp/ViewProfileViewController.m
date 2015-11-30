@@ -17,6 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self navigationMethod];
+    SWRevealViewController *revealController = [self revealViewController];
+    UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+    
+    
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
     NSLog(@"userId:%@",userId);
     PFQuery *query=[PFUser query];
     [query whereKey:ROLE equalTo:@"author"];

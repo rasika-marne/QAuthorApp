@@ -141,6 +141,7 @@
 		FD9C6A651BD7AA0F00849E75 /* template2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD9C6A601BD7AA0F00849E75 /* template2.jpg */; };
 		FD9C6A661BD7AA0F00849E75 /* template3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD9C6A611BD7AA0F00849E75 /* template3.jpg */; };
 		FD9C6A681BD7AA0F00849E75 /* template4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD9C6A631BD7AA0F00849E75 /* template4.jpg */; };
+		FD9DA7B81C0C765A00442305 /* bookBack3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD9DA7B71C0C765A00442305 /* bookBack3.jpg */; };
 		FD9F55351BBBD6CB008C6BEF /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9F55341BBBD6CB008C6BEF /* EditProfileViewController.m */; };
 		FD9F7B771BC389B4002D629F /* BookDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9F7B761BC389B4002D629F /* BookDetails.m */; };
 		FD9F7B7A1BC3D607002D629F /* menu-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FD9F7B781BC3D607002D629F /* menu-icon.png */; };
@@ -399,6 +400,7 @@
 		FD9C6A601BD7AA0F00849E75 /* template2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = template2.jpg; path = QAuthorApp/template2.jpg; sourceTree = "<group>"; };
 		FD9C6A611BD7AA0F00849E75 /* template3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = template3.jpg; path = QAuthorApp/template3.jpg; sourceTree = "<group>"; };
 		FD9C6A631BD7AA0F00849E75 /* template4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = template4.jpg; path = QAuthorApp/template4.jpg; sourceTree = "<group>"; };
+		FD9DA7B71C0C765A00442305 /* bookBack3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bookBack3.jpg; path = ../../bookBack3.jpg; sourceTree = "<group>"; };
 		FD9F55331BBBD6CB008C6BEF /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		FD9F55341BBBD6CB008C6BEF /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		FD9F7B751BC389B4002D629F /* BookDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetails.h; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 		FD2CDCCC1BB5078300AD50AF = {
 			isa = PBXGroup;
 			children = (
+				FD9DA7B71C0C765A00442305 /* bookBack3.jpg */,
 				FD03CEAB1BFC9AD000A438C3 /* Google_Analytics */,
 				FD13671A1BEB4AC300F9639F /* Custom font */,
 				FDED84FC1BC7C87A000FA50B /* Images */,
@@ -1279,6 +1282,7 @@
 				FD9C6A571BD791F500849E75 /* editbook.png in Resources */,
 				FDED84FB1BC7C7F8000FA50B /* share.png in Resources */,
 				FD13672C1BEB4AC300F9639F /* AvenirLTStd-HeavyOblique.otf in Resources */,
+				FD9DA7B81C0C765A00442305 /* bookBack3.jpg in Resources */,
 				FD1367301BEB4AC300F9639F /* AvenirLTStd-MediumOblique.otf in Resources */,
 				FD9C6A681BD7AA0F00849E75 /* template4.jpg in Resources */,
 				FD13672A1BEB4AC300F9639F /* AvenirLTStd-BookOblique.otf in Resources */,

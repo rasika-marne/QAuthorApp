@@ -18,7 +18,16 @@
     [super viewDidLoad];
     [self navigationMethod];
     [self.view setBackgroundColor: RGB];
-
+    SWRevealViewController *revealController = [self revealViewController];
+    UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+    
+    
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
+    
     //remove files from merged/pdf directory
     NSFileManager *fm = [NSFileManager defaultManager];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -36,6 +45,7 @@
 
     pagePDFArr = [[NSMutableArray alloc]init];
        count = 1;
+    pageNumber = 0;
     self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
     bookDetailsArr = [[NSMutableArray alloc]init];
     //get book details
@@ -43,24 +53,30 @@
     [bookDet fetchBookDetailBlockForBook:bookId block1:^(NSMutableArray *objects, NSError *error) {
         if (!error) {
             bookDetailsArr = objects;
-            NSLog(@"book det arr:%@",bookDetailsArr);
             BookDetails *b1 = [BookDetails createEmptyObject];
             b1 = [bookDetailsArr objectAtIndex:0];
-            PFFile *imageFile = b1.imageContent;
-            if (imageFile && ![b1.imageContent isEqual:[NSNull null]]) {
-                [b1.imageContent getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                    if (data) {
-                        [imageView1 setImage:[UIImage imageWithData:data]];
-                    }
-                    
-                    
-                }];
-            }
+            
+                
+                PFFile *imageFile = b1.imageContent;
+                if (imageFile && ![b1.imageContent isEqual:[NSNull null]]) {
+                    [b1.imageContent getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                        if (data) {
+                            [imageView1 setImage:[UIImage imageWithData:data]];
+                            textView1.text = b1.textContent;
+                        }
+                        
+                        
+                    }];
+                }
+           
+
+            NSLog(@"book det arr:%@",bookDetailsArr);
             for (int i=0; i<[bookDetailsArr count]; i++) {
                 BookDetails *bDetObj = [BookDetails createEmptyObject];
                 bDetObj = [bookDetailsArr objectAtIndex:i];
                 PFFile *pagePDF = bDetObj.pagePDF;
                 [pagePDFArr addObject:pagePDF];
+               
             }
             
             //downloads files from parse to merged/pdf directory
@@ -94,7 +110,7 @@
             }
             
 
-            textView1.text = b1.textContent;
+            
             
         }
     }];
@@ -330,7 +346,7 @@
 
 
 - (IBAction)onNextPageClicked:(id)sender {
-    
+    pageNumber++;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
                                                     message:@"Do you want to edit next page?"
                                                    delegate:self
@@ -347,22 +363,35 @@
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 11) {
         if (buttonIndex == 1) {
-            if ([bookDetailsArr count]>count) {
+            if (count<[bookDetailsArr count]) {
                 count++;
                 BookDetails *b2 = [BookDetails createEmptyObject];
-                b2 = [bookDetailsArr objectAtIndex:count-1];
+                b2 = [bookDetailsArr objectAtIndex:pageNumber];
+                
+                NSLog(@"%@",b2.pageNumber);
+
                 self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
                 PFFile *imageFile = b2.imageContent;
                 if (imageFile && ![b2.imageContent isEqual:[NSNull null]]) {
                     [b2.imageContent getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                         if (data) {
                             [imageView1 setImage:[UIImage imageWithData:data]];
+                            
                         }
                         
                     }];
                 }
-                
+                NSLog(@"%@",b2.textContent);
                 textView1.text = b2.textContent;
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                message:@"End of the Book"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
             }
 
             

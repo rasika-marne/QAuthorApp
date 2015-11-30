@@ -23,7 +23,13 @@
     //self.navigationController.navigationBar.hidden = NO;
     
     SWRevealViewController *revealController = [self revealViewController];
-    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+    UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+    
+
     self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
     
     self.authorsButton.selected = YES;

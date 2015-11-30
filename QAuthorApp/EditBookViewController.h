@@ -16,7 +16,7 @@
 #import "NSUserDefaults+StoryData.h"
 #import "SaveFile.h"
 @interface EditBookViewController : UIViewController<CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>{
-    int count;
+    int count,pageNumber;
     NSMutableArray *bookDetailsArr,*pagePDFArr;
     UITextView* activeTextView;
    

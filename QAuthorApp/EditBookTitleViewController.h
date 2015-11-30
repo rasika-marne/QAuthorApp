@@ -30,4 +30,5 @@
 @property (nonatomic, strong) EditBookViewController *editBookVC;
 - (IBAction)onSaveButtonClicked:(id)sender;
 - (UIImage *)scaleAndRotateImage:(UIImage *)image;
+- (IBAction)onClickCancel:(id)sender;
 @end
