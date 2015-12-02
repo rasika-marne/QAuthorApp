@@ -17,7 +17,7 @@ static NSString *const kGAIScreenName = @"Screen";
 @synthesize pickerData;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.viewForBanner.hidden = YES;
+    self.bannerView.hidden = YES;
     count = -1;
     [self navigationMethod];
     [self.view setBackgroundColor: RGB];
@@ -704,27 +704,31 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
             count = count+5;
             if (indexPath.row==count) {
                 //count = count+5;
-                [self animateTextField:self.viewForBanner up:YES];
-                if ([self.viewForBanner isHidden]==YES) {
-                    self.viewForBanner.hidden = NO;
+                //[self animateTextField:self.viewForBanner up:YES];
+                if ([self.bannerView isHidden]==YES) {
+                    self.bannerView.hidden = NO;
                 }
                 
             }
             else
-                [self animateTextField:self.viewForBanner up:NO];
+            {
+                self.bannerView.hidden = YES;
+            }
         }
         else if (count>indexPath.row){
             count = count-5;
             if (indexPath.row==count) {
                 //NSLog(@"count %d",count);
                 //count = count-5;
-                [self animateTextField:self.viewForBanner up:YES];
-                if ([self.viewForBanner isHidden]==YES) {
-                    self.viewForBanner.hidden = NO;
+                //[self animateTextField:self.viewForBanner up:YES];
+                if ([self.bannerView isHidden]==YES) {
+                    self.bannerView.hidden = NO;
                 }
             }
             else
-                [self animateTextField:self.viewForBanner up:NO];
+            {
+                self.bannerView.hidden = YES;
+            }
             
         }
 
@@ -735,27 +739,32 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
             count = count+5;
             if (indexPath.row==count) {
                // count = count+5;
-                [self animateTextField:self.viewForBanner up:YES];
-                if ([self.viewForBanner isHidden]==YES) {
-                    self.viewForBanner.hidden = NO;
+               // [self animateTextField:self.viewForBanner up:YES];
+                if ([self.bannerView isHidden]==YES) {
+                    self.bannerView.hidden = NO;
                 }
                 
             }
             else
-                [self animateTextField:self.viewForBanner up:NO];
+            {
+                self.bannerView.hidden = YES;
+            }
+            
         }
         else if (count>indexPath.row){
             count = count-5;
             if (indexPath.row==count) {
                 NSLog(@"count %d",count);
                 //count = count-5;
-                [self animateTextField:self.viewForBanner up:YES];
-                if ([self.viewForBanner isHidden]==YES) {
-                    self.viewForBanner.hidden = NO;
+               // [self animateTextField:self.viewForBanner up:YES];
+                if ([self.bannerView isHidden]==YES) {
+                    self.bannerView.hidden = NO;
                 }
             }
             else
-                [self animateTextField:self.viewForBanner up:NO];
+            {
+                self.bannerView.hidden = YES;
+            }
             
         }
 
@@ -811,6 +820,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     [[UIApplication sharedApplication] openURL:url];
 }
 -(void)btnLikeClicked:(UIButton *)sender{
+    [sender setBackgroundImage:[UIImage imageNamed:@"like_g"] forState:UIControlStateNormal];
+    sender.enabled = NO;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     bookObj = [booksArray objectAtIndex:indexPath.row];
     likeCount = [bookObj.noOfLikes intValue];
@@ -848,7 +859,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
      [query1 whereKey:LIKE_BOOK_ID equalTo:bookObj.objectId];
     [query1 getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (object) {
-            cell.likeButton.hidden = YES;
+            [sender setBackgroundImage:[UIImage imageNamed:@"like_g"] forState:UIControlStateNormal];
+            sender.enabled = NO;
+           // cell.likeButton.hidden = YES;
         }
         else{
             likes.bookId = bookObj.objectId;

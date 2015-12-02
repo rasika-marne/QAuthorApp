@@ -20,14 +20,14 @@
     [self navigationMethod];
     
     
-    SWRevealViewController *revealController = [self revealViewController];
+   /* SWRevealViewController *revealController = [self revealViewController];
     UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     
     UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
     
-    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;*/
     [bookObj1.coverPic getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         [self.bookCoverImg setImage:[UIImage imageWithData:data]];
         self.bookCoverImg.contentMode =UIViewContentModeScaleAspectFit;
@@ -86,12 +86,27 @@
     //self.title=@"Home";
     self.navigationItem.title = @"Book Details";
     self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    UIImage *myImage = [UIImage imageNamed:@"back"];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
+    
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonClicked:)];
+    
+    
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;    //UIImage *backButtonImage = [[UIImage imageNamed:@"back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
+   // [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+
+   // UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(Back)];
+    //self.navigationItem.leftBarButtonItem = backButton;
     
     //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
     //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
     
     self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
+}
+- (void)backButtonClicked :(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

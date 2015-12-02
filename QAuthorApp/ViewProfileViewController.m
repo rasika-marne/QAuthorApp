@@ -17,15 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self navigationMethod];
-    SWRevealViewController *revealController = [self revealViewController];
-    UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
-    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    
-    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
-    
-    
-    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
     NSLog(@"userId:%@",userId);
     PFQuery *query=[PFUser query];
     [query whereKey:ROLE equalTo:@"author"];
@@ -57,11 +49,24 @@
      self.title=@"View Profile";
     self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
     
+    UIImage *myImage = [UIImage imageNamed:@"back"];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonClicked:)];
+    
+    
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
+    
     
     //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
     //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
     
     self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
+}
+- (void)backButtonClicked :(id)sender{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

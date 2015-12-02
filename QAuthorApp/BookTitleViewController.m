@@ -71,11 +71,13 @@
     self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
     
     
+
     //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
     //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
     
     self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
+
 -(void)keyboardWillShow {
     // Animate the current view out of the way
     if (self.view.frame.origin.y >= 0)
@@ -129,8 +131,8 @@
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
         if (textViewBegin == YES) {
-            rect.origin.y -= kOFFSET_FOR_KEYBOARD+90;
-            rect.size.height += kOFFSET_FOR_KEYBOARD+90;
+            rect.origin.y -= kOFFSET_FOR_KEYBOARD+70;
+            rect.size.height += kOFFSET_FOR_KEYBOARD+70;
         }
         else
         {

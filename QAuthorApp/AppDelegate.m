@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "RearViewController.h"
 
-static NSString *const kTrackingId = @"UA-70308797-1";
+static NSString *const kTrackingId = @"UA-70889501-1";
 static NSString *const kAllowTracking = @"allowTracking";
 @interface AppDelegate ()<SWRevealViewControllerDelegate>
 @property(nonatomic, assign) BOOL okToWait;

@@ -21,16 +21,7 @@
    
 
     [self navigationMethod];
-    SWRevealViewController *revealController = [self revealViewController];
-    UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
-    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    
-    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
-    
-
-    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
-    bookDetailsArray = [[NSMutableArray alloc]init];
+        bookDetailsArray = [[NSMutableArray alloc]init];
     bookDet = [BookDetails createEmptyObject];
        self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     self.pageViewController.delegate = self;
@@ -65,12 +56,23 @@
     self.navigationController.navigationBar.hidden = NO;
     //self.title=@"";
     self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    UIImage *myImage = [UIImage imageNamed:@"back"];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
+    
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonClicked:)];
+    
+    
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
     
     //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
     //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
     
     self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
+}
+- (void)backButtonClicked :(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

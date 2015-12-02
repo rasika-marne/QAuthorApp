@@ -19,6 +19,7 @@
     
     [super viewDidLoad];
     count = 1;
+    self.backImage.hidden = YES;
     [self navigationMethod];
     self.m_oImage.hidden = NO;
     self.chooseOwnLbl.hidden = NO;
@@ -29,7 +30,7 @@
     
    
     
-    SWRevealViewController *revealController = [self revealViewController];
+    /*SWRevealViewController *revealController = [self revealViewController];
     UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
@@ -37,7 +38,7 @@
     UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
     
 
-    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;*/
     
 
     
@@ -50,13 +51,26 @@
     self.navigationController.navigationBar.hidden = NO;
     self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
     self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    UIImage *myImage = [UIImage imageNamed:@"back"];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
+    
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonClicked:)];
+    
+    
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
+
     
     //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
     //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
     
     self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
+- (void)backButtonClicked :(id)sender{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -483,10 +497,15 @@
         self.m_oImage.hidden = NO;
         self.chooseOwnLbl.hidden = NO;
     }
+    self.backImage.hidden = NO;
+    
     //[self.m_oImage setImage:image forState:UIControlStateNormal];
     UIImage *lowResImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 0.02)];
+    
+    
     [imageView1 setImage:lowResImage];
-
+    CGRect myImageRect = CGRectMake(imageView1.frame.origin.x-10, imageView1.frame.origin.y-10, imageView1.frame.size.width+10,imageView1.frame.size.height+10);
+    self.backImage.frame = myImageRect;
     [self refreshImageView];
     
     [editor dismissViewControllerAnimated:YES completion:nil];

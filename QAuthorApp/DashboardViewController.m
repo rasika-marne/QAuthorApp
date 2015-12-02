@@ -21,7 +21,8 @@
     fanObj = [FanFollowers createEmptyObject];
     [self navigationMethod];
     //self.navigationController.navigationBar.hidden = NO;
-    
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user"] forState:UIControlStateNormal];
+
     SWRevealViewController *revealController = [self revealViewController];
     UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -83,13 +84,18 @@
     self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
 - (IBAction)onclickAuthorBtn:(id)sender {
-    
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user"] forState:UIControlStateNormal];
+    [self.followersButton setBackgroundImage:[UIImage imageNamed:@"followers-unselected"] forState:UIControlStateNormal];
+    [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-unselected"] forState:UIControlStateNormal];
     SelectedSegmentvalue=nil;
     SelectedSegmentvalue=@"Dashboard";
     self.navigationItem.title = @"Dashboard";
     [self fetchAuthors];}
 
 - (IBAction)onClickFollowersBtn:(id)sender {
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user-unselected"] forState:UIControlStateNormal];
+    [self.followersButton setBackgroundImage:[UIImage imageNamed:@"followers-1"] forState:UIControlStateNormal];
+    [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-unselected"] forState:UIControlStateNormal];
     SelectedSegmentvalue=nil;
     SelectedSegmentvalue=@"Followers";
     self.navigationItem.title = @"Followers";
@@ -97,6 +103,9 @@
 }
 
 - (IBAction)onClickFollowingBtn:(id)sender {
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user-unselected"] forState:UIControlStateNormal];
+    [self.followersButton setBackgroundImage:[UIImage imageNamed:@"followers-unselected"] forState:UIControlStateNormal];
+    [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-1"] forState:UIControlStateNormal];
     SelectedSegmentvalue=nil;
     SelectedSegmentvalue=@"Following";
     [self fetchFollowing];
@@ -125,6 +134,7 @@
 }
 -(void)fetchAuthors{
    // [self tempFetchFollowings];
+   
     tempFollowingArr=[[NSMutableArray alloc]init];
     [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
     autorsArray=[[NSMutableArray alloc]init];
@@ -192,6 +202,7 @@
         }}];
    }
 -(void)fetchFollowers{
+    
     SelectedSegmentvalue=nil;
     SelectedSegmentvalue=@"Followers";
     [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
@@ -240,6 +251,7 @@
         }];
 }
 -(void)fetchFollowing{
+    
     SelectedSegmentvalue=nil;
     SelectedSegmentvalue=@"Following";
     [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];

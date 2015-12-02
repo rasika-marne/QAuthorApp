@@ -159,6 +159,8 @@
 		FDA4ADAF1BC4F07C003E2383 /* AgeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA4ADAE1BC4F07C003E2383 /* AgeRange.m */; };
 		FDAF88A81BCF7890002F276A /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAF88A51BCF7890002F276A /* DashboardViewController.m */; };
 		FDAF88A91BCF7890002F276A /* DCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAF88A71BCF7890002F276A /* DCTableViewCell.m */; };
+		FDC92EA71C0D63C200EE644E /* bookBack2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FDC92EA51C0D63C200EE644E /* bookBack2.jpg */; };
+		FDC92EA81C0D63C200EE644E /* bookBack4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FDC92EA61C0D63C200EE644E /* bookBack4.jpg */; };
 		FDE4D8BD1BC63BB600BFB646 /* BookDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE4D8BC1BC63BB500BFB646 /* BookDetailsViewController.m */; };
 		FDE4D8C51BC682C100BFB646 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE4D8C41BC682C100BFB646 /* QuickLook.framework */; };
 		FDE4D8D41BC6848100BFB646 /* listen-button.png in Resources */ = {isa = PBXBuildFile; fileRef = FDE4D8D21BC6848100BFB646 /* listen-button.png */; };
@@ -428,6 +430,8 @@
 		FDAF88A51BCF7890002F276A /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
 		FDAF88A61BCF7890002F276A /* DCTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTableViewCell.h; sourceTree = "<group>"; };
 		FDAF88A71BCF7890002F276A /* DCTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTableViewCell.m; sourceTree = "<group>"; };
+		FDC92EA51C0D63C200EE644E /* bookBack2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bookBack2.jpg; path = ../../bookBack2.jpg; sourceTree = "<group>"; };
+		FDC92EA61C0D63C200EE644E /* bookBack4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bookBack4.jpg; path = ../../bookBack4.jpg; sourceTree = "<group>"; };
 		FDE4D8BB1BC63BB500BFB646 /* BookDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailsViewController.h; sourceTree = "<group>"; };
 		FDE4D8BC1BC63BB500BFB646 /* BookDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailsViewController.m; sourceTree = "<group>"; };
 		FDE4D8C41BC682C100BFB646 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
@@ -552,6 +556,8 @@
 		FD2CDCCC1BB5078300AD50AF = {
 			isa = PBXGroup;
 			children = (
+				FDC92EA51C0D63C200EE644E /* bookBack2.jpg */,
+				FDC92EA61C0D63C200EE644E /* bookBack4.jpg */,
 				FD9DA7B71C0C765A00442305 /* bookBack3.jpg */,
 				FD03CEAB1BFC9AD000A438C3 /* Google_Analytics */,
 				FD13671A1BEB4AC300F9639F /* Custom font */,
@@ -1263,6 +1269,7 @@
 			files = (
 				FD9F7B7A1BC3D607002D629F /* menu-icon.png in Resources */,
 				FD9C6A641BD7AA0F00849E75 /* template1.jpg in Resources */,
+				FDC92EA81C0D63C200EE644E /* bookBack4.jpg in Resources */,
 				FDA4A9611BCD267700AE1433 /* downloadPdf.png in Resources */,
 				FD1367291BEB4AC300F9639F /* AvenirLTStd-Book.otf in Resources */,
 				FD1367271BEB4AC300F9639F /* AvenirLTStd-Black.otf in Resources */,
@@ -1275,6 +1282,7 @@
 				FD1DABA71C046FC700D45379 /* Main-ipad.storyboard in Resources */,
 				FDA4A9621BCD267700AE1433 /* ReadbookImage.png in Resources */,
 				FD2CDDC21BB561B600AD50AF /* recordvoice@2x.png in Resources */,
+				FDC92EA71C0D63C200EE644E /* bookBack2.jpg in Resources */,
 				FD7D4E461BB9179F00DD3F76 /* ProfilePic.png in Resources */,
 				FDED84FA1BC7C7F8000FA50B /* like.png in Resources */,
 				FD2CDD911BB561B600AD50AF /* CLImageEditor.bundle in Resources */,

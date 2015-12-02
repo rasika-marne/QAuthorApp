@@ -53,12 +53,25 @@
     self.navigationController.navigationBar.hidden = NO;
     self.navigationItem.title = @"Registration";
     self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
+    UIImage *myImage = [UIImage imageNamed:@"back"];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
+    
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonClicked:)];
+    
+    
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
+    
+   
     
     //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
     //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
     
     self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
+}
+- (void)backButtonClicked :(id)sender{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     PFQuery *query1 = [PFQuery queryWithClassName:@"FavoriteAuthor"];
