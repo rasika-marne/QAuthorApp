@@ -33,7 +33,7 @@
 
     self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
     
-    self.authorsButton.selected = YES;
+    //self.authorsButton.selected = YES;
     if ([SelectedSegmentvalue isEqualToString:@"Dashboard"]) {
         //[self fetchAuthors];
 

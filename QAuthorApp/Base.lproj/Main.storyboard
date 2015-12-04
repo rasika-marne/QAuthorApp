@@ -79,6 +79,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yBr-6l-kU9">
                                 <rect key="frame" x="16" y="28" width="568" height="473"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bookBack3.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="DtP-bn-WUe">
+                                        <rect key="frame" x="0.0" y="0.0" width="568" height="473"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="568" id="r0g-e3-j9p"/>
+                                        </constraints>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book-1" translatesAutoresizingMaskIntoConstraints="NO" id="fvp-wo-8Y3">
                                         <rect key="frame" x="197" y="23" width="164" height="171"/>
                                         <constraints>
@@ -124,6 +130,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="Hv7-dA-USV" secondAttribute="centerX" constant="-0.5" id="0IZ-vL-6tG"/>
+                                    <constraint firstAttribute="centerX" secondItem="DtP-bn-WUe" secondAttribute="centerX" id="87a-Ef-dDz"/>
+                                    <constraint firstAttribute="bottom" secondItem="DtP-bn-WUe" secondAttribute="bottom" id="8cz-MC-RDc"/>
+                                    <constraint firstItem="DtP-bn-WUe" firstAttribute="top" secondItem="yBr-6l-kU9" secondAttribute="top" id="BwJ-9t-kKG"/>
+                                    <constraint firstAttribute="centerY" secondItem="DtP-bn-WUe" secondAttribute="centerY" id="DWg-HN-pIw"/>
                                     <constraint firstItem="Hv7-dA-USV" firstAttribute="top" secondItem="0Lm-AU-jMQ" secondAttribute="bottom" constant="24" id="K1C-sE-Ham"/>
                                     <constraint firstItem="Hv7-dA-USV" firstAttribute="leading" secondItem="yBr-6l-kU9" secondAttribute="leading" constant="16" id="Ljz-xy-NSn"/>
                                     <constraint firstAttribute="centerX" secondItem="fvp-wo-8Y3" secondAttribute="centerX" constant="5" id="LuN-9F-3fs"/>
@@ -208,6 +218,7 @@
                     </view>
                     <connections>
                         <outlet property="ViewToPDF" destination="yBr-6l-kU9" id="7Lf-xV-cgl"/>
+                        <outlet property="backImage" destination="DtP-bn-WUe" id="mqY-3Y-3Su"/>
                         <outlet property="chooseOwnLbl" destination="DiU-rc-HPJ" id="hTz-5r-Pgx"/>
                         <outlet property="imageView1" destination="fvp-wo-8Y3" id="e2j-aC-VGS"/>
                         <outlet property="m_oImage" destination="0Lm-AU-jMQ" id="Zg3-Fw-h7X"/>
@@ -2420,6 +2431,7 @@
         <image name="all-user-unselected" width="56" height="56"/>
         <image name="audio" width="32" height="32"/>
         <image name="book-1" width="68" height="61"/>
+        <image name="bookBack3.jpg" width="736" height="955"/>
         <image name="box" width="366" height="345"/>
         <image name="buyicon" width="16" height="16"/>
         <image name="choose-temp" width="111" height="111"/>

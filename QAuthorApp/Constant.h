@@ -36,10 +36,10 @@
 #define RGB [UIColor colorWithRed:114/255.0 green:197/255.0 blue:213/255.0 alpha:1]
 //#define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 //Facebook credentials
-#define FbClientID @"423047544565291"
+#define FbClientID @"925338840836391"
 
-#define AD_Unit_id @"ca-app-pub-5468147316620707/4430610672"
-#define AD_Full_Screen_Unit_id @"ca-app-pub-5468147316620707/6861942679"
+#define AD_Unit_id @"ca-app-pub-4614916931493908/4956610274"
+#define AD_Full_Screen_Unit_id @"ca-app-pub-4614916931493908/6433343471"
 
 
 //Custom Font
@@ -56,6 +56,7 @@
 #endif
 #define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 NSString *SELECTEDBOOKID,*SelectedSegmentvalue;
+//static NSString *const kGAIScreenName = @"Screen";
 UIImage *selectedTemplate;
 typedef void (^UserIdResultBlock)(id object, NSError *error);
 #define KMessageCount @"messageCnt"

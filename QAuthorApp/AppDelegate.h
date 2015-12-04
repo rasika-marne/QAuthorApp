@@ -12,7 +12,10 @@
 #import "HomeViewController.h"
 #import "User.h"
 #import "MBProgressHUD.h"
+
+#import "GAITracker.h"
 #import "GAI.h"
+#import "GAIFields.h"
 //#import "MenuViewController.h"
 #import "EditProfileViewController.h"
 #import <netinet/in.h>
@@ -27,7 +30,7 @@
 @class User;
 @class EditProfileViewController;
 @class SignUpViewController;
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ViewController *viewController;

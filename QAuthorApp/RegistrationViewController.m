@@ -13,12 +13,25 @@
 @end
 
 @implementation RegistrationViewController
-@synthesize pickerData,countrySelect,authorSelect;
+@synthesize pickerData,countrySelect,authorSelect,isFacebookLogin,fbData;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self navigationMethod];
      [self.view setBackgroundColor: RGB];
-    
+    if (isFacebookLogin == YES) {
+        fbName = [fbData objectForKey:@"name"];
+        NSArray *arr = [fbName componentsSeparatedByString:@" "];
+        fbFName = [arr objectAtIndex:0];
+        fbLName = [arr objectAtIndex:1];
+        fbEmail = [fbData objectForKey:@"email"];
+        fbId = [fbData objectForKey:@"id"];
+        NSDictionary *data = [fbData objectForKey:@"picture"];
+        NSDictionary *data1 = [data objectForKey:@"data"];
+        fbPicUrl = [data1 objectForKey:@"url"];
+        NSURL *url = [NSURL URLWithString:fbPicUrl];
+        fbImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+        self.profilePicImg.image = fbImage;
+    }
     authorNameArr = [[NSMutableArray alloc]init];
     NSMutableArray * countriesArray = [[NSMutableArray alloc] init];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier: @"en_US"];
@@ -116,20 +129,36 @@
     if(indexPath.row ==0)
     {
         self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"First name*";
+        if (isFacebookLogin == YES) {
+            self.cell.editTxtFld.text = fbFName;
+        }
+        else
+            self.cell.editTxtFld.placeholder=@"First name*";
         self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
         
         
     } else if (indexPath.row ==1) {
         
         self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Last Name*";
-        self.cell.iconImage.image=[UIImage imageNamed:@"email"];
+        if (isFacebookLogin == YES) {
+            self.cell.editTxtFld.text = fbLName;
+        }
+        else
+            self.cell.editTxtFld.placeholder=@"Last Name*";
+        
+         self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
         
     } else if (indexPath.row == 2) {
         
         self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Email (Username)*";
+        if (isFacebookLogin == YES) {
+            self.cell.editTxtFld.text = fbEmail;
+        }
+        else
+            self.cell.editTxtFld.placeholder=@"Email (Username)*";
+        
+
+        
         self.cell.iconImage.image=[UIImage imageNamed:@"email"];
         
     }
@@ -386,6 +415,9 @@
         user.firstName = self.txtFirstName;
         user.lastName = self.txtLastName;
         user.role = @"author";
+        if (isFacebookLogin == YES) {
+            user.facebookId = fbId;
+        }
         if (self.profilePicImg.image != [UIImage imageNamed:@"ProfilePic.png"]) {
             UIImage *image = [self scaleAndRotateImage:self.profilePicImg.image];
             NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
@@ -394,6 +426,7 @@
         [user signUpBlock:^(id object, NSError *error) {
             [APP_DELEGATE stopActivityIndicator];
             if (!error) {
+                [self logButtonPress:sender];
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
                                                                 message:@"Registered successfully!!! Want to login?"
                                                                delegate:self
@@ -414,7 +447,17 @@
         
     }
 }
-
+-(void)logButtonPress:(UIButton *)button{
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker set:kGAIScreenName value:@"Registration Screen"];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                          action:@"touch"
+                                                           label:@"registration"
+                                                           value:nil] build]];
+    [tracker set:kGAIScreenName value:nil];
+}
 
 
 #pragma mark

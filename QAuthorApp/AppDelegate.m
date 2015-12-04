@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RearViewController.h"
-
+//#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 static NSString *const kTrackingId = @"UA-70889501-1";
 static NSString *const kAllowTracking = @"allowTracking";
 @interface AppDelegate ()<SWRevealViewControllerDelegate>
@@ -26,8 +26,10 @@ static NSString *const kAllowTracking = @"allowTracking";
   // remove before app release
 
     // Override point for customization after application launch.
-        [Parse setApplicationId:PARSE_APP_ID clientKey:PARSE_CLIENT_KEY];
-    
+    [Parse setApplicationId:PARSE_APP_ID clientKey:PARSE_CLIENT_KEY];
+   // [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+
+
     //For Apns
     if (IS_OS_8_OR_LATER) {
         // In iOS 8 onwards , we need to register for remote notification & local notificatio SEPARATELY
@@ -80,8 +82,41 @@ static NSString *const kAllowTracking = @"allowTracking";
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
     
     [[GAI sharedInstance] setTrackUncaughtExceptions:YES];
-}
+    
+    
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+     //send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    /********** Sampling Rate 20 seconds. **********/
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    
+    /* Initialize tracker */
+   // id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:kTrackingId];
+    
+    /********** Sampling Rate **********/
+  /*  NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
+    [self.tracker set:kGAIAppVersion value:version];
+    [self.tracker  set:kGAISampleRate value:@"50.0"]; // sampling rate of 50%
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Google Analytics" message:@"With your permission usage information will be collected to improve the application." delegate:self cancelButtonTitle:@"Opt Out" otherButtonTitles:@"Opt In", nil];
+    [av show];*/
 
+
+}
+/*- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 0:
+            [[GAI sharedInstance] setOptOut:YES];
+            break;
+        case 1:
+            [[GAI sharedInstance] setOptOut:NO];
+            break;
+            
+        default:
+            break;
+    }
+}*/
 - (void)sendHitsInBackground {
     self.okToWait = YES;
     __weak AppDelegate *weakSelf = self;

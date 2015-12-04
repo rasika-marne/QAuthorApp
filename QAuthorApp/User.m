@@ -24,6 +24,7 @@
     
     user.objectId = IS_POPULATED_STRING(userObject.objectId)?userObject.objectId:@"";
     user.username = IS_POPULATED_STRING([userObject objectForKey:USERNAME])?[userObject objectForKey:USERNAME]:@"";
+     user.facebookId = IS_POPULATED_STRING([userObject objectForKey:FACEBOOK_ID])?[userObject objectForKey:FACEBOOK_ID]:@"";
     user.email = IS_POPULATED_STRING([userObject objectForKey:EMAIL_ID])?[userObject objectForKey:EMAIL_ID]:@"";
     user.password = IS_POPULATED_STRING([userObject objectForKey:PASSWORD])?[userObject objectForKey:PASSWORD]:@"";
     user.city = IS_POPULATED_STRING([userObject objectForKey:CITY])?[userObject objectForKey:CITY]:@"";
@@ -69,7 +70,7 @@
     [user setUsername:IS_POPULATED_STRING(self.email)?self.email:@""];
     [user setEmail:IS_POPULATED_STRING(self.email)?self.email:@""];
     [user setPassword:IS_POPULATED_STRING(self.password)?self.password:@""];
-    
+     [user setObject:IS_POPULATED_STRING(self.facebookId)?self.facebookId:@"" forKey:FACEBOOK_ID];
     
     [user setObject:IS_POPULATED_STRING(self.city)?self.city:@"" forKey:CITY];
     [user setObject:IS_POPULATED_STRING(self.country)?self.country:@"" forKey:COUNTRY];

@@ -7,7 +7,7 @@
 //
 
 #import "SignUpViewController.h"
-
+#import "RearViewController.h"
 @interface SignUpViewController ()
 
 @end
@@ -16,6 +16,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    emailIdArr = [[NSMutableArray alloc]init];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleFBSessionStateChangeWithNotification:)
+                                                 name:@"SessionStateChangeNotification"
+                                               object:nil];
+    
+    PFQuery *query = [PFUser query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            for (PFObject *obj in objects) {
+                NSString *emailId = [obj objectForKey:USERNAME];
+                NSLog(@"email:%@",emailId);
+                [emailIdArr addObject:emailId];
+            }
+             NSLog(@"email:%@",emailIdArr);
+        }
+    }];
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -106,14 +124,61 @@
         if (sessionState == FBSessionStateOpen) {
             
             
-            [FBRequestConnection startWithGraphPath:@"me?fields=id,name,email,gender,birthday,location"
+            [FBRequestConnection startWithGraphPath:@"me?fields=id,name,hometown,birthday,picture{url},email"
                                   completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                                       if (!error)
                                       {
+                                          NSString *fbEmail;
                                           NSLog(@"result : %@",result);
-                                          HomeViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-                                          
-                                          [self.navigationController pushViewController:vc animated:NO];
+                                          fbId = [result objectForKey:@"id"];
+                                           fbEmail = [result objectForKey:@"email"];
+                                          for (int i=0; i<[emailIdArr count]; i++) {
+                                            
+                                              NSLog(@"fbemail:%@",fbEmail);
+                                              if ([fbEmail isEqualToString:[emailIdArr objectAtIndex:i]]) {
+                                                  flag = 1;
+                                                  break;
+                                              }
+                                              
+                                          }
+                                          if (flag == 1) {
+                                              PFQuery *query = [PFUser query];
+                                              [query whereKey:USERNAME equalTo:fbEmail];
+                                              [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                                                  if (!error) {
+                                                      User *userObj = [User createEmptyUser];
+                                                      userObj = [User convertPFObjectToUser:object forNote:YES];
+                                                      NSLog(@"email:%@",userObj.username);
+                                                      NSLog(@"passwrd:%@",userObj.password);
+                                                     // APP_DELEGATE.loggedInUser = userObj;
+                                                      //NSString *fbid =[result objectForKey:@"id"];
+                                                      //[userObj setObject:fbid forKey:FACEBOOK_ID];
+                                                      //[userObj updateUserblock:^(id object, NSError *error) {
+                                                         // if (!error) {
+                                                              [self login:userObj];
+                                                         // }
+                                                     // }];
+                                                      
+                                                      
+                                                      
+                                                  }
+                                              }];
+                                          }
+                                          else
+                                          {
+                                              UIStoryboard *storyboard;
+                                              if (IPAD) {
+                                                  storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+                                              }
+                                              else
+                                                  storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                                              self.registrationView = (RegistrationViewController *)
+                                              [storyboard instantiateViewControllerWithIdentifier:@"RegistrationViewController"];
+                                              self.registrationView.isFacebookLogin = YES;
+                                              self.registrationView.fbData = (NSDictionary *)result;
+                                              [self.navigationController pushViewController:self.registrationView animated:YES];
+                                          }
+                                         
                                       }
                                       else{
                                           NSLog(@"%@", [error localizedDescription]);
@@ -134,7 +199,59 @@
     }
 }
 
+-(void)login :(User *)user
+{
+    [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
+    [user loginblock:^(id object, NSError *error) {
+        
+        if (object) {
+            DLog(@"Login Success");
+            APP_DELEGATE.loggedInUser = (User*)object;
+            [object setObject:fbId forKey:FACEBOOK_ID];
+            [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    [APP_DELEGATE stopActivityIndicator];
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    [defaults setValue:APP_DELEGATE.loggedInUser.objectId forKey:USER_ID];
+                    [defaults setValue:@"Yes" forKey:@"LoginUserSucessFlag"];
+                    
+                    [defaults synchronize];
+                    NSLog(@"user:%@",APP_DELEGATE.loggedInUser);
+                    //  [APP_DELEGATE saveLoggedInUserId:APP_DELEGATE.loggedInUser.objectId andPwd:[self.pswrdTextField.text stringByTrimmingCharactersInSet:TRIM_CHARACTER_SET] andUserName:[self.userNameTextField.text stringByTrimmingCharactersInSet:TRIM_CHARACTER_SET]];
+                    NSString *userName = [NSString stringWithFormat:@"%@ %@",[object valueForKey:@"firstName"],[object valueForKey:@"lastName"]];
+                    [[NSUserDefaults standardUserDefaults]setValue:userName forKey:@"UserName"];
+                    
+                    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                    [currentInstallation setObject:APP_DELEGATE.loggedInUser.objectId forKey:@"userId"];
+                    [currentInstallation saveInBackground];
+                    UIStoryboard *storyboard;
+                    if (IPAD) {
+                        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+                    }
+                    else
+                        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    
+                    // UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    HomeViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+                    
+                    UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+                    RearViewController *rearViewController = [[RearViewController alloc] init];
+                    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+                    SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:nav frontViewController:frontNavigationController];
+                    revealController.delegate = self;
+                    [self presentViewController:revealController animated:NO completion:nil];
+                    
+                    
 
+                }
+            }];
+                        // [APP_DELEGATE tabBarSetup];
+            //  [self.navigationController pushViewController:self.homeVC animated:YES];
+            // [APP_DELEGATE.window setRootViewController:APP_DELEGATE.tabBarController];
+        }
+    }];
+
+}
 - (IBAction)onClickSignupwithEmail:(id)sender {
     UIStoryboard *storyboard;
     if (IPAD) {

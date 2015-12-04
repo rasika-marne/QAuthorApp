@@ -18,13 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self navigationMethod];
-    [self.view setBackgroundColor: RGB]; 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleFBSessionStateChangeWithNotification:)
-                                                 name:@"SessionStateChangeNotification"
-                                               object:nil];
-
-    //self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [self.view setBackgroundColor: RGB];
+   
+        //self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     [PFUser logOut];
     self.navigationItem.hidesBackButton = YES;

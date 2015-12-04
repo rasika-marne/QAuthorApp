@@ -8,7 +8,7 @@
 @import GoogleMobileAds;
 #import "HomeViewController.h"
 #import "AppDelegate.h"
-static NSString *const kGAIScreenName = @"Screen";
+//static NSString *const kGAIScreenName = @"Screen";
 
 @interface HomeViewController ()
 @end
@@ -735,7 +735,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     } else {
         // iPhone / iPod Touch
         if (count<indexPath.row) {
-            NSLog(@"count %d",count);
+           // NSLog(@"count %d",count);
             count = count+5;
             if (indexPath.row==count) {
                // count = count+5;
@@ -754,7 +754,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
         else if (count>indexPath.row){
             count = count-5;
             if (indexPath.row==count) {
-                NSLog(@"count %d",count);
+               // NSLog(@"count %d",count);
                 //count = count-5;
                // [self animateTextField:self.viewForBanner up:YES];
                 if ([self.bannerView isHidden]==YES) {
@@ -928,7 +928,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }
 -(void)btnShareClicked:(UIButton *)sender{
-   // [self logButtonPress:sender];
+    [self logButtonPress:sender];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     bookObj = [booksArray objectAtIndex:indexPath.row];
     

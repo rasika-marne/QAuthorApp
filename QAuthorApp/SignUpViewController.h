@@ -10,8 +10,13 @@
 #import "ViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "RegistrationViewController.h"
+#import "SWRevealViewController.h"
 @class ViewController;
-@interface SignUpViewController : UIViewController<FBLoginViewDelegate>
+@interface SignUpViewController : UIViewController<FBLoginViewDelegate,SWRevealViewControllerDelegate>{
+    NSMutableArray *emailIdArr;
+    NSString *fbId;
+    int flag;
+}
 
 @property (strong, nonatomic) ViewController *viewController;
 @property (strong, nonatomic) RegistrationViewController *registrationView;

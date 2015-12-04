@@ -17,14 +17,17 @@
     BOOL countrySelected,authorSelected;
     NSMutableArray *userIdArr,*authorNameArr;
     NSInteger selectedIndex;
+    NSString *fbName,*fbEmail,*fbPicUrl,*fbId,*fbFName,*fbLName;
+    UIImage *fbImage;
     
 }
 @property (weak, nonatomic) IBOutlet UITableView *registrationTableView;
 @property (strong, nonatomic) ViewController *viewController;
 @property (nonatomic, retain) UIPickerView *authorSelect;
 @property (nonatomic, retain) UIPickerView *countrySelect;
-
+@property (nonatomic, readwrite)  BOOL isFacebookLogin;
 @property (nonatomic, retain)  NSArray *pickerData;
+@property (nonatomic, retain)  NSDictionary *fbData;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicImg;
