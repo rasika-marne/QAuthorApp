@@ -23,6 +23,14 @@
 @property (weak, nonatomic) IBOutlet UIImageView *template4;
 - (IBAction)onTemplate1Click:(id)sender;
 - (IBAction)onTemplate4Click:(id)sender;
+- (IBAction)onTemplate5Click:(id)sender;
+- (IBAction)onTemplate6Click:(id)sender;
+- (IBAction)onTemplate7Click:(id)sender;
+- (IBAction)onTemplate8Click:(id)sender;
+- (IBAction)onTemplate9Click:(id)sender;
+- (IBAction)onTemplate10Click:(id)sender;
+- (IBAction)onTemplate11Click:(id)sender;
+
 - (IBAction)onClickCancel:(id)sender;
 -(void)createBook;
 @end

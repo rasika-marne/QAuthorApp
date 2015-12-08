@@ -76,6 +76,49 @@
     
     [self createBook];
 }
+- (IBAction)onTemplate5Click:(id)sender
+{
+    flag =5;
+    
+    [self createBook];
+}
+- (IBAction)onTemplate6Click:(id)sender
+{
+    flag =6;
+    
+    [self createBook];
+}
+- (IBAction)onTemplate7Click:(id)sender
+{
+    flag =7;
+    
+    [self createBook];
+}
+- (IBAction)onTemplate8Click:(id)sender
+{
+    flag =8;
+    
+    [self createBook];
+}
+- (IBAction)onTemplate9Click:(id)sender
+{
+    flag =9;
+    
+    [self createBook];
+}
+- (IBAction)onTemplate10Click:(id)sender
+{
+    flag =10;
+    
+    [self createBook];
+}
+
+- (IBAction)onTemplate11Click:(id)sender
+{
+    flag =11;
+    
+    [self createBook];
+}
 
 -(void)createBook{
     

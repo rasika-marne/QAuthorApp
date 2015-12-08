@@ -58,6 +58,7 @@
 NSString *SELECTEDBOOKID,*SelectedSegmentvalue;
 //static NSString *const kGAIScreenName = @"Screen";
 UIImage *selectedTemplate;
+UIImage *selectedBorder;
 typedef void (^UserIdResultBlock)(id object, NSError *error);
 #define KMessageCount @"messageCnt"
 //---------- User Constant -------//
