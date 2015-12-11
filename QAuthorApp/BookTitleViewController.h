@@ -14,8 +14,9 @@
 #import <CoreText/CoreText.h>
 #import <QuartzCore/QuartzCore.h>
 #import "CLImageEditor.h"
-
+#import "AddBorderViewController.h"
 #import "ChooseTemplateViewController.h"
+@class AddBorderViewController;
 @class CreateBookViewController;
 @class Book;
 @class User;
@@ -44,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *authorImg;
 @property (weak, nonatomic) IBOutlet UIImageView *bookCoverImg;
 @property (weak, nonatomic) IBOutlet UITextField *bookTitleTextField;
+@property (nonatomic, strong) AddBorderViewController *addBorderVC;
 @property (nonatomic, strong) CreateBookViewController *createBookVC;
 @property (nonatomic, strong) ChooseTemplateViewController *chooseTemplateVC;
 @property (weak, nonatomic) IBOutlet UITextField *shortDescTextField;

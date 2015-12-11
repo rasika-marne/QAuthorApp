@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "Constant.h"
+#import "User.h"
 #import "BookComment.h"
 @class BookComment;
+@class User;
 @interface ExcCommentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIAlertViewDelegate>
 {
     int movementDistance;

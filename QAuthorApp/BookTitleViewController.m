@@ -251,7 +251,16 @@
     user =[User createEmptyUser];
    // NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     //user = [def objectForKey:@"loggedInUser"];
-    
+    if([self.bookTitleTextField.text isEqualToString:@""]&&[self.genreTextField.text isEqualToString:@""]&&[self.shortDescTextView.text isEqualToString:@"Enter short description"]){
+          if (self.bookCoverImg.image == [UIImage imageNamed:@"book-1"]) {
+              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                              message:@"All fields are compulsory!!!"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+              [alert show];
+          }
+    }
     user = APP_DELEGATE.loggedInUser;
     UIStoryboard *storyboard;
     if (IPAD) {
@@ -298,6 +307,18 @@
             [book saveBooksBlock:^(Book *object, NSError *error) {
                 if (!error) {
                     [APP_DELEGATE stopActivityIndicator];
+                    UIStoryboard *storyboard;
+                    if (IPAD) {
+                        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+                    }
+                    else
+                        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    
+                    //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    self.addBorderVC = (AddBorderViewController *) [storyboard instantiateViewControllerWithIdentifier:@"AddBorderViewController"];
+                    [self  presentViewController:self.addBorderVC animated:YES completion:nil];
+                    
+
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
                                                                     message:@"Book created Successfully!!"
                                                                    delegate:self

@@ -12,6 +12,8 @@
 #import "SaveFile.h"
 #import <MessageUI/MessageUI.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "AddBorderViewController.h"
+#import "ChooseTemplateViewController.h"
 //#import "ViewBookViewController.h"
 #import "Constant.h"
 #import <CoreText/CoreText.h>
@@ -21,6 +23,7 @@
 #import "BookDetails.h"
 @class Book;
 @class BookDetails;
+@class AddBorderViewController;
 @interface CreateBookViewController : UIViewController<UITextViewDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate,CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate>{
     int count;
     UITextView* activeTextView;
@@ -36,7 +39,9 @@
 - (IBAction)onClickExportBtn:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView1;
 @property (nonatomic, strong) StoryAudioPlayer *audioPlayerObject;
-//@property (nonatomic, strong) ViewBookViewController *viewBookVC;
+@property (nonatomic, strong) AddBorderViewController *addBorderVC;
+@property (nonatomic, strong) ChooseTemplateViewController *chooseTemplateVC;
+
 @property (weak, nonatomic) IBOutlet UILabel *chooseOwnLbl;
 
 @property (nonatomic, strong) NSString* storySoundFilePath;

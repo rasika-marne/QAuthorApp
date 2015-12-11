@@ -8,6 +8,9 @@
 
 #import "SignUpViewController.h"
 #import "RearViewController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 @interface SignUpViewController ()
 
 @end
@@ -79,12 +82,72 @@
      if (_permissions!=nil) { }
      }*/
 }
-
 -(void)facebookSignIn
+{
+     NSArray *permissionsArray = @[ @"public_profile", @"email"];
+    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        if (!user) {
+            NSLog(@"Uh oh. The user cancelled the Facebook login.");
+        } else if (user.isNew) {
+            flag = 1;
+             NSLog(@"user:%@",user.email);
+           // [self getFbData];
+            NSLog(@"User signed up and logged in through Facebook!");
+            
+        } else {
+            NSLog(@"User logged in through Facebook!:%@",user);
+            flag = 2;
+            NSLog(@"user:%@",user.email);
+            if (![PFFacebookUtils isLinkedWithUser:user]) {
+                [PFFacebookUtils linkUserInBackground:user withReadPermissions:nil block:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        NSLog(@"Woohoo, user is linked with Facebook!");
+                    }
+                }];
+            }
+
+            //[self login:(User *)user];
+            
+        }
+    }];
+
+}
+-(void)getFbData{
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"first_name, last_name, picture, email"}];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        // handle response
+        if (!error) {
+            NSLog(@"result:%@",result);
+            // result is a dictionary with the user's Facebook data
+            NSDictionary *userData = (NSDictionary *)result;
+            
+           // NSString *facebookID = userData[@"id"];
+           
+           // NSString *email = userData[@"email"];
+            
+            if (flag == 1) {
+                UIStoryboard *storyboard;
+                if (IPAD) {
+                    storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+                }
+                else
+                    storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                self.registrationView = (RegistrationViewController *)
+                [storyboard instantiateViewControllerWithIdentifier:@"RegistrationViewController"];
+                self.registrationView.isFacebookLogin = YES;
+                self.registrationView.fbData = userData;
+                [self.navigationController pushViewController:self.registrationView animated:YES];
+            }
+                       // Now add the data to the UI elements
+            // ...
+        }
+    }];
+}
+/*-(void)facebookSignIn
 {
     if ([FBSession activeSession].state != FBSessionStateOpen &&
         [FBSession activeSession].state != FBSessionStateOpenTokenExtended) {
-        
+ 
         [APP_DELEGATE openActiveSessionWithPermissions:@[@"public_profile", @"email"] allowLoginUI:YES];
         
     }
@@ -105,9 +168,9 @@
     //         ^(FBSession *session, FBSessionState state, NSError *error) {
     //             [self sessionStateChanged:session state:state error:error];
     //         }];
-}
+}*/
 
--(void)handleFBSessionStateChangeWithNotification:(NSNotification *)notification{
+/*-(void)handleFBSessionStateChangeWithNotification:(NSNotification *)notification{
     
     
     // Get the session, state and error values from the notification's userInfo dictionary.
@@ -197,7 +260,7 @@
         // In case an error has occurred, then just log the error and update the UI accordingly.
         NSLog(@"Error: %@", [error localizedDescription]);
     }
-}
+}*/
 
 -(void)login :(User *)user
 {

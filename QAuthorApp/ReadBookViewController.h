@@ -12,6 +12,7 @@
 #import "BookDetails.h"
 #import "DataViewController.h"
 @class YMCAudioPlayer;
+@class Book;
 @interface ReadBookViewController : UIViewController<UIPageViewControllerDelegate,GADInterstitialDelegate>{
     BookDetails *bookDet;
 }

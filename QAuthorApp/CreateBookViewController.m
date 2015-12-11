@@ -18,11 +18,27 @@
     
     
     [super viewDidLoad];
+    selectedTemplate = nil;
+    self.textView1.hidden =YES;
+    self.imageView1.hidden = YES;
+    self.m_oImage.hidden = YES;
+       
+    if (selectedBorder != nil) {
+        self.backImage.image = selectedBorder;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Start book"
+                                                        message:@"Do you want to add Text or Image?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Text",@"Image",nil];
+        alert.tag = 11;
+        [alert show];
+
+    }
+
     count = 1;
-    self.backImage.hidden = YES;
+    //self.backImage.hidden = YES;
     [self navigationMethod];
-    self.m_oImage.hidden = NO;
-    self.chooseOwnLbl.hidden = NO;
+   
     [self.view setBackgroundColor: RGB];
     NSLog(@"book obj title:%@",bookObj.title);
     //backImage.image = backImg1;
@@ -44,7 +60,21 @@
     
     //bookObj = [Book createEmptyObject];
     bookDetailsObj = [BookDetails createEmptyObject];
-   }
+}
+-(void)viewWillAppear:(BOOL)animated{
+    
+    if (selectedTemplate != nil) {
+        CLImageEditor *editor=[[CLImageEditor alloc] initWithImage:selectedTemplate delegate:self];
+        [self presentViewController:editor animated:YES completion:nil];
+        //[picker presentViewController:editor animated:YES completion:nil];
+       // [picker pushViewController:editor animated:YES];
+
+        //self.imageView1.image = selectedTemplate;
+        self.m_oImage.hidden = YES;
+        self.chooseOwnLbl.hidden = YES;
+    }
+    
+}
 -(void)navigationMethod{
     [self.view setBackgroundColor: RGB]; //will give a UIColor
     self.navigationItem.hidesBackButton = YES;
@@ -70,7 +100,22 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
     
 }
-
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if (alertView.tag == 11) {
+        if (buttonIndex == 1) {
+            self.textView1.hidden = NO;
+            self.imageView1.hidden = YES;
+            self.m_oImage.hidden = YES;
+        }
+        else if (buttonIndex == 2){
+            self.textView1.hidden = YES;
+            self.imageView1.hidden = NO;
+            self.m_oImage.hidden = NO;
+        }
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -188,10 +233,26 @@
             
             count++;
             self.navigationItem.title = [NSString stringWithFormat:@"Page %d",count];
-          
+            selectedTemplate = nil;
+            self.textView1.hidden =YES;
+            self.imageView1.hidden = YES;
+            self.m_oImage.hidden = YES;
+            
+            if (selectedBorder != nil) {
+                self.backImage.image = selectedBorder;
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Start book"
+                                                                message:@"Do you want to add Text or Image?"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Cancel"
+                                                      otherButtonTitles:@"Text",@"Image",nil];
+                alert.tag = 11;
+                [alert show];
+                
+            }
+            
+
             textView1.text = @"Type story....";
-            self.chooseOwnLbl.hidden = NO;
-            self.m_oImage.hidden = NO;
+        
             [self.m_oImage setBackgroundImage:[UIImage imageNamed:@"won-img"] forState:UIControlStateNormal];
             [imageView1 setImage:[UIImage imageNamed:@"book-1"]];
             
@@ -411,8 +472,9 @@
 
 - (IBAction)onPhotoTap:(id)sender
 {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Add image" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Gallary",@"Choose Template", nil];
     [sheet showInView:self.view.window];
+
     
 }
 #pragma mark- Actionsheet delegate
@@ -422,21 +484,35 @@
     if(buttonIndex==actionSheet.cancelButtonIndex){
         return;
     }
-    
-    UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    if([UIImagePickerController isSourceTypeAvailable:type]){
-        if(buttonIndex==0 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
-            type = UIImagePickerControllerSourceTypeCamera;
+    else if (buttonIndex == 2){
+        UIStoryboard *storyboard;
+        if (IPAD) {
+            storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
         }
+        else
+            storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.allowsEditing = NO;
-        picker.delegate   = self;
-        picker.sourceType = type;
-        
-        [self presentViewController:picker animated:YES completion:nil];
+        // UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.chooseTemplateVC = (ChooseTemplateViewController *) [storyboard instantiateViewControllerWithIdentifier:@"ChooseTemplateViewController"];
+        [self  presentViewController:self.chooseTemplateVC animated:YES completion:nil];
     }
+    else{
+        UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        if([UIImagePickerController isSourceTypeAvailable:type]){
+            if(buttonIndex==0 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+                type = UIImagePickerControllerSourceTypeCamera;
+            }
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.allowsEditing = NO;
+            picker.delegate   = self;
+            picker.sourceType = type;
+            
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+    }
+    
 }
 /*-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
  {
@@ -464,6 +540,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    
     UIImage * pImage=[info objectForKey:UIImagePickerControllerOriginalImage];
     UIImageOrientation orient = pImage.imageOrientation;
     if (orient != UIImageOrientationUp) {
@@ -482,6 +559,7 @@
     [picker pushViewController:editor animated:YES];
     
     
+    
 }
 
 #pragma mark - CLImageEditor Delegate
@@ -497,7 +575,7 @@
         self.m_oImage.hidden = NO;
         self.chooseOwnLbl.hidden = NO;
     }
-    self.backImage.hidden = NO;
+   // self.backImage.hidden = NO;
     
     //[self.m_oImage setImage:image forState:UIControlStateNormal];
     UIImage *lowResImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 0.02)];

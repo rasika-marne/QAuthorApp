@@ -18,12 +18,12 @@
 #import <UIKit/UIKit.h>
 
 #import "AppDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
+//#import <FacebookSDK/FacebookSDK.h>
 //#import <FBSDKCoreKit/FBSDKCoreKit.h>
 //#import <FBSDKLoginKit/FBSDKLoginKit.h>
 @class HomeViewController;
 @class RegistrationViewController;
-@interface ViewController : UIViewController<UIAlertViewDelegate,SWRevealViewControllerDelegate,FBLoginViewDelegate>{
+@interface ViewController : UIViewController<UIAlertViewDelegate,SWRevealViewControllerDelegate>{
       NSString *USER_FB_ID_STR, *USER_FB_EMAIL_STR;
     int movementDistance;
 }

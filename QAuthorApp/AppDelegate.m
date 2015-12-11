@@ -8,7 +8,9 @@
 
 #import "AppDelegate.h"
 #import "RearViewController.h"
-//#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+
 static NSString *const kTrackingId = @"UA-70889501-1";
 static NSString *const kAllowTracking = @"allowTracking";
 @interface AppDelegate ()<SWRevealViewControllerDelegate>
@@ -27,7 +29,8 @@ static NSString *const kAllowTracking = @"allowTracking";
 
     // Override point for customization after application launch.
     [Parse setApplicationId:PARSE_APP_ID clientKey:PARSE_CLIENT_KEY];
-   // [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+    //[PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
 
 
     //For Apns
@@ -44,7 +47,7 @@ static NSString *const kAllowTracking = @"allowTracking";
     }
     
     loggedInUser = [User createEmptyUser];
-     [FBAppEvents activateApp];
+   //  [FBAppEvents activateApp];
     // [self tabBarSetup];
     if ([self getLoggedInUserName] == NULL) {
         [self firstTimeLogin];
@@ -104,6 +107,17 @@ static NSString *const kAllowTracking = @"allowTracking";
 
 
 }
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
+}
+
+
 /*- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     switch (buttonIndex) {
         case 0:
@@ -375,24 +389,26 @@ performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionH
     [GAI sharedInstance].optOut =
     ![[NSUserDefaults standardUserDefaults] boolForKey:kAllowTracking];
     [application setApplicationIconBadgeNumber:0];
-    if ([FBSession activeSession].state == FBSessionStateCreatedTokenLoaded) {
+    [FBSDKAppEvents activateApp];
+
+   /* if ([FBSession activeSession].state == FBSessionStateCreatedTokenLoaded) {
         [self openActiveSessionWithPermissions:nil allowLoginUI:NO];
     }
     
-    [FBAppCall handleDidBecomeActive];
+    [FBAppCall handleDidBecomeActive];*/
    // [FBSDKAppEvents activateApp];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
--(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+/*-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     
-    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-}
+    //return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+}*/
 
 
 #pragma mark - Public method implementation
 
 -(void)openActiveSessionWithPermissions:(NSArray *)permissions allowLoginUI:(BOOL)allowLoginUI{
-    [FBSession openActiveSessionWithReadPermissions:permissions
+   /* [FBSession openActiveSessionWithReadPermissions:permissions
                                        allowLoginUI:allowLoginUI
                                   completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
                                       // Create a NSDictionary object and set the parameter values.
@@ -407,7 +423,7 @@ performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionH
                                                                                           object:nil
                                                                                         userInfo:sessionStateInfo];
                                       
-                                  }];
+                                  }];*/
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
