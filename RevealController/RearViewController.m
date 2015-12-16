@@ -33,6 +33,7 @@
 #import "DashboardViewController.h"
 #import "CellRearTableView.h"
 #import "ChooseTemplateViewController.h"
+#import "CreateBookViewController.h"
 @interface RearViewController()
 
 @end
@@ -228,8 +229,11 @@
     }
     else if (row == 1)
     {
+        //SelectedSegmentvalue=nil;
+        //SelectedSegmentvalue=@"Create Book";
         if ( ![frontNavigationController.topViewController isKindOfClass:[BookTitleViewController class]] )
         {
+        
             BookTitleViewController *demoController1 =
             (BookTitleViewController *)
             [storyboard instantiateViewControllerWithIdentifier:@"BookTitleViewController"];
@@ -241,11 +245,13 @@
         }
         else
         {
-            [revealController revealToggle:self];
+          [revealController revealToggle:self];
         }
     }
     else if (row == 2)
     {
+        SelectedSegmentvalue=nil;
+        SelectedSegmentvalue=@"Edit Profile";
         EditProfileViewController *demoController2 =
         (EditProfileViewController *)
         [storyboard instantiateViewControllerWithIdentifier:@"EditProfileViewController"];

@@ -9,7 +9,7 @@
 #import "Book.h"
 
 @implementation Book
-@synthesize objectId,title,genre,authorId,status,shortDesc,type,createdAt;
+@synthesize title,genre,authorId,status,shortDesc,type,createdAt,borderId;
 @synthesize coverPic,noOfComments,noOfLikes,ageFrom,ageTo,pdfFile,eCommerceUrl,price,authorName;
 
 +(Book *)createEmptyObject{
@@ -20,12 +20,20 @@
 +(Book *)convertPFObjectToBooks:(PFObject *)pobj{
     //  User *user = [User createEmptyUser];
     Book *note=[Book createEmptyObject];
+    //note.objectId = IS_POPULATED_STRING(pobj.objectId)?pobj.objectId:@"";
+   /// if ([pobj isKindOfClass:[Book class]]) {
+       // Book *bobj = (Book *)pobj;
+      //  note.objectId = bobj.objectId;
+      //      //}
     note.objectId = pobj.objectId;
-    note.createdAt = pobj.createdAt;
+    NSLog(@"object id:%@",[pobj objectId]);
+
+    note.createdAt = [pobj createdAt];
     note.title = IS_POPULATED_STRING([pobj objectForKey:TITLE])?[pobj objectForKey:TITLE]:@"";
     note.genre = IS_POPULATED_STRING([pobj objectForKey:GENRE])?[pobj objectForKey:GENRE]:@"";
     note.type = IS_POPULATED_STRING([pobj objectForKey:TYPE])?[pobj objectForKey:TYPE]:@"";
     note.authorName = IS_POPULATED_STRING([pobj objectForKey:AUTHOR_NAME])?[pobj objectForKey:AUTHOR_NAME]:@"";
+    note.borderId = IS_POPULATED_STRING([pobj objectForKey:BORDER_ID])?[pobj objectForKey:BORDER_ID]:@"";
     note.eCommerceUrl = IS_POPULATED_STRING([pobj objectForKey:ECOMMERCE_URL])?[pobj objectForKey:ECOMMERCE_URL]:@"";
     note.price = IS_POPULATED_STRING([pobj objectForKey:PRICE])?[pobj objectForKey:PRICE]:@"";
 
@@ -54,12 +62,14 @@
     PFObject *pObj=[Book createEmptyObject];
     if (self.objectId) {
         [pObj setObjectId:self.objectId];
+       // [pObj setObject:self.objectId forKey:OBJECT_ID];
     }
     if (self.createdAt) {
         [pObj setObject:self.createdAt forKey:CREATED_AT];
     }
     
     [pObj setObject:IS_POPULATED_STRING(self.title)?self.title:@"" forKey:TITLE];
+    [pObj setObject:IS_POPULATED_STRING(self.borderId)?self.borderId:@"" forKey:BORDER_ID];
     [pObj setObject:IS_POPULATED_STRING(self.genre)?self.genre:@"" forKey:GENRE];
     [pObj setObject:IS_POPULATED_STRING(self.type)?self.type:@"" forKey:TYPE];
     [pObj setObject:IS_POPULATED_STRING(self.price)?self.price:@"" forKey:PRICE];
@@ -91,6 +101,7 @@
     PFObject *pObj=[self convertBooksToPFObject];
     [pObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
+            NSLog(@"obj id:%@",pObj.objectId);
             block([Book convertPFObjectToBooks:pObj],nil);
         }else{
             block(nil,error);

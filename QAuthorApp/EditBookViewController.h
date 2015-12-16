@@ -15,16 +15,29 @@
 #import "CLImageEditor.h"
 #import "NSUserDefaults+StoryData.h"
 #import "SaveFile.h"
+#import "Book.h"
+#import "AddBorderViewController.h"
+#import "ChooseTemplateViewController.h"
+@class AddBorderViewController;
+@class ChooseTemplateViewController;
+@class Book;
 @interface EditBookViewController : UIViewController<CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>{
     int count,pageNumber;
     NSMutableArray *bookDetailsArr,*pagePDFArr;
     UITextView* activeTextView;
+    BOOL isImageEdited;
    
 
 }
+@property (weak, nonatomic) IBOutlet UIButton *imageClickbutton;
+@property (weak, nonatomic) IBOutlet UIImageView *borderImage;
 @property (weak, nonatomic) IBOutlet UIView *viewForPdf;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView1;
 @property (weak, nonatomic) IBOutlet UIButton *recordAudioButton;
+@property (nonatomic, strong) AddBorderViewController *addBorderVC;
+@property (nonatomic, strong) ChooseTemplateViewController *chooseTemplateVC;
+
+@property (strong,nonatomic)Book *bookObj1;
 - (IBAction)onPhotoTap:(id)sender;
 @property (nonatomic, strong) StoryAudioPlayer *audioPlayerObject;
 @property (weak, nonatomic) IBOutlet UITextView *textView1;

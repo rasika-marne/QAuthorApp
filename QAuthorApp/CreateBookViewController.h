@@ -27,7 +27,7 @@
 @interface CreateBookViewController : UIViewController<UITextViewDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate,CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate>{
     int count;
     UITextView* activeTextView;
-    BOOL m_bPhotoWasChanged;
+    BOOL m_bPhotoWasChanged,isImageEdited,isImageSelected,isTextSelected;
 
 }
 @property (weak, nonatomic) IBOutlet UIImageView *backImage;

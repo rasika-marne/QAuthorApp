@@ -19,12 +19,18 @@
     
     [super viewDidLoad];
     selectedTemplate = nil;
+     isImageEdited = NO;
+    isImageSelected = NO;
+    isTextSelected = NO;
     self.textView1.hidden =YES;
     self.imageView1.hidden = YES;
     self.m_oImage.hidden = YES;
+    self.chooseOwnLbl.hidden = YES;
        
     if (selectedBorder != nil) {
+         NSLog(@"border flag:%d",borderImageFlag);
         self.backImage.image = selectedBorder;
+        bookObj.borderId = [NSString stringWithFormat:@"border%d",borderImageFlag];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Start book"
                                                         message:@"Do you want to add Text or Image?"
                                                        delegate:self
@@ -32,6 +38,9 @@
                                               otherButtonTitles:@"Text",@"Image",nil];
         alert.tag = 11;
         [alert show];
+       
+        
+        
 
     }
 
@@ -63,13 +72,12 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     
-    if (selectedTemplate != nil) {
-        CLImageEditor *editor=[[CLImageEditor alloc] initWithImage:selectedTemplate delegate:self];
-        [self presentViewController:editor animated:YES completion:nil];
-        //[picker presentViewController:editor animated:YES completion:nil];
-       // [picker pushViewController:editor animated:YES];
-
-        //self.imageView1.image = selectedTemplate;
+    if (selectedTemplate != nil && isImageEdited == NO) {
+        self.imageView1.image = selectedTemplate;
+        CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:self.imageView1.image];
+        editor.delegate = self;
+        
+        [self presentViewController:editor animated:YES completion:nil];        //
         self.m_oImage.hidden = YES;
         self.chooseOwnLbl.hidden = YES;
     }
@@ -108,11 +116,18 @@
             self.textView1.hidden = NO;
             self.imageView1.hidden = YES;
             self.m_oImage.hidden = YES;
+            self.chooseOwnLbl.hidden = YES;
+            isTextSelected = YES;
+            isImageSelected = NO;
+            imageView1.image = [UIImage imageNamed:@"book-1"];
         }
         else if (buttonIndex == 2){
             self.textView1.hidden = YES;
             self.imageView1.hidden = NO;
             self.m_oImage.hidden = NO;
+            self.chooseOwnLbl.hidden = NO;
+            isImageSelected = YES;
+            isTextSelected = NO;
         }
     }
 }
@@ -143,7 +158,7 @@
     
     
     
-    CGContextRef pdfContext = [self createPDFContext:CGRectMake(0, 40, view.frame.size.width, view.frame.size.height) path:(__bridge CFStringRef)(filePath)];
+    CGContextRef pdfContext = [self createPDFContext:CGRectMake(20, 40, view.frame.size.width, view.frame.size.height) path:(__bridge CFStringRef)(filePath)];
     CGContextBeginPage (pdfContext,nil);
     CGAffineTransform transform = CGAffineTransformIdentity;
     transform = CGAffineTransformMakeTranslation(0,view.frame.size.height
@@ -198,13 +213,18 @@
     bookDetailsObj.pagePDF = [PFFile fileWithName:[NSString stringWithFormat:@"Page%d.pdf",count] data:myData];
     bookDetailsObj.bookId = bookObj.objectId;
     bookDetailsObj.pageNumber = [NSNumber numberWithInteger:count];
-    bookDetailsObj.textContent = textView1.text;
-    if (imageView1.image != [UIImage imageNamed:@"book-1"]) {
-        UIImage *image = [self scaleAndRotateImage:imageView1.image];
-        NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
-        bookDetailsObj.imageContent = [PFFile fileWithName:[NSString stringWithFormat:@"page%d.jpg",count] data:imageData];
-       // NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
-        //book.coverPic = [PFFile fileWithName:@"CoverPage.jpg" data:imageData];
+    if (isTextSelected == YES) {
+        bookDetailsObj.textContent = textView1.text;
+          bookDetailsObj.imageContent = nil;
+        
+    }
+    else if (isImageSelected == YES){
+        if (imageView1.image != [UIImage imageNamed:@"book-1"]) {
+            UIImage *image = [self scaleAndRotateImage:imageView1.image];
+            NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
+            bookDetailsObj.imageContent = [PFFile fileWithName:[NSString stringWithFormat:@"page%d.jpg",count] data:imageData];
+            bookDetailsObj.textContent = nil;
+        }
     }
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir;
@@ -288,18 +308,26 @@
         
         // Now let's update it with some new data. In this case, only cheatMode and score
         // will get sent to the cloud. playerName hasn't changed.
-        gObj[PDF_FILE] = [PFFile fileWithName:@"Book.pdf" data:myData];
+        gObj[PDF_FILE] = [PFFile fileWithName:[NSString stringWithFormat:@"%@.pdf",gObj[TITLE]] data:myData];
+        gObj[BORDER_ID] = [NSString stringWithFormat:@"border%d",borderImageFlag];
         [gObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(!error){
                 NSLog(@"book updated!!");
                 
                 bookDetailsObj.bookId = bookObj.objectId;
                 bookDetailsObj.pageNumber = [NSNumber numberWithInteger:count];
-                bookDetailsObj.textContent = textView1.text;
-                if (imageView1.image != [UIImage imageNamed:@"book-1"]) {
+                if (isTextSelected == YES) {
+                    bookDetailsObj.textContent = textView1.text;
+                    bookDetailsObj.imageContent = nil;
+
+                }
+                else if (isImageSelected == YES){
+                                if (imageView1.image != [UIImage imageNamed:@"book-1"]) {
                     UIImage *image = [self scaleAndRotateImage:imageView1.image];
                     NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
                     bookDetailsObj.imageContent = [PFFile fileWithName:[NSString stringWithFormat:@"page%d.jpg",count] data:imageData];
+                                    bookDetailsObj.textContent = nil;
+                }
                 }
                 NSArray *paths1 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
                 NSString *docsDir;
@@ -566,6 +594,8 @@
 
 - (void)imageEditor:(CLImageEditor *)editor didFinishEdittingWithImage:(UIImage *)image
 {
+    
+    isImageEdited = YES;
     if (image) {
         self.m_oImage.hidden = YES;
         self.chooseOwnLbl.hidden = YES;
@@ -582,15 +612,16 @@
     
     
     [imageView1 setImage:lowResImage];
-    CGRect myImageRect = CGRectMake(imageView1.frame.origin.x-10, imageView1.frame.origin.y-10, imageView1.frame.size.width+10,imageView1.frame.size.height+10);
-    self.backImage.frame = myImageRect;
-    [self refreshImageView];
+  //  CGRect myImageRect = CGRectMake(imageView1.frame.origin.x-10, imageView1.frame.origin.y-10, imageView1.frame.size.width+10,imageView1.frame.size.height+10);
+   // self.backImage.frame = myImageRect;
+  //  [self refreshImageView];
     
     [editor dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imageEditor:(CLImageEditor *)editor willDismissWithImageView:(UIImageView *)imageView canceled:(BOOL)canceled
 {
+    isImageEdited = NO;
     [self refreshImageView];
 }
 - (void)refreshImageView
@@ -602,7 +633,7 @@
 - (void)resetImageViewFrame
 {
     CGSize size = (imageView1.image) ? imageView1.image.size : imageView1.frame.size;
-    CGFloat ratio = MIN(ViewToPDF.frame.size.width / size.width, ViewToPDF.frame.size.height / size.height);
+    CGFloat ratio = MIN(backImage.frame.size.width / size.width, backImage.frame.size.height / size.height);
     CGFloat W = ratio * size.width;
     CGFloat H = ratio * size.height;
     imageView1.frame = CGRectMake(0, 0, W, H);

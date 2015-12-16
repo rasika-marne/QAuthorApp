@@ -37,8 +37,7 @@
 
 - (IBAction)onClickSignIn:(id)sender;
 - (IBAction)onClickForgotPassword:(id)sender;
-- (IBAction)onClickSignUp:(id)sender;
-- (IBAction)onClickFacebookLogin:(id)sender;
+
 -(void)showAlerForParseError:(NSError*)error;
 @end
 

@@ -99,7 +99,7 @@
     
     CGContextSaveGState(context);
     // Flip the context so that the PDF page is rendered right side up.
-    CGContextTranslateCTM(context, 50.0, self.bounds.size.height+10.0);
+    CGContextTranslateCTM(context, 30.0, self.bounds.size.height);
     CGContextScaleCTM(context, 1.0, -1.0);
     
     // Scale the context so that the PDF page is rendered at the correct size for the zoom level.

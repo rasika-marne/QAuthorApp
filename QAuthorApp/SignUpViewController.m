@@ -91,20 +91,21 @@
         } else if (user.isNew) {
             flag = 1;
              NSLog(@"user:%@",user.email);
-           // [self getFbData];
+            [self getFbData];
             NSLog(@"User signed up and logged in through Facebook!");
             
         } else {
             NSLog(@"User logged in through Facebook!:%@",user);
             flag = 2;
             NSLog(@"user:%@",user.email);
-            if (![PFFacebookUtils isLinkedWithUser:user]) {
+            [self getFbData];
+            /*if (![PFFacebookUtils isLinkedWithUser:user]) {
                 [PFFacebookUtils linkUserInBackground:user withReadPermissions:nil block:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
                         NSLog(@"Woohoo, user is linked with Facebook!");
                     }
                 }];
-            }
+            }*/
 
             //[self login:(User *)user];
             
@@ -121,11 +122,12 @@
             // result is a dictionary with the user's Facebook data
             NSDictionary *userData = (NSDictionary *)result;
             
-           // NSString *facebookID = userData[@"id"];
+          //  NSString *facebookID = userData[@"id"];
            
            // NSString *email = userData[@"email"];
+           //  NSString *name = userData[@"name"];
             
-            if (flag == 1) {
+           /* if (flag == 1) {
                 UIStoryboard *storyboard;
                 if (IPAD) {
                     storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
@@ -137,7 +139,7 @@
                 self.registrationView.isFacebookLogin = YES;
                 self.registrationView.fbData = userData;
                 [self.navigationController pushViewController:self.registrationView animated:YES];
-            }
+            }*/
                        // Now add the data to the UI elements
             // ...
         }

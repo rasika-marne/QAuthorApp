@@ -29,7 +29,7 @@
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     
-    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
     
 
     self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
@@ -131,8 +131,8 @@
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
         if (textViewBegin == YES) {
-            rect.origin.y -= kOFFSET_FOR_KEYBOARD+70;
-            rect.size.height += kOFFSET_FOR_KEYBOARD+70;
+            rect.origin.y -= kOFFSET_FOR_KEYBOARD+140;
+            rect.size.height += kOFFSET_FOR_KEYBOARD+140;
         }
         else
         {
@@ -164,7 +164,9 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-
+    if (selectedBorder!=nil) {
+        NSLog(@"flag:%d",borderImageFlag);
+    }
     if (selectedTemplate == nil && ownPhotoTap == NO) {
         self.bookCoverImg.hidden = YES;
         self.templateButton.hidden = NO;
@@ -173,6 +175,7 @@
         self.templateLbl.hidden = NO;
         self.ownImgLbl.hidden = NO;
         self.circlrImg.hidden = NO;
+        
     }
     else{
         
@@ -304,9 +307,12 @@
             book.type = @"Normal";
             NSLog(@"Book obj:%@",book);
             [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
-            [book saveBooksBlock:^(Book *object, NSError *error) {
-                if (!error) {
+            [book saveBooksBlock:^(id object, NSError *error) {
+                if (object) {
                     [APP_DELEGATE stopActivityIndicator];
+                    PFObject *obj = object;
+                    NSLog(@"saved book object id:%@",obj.objectId);
+                     NSLog(@"saved book object created at:%@",obj.createdAt);
                     UIStoryboard *storyboard;
                     if (IPAD) {
                         storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
@@ -318,20 +324,21 @@
                     self.addBorderVC = (AddBorderViewController *) [storyboard instantiateViewControllerWithIdentifier:@"AddBorderViewController"];
                     [self  presentViewController:self.addBorderVC animated:YES completion:nil];
                     
-
+                    
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
                                                                     message:@"Book created Successfully!!"
                                                                    delegate:self
                                                           cancelButtonTitle:@"OK"
                                                           otherButtonTitles:nil];
                     [alert show];
-                    NSLog(@"Book obj id:%@",object.objectId);
-                    book = object;
+                    NSLog(@"Book obj id:%@",obj.objectId);
+                    book = [Book convertPFObjectToBooks:obj];
+                    
                     self.createBookVC = (CreateBookViewController *)
                     [storyboard instantiateViewControllerWithIdentifier:@"CreateBookViewController"];
-                    NSLog(@"book obj:%@",book);
+                    NSLog(@"book obj id:%@",book.objectId);
                     NSLog(@"book title obj:%@",book.title);
-                   // self.createBookVC.backImg1 = [[UIImage alloc]init];
+                    // self.createBookVC.backImg1 = [[UIImage alloc]init];
                     //self.createBookVC.backImg1 = backImg1;
                     self.createBookVC.bookObj = [Book createEmptyObject];
                     self.createBookVC.bookObj = book;
@@ -339,6 +346,9 @@
                     
                 }
             }];
+            
+                //}
+            //}];
             
 
         }

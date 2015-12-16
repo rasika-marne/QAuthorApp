@@ -25,8 +25,29 @@
     [PFUser logOut];
     self.navigationItem.hidesBackButton = YES;
     self.navigationController.navigationBar.hidden = NO;
+    UIImage *myImage = [UIImage imageNamed:@"back"];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonClicked:)];
+    
+    
+    self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
+    
+    
+    
+    //  UIImage *image = [UIImage imageNamed:@"nav-bar"];
+    //self.navigationController.navigationBar.barTintColor =[UIColor colorWithPatternImage:image];
+    
+    self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
+
     // Do any additional setup after loading the view, typically from a nib.
 }
+- (void)backButtonClicked :(id)sender{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+}
+
 //-(void)viewWillAppear:(BOOL)animated{
     // register for keyboard notifications
     /*[[NSNotificationCenter defaultCenter] addObserver:self

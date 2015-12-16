@@ -13,11 +13,18 @@
 @end
 
 @implementation EditBookViewController
-@synthesize bookId,imageView1,textView1;
+@synthesize bookId,imageView1,textView1,imageClickbutton,borderImage,bookObj1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self navigationMethod];
     [self.view setBackgroundColor: RGB];
+    isImageEdited = NO;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:@"Tap on image or text to edit it."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
    /* SWRevealViewController *revealController = [self revealViewController];
     UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -41,8 +48,10 @@
             // it failed.
         }
     }
-    
-
+    if (![bookObj1.borderId isEqualToString:@""]||bookObj1.borderId != nil) {
+        borderImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",bookObj1.borderId]];
+    }
+ 
     pagePDFArr = [[NSMutableArray alloc]init];
        count = 1;
     pageNumber = 0;
@@ -55,19 +64,30 @@
             bookDetailsArr = objects;
             BookDetails *b1 = [BookDetails createEmptyObject];
             b1 = [bookDetailsArr objectAtIndex:0];
-            
-                
+           
                 PFFile *imageFile = b1.imageContent;
                 if (imageFile && ![b1.imageContent isEqual:[NSNull null]]) {
                     [b1.imageContent getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                         if (data) {
                             [imageView1 setImage:[UIImage imageWithData:data]];
-                            textView1.text = b1.textContent;
+                            textView1.hidden = YES;
+                            imageView1.hidden = NO;
+                            imageClickbutton.hidden = NO;
                         }
                         
                         
                     }];
+                    
                 }
+                else if(![b1.textContent isEqualToString:@""]||b1.textContent != nil)
+                {
+                    imageView1.hidden = YES;
+                    imageClickbutton.hidden = YES;
+                    
+                    textView1.hidden = NO;
+                    textView1.text = b1.textContent;
+                }
+            
            
 
             NSLog(@"book det arr:%@",bookDetailsArr);
@@ -109,15 +129,25 @@
                
             }
             
-
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                            message:@"Do you want to edit border?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"No"
+                                                  otherButtonTitles:@"Yes",nil];
+            [alert show];
+            alert.tag = 12;
             
             
         }
+        
+
     }];
     
     
     // Do any additional setup after loading the view.
 }
+
+
 -(void)navigationMethod{
     [self.view setBackgroundColor: RGB]; //will give a UIColor
     self.navigationItem.hidesBackButton = YES;
@@ -145,7 +175,20 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-   }
+   
+    if (selectedBorder != nil) {
+        borderImage.image = selectedBorder;
+    }
+    if (selectedTemplate != nil && isImageEdited == NO) {
+        self.imageView1.image = selectedTemplate;
+        CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:self.imageView1.image];
+        editor.delegate = self;
+        
+        [self presentViewController:editor animated:YES completion:nil];        //
+       // self.m_oImage.hidden = YES;
+        //self.chooseOwnLbl.hidden = YES;
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -240,7 +283,7 @@
     //    // Finalize the output file
     CGPDFContextClose(writeContext);
     CGContextRelease(writeContext);
-    NSFileManager *fm = [NSFileManager defaultManager];
+    //NSFileManager *fm = [NSFileManager defaultManager];
     //NSString *directory = [[self documentsDirectory] stringByAppendingPathComponent:@"Photos/"];
     /* NSError *error = nil;
      for (NSString *file in [fm contentsOfDirectoryAtPath:layOutPath error:&error]) {
@@ -273,7 +316,7 @@
 
 - (IBAction)onPhotoTap:(id)sender
 {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Gallary",@"Choose Template", nil];
     [sheet showInView:self.view.window];
     
 }
@@ -284,21 +327,35 @@
     if(buttonIndex==actionSheet.cancelButtonIndex){
         return;
     }
-    
-    UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    if([UIImagePickerController isSourceTypeAvailable:type]){
-        if(buttonIndex==0 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
-            type = UIImagePickerControllerSourceTypeCamera;
+    else if (buttonIndex == 2){
+        UIStoryboard *storyboard;
+        if (IPAD) {
+            storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
         }
+        else
+            storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.allowsEditing = NO;
-        picker.delegate   = self;
-        picker.sourceType = type;
-        
-        [self presentViewController:picker animated:YES completion:nil];
+        // UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.chooseTemplateVC = (ChooseTemplateViewController *) [storyboard instantiateViewControllerWithIdentifier:@"ChooseTemplateViewController"];
+        [self  presentViewController:self.chooseTemplateVC animated:YES completion:nil];
     }
+    else{
+        UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        if([UIImagePickerController isSourceTypeAvailable:type]){
+            if(buttonIndex==0 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+                type = UIImagePickerControllerSourceTypeCamera;
+            }
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.allowsEditing = NO;
+            picker.delegate   = self;
+            picker.sourceType = type;
+            
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+    }
+    
 }
 #pragma mark- ImagePicker delegate
 
@@ -328,6 +385,9 @@
 
 - (void)imageEditor:(CLImageEditor *)editor didFinishEdittingWithImage:(UIImage *)image
 {
+    isImageEdited = YES;
+   
+
     //[self.m_oImage setImage:image forState:UIControlStateNormal];
     UIImage *lowResImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 0.02)];
     [imageView1 setImage:lowResImage];
@@ -378,6 +438,9 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         if (buttonIndex == 1) {
             if (count<[bookDetailsArr count]) {
                 count++;
+                if (![bookObj1.borderId isEqualToString:@""]||bookObj1.borderId != nil) {
+                    borderImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",bookObj1.borderId]];
+                }
                 BookDetails *b2 = [BookDetails createEmptyObject];
                 b2 = [bookDetailsArr objectAtIndex:pageNumber];
                 
@@ -389,13 +452,25 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
                     [b2.imageContent getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                         if (data) {
                             [imageView1 setImage:[UIImage imageWithData:data]];
+                            textView1.hidden = YES;
+                            imageView1.hidden = NO;
+                            imageClickbutton.hidden = NO;
                             
                         }
                         
                     }];
                 }
-                NSLog(@"%@",b2.textContent);
-                textView1.text = b2.textContent;
+                else if(![b2.textContent isEqualToString:@""]||b2.textContent != nil)
+                {
+                    imageView1.hidden = YES;
+                    imageClickbutton.hidden = YES;
+                    
+                    textView1.hidden = NO;
+                    textView1.text = b2.textContent;
+                }
+                
+
+                
             }
             else
             {
@@ -408,6 +483,20 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             }
 
             
+        }
+        else if (alertView.tag == 12){
+            UIStoryboard *storyboard;
+            if (IPAD) {
+                storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+            }
+            else
+                storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            
+            //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            self.addBorderVC = (AddBorderViewController *) [storyboard instantiateViewControllerWithIdentifier:@"AddBorderViewController"];
+            [self  presentViewController:self.addBorderVC animated:YES completion:nil];
+            
+
         }
     }
 }

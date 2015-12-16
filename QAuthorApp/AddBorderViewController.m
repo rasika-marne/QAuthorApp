@@ -38,68 +38,68 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)onBorder1Click:(id)sender{
-    flag = 1;
+    borderImageFlag = 1;
     
     [self selectBorder];
     
 }
 - (IBAction)onBorder2Click:(id)sender{
-    flag = 2;
+    borderImageFlag = 2;
     
     [self selectBorder];
     
 }
 - (IBAction)onBorder3Click:(id)sender{
-    flag = 3;
+    borderImageFlag = 3;
     
     [self selectBorder];
 
     
 }
 - (IBAction)onBorder4Click:(id)sender{
-    flag = 4;
+    borderImageFlag = 4;
     
     [self selectBorder];
 
     
 }
 - (IBAction)onBorder5Click:(id)sender{
-    flag = 5;
+    borderImageFlag = 5;
     
     [self selectBorder];
 
     
 }
 - (IBAction)onBorder6Click:(id)sender{
-    flag = 6;
+    borderImageFlag = 6;
     
     [self selectBorder];
 
     
 }
 - (IBAction)onBorder7Click:(id)sender{
-    flag = 7;
+    borderImageFlag = 7;
     
     [self selectBorder];
 
     
 }
 - (IBAction)onBorder8Click:(id)sender{
-    flag = 8;
+    borderImageFlag = 8;
     
     [self selectBorder];
 
     
 }
 - (IBAction)onBorder9Click:(id)sender{
-    flag = 9;
+    borderImageFlag = 9;
     
     [self selectBorder];
 
     
 }
 - (IBAction)onBorder10Click:(id)sender{
-    flag = 10;
+    borderImageFlag = 10;
     
     [self selectBorder];
 
@@ -108,7 +108,7 @@
 -(void)selectBorder{
     
     selectedBorder = [[UIImage alloc]init];
-    selectedBorder = [UIImage imageNamed:[NSString stringWithFormat:@"border%d.jpg",flag]];
+    selectedBorder = [UIImage imageNamed:[NSString stringWithFormat:@"border%d.jpg",borderImageFlag]];
     
     [self dismissViewControllerAnimated:YES completion:nil];
     

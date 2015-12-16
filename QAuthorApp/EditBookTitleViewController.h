@@ -12,12 +12,16 @@
 #import "BookDetails.h"
 #import "ChooseTemplateViewController.h"
 #import "EditBookViewController.h"
+#import "AddBorderViewController.h"
 #import <CoreText/CoreText.h>
 #import <QuartzCore/QuartzCore.h>
 #import "CLImageEditor.h"
+@class AddBorderViewController;
 @class ChooseTemplateViewController;
 @class EditBookViewController;
-@interface EditBookTitleViewController : UIViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate,UIAlertViewDelegate>
+@interface EditBookTitleViewController : UIViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate,UIAlertViewDelegate>{
+    BOOL textViewBegin;
+}
 - (IBAction)onCoverPicTapped:(id)sender;
 @property (strong,nonatomic)Book *bookObj;
 @property (weak, nonatomic) IBOutlet UIImageView *coverPic;
@@ -27,6 +31,7 @@
 @property (nonatomic, retain) UIPickerView *genreSelect;
 @property (nonatomic, retain)  NSMutableArray *pickerData;
 @property (nonatomic, strong) ChooseTemplateViewController *chooseTemplateVC;
+@property (nonatomic, strong) AddBorderViewController *addBorderVC;
 @property (nonatomic, strong) EditBookViewController *editBookVC;
 - (IBAction)onSaveButtonClicked:(id)sender;
 - (UIImage *)scaleAndRotateImage:(UIImage *)image;

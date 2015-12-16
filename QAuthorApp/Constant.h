@@ -56,6 +56,7 @@
 #endif
 #define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 NSString *SELECTEDBOOKID,*SelectedSegmentvalue;
+NSInteger borderImageFlag;
 //static NSString *const kGAIScreenName = @"Screen";
 UIImage *selectedTemplate;
 UIImage *selectedBorder;
@@ -106,6 +107,7 @@ typedef void (^UserIdResultBlock)(id object, NSError *error);
 #define ECOMMERCE_URL       @"eCommerceUrl"
 #define PRICE               @"price"
 #define CREATED_AT          @"createdAt"
+#define BORDER_ID           @"borderId"
 
 
 //---------- BookDetails Constant -------//

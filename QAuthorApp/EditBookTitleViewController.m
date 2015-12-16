@@ -17,7 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self navigationMethod];
-    [self.view setBackgroundColor: RGB]; 
+    [self.view setBackgroundColor: RGB];
+     textViewBegin = NO;
     /*SWRevealViewController *revealController = [self revealViewController];
     UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -70,6 +71,7 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)sender
 {
+     textViewBegin = NO;
    // if ([sender isEqual:mailTf])
    // {
         //move the main view, so that the keyboard does not hide it.
@@ -84,6 +86,16 @@
     [textField resignFirstResponder];
     return YES;
 }
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    // activeTextView = textView;
+    textViewBegin = YES;
+    textView.text = @"";
+    if  (self.view.frame.origin.y >= 0)
+    {
+        [self setViewMovedUp:YES];
+    }
+}
+
 //method to move the view up/down whenever the keyboard is shown/dismissed
 -(void)setViewMovedUp:(BOOL)movedUp
 {
@@ -95,8 +107,16 @@
     {
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
-        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-        rect.size.height += kOFFSET_FOR_KEYBOARD;
+        if (textViewBegin == YES) {
+            rect.origin.y -= kOFFSET_FOR_KEYBOARD+120;
+            rect.size.height += kOFFSET_FOR_KEYBOARD+120;
+        }
+        else
+        {
+            rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+            rect.size.height += kOFFSET_FOR_KEYBOARD;
+        }
+        
     }
     else
     {
@@ -356,8 +376,9 @@
             [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 [APP_DELEGATE stopActivityIndicator];
                 if (!error) {
+                    
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                                    message:@"Book Title Edited successfully!!!Do you want to edit Book details"
+                                                                    message:@"Book Title Edited successfully!!!Do you want to edit Book details?"
                                                                    delegate:self
                                                           cancelButtonTitle:@"No"
                                                           otherButtonTitles:@"Yes",nil];
@@ -391,10 +412,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             }
             else
                 storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-
-            //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                           //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
             self.editBookVC = (EditBookViewController*)
             [storyboard instantiateViewControllerWithIdentifier:@"EditBookViewController"];
+            self.editBookVC.bookObj1 = [Book createEmptyObject];
+            self.editBookVC.bookObj1 = bookObj;
             self.editBookVC.bookId = bookObj.objectId;
             [self.navigationController pushViewController:self.editBookVC animated:YES];
             
