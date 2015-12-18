@@ -26,7 +26,7 @@
     self.imageView1.hidden = YES;
     self.m_oImage.hidden = YES;
     self.chooseOwnLbl.hidden = YES;
-       
+       self.backImage.userInteractionEnabled = NO;
     if (selectedBorder != nil) {
          NSLog(@"border flag:%d",borderImageFlag);
         self.backImage.image = selectedBorder;
@@ -73,15 +73,27 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     if (selectedTemplate != nil && isImageEdited == NO) {
-        self.imageView1.image = selectedTemplate;
-        CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:self.imageView1.image];
-        editor.delegate = self;
-        
-        [self presentViewController:editor animated:YES completion:nil];        //
-        self.m_oImage.hidden = YES;
-        self.chooseOwnLbl.hidden = YES;
-    }
+        //NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self  selector:@selector(presentImageEditor) userInfo:nil repeats:NO];
+        //[timer fire];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSelector:  @selector(presentImageEditor) withObject:nil afterDelay:2.0];
+        });
+
+        }
     
+    
+    
+}
+-(void)presentImageEditor{
+    self.imageView1.image = selectedTemplate;
+    
+    CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:self.imageView1.image];
+    editor.delegate = self;
+    
+    [self presentViewController:editor animated:YES completion:nil];        //
+    self.m_oImage.hidden = YES;
+    self.chooseOwnLbl.hidden = YES;
+
 }
 -(void)navigationMethod{
     [self.view setBackgroundColor: RGB]; //will give a UIColor
@@ -93,7 +105,7 @@
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     
-    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonClicked:)];
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStylePlain target:self action:@selector(backButtonClicked:)];
     
     
     self.navigationItem.leftBarButtonItem = leftRevealButtonItem;

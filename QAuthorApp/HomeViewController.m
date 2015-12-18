@@ -812,6 +812,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     self.editBookTitleVC.bookObj = [Book createEmptyObject];
     self.editBookTitleVC.bookObj = bookObj;
     [self.navigationController pushViewController:self.editBookTitleVC animated:YES];
+    NSArray *viewC = [self.navigationController viewControllers];
+    NSLog(@"viewcontraollers cnt:%d",[viewC count]);
+    UIViewController *vC = [self.navigationController topViewController];
+    NSLog(@"top VC:%@",vC);
+
 }
 -(void)btnBuyClicked:(UIButton *)sender{
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];

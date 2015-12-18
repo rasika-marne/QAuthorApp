@@ -25,14 +25,16 @@
     int count,pageNumber;
     NSMutableArray *bookDetailsArr,*pagePDFArr;
     UITextView* activeTextView;
-    BOOL isImageEdited;
+    BOOL isImageEdited,isBorderEdited;
    
 
 }
-@property (weak, nonatomic) IBOutlet UIButton *imageClickbutton;
+@property (weak, nonatomic) IBOutlet UIButton *imageButtonClick;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView1;
+@property (weak, nonatomic) IBOutlet UITextView *textView1;
 @property (weak, nonatomic) IBOutlet UIImageView *borderImage;
 @property (weak, nonatomic) IBOutlet UIView *viewForPdf;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView1;
+
 @property (weak, nonatomic) IBOutlet UIButton *recordAudioButton;
 @property (nonatomic, strong) AddBorderViewController *addBorderVC;
 @property (nonatomic, strong) ChooseTemplateViewController *chooseTemplateVC;
@@ -40,7 +42,7 @@
 @property (strong,nonatomic)Book *bookObj1;
 - (IBAction)onPhotoTap:(id)sender;
 @property (nonatomic, strong) StoryAudioPlayer *audioPlayerObject;
-@property (weak, nonatomic) IBOutlet UITextView *textView1;
+
 @property (strong,nonatomic)NSString *bookId;
 @property (nonatomic, strong) NSString* storySoundFilePath;
 @property (nonatomic, strong) NSString* storyId;

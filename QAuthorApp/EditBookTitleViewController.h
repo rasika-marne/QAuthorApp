@@ -20,7 +20,7 @@
 @class ChooseTemplateViewController;
 @class EditBookViewController;
 @interface EditBookTitleViewController : UIViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate,UIAlertViewDelegate>{
-    BOOL textViewBegin;
+    BOOL textViewBegin,isTitleEdited,isGenreEdited,isDescEdited,isCoverPicEdited;
 }
 - (IBAction)onCoverPicTapped:(id)sender;
 @property (strong,nonatomic)Book *bookObj;

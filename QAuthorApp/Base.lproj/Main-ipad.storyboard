@@ -489,7 +489,7 @@
         <!--Edit Book View Controller-->
         <scene sceneID="q8B-pX-Zt3">
             <objects>
-                <viewController storyboardIdentifier="EditBookViewController" id="ogV-NH-Wqb" customClass="EditBookViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditBookViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ogV-NH-Wqb" customClass="EditBookViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cXd-WX-W4q"/>
                         <viewControllerLayoutGuide type="bottom" id="Vib-im-c7n"/>
@@ -520,9 +520,6 @@
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="onPhotoTap:" destination="ogV-NH-Wqb" eventType="touchUpInside" id="yec-EI-IRT"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -554,9 +551,6 @@
                                 <state key="normal" backgroundImage="audio">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="recordAudio:" destination="ogV-NH-Wqb" eventType="touchUpInside" id="Hlk-bU-Qrm"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record Audio" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXR-fv-QiS">
                                 <rect key="frame" x="10" y="995" width="75" height="21"/>
@@ -579,9 +573,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="onSaveButtonClicked:" destination="ogV-NH-Wqb" eventType="touchUpInside" id="kaw-AZ-jQ7"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8yK-1d-jdc">
                                 <rect key="frame" x="647" y="963" width="106" height="41"/>
@@ -594,9 +585,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="onNextPageClicked:" destination="ogV-NH-Wqb" eventType="touchUpInside" id="id1-nM-WZd"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.44705882349999998" green="0.7725490196" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -616,13 +604,6 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
-                    <connections>
-                        <outlet property="borderImage" destination="JLJ-lJ-BYR" id="zuz-Sm-IzY"/>
-                        <outlet property="imageView1" destination="zvH-SU-j32" id="790-Sz-t4K"/>
-                        <outlet property="recordAudioButton" destination="Dwy-7h-ITv" id="lQb-tQ-27h"/>
-                        <outlet property="textView1" destination="eg6-F9-0zC" id="HNm-wT-KMa"/>
-                        <outlet property="viewForPdf" destination="zab-dE-Tna" id="EVG-ZZ-eej"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="48p-BM-vor" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

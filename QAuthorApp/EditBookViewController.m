@@ -13,18 +13,22 @@
 @end
 
 @implementation EditBookViewController
-@synthesize bookId,imageView1,textView1,imageClickbutton,borderImage,bookObj1;
+@synthesize bookId,imageView1,textView1,borderImage,bookObj1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self navigationMethod];
     [self.view setBackgroundColor: RGB];
     isImageEdited = NO;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-                                                    message:@"Tap on image or text to edit it."
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+    isBorderEdited = NO;
+    textView1.text = @"Story.....";
+    selectedTemplate = nil;
+    selectedBorder = nil;
+  //  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+               //                                    message:@"Tap on image or text to edit it."
+                //                                 delegate:nil
+              //                            cancelButtonTitle:@"OK"
+                //                          otherButtonTitles:nil];
+   // [alert show];
    /* SWRevealViewController *revealController = [self revealViewController];
     UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -72,7 +76,7 @@
                             [imageView1 setImage:[UIImage imageWithData:data]];
                             textView1.hidden = YES;
                             imageView1.hidden = NO;
-                            imageClickbutton.hidden = NO;
+                            self.imageButtonClick.hidden = NO;
                         }
                         
                         
@@ -82,7 +86,7 @@
                 else if(![b1.textContent isEqualToString:@""]||b1.textContent != nil)
                 {
                     imageView1.hidden = YES;
-                    imageClickbutton.hidden = YES;
+                    self.imageButtonClick.hidden = YES;
                     
                     textView1.hidden = NO;
                     textView1.text = b1.textContent;
@@ -134,8 +138,9 @@
                                                            delegate:self
                                                   cancelButtonTitle:@"No"
                                                   otherButtonTitles:@"Yes",nil];
-            [alert show];
+            
             alert.tag = 12;
+            [alert show];
             
             
         }
@@ -158,7 +163,7 @@
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     
-    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonClicked:)];
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStylePlain target:self action:@selector(backButtonClicked:)];
     
     
     self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
@@ -175,19 +180,33 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-   
+    
+    
+
+
     if (selectedBorder != nil) {
         borderImage.image = selectedBorder;
+        isBorderEdited = YES;
     }
     if (selectedTemplate != nil && isImageEdited == NO) {
-        self.imageView1.image = selectedTemplate;
-        CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:self.imageView1.image];
-        editor.delegate = self;
+       
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSelector:  @selector(presentImageEditor) withObject:nil afterDelay:2.0];
+        });
         
-        [self presentViewController:editor animated:YES completion:nil];        //
-       // self.m_oImage.hidden = YES;
-        //self.chooseOwnLbl.hidden = YES;
     }
+}
+
+-(void)presentImageEditor{
+    self.imageView1.image = selectedTemplate;
+    
+    CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:self.imageView1.image];
+    editor.delegate = self;
+    
+    [self presentViewController:editor animated:YES completion:nil];        //
+    self.imageButtonClick.hidden = YES;
+    //self.chooseOwnLbl.hidden = YES;
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -399,6 +418,7 @@
 
 - (void)imageEditor:(CLImageEditor *)editor willDismissWithImageView:(UIImageView *)imageView canceled:(BOOL)canceled
 {
+     isImageEdited = NO;
     [self refreshImageView];
 }
 - (void)refreshImageView
@@ -438,8 +458,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         if (buttonIndex == 1) {
             if (count<[bookDetailsArr count]) {
                 count++;
-                if (![bookObj1.borderId isEqualToString:@""]||bookObj1.borderId != nil) {
+                if ((![bookObj1.borderId isEqualToString:@""]||bookObj1.borderId != nil)&& isBorderEdited == NO) {
                     borderImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",bookObj1.borderId]];
+                }
+                else if (isBorderEdited == YES && selectedBorder !=nil){
+                    borderImage.image = selectedBorder;
                 }
                 BookDetails *b2 = [BookDetails createEmptyObject];
                 b2 = [bookDetailsArr objectAtIndex:pageNumber];
@@ -454,7 +477,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
                             [imageView1 setImage:[UIImage imageWithData:data]];
                             textView1.hidden = YES;
                             imageView1.hidden = NO;
-                            imageClickbutton.hidden = NO;
+                            self.imageButtonClick.hidden = NO;
                             
                         }
                         
@@ -463,7 +486,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
                 else if(![b2.textContent isEqualToString:@""]||b2.textContent != nil)
                 {
                     imageView1.hidden = YES;
-                    imageClickbutton.hidden = YES;
+                    self.imageButtonClick.hidden = YES;
                     
                     textView1.hidden = NO;
                     textView1.text = b2.textContent;
@@ -484,21 +507,22 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
             
         }
-        else if (alertView.tag == 12){
-            UIStoryboard *storyboard;
-            if (IPAD) {
-                storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
-            }
-            else
-                storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            
-            //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            self.addBorderVC = (AddBorderViewController *) [storyboard instantiateViewControllerWithIdentifier:@"AddBorderViewController"];
-            [self  presentViewController:self.addBorderVC animated:YES completion:nil];
-            
-
-        }
     }
+    else if (alertView.tag == 12){
+        UIStoryboard *storyboard;
+        if (IPAD) {
+            storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+        }
+        else
+            storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.addBorderVC = (AddBorderViewController *) [storyboard instantiateViewControllerWithIdentifier:@"AddBorderViewController"];
+        [self  presentViewController:self.addBorderVC animated:YES completion:nil];
+        
+        
+    }
+
 }
 - (IBAction)recordAudio:(id)sender
 {
@@ -645,6 +669,10 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
                         
                         // Now let's update it with some new data. In this case, only cheatMode and score
                         // will get sent to the cloud. playerName hasn't changed.
+                        if (isBorderEdited == YES) {
+                             gObj[BORDER_ID] = [NSString stringWithFormat:@"border%d",borderImageFlag];
+                        }
+                       
                         gObj[PDF_FILE] = [PFFile fileWithName:@"Book.pdf" data:myData];
                         [gObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                             if(!error){

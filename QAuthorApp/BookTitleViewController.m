@@ -20,6 +20,7 @@
   
     [self navigationMethod];
     textViewBegin= NO;
+    isImageEdited = NO;
     [self.view setBackgroundColor: RGB];
     ownPhotoTap = NO;
    
@@ -189,6 +190,27 @@
         self.circlrImg.hidden = YES;
 
     }
+    if (selectedTemplate != nil && isImageEdited == NO) {
+        //NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self  selector:@selector(presentImageEditor) userInfo:nil repeats:NO];
+        //[timer fire];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSelector:  @selector(presentImageEditor) withObject:nil afterDelay:2.0];
+        });
+        
+    }
+    
+    
+}
+-(void)presentImageEditor{
+     self.bookCoverImg.image = selectedTemplate;
+    
+    CLImageEditor *editor = [[CLImageEditor alloc] initWithImage: self.bookCoverImg.image];
+    editor.delegate = self;
+    
+    [self presentViewController:editor animated:YES completion:nil];        //
+    //self.m_oImage.hidden = YES;
+   // self.chooseOwnLbl.hidden = YES;
+    
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -426,6 +448,7 @@
 
 - (void)imageEditor:(CLImageEditor *)editor didFinishEdittingWithImage:(UIImage *)image
 {
+    isImageEdited = YES;
     //[self.m_oImage setImage:image forState:UIControlStateNormal];
     UIImage *lowResImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 0.02)];
     [self.bookCoverImg setImage:lowResImage];
@@ -441,6 +464,7 @@
 
 - (void)imageEditor:(CLImageEditor *)editor willDismissWithImageView:(UIImageView *)imageView canceled:(BOOL)canceled
 {
+    isImageEdited = NO;
     [self refreshImageView];
 }
 - (void)refreshImageView

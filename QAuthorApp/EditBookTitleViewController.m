@@ -19,6 +19,10 @@
     [self navigationMethod];
     [self.view setBackgroundColor: RGB];
      textViewBegin = NO;
+    isCoverPicEdited = NO;
+    isDescEdited = NO;
+    isTitleEdited = NO;
+    isGenreEdited = NO;
     /*SWRevealViewController *revealController = [self revealViewController];
     UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -82,6 +86,13 @@
    // }
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField.tag == 1) {
+        isTitleEdited = YES;
+    }
+    //else if (textField.tag == 2){
+        //isGenreEdited = YES;
+    //}
+    
    // book.title = self.bookTitleTextField.text;
     [textField resignFirstResponder];
     return YES;
@@ -89,13 +100,26 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     // activeTextView = textView;
     textViewBegin = YES;
+    isDescEdited = YES;
     textView.text = @"";
     if  (self.view.frame.origin.y >= 0)
     {
         [self setViewMovedUp:YES];
     }
 }
-
+- (BOOL)textView:(UITextView * )textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
+    //self.txtCommentStr=[[NSString alloc]initWithFormat:@"%@",textView.text];
+    
+    
+    if( [text rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location == NSNotFound ) {
+        
+        return YES;
+    }
+    
+    [textView resignFirstResponder];
+    return NO;
+}
 //method to move the view up/down whenever the keyboard is shown/dismissed
 -(void)setViewMovedUp:(BOOL)movedUp
 {
@@ -138,7 +162,7 @@
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     
-    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonClicked:)];
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStylePlain target:self action:@selector(backButtonClicked:)];
     
     
     self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
@@ -222,6 +246,7 @@
 {
     //Write the required logic here that should happen after you select a row in Picker View.
     self.genreTextField.text = [self.pickerData objectAtIndex:row];
+    isGenreEdited = YES;
     [[self view]endEditing:YES];
     
     //    [languageSelect removeFromSuperview];
@@ -322,7 +347,12 @@
 
 - (void)imageEditor:(CLImageEditor *)editor didFinishEdittingWithImage:(UIImage *)image
 {
+    
     //[self.m_oImage setImage:image forState:UIControlStateNormal];
+    if (image) {
+        isCoverPicEdited = YES;
+        
+    }
     UIImage *lowResImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 0.02)];
     [self.coverPic setImage:lowResImage];
     selectedTemplate = lowResImage;
@@ -361,17 +391,26 @@
     PFQuery *query = [PFQuery queryWithClassName:BOOK];
     [query getObjectInBackgroundWithId:bookObj.objectId block:^(PFObject *object, NSError *error) {
         if (!error) {
-           // [APP_DELEGATE stopActivityIndicator];
-            [object setObject:titleTextField.text forKey:TITLE];
-            [object setObject:genreTextField.text forKey:GENRE];
-            [object setObject:descTextView.text forKey:SHORT_DESC];
-            
-            UIImage *image = [self scaleAndRotateImage:self.coverPic.image];
-            NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
-            
-            PFFile *imgFile = [PFFile fileWithName:@"CoverPage.jpg" data:imageData];
-            if (self.coverPic !=nil) {
-                [object setObject:imgFile forKey:COVER_PAGE];
+            // [APP_DELEGATE stopActivityIndicator];
+            if (isTitleEdited == YES) {
+                [object setObject:titleTextField.text forKey:TITLE];
+            }
+            if(isGenreEdited == YES){
+                [object setObject:genreTextField.text forKey:GENRE];
+            }
+            if (isDescEdited == YES) {
+                 [object setObject:descTextView.text forKey:SHORT_DESC];
+            }
+            if (isCoverPicEdited == YES) {
+                
+                UIImage *image = [self scaleAndRotateImage:self.coverPic.image];
+                NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
+                
+                PFFile *imgFile = [PFFile fileWithName:@"CoverPage.jpg" data:imageData];
+                if (self.coverPic !=nil) {
+                    [object setObject:imgFile forKey:COVER_PAGE];
+                }
+
             }
             [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 [APP_DELEGATE stopActivityIndicator];
@@ -382,9 +421,8 @@
                                                                    delegate:self
                                                           cancelButtonTitle:@"No"
                                                           otherButtonTitles:@"Yes",nil];
-                    [alert show];
                     alert.tag = 11;
-                    
+                    [alert show];
                 }
                 else{
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
@@ -394,11 +432,8 @@
                                                           otherButtonTitles:nil];
                     [alert show];
                 }
-                
             }];
-            
         }
-     
     }];
 }
 
@@ -410,17 +445,24 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             if (IPAD) {
                 storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
             }
-            else
+            else{
                 storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                           //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            self.editBookVC = (EditBookViewController*)
-            [storyboard instantiateViewControllerWithIdentifier:@"EditBookViewController"];
-            self.editBookVC.bookObj1 = [Book createEmptyObject];
-            self.editBookVC.bookObj1 = bookObj;
-            self.editBookVC.bookId = bookObj.objectId;
-            [self.navigationController pushViewController:self.editBookVC animated:YES];
-            
+            }
+         
+                //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                self.editBookVC = (EditBookViewController*)[storyboard instantiateViewControllerWithIdentifier:@"EditBookViewController"];
+                self.editBookVC.bookObj1 = [Book createEmptyObject];
+                self.editBookVC.bookObj1 = bookObj;
+                self.editBookVC.bookId = bookObj.objectId;
+            if (self.navigationController != nil) {
+                [self.navigationController pushViewController:self.editBookVC animated:YES];
+               
+
+            }
         }
+            
+            
+        
     }
     
 }
