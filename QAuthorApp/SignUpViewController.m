@@ -20,10 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     emailIdArr = [[NSMutableArray alloc]init];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleFBSessionStateChangeWithNotification:)
-                                                 name:@"SessionStateChangeNotification"
-                                               object:nil];
+   // [[NSNotificationCenter defaultCenter] addObserver:self
+                //                             selector:@selector(handleFBSessionStateChangeWithNotification:)
+               //                                  name:@"SessionStateChangeNotification"
+               //                                object:nil];
     
     PFQuery *query = [PFUser query];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -86,9 +86,17 @@
 {
      NSArray *permissionsArray = @[ @"public_profile", @"email"];
     [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        
         if (!user) {
             NSLog(@"Uh oh. The user cancelled the Facebook login.");
         } else if (user.isNew) {
+            fbUser = user;
+            APP_DELEGATE.loggedInUser = (User*)user;
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setValue:APP_DELEGATE.loggedInUser.objectId forKey:USER_ID];
+            [defaults setValue:@"Yes" forKey:@"LoginUserSucessFlag"];
+            
+            [defaults synchronize];
             flag = 1;
              NSLog(@"user:%@",user.email);
             [self getFbData];
@@ -98,7 +106,7 @@
             NSLog(@"User logged in through Facebook!:%@",user);
             flag = 2;
             NSLog(@"user:%@",user.email);
-            [self getFbData];
+            [self goToHome];
             /*if (![PFFacebookUtils isLinkedWithUser:user]) {
                 [PFFacebookUtils linkUserInBackground:user withReadPermissions:nil block:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
@@ -113,6 +121,24 @@
     }];
 
 }
+-(void)goToHome{
+    UIStoryboard *storyboard;
+    if (IPAD) {
+        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+    }
+    else
+        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    // UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+    
+    UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+    RearViewController *rearViewController = [[RearViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+    SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:nav frontViewController:frontNavigationController];
+    revealController.delegate = self;
+    [self presentViewController:revealController animated:NO completion:nil];
+}
 -(void)getFbData{
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"first_name, last_name, picture, email"}];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
@@ -121,6 +147,59 @@
             NSLog(@"result:%@",result);
             // result is a dictionary with the user's Facebook data
             NSDictionary *userData = (NSDictionary *)result;
+//            User *user =(User *)fbUser;
+//            user.email = userData[@"email"];
+//            user.username = userData[@"email"];
+//             NSString *name = userData[@"name"];
+//            NSArray *arr = [name componentsSeparatedByString:@" "];
+//            user.firstName = [arr objectAtIndex:0];
+//            user.lastName = [arr objectAtIndex:1];
+            PFQuery *query = [PFUser query];
+            [query getObjectInBackgroundWithId:fbUser.objectId block:^(PFObject *object, NSError *error) {
+                if (!error) {
+                    NSDictionary *picData = userData[@"picture"];
+                    NSDictionary *dataDict = picData[@"data"];
+                    NSString *urlStr = [dataDict objectForKey:@"url"];
+                    NSURL *url = [NSURL URLWithString:urlStr];
+                    NSData *data = [NSData dataWithContentsOfURL:url];
+                    PFFile *file = [PFFile fileWithName:@"ProfilePic.jpg" data:data];
+                    [object setObject:file forKey:PROFILE_PIC];
+                  //  UIImage *image = [self scaleAndRotateImage:self.editProfilePic.image];
+                  //  NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
+                   // PFFile *file = [PFFile fileWithName:@"ProfilePic.jpg" data:imageData];
+                   // [object setObject:file forKey:PROFILE_PIC];
+                    // [picker dismissViewControllerAnimated:YES completion:nil];
+                    [object setObject:userData[@"email"] forKey:EMAIL_ID];
+                    //[object setObject:userData[@"email"] forKey:USERNAME];
+                   // NSString *name = userData[@"name"];
+                   // NSArray *arr = [name componentsSeparatedByString:@" "];
+                    [object setObject:userData[@"first_name"] forKey:FIRST_NAME];
+                    
+                    [object setObject:userData[@"last_name"] forKey:LAST_NAME];
+                    [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                        [APP_DELEGATE stopActivityIndicator];
+                        if (!error) {
+                            UIStoryboard *storyboard;
+                            if (IPAD) {
+                                storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+                            }
+                            else
+                                storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                            self.registrationView = (RegistrationViewController *)
+                            [storyboard instantiateViewControllerWithIdentifier:@"RegistrationViewController"];
+                            self.registrationView.isFacebookLogin = YES;
+                            self.registrationView.fbData = (NSDictionary *)result;
+                            [self.navigationController pushViewController:self.registrationView animated:YES];
+
+                        }
+                    }];
+
+
+                }
+                }];
+            
+            
+            
             
           //  NSString *facebookID = userData[@"id"];
            

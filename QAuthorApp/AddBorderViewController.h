@@ -13,6 +13,7 @@
 @interface AddBorderViewController : UIViewController{
     int flag;
 }
+- (IBAction)onClickCancel:(id)sender;
 
 - (IBAction)onBorder1Click:(id)sender;
 - (IBAction)onBorder2Click:(id)sender;

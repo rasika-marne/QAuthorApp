@@ -182,6 +182,7 @@
     NSString *userId = [def valueForKey:USER_ID];
     if([userId length] > 0){
         PFQuery *query = [PFUser query];
+        [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
         [query whereKey:USER_OBJECT_ID equalTo:userId];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             if (!error) {
@@ -289,45 +290,49 @@
     [query2 whereKey:TYPE equalTo:@"Professional"];
      [query2 includeKey:AUTHOR_ID];
     [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        NSMutableArray *results=[[NSMutableArray alloc] init];
-        for (PFObject *obj in objects) {
-            Book *events=[Book convertPFObjectToBooks:obj];
-            //  User *author = [];
-            [results addObject:events];
-            NSLog(@"book obj:%@",events);
-            NSLog(@"res cnt:%lu",(unsigned long)[results count]);
-        }
-        booksArray = results;
-        if ([booksArray count]>0) {
-            
-            authorNamesArr = [[NSMutableArray alloc]init];
-            for (Book *bObj in booksArray) {
-                [bObjectIdArr addObject:bObj.objectId];
-                User *userObj=[User convertPFObjectToUser:bObj.authorId forNote:NO];
-                authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
-                             ];
-                // if ([authorNamesArr containsObject:authorName]) {
-                // continue;                            }
-                // else{
-                [authorNamesArr addObject:authorName];
-                //}
+        if (!error) {
+            [APP_DELEGATE stopActivityIndicator];
+            NSMutableArray *results=[[NSMutableArray alloc] init];
+            for (PFObject *obj in objects) {
+                Book *events=[Book convertPFObjectToBooks:obj];
+                //  User *author = [];
+                [results addObject:events];
+                NSLog(@"book obj:%@",events);
+                NSLog(@"res cnt:%lu",(unsigned long)[results count]);
+            }
+            booksArray = results;
+            if ([booksArray count]>0) {
                 
+                authorNamesArr = [[NSMutableArray alloc]init];
+                for (Book *bObj in booksArray) {
+                    [bObjectIdArr addObject:bObj.objectId];
+                    User *userObj=[User convertPFObjectToUser:bObj.authorId forNote:NO];
+                    authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
+                                 ];
+                    // if ([authorNamesArr containsObject:authorName]) {
+                    // continue;                            }
+                    // else{
+                    [authorNamesArr addObject:authorName];
+                    //}
+                    
+                    
+                }
+                [self.bookListTableView reloadData];
                 
             }
-            [self.bookListTableView reloadData];
-            
+            else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                message:@"No books right now."
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                // alert.tag = 12;
+                [alert show];
+                
+            }
+
         }
-        else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"No books right now."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-           // alert.tag = 12;
-            [alert show];
-            
-        }
-        NSLog(@"professional books cnt:%lu",(unsigned long)[booksArray count]);
+                  NSLog(@"professional books cnt:%lu",(unsigned long)[booksArray count]);
     }];
 
     //if (self.bookSegments.selectedSegmentIndex == 1) {
@@ -347,46 +352,50 @@
     [query2 includeKey:AUTHOR_ID];
     [query2 orderByDescending:NUMBER_OF_LIKES];
     [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        NSMutableArray *results=[[NSMutableArray alloc] init];
-        for (PFObject *obj in objects) {
-            Book *events=[Book convertPFObjectToBooks:obj];
-            //  User *author = [];
-            [results addObject:events];
-            NSLog(@"book obj:%@",events);
-            NSLog(@"res cnt:%lu",(unsigned long)[results count]);
-        }
-        booksArray = results;
-        if ([booksArray count]>0) {
-            
-            authorNamesArr = [[NSMutableArray alloc]init];
-            for (Book *bObj in booksArray) {
-                [bObjectIdArr addObject:bObj.objectId];
-                User *userObj=[User convertPFObjectToUser:bObj.authorId forNote:NO];
-                authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
-                             ];
-                // if ([authorNamesArr containsObject:authorName]) {
-                // continue;                            }
-                // else{
-                [authorNamesArr addObject:authorName];
-                //}
+        if (!error) {
+            [APP_DELEGATE stopActivityIndicator];
+            NSMutableArray *results=[[NSMutableArray alloc] init];
+            for (PFObject *obj in objects) {
+                Book *events=[Book convertPFObjectToBooks:obj];
+                //  User *author = [];
+                [results addObject:events];
+                NSLog(@"book obj:%@",events);
+                NSLog(@"res cnt:%lu",(unsigned long)[results count]);
+            }
+            booksArray = results;
+            if ([booksArray count]>0) {
                 
+                authorNamesArr = [[NSMutableArray alloc]init];
+                for (Book *bObj in booksArray) {
+                    [bObjectIdArr addObject:bObj.objectId];
+                    User *userObj=[User convertPFObjectToUser:bObj.authorId forNote:NO];
+                    authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
+                                 ];
+                    // if ([authorNamesArr containsObject:authorName]) {
+                    // continue;                            }
+                    // else{
+                    [authorNamesArr addObject:authorName];
+                    //}
+                    
+                    
+                }
+                [self.bookListTableView reloadData];
                 
             }
-            [self.bookListTableView reloadData];
-
-        }
-        else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"No books right now."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            alert.tag = 12;
-            [alert show];
+            else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                message:@"No books right now."
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                alert.tag = 12;
+                [alert show];
+                
+            }
+            
             
         }
-
-               /* PFObject *firstObject = [((PFObject*)[objects firstObject]) objectForKey:AUTHOR_ID];
+             /* PFObject *firstObject = [((PFObject*)[objects firstObject]) objectForKey:AUTHOR_ID];
         
         [query1 whereKey:@"objectId" equalTo:firstObject.objectId];
         
@@ -480,7 +489,7 @@
 -(void)fetchAllBooks{
     myBooksClicked = NO;
     professionalClicked = NO;
-    [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
+   // [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
     bObjectIdArr = [[NSMutableArray alloc]init];
     booksArray = [[NSMutableArray alloc]init];
     searchResults = [[NSMutableArray alloc]init];

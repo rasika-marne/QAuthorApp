@@ -132,8 +132,8 @@
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
         if (textViewBegin == YES) {
-            rect.origin.y -= kOFFSET_FOR_KEYBOARD+120;
-            rect.size.height += kOFFSET_FOR_KEYBOARD+120;
+            rect.origin.y -= kOFFSET_FOR_KEYBOARD+140;
+            rect.size.height += kOFFSET_FOR_KEYBOARD+140;
         }
         else
         {

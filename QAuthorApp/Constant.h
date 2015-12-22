@@ -120,6 +120,7 @@ typedef void (^UserIdResultBlock)(id object, NSError *error);
 #define IMAGE_CONTENT               @"imageContent"
 #define AUDIO_CONTENT               @"audioContent"
 #define PAGE_PDF                    @"pagePDF"
+#define METHOD                      @"method"
 
 
 //---------- AgeRange Constant -------//

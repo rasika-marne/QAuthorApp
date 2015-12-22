@@ -27,7 +27,7 @@
     Book *book;
     User *user;
     AgeRange *ageRange;
-    BOOL ownPhotoTap,textViewBegin,isImageEdited;
+    BOOL ownPhotoTap,textViewBegin,isImageEdited,isImageEditorCancelled;
    // NSMutableArray *genreArr;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *circlrImg;

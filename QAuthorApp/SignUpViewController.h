@@ -11,10 +11,13 @@
 //#import <FacebookSDK/FacebookSDK.h>
 #import "RegistrationViewController.h"
 #import "SWRevealViewController.h"
+#import "User.h"
 @class ViewController;
+@class User;
 @interface SignUpViewController : UIViewController<SWRevealViewControllerDelegate>{
     NSMutableArray *emailIdArr;
     NSString *fbId;
+    PFUser *fbUser;
     int flag;
 }
 

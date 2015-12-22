@@ -21,7 +21,7 @@
     fanObj = [FanFollowers createEmptyObject];
     [self navigationMethod];
     //self.navigationController.navigationBar.hidden = NO;
-    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user"] forState:UIControlStateNormal];
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all_user_active"] forState:UIControlStateNormal];
 
     SWRevealViewController *revealController = [self revealViewController];
     UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
@@ -84,7 +84,7 @@
     self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
 - (IBAction)onclickAuthorBtn:(id)sender {
-    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user"] forState:UIControlStateNormal];
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all_user_active"] forState:UIControlStateNormal];
     [self.followersButton setBackgroundImage:[UIImage imageNamed:@"followers-unselected"] forState:UIControlStateNormal];
     [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-unselected"] forState:UIControlStateNormal];
     SelectedSegmentvalue=nil;
@@ -93,7 +93,7 @@
     [self fetchAuthors];}
 
 - (IBAction)onClickFollowersBtn:(id)sender {
-    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user-unselected"] forState:UIControlStateNormal];
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user_unselected"] forState:UIControlStateNormal];
     [self.followersButton setBackgroundImage:[UIImage imageNamed:@"followers-1"] forState:UIControlStateNormal];
     [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-unselected"] forState:UIControlStateNormal];
     SelectedSegmentvalue=nil;
@@ -103,7 +103,7 @@
 }
 
 - (IBAction)onClickFollowingBtn:(id)sender {
-    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user-unselected"] forState:UIControlStateNormal];
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user_unselected"] forState:UIControlStateNormal];
     [self.followersButton setBackgroundImage:[UIImage imageNamed:@"followers-unselected"] forState:UIControlStateNormal];
     [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-1"] forState:UIControlStateNormal];
     SelectedSegmentvalue=nil;

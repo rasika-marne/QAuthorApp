@@ -17,7 +17,7 @@
     int movementDistance;
      NSMutableArray *userIdArr,*authorNameArr;
     NSInteger selectedIndex;
-    NSMutableDictionary *dictionary;
+    NSMutableDictionary *dictionary,*userData;
 }
 @property (weak, nonatomic) IBOutlet UITableView *editProfileTableView;
 @property (nonatomic, retain) UIPickerView *countrySelect;

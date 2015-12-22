@@ -70,6 +70,14 @@
     //bookObj = [Book createEmptyObject];
     bookDetailsObj = [BookDetails createEmptyObject];
 }
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.textView1 isFirstResponder] && [touch view] != self.textView1) {
+        [self.textView1 resignFirstResponder];
+    }
+    
+}
 -(void)viewWillAppear:(BOOL)animated{
     
     if (selectedTemplate != nil && isImageEdited == NO) {
@@ -193,20 +201,11 @@
     }
     return myOutContext;
 }
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    
-    if( [text rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location == NSNotFound ) {
-        
-        return YES;
-    }
-    
-    [textView resignFirstResponder];
-    return NO;
-}
+
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     activeTextView = textView;
     
-    textView.text = @"";
+    //textView.text = @"";
 }
 - (IBAction)onClickExportBtn:(id)sender {
     count++;
@@ -228,6 +227,7 @@
     if (isTextSelected == YES) {
         bookDetailsObj.textContent = textView1.text;
           bookDetailsObj.imageContent = nil;
+        bookDetailsObj.method = @"Only_Text";
         
     }
     else if (isImageSelected == YES){
@@ -236,6 +236,7 @@
             NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
             bookDetailsObj.imageContent = [PFFile fileWithName:[NSString stringWithFormat:@"page%d.jpg",count] data:imageData];
             bookDetailsObj.textContent = nil;
+            bookDetailsObj.method = @"Only_Image";
         }
     }
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -331,6 +332,7 @@
                 if (isTextSelected == YES) {
                     bookDetailsObj.textContent = textView1.text;
                     bookDetailsObj.imageContent = nil;
+                    bookDetailsObj.method = @"Only_Text";
 
                 }
                 else if (isImageSelected == YES){
@@ -339,6 +341,7 @@
                     NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
                     bookDetailsObj.imageContent = [PFFile fileWithName:[NSString stringWithFormat:@"page%d.jpg",count] data:imageData];
                                     bookDetailsObj.textContent = nil;
+                                    bookDetailsObj.method = @"Only_Image";
                 }
                 }
                 NSArray *paths1 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -394,6 +397,18 @@
                                     [push setData:data];
                                     [push sendPushInBackground];
                                 }
+                                UIStoryboard *storyboard;
+                                if (IPAD) {
+                                    storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+                                }
+                                else
+                                    storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                                
+                                // UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                                HomeViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+                                
+                                 [self.navigationController pushViewController:vc animated:YES];
+
                             }
                         }];
                          

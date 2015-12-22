@@ -52,6 +52,23 @@
     [user.profilePic getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         [self.editProfilePic setImage:[UIImage imageWithData:data]];
     }];
+    userData = [[NSMutableDictionary alloc]init];
+    [userData setValue:user.firstName forKey:@"0"];
+    [userData setValue:user.lastName forKey:@"1"];
+    [userData setValue:user.email forKey:@"2"];
+    [userData setValue:@"Password*" forKey:@"3"];
+    [userData setValue:@"Confirm Password*" forKey:@"4"];
+    [userData setValue:[NSString stringWithFormat:@"%d",[user.age intValue]] forKey:@"5"];
+    [userData setValue:user.country forKey:@"6"];
+    [userData setValue:user.city forKey:@"7"];
+    [userData setValue:user.language forKey:@"8"];
+    [userData setValue:user.favoriteAuthor1 forKey:@"9"];
+    [userData setValue:user.favoriteAuthor2 forKey:@"10"];
+    [userData setValue:user.favoriteAuthor3 forKey:@"11"];
+    [userData setValue:user.nwAuthor1 forKey:@"12"];
+    [userData setValue:user.nwAuthor2 forKey:@"13"];
+    //[userData setObject:user.lastName forKey:[NSNumber numberWithInt:1]];
+    NSLog(@"user Dict:%@",userData);
     NSMutableArray * countriesArray = [[NSMutableArray alloc] init];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier: @"en_US"];
     
@@ -140,31 +157,31 @@
     if (pickerView.tag == 11) {
         self.txtCountry=@"";
         self.txtCountry= [pickerData objectAtIndex:row];
-        self.cell = (editProfileCustomeCell*)[self.editProfileTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
-        self.cell.editTxtFld.text=self.txtCountry;
+        editProfileCustomeCell *cell = (editProfileCustomeCell*)[self.editProfileTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+        cell.editTxtFld.text=self.txtCountry;
     }
     else if (pickerView.tag == 12){
         
-        if (selectedIndex == 7 ) {
+        if (selectedIndex == 9 ) {
             self.txtfavAuth1=@"";
             self.txtfavAuth1= [authorNameArr objectAtIndex:row];
-            self.cell = (editProfileCustomeCell*)[self.editProfileTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0]];
-            self.cell.editTxtFld.text=self.txtfavAuth1;
+            editProfileCustomeCell *cell = (editProfileCustomeCell*)[self.editProfileTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0]];
+            cell.editTxtFld.text=self.txtfavAuth1;
 
         }
-        else if (selectedIndex == 8 ) {
+        else if (selectedIndex == 10 ) {
             self.txtFavAuth2=@"";
             self.txtFavAuth2 = [[NSString alloc]init];
             self.txtFavAuth2= [authorNameArr objectAtIndex:row];
-            self.cell = (editProfileCustomeCell*)[self.editProfileTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]];
-            self.cell.editTxtFld.text=self.txtFavAuth2;
+            editProfileCustomeCell *cell = (editProfileCustomeCell*)[self.editProfileTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]];
+             cell.editTxtFld.text=self.txtFavAuth2;
             
         }
-        else if (selectedIndex == 9 ) {
+        else if (selectedIndex == 11 ) {
             self.txtFavAuth3=@"";
             self.txtFavAuth3= [authorNameArr objectAtIndex:row];
-            self.cell = (editProfileCustomeCell*)[self.editProfileTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
-            self.cell.editTxtFld.text=self.txtFavAuth3;
+            editProfileCustomeCell *cell = (editProfileCustomeCell*)[self.editProfileTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
+            cell.editTxtFld.text=self.txtFavAuth3;
             
         }
 
@@ -202,137 +219,164 @@
     return view;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    NSLog(@"USER DATA:%@",userData);
     
     static NSString *simpleTableIdentifier = @"editProfileCustomeCell";
     
-    self.cell = (editProfileCustomeCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (self.cell == nil) {
-        
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"editProfileCustomeCell" owner:self options:nil];
-        self.cell = [nib objectAtIndex:0];
-        
+    editProfileCustomeCell *cell = (editProfileCustomeCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    //cell.editTxtFld = nil;
+    if(cell == nil) {
+        NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"editProfileCustomeCell" owner:self options:nil];
+        cell = [cellArray lastObject];
     }
+   // editProfileCustomeCell *cell = (editProfileCustomeCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+   // if (cell == nil) {
+        
+       // NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"editProfileCustomeCell" owner:self options:nil];
+        //cell = [nib objectAtIndex:0];
+        
+  //  }
     UIView* bview = [[UIView alloc] init];
     bview.backgroundColor = [UIColor clearColor];
     [tableView setBackgroundView:bview];
-    self.cell.backgroundColor=[UIColor clearColor];
+    cell.backgroundColor=[UIColor clearColor];
     
-    self.cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
-    self.cell.editTxtFld.delegate = self;
-    if(indexPath.row ==0)
+    cell.editTxtFld.delegate = self;
+    if(indexPath.row == 0)
     {
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.text = user.firstName;
-       self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
-        [dictionary setObject:user.firstName forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.tag=indexPath.row;
+        //cell.editTxtFld.text = user.firstName;
+        cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
+       // [dictionary setObject:user.firstName forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
         
     } else if (indexPath.row ==1) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.text = user.lastName;
-       self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
-        [dictionary setObject:user.lastName forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.tag=indexPath.row;
+        //cell.editTxtFld.text = user.lastName;
+        cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        
+       cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
+        //[dictionary setObject:user.lastName forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         
     } else if (indexPath.row == 2) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.text = user.email;
-        self.cell.iconImage.image=[UIImage imageNamed:@"email"];
-        [dictionary setObject:user.email forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.tag=indexPath.row;
+       // cell.editTxtFld.text = user.email;
+         cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.iconImage.image=[UIImage imageNamed:@"email"];
+       // [dictionary setObject:user.email forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         
     }else if (indexPath.row == 3) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Password*";
-        self.cell.editTxtFld.secureTextEntry = YES;
-        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.text=[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.textColor = [UIColor grayColor];
+       /// cell.editTxtFld.secureTextEntry = YES;
+        //cell.editTxtFld.enabled = NO;
+        cell.iconImage.image=[UIImage imageNamed:@"locl"];
     }else if (indexPath.row == 4) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Confirm Password*";
-        self.cell.editTxtFld.secureTextEntry = YES;
-        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.text=[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        //cell.editTxtFld.text=[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.textColor = [UIColor grayColor];
+       // cell.editTxtFld.secureTextEntry = YES;
+       // cell.editTxtFld.enabled = NO;
+        cell.iconImage.image=[UIImage imageNamed:@"locl"];
         
     }
    else if (indexPath.row == 5) {
         
-       self.cell.editTxtFld.tag=indexPath.row;
-       self.cell.editTxtFld.placeholder=@"Child Age*";
-       self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
+       cell.editTxtFld.tag=indexPath.row;
+      // cell.editTxtFld.placeholder=@"Child Age*";
+       NSString *str = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+       NSLog(@"%@",str);
+       cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+       cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
        
-        [dictionary setObject:user.age forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        //[dictionary setObject:user.age forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         
     }else if (indexPath.row == 6) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Country*";
-        self.cell.editTxtFld.inputView = countrySelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"location"];
-        [dictionary setObject:user.country forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.tag=indexPath.row;
+       // cell.editTxtFld.placeholder=@"Country*";
+        cell.editTxtFld.inputView = countrySelect;
+        cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.iconImage.image=[UIImage imageNamed:@"location"];
+      //  [dictionary setObject:user.country forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
 
         
     }else if (indexPath.row == 7) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"City*";
-        self.cell.iconImage.image=[UIImage imageNamed:@"city"];
-        [dictionary setObject:user.city forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.tag=indexPath.row;
+       // cell.editTxtFld.placeholder=@"City*";
+       cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.iconImage.image=[UIImage imageNamed:@"city"];
+       // [dictionary setObject:user.city forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
 
         
     }else if (indexPath.row == 8) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Language";
-        self.cell.iconImage.image=[UIImage imageNamed:@"language"];
-         [dictionary setObject:user.language forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.tag=indexPath.row;
+       // cell.editTxtFld.placeholder=@"Language";
+       cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.iconImage.image=[UIImage imageNamed:@"language"];
+       //  [dictionary setObject:user.language forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         
     }else if (indexPath.row == 9) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Favorite Author 1";
-        self.cell.editTxtFld.inputView = authorSelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        cell.editTxtFld.tag=indexPath.row;
+       // cell.editTxtFld.placeholder=@"Favorite Author 1";
+       cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.inputView = authorSelect;
+        cell.iconImage.image=[UIImage imageNamed:@"author"];
         
 
-        [dictionary setObject:user.favoriteAuthor1 forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+       // [dictionary setObject:user.favoriteAuthor1 forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         
     }else if (indexPath.row == 10) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Favorite Author 2";
-        self.cell.editTxtFld.inputView = authorSelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        cell.editTxtFld.tag=indexPath.row;
+        //cell.editTxtFld.placeholder=@"Favorite Author 2";
+       cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.inputView = authorSelect;
+        cell.iconImage.image=[UIImage imageNamed:@"author"];
 
-        [dictionary setObject:user.favoriteAuthor2 forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+       // [dictionary setObject:user.favoriteAuthor2 forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         
     }else if (indexPath.row == 11) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Favorite Author 3";
-        self.cell.editTxtFld.inputView = authorSelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"author"];        [dictionary setObject:user.favoriteAuthor3 forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.tag=indexPath.row;
+       // cell.editTxtFld.placeholder=@"Favorite Author 3";
+        cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.editTxtFld.inputView = authorSelect;
+        cell.iconImage.image=[UIImage imageNamed:@"author"];
+        //[dictionary setObject:user.favoriteAuthor3 forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         
     }else if (indexPath.row == 12) {
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"New Author 1";
+        cell.editTxtFld.tag=indexPath.row;
+       // cell.editTxtFld.placeholder=@"New Author 1";
+        cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
         //  self.cell.editTxtFld.inputView = authorSelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
-        [dictionary setObject:user.nwAuthor1 forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.iconImage.image=[UIImage imageNamed:@"author"];
+       // [dictionary setObject:user.nwAuthor1 forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
 
         
     }else if (indexPath.row == 13) {
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"New Author 2";
+        cell.editTxtFld.tag=indexPath.row;
+        //cell.editTxtFld.placeholder=@"New Author 2";
+       cell.editTxtFld.text = [userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
         //  self.cell.editTxtFld.inputView = authorSelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
-        [dictionary setObject:user.nwAuthor2 forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        cell.iconImage.image=[UIImage imageNamed:@"author"];
+      //  [dictionary setObject:user.nwAuthor2 forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         
     }
     
     
-    return self.cell;
+    return cell;
 }
 #pragma mark- Actionsheet delegate
 
@@ -505,8 +549,8 @@
     [self animateTextField: textField up: YES];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [dictionary removeObjectForKey:[NSString stringWithFormat:@"%d",textField.tag]];
-    [dictionary setObject:textField.text forKey:[NSString stringWithFormat:@"%d",textField.tag]];
+    [userData removeObjectForKey:[NSString stringWithFormat:@"%d",textField.tag]];
+    [userData setValue:textField.text forKey:[NSString stringWithFormat:@"%d",textField.tag]];
     
 
     /*if (selectedIndex==10) {
@@ -588,8 +632,8 @@
 
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField {
-    [dictionary removeObjectForKey:[NSString stringWithFormat:@"%d",textField.tag]];
-    [dictionary setObject:textField.text forKey:[NSString stringWithFormat:@"%d",textField.tag]];
+    [userData removeObjectForKey:[NSString stringWithFormat:@"%d",textField.tag]];
+    [userData setValue:textField.text forKey:[NSString stringWithFormat:@"%d",textField.tag]];
     
            [self animateTextField: textField up: NO];
     
@@ -788,32 +832,38 @@
                     
                 }if (indexPath.row==3) {
                     
-                    self.txtAge=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                   // self.txtAge=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     
                 }if (indexPath.row==4) {
                     
-                    self.txtCountry=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    //self.txtCountry=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     
                 }if (indexPath.row==5) {
                     
-                    self.txtCity=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    self.txtAge=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     
                     
                 }if (indexPath.row==6) {
                     
-                    self.txtLang=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    self.txtCountry=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
+
+                    
+                   
                 }
                 if (indexPath.row==7) {
                     
+                    self.txtCity=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
+
                     //self.txtfavAuth1=[[NSString alloc]initWithFormat:@"%@",txtField.text];
                     
                 }
                 if (indexPath.row==8) {
+                    self.txtLang=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     // self.txtFavAuth2=[[NSString alloc]initWithFormat:@"%@",txtField.text];
                     
@@ -825,22 +875,27 @@
                 }
                 if (indexPath.row==10) {
                     
-                     self.txtNewAuth1=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                   //  self.txtNewAuth1=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                 }
                 if (indexPath.row==11) {
                     
-                    self.txtNewAuth2=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                   // self.txtNewAuth2=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                 }
                 
                 
                 if (indexPath.row==12) {
+                    self.txtNewAuth1=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    
+
                     
                     //self.txtPassword=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                 }
                 if (indexPath.row==13) {
+                    
+                    self.txtNewAuth2=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     //self.txtConfirmPass=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     

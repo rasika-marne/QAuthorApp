@@ -37,6 +37,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)onClickCancel:(id)sender {
+     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)onBorder1Click:(id)sender{
     borderImageFlag = 1;
     

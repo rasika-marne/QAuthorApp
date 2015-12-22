@@ -2373,6 +2373,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBorder1Click:" destination="cZh-Pg-MAr" eventType="touchUpInside" id="YIr-4J-Px4"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eg2-Fm-1jI">
                                 <rect key="frame" x="307" y="55" width="155" height="190"/>
@@ -2384,6 +2387,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBorder2Click:" destination="cZh-Pg-MAr" eventType="touchUpInside" id="l1d-Rh-UPX"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHT-nv-InO">
                                 <rect key="frame" x="508" y="55" width="155" height="190"/>
@@ -2395,6 +2401,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBorder3Click:" destination="cZh-Pg-MAr" eventType="touchUpInside" id="MhG-M1-Wzk"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lv8-fU-2I5">
                                 <rect key="frame" x="104" y="283" width="155" height="190"/>
@@ -2406,6 +2415,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBorder4Click:" destination="cZh-Pg-MAr" eventType="touchUpInside" id="MHz-Is-DUW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhX-Rm-odV">
                                 <rect key="frame" x="307" y="283" width="155" height="190"/>
@@ -2417,6 +2429,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBorder5Click:" destination="cZh-Pg-MAr" eventType="touchUpInside" id="gUO-rY-aUI"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6d-FL-idt">
                                 <rect key="frame" x="508" y="283" width="155" height="190"/>
@@ -2428,6 +2443,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBorder6Click:" destination="cZh-Pg-MAr" eventType="touchUpInside" id="pnK-Nx-lIj"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vju-wr-tJA">
                                 <rect key="frame" x="104" y="512" width="155" height="190"/>
@@ -2439,6 +2457,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBorder7Click:" destination="cZh-Pg-MAr" eventType="touchUpInside" id="vRZ-Ka-Sdk"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6m4-Y4-eNt">
                                 <rect key="frame" x="307" y="512" width="155" height="190"/>
@@ -2450,6 +2471,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBorder8Click:" destination="cZh-Pg-MAr" eventType="touchUpInside" id="IdR-Ih-AAS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VjS-fx-4kt">
                                 <rect key="frame" x="508" y="512" width="155" height="190"/>
@@ -2461,6 +2485,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBorder9Click:" destination="cZh-Pg-MAr" eventType="touchUpInside" id="5vu-dG-jHt"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LXO-XQ-TIP">
                                 <rect key="frame" x="104" y="746" width="155" height="190"/>
@@ -2472,6 +2499,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBorder10Click:" destination="cZh-Pg-MAr" eventType="touchUpInside" id="Iow-K6-dYm"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.44705882349999998" green="0.7725490196" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>

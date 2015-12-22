@@ -21,6 +21,7 @@
     [self navigationMethod];
     textViewBegin= NO;
     isImageEdited = NO;
+    isImageEditorCancelled = NO;
     [self.view setBackgroundColor: RGB];
     ownPhotoTap = NO;
    
@@ -190,11 +191,11 @@
         self.circlrImg.hidden = YES;
 
     }
-    if (selectedTemplate != nil && isImageEdited == NO) {
+    if (selectedTemplate != nil && isImageEdited == NO && isImageEditorCancelled == NO) {
         //NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self  selector:@selector(presentImageEditor) userInfo:nil repeats:NO];
         //[timer fire];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self performSelector:  @selector(presentImageEditor) withObject:nil afterDelay:2.0];
+            [self performSelector:  @selector(presentImageEditor) withObject:nil afterDelay:1.0];
         });
         
     }
@@ -276,8 +277,8 @@
     user =[User createEmptyUser];
    // NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     //user = [def objectForKey:@"loggedInUser"];
-    if([self.bookTitleTextField.text isEqualToString:@""]&&[self.genreTextField.text isEqualToString:@""]&&[self.shortDescTextView.text isEqualToString:@"Enter short description"]){
-          if (self.bookCoverImg.image == [UIImage imageNamed:@"book-1"]) {
+    if((self.bookTitleTextField.text.length == 0) &&(self.genreTextField.text.length == 0) && ([self.shortDescTextView.text isEqualToString:@"Enter short description"])){
+          if (isImageEdited == NO || isImageEditorCancelled == NO) {
               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
                                                               message:@"All fields are compulsory!!!"
                                                              delegate:self
@@ -286,98 +287,101 @@
               [alert show];
           }
     }
-    user = APP_DELEGATE.loggedInUser;
-    UIStoryboard *storyboard;
-    if (IPAD) {
-        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
-    }
-    else
-        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-
-     //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ageRange = [AgeRange createEmptyObject];
-    NSLog(@"user age:%d",[user.age intValue]);
-    // NSArray *rangeArr;
-    [ageRange fetchAgeRangeBlock:^(NSMutableArray *objects, NSError *error) {
-        if (!error) {
-            //rangeArr = objects;
-            for (int i=0; i<[objects count]; i++) {
-                ageRange = [objects objectAtIndex:i];
-                if (([user.age intValue] >= [ageRange.ageFrom intValue]) && ([user.age intValue] <= [ageRange.ageTo intValue])) {
-                    book.ageFrom = ageRange.ageFrom;
-                    book.ageTo = ageRange.ageTo;
-                    break;
-                }
-            }
-            book.title = self.bookTitleTextField.text;
-            if (self.bookCoverImg.image != [UIImage imageNamed:@"book-1"]) {
-                UIImage *image = [self scaleAndRotateImage:self.bookCoverImg.image];
-                NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
-                book.coverPic = [PFFile fileWithName:@"CoverPage.jpg" data:imageData];
-                
-                
-            }
-            // PFUser *user1=[PFUser objectWithoutDataWithObjectId:[NSString stringWithFormat:@"%@",user.objectId]];
-            
-            //laundryObj[@"liaisonId"] = user; // shows up as Pointer
-            book.authorId = [PFUser currentUser];
-            // book.ageFrom = ageRange.ageFrom;
-            // book.ageTo = ageRange.ageTo;
-            book.genre =self.genreTextField.text;
-            book.shortDesc = self.shortDescTextView.text;
-            book.status = @"active";
-            book.type = @"Normal";
-            NSLog(@"Book obj:%@",book);
-            [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
-            [book saveBooksBlock:^(id object, NSError *error) {
-                if (object) {
-                    [APP_DELEGATE stopActivityIndicator];
-                    PFObject *obj = object;
-                    NSLog(@"saved book object id:%@",obj.objectId);
-                     NSLog(@"saved book object created at:%@",obj.createdAt);
-                    UIStoryboard *storyboard;
-                    if (IPAD) {
-                        storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
-                    }
-                    else
-                        storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                    
-                    //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                    self.addBorderVC = (AddBorderViewController *) [storyboard instantiateViewControllerWithIdentifier:@"AddBorderViewController"];
-                    [self  presentViewController:self.addBorderVC animated:YES completion:nil];
-                    
-                    
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                                    message:@"Book created Successfully!!"
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-                    [alert show];
-                    NSLog(@"Book obj id:%@",obj.objectId);
-                    book = [Book convertPFObjectToBooks:obj];
-                    
-                    self.createBookVC = (CreateBookViewController *)
-                    [storyboard instantiateViewControllerWithIdentifier:@"CreateBookViewController"];
-                    NSLog(@"book obj id:%@",book.objectId);
-                    NSLog(@"book title obj:%@",book.title);
-                    // self.createBookVC.backImg1 = [[UIImage alloc]init];
-                    //self.createBookVC.backImg1 = backImg1;
-                    self.createBookVC.bookObj = [Book createEmptyObject];
-                    self.createBookVC.bookObj = book;
-                    [self.navigationController pushViewController:self.createBookVC animated:YES];
-                    
-                }
-            }];
-            
-                //}
-            //}];
-            
-
+    else{
+        user = APP_DELEGATE.loggedInUser;
+        UIStoryboard *storyboard;
+        if (IPAD) {
+            storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
         }
-    }];
+        else
+            storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        //UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ageRange = [AgeRange createEmptyObject];
+        NSLog(@"user age:%d",[user.age intValue]);
+        // NSArray *rangeArr;
+        [ageRange fetchAgeRangeBlock:^(NSMutableArray *objects, NSError *error) {
+            if (!error) {
+                //rangeArr = objects;
+                for (int i=0; i<[objects count]; i++) {
+                    ageRange = [objects objectAtIndex:i];
+                    if (([user.age intValue] >= [ageRange.ageFrom intValue]) && ([user.age intValue] <= [ageRange.ageTo intValue])) {
+                        book.ageFrom = ageRange.ageFrom;
+                        book.ageTo = ageRange.ageTo;
+                        break;
+                    }
+                }
+                book.title = self.bookTitleTextField.text;
+                if (self.bookCoverImg.image != [UIImage imageNamed:@"book-1"]) {
+                    UIImage *image = [self scaleAndRotateImage:self.bookCoverImg.image];
+                    NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
+                    book.coverPic = [PFFile fileWithName:@"CoverPage.jpg" data:imageData];
+                    
+                    
+                }
+                // PFUser *user1=[PFUser objectWithoutDataWithObjectId:[NSString stringWithFormat:@"%@",user.objectId]];
+                
+                //laundryObj[@"liaisonId"] = user; // shows up as Pointer
+                book.authorId = [PFUser currentUser];
+                // book.ageFrom = ageRange.ageFrom;
+                // book.ageTo = ageRange.ageTo;
+                book.genre =self.genreTextField.text;
+                book.shortDesc = self.shortDescTextView.text;
+                book.status = @"active";
+                book.type = @"Normal";
+                NSLog(@"Book obj:%@",book);
+                [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
+                [book saveBooksBlock:^(id object, NSError *error) {
+                    if (object) {
+                        [APP_DELEGATE stopActivityIndicator];
+                        PFObject *obj = object;
+                        NSLog(@"saved book object id:%@",obj.objectId);
+                        NSLog(@"saved book object created at:%@",obj.createdAt);
+                        UIStoryboard *storyboard;
+                        if (IPAD) {
+                            storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+                        }
+                        else
+                            storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        
+                        //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        self.addBorderVC = (AddBorderViewController *) [storyboard instantiateViewControllerWithIdentifier:@"AddBorderViewController"];
+                        [self  presentViewController:self.addBorderVC animated:YES completion:nil];
+                        
+                        
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                        message:@"Book created Successfully!!"
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                        NSLog(@"Book obj id:%@",obj.objectId);
+                        book = [Book convertPFObjectToBooks:obj];
+                        
+                        self.createBookVC = (CreateBookViewController *)
+                        [storyboard instantiateViewControllerWithIdentifier:@"CreateBookViewController"];
+                        NSLog(@"book obj id:%@",book.objectId);
+                        NSLog(@"book title obj:%@",book.title);
+                        // self.createBookVC.backImg1 = [[UIImage alloc]init];
+                        //self.createBookVC.backImg1 = backImg1;
+                        self.createBookVC.bookObj = [Book createEmptyObject];
+                        self.createBookVC.bookObj = book;
+                        [self.navigationController pushViewController:self.createBookVC animated:YES];
+                        
+                    }
+                }];
+                
+                //}
+                //}];
+                
+                
+            }
+        }];
+        
+        
+        
 
-    
-   
+    }
 }
 
 - (IBAction)onPhotoTap:(id)sender
@@ -461,12 +465,20 @@
     
     [editor dismissViewControllerAnimated:YES completion:nil];
 }
+- (void)imageEditorDidCancel:(CLImageEditor*)editor{
+     isImageEditorCancelled = YES;
+    [editor dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)imageEditor:(CLImageEditor *)editor willDismissWithImageView:(UIImageView *)imageView canceled:(BOOL)canceled
 {
-    isImageEdited = NO;
+    isImageEditorCancelled = YES;
     [self refreshImageView];
 }
+- (void)imageEditor:(CLImageEditor*)editor didDismissWithImageView:(UIImageView*)imageView canceled:(BOOL)canceled{
+    isImageEditorCancelled = YES;
+}
+
 - (void)refreshImageView
 {
     [self resetImageViewFrame];

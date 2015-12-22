@@ -10,7 +10,7 @@
 
 @implementation BookDetails
 @synthesize objectId,bookId,pageNumber,textContent,imageContent;
-@synthesize audioContent,pagePDF;
+@synthesize audioContent,pagePDF,method;
 
 +(BookDetails *)createEmptyObject{
     BookDetails *note=[[BookDetails alloc]initWithClassName:BOOK_DETAILS];
@@ -24,6 +24,7 @@
     
     note.bookId = IS_POPULATED_STRING([pobj objectForKey:BOOK_ID])?[pobj objectForKey:BOOK_ID]:@"";
     note.textContent = IS_POPULATED_STRING([pobj objectForKey:TEXT_CONTENT])?[pobj objectForKey:TEXT_CONTENT]:@"";
+     note.method = IS_POPULATED_STRING([pobj objectForKey:METHOD])?[pobj objectForKey:METHOD]:@"";
     // note.timestamp =[pobj objectForKey:EVENTS_TIME];
     
     note.pageNumber=[pobj objectForKey:PAGE_NUMBER]?(NSNumber*)[pobj objectForKey:PAGE_NUMBER]:[NSNumber numberWithInt:0];
@@ -47,6 +48,7 @@
     // [pObj setObject:IS_POPULATED_STRING(self.createdAt)?self.createdAt:@"" forKey:INBOX_OBJECT_CREATED];
     [pObj setObject:IS_POPULATED_STRING(self.bookId)?self.bookId:@"" forKey:BOOK_ID];
     [pObj setObject:IS_POPULATED_STRING(self.textContent)?self.textContent:@"" forKey:TEXT_CONTENT];
+    [pObj setObject:IS_POPULATED_STRING(self.method)?self.method:@"" forKey:METHOD];
     // [pObj setObject:[NSDate date] forKey:EVENTS_TIME];
     [pObj setObject:self.pageNumber?self.pageNumber:[NSNumber numberWithInt:0] forKey:PAGE_NUMBER];
     

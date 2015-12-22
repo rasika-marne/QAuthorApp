@@ -14,16 +14,18 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "AddBorderViewController.h"
 #import "ChooseTemplateViewController.h"
+#import "HomeViewController.h"
 //#import "ViewBookViewController.h"
 #import "Constant.h"
 #import <CoreText/CoreText.h>
- #import <QuartzCore/QuartzCore.h>
+#import <QuartzCore/QuartzCore.h>
 #import "CLImageEditor.h"
 #import "Book.h"
 #import "BookDetails.h"
 @class Book;
 @class BookDetails;
 @class AddBorderViewController;
+@class HomeViewController;
 @interface CreateBookViewController : UIViewController<UITextViewDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate,CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate>{
     int count;
     UITextView* activeTextView;
@@ -41,7 +43,7 @@
 @property (nonatomic, strong) StoryAudioPlayer *audioPlayerObject;
 @property (nonatomic, strong) AddBorderViewController *addBorderVC;
 @property (nonatomic, strong) ChooseTemplateViewController *chooseTemplateVC;
-
+@property (nonatomic, strong) HomeViewController *homeVC;
 @property (weak, nonatomic) IBOutlet UILabel *chooseOwnLbl;
 
 @property (nonatomic, strong) NSString* storySoundFilePath;

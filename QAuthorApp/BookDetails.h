@@ -16,7 +16,7 @@ typedef void (^arrayResultBlock)(NSMutableArray *objects, NSError *error);
 @property (nonatomic, strong) NSString *bookId;
 @property (nonatomic, strong) NSNumber *pageNumber;
 @property (nonatomic, strong) NSString *textContent;
-
+@property (nonatomic, strong) NSString *method;
 @property (nonatomic, strong) PFFile *imageContent;
 @property (nonatomic, strong) PFFile *audioContent;
 @property (nonatomic, strong) PFFile *pagePDF;
