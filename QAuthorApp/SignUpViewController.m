@@ -98,8 +98,9 @@
             
             [defaults synchronize];
             flag = 1;
-             NSLog(@"user:%@",user.email);
+             NSLog(@"user:%@",user.objectId);
             [self getFbData];
+             //[self goToHome];
             NSLog(@"User signed up and logged in through Facebook!");
             
         } else {
@@ -141,6 +142,7 @@
 }
 -(void)getFbData{
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"first_name, last_name, picture, email"}];
+    [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         // handle response
         if (!error) {
@@ -188,6 +190,7 @@
                             self.registrationView = (RegistrationViewController *)
                             [storyboard instantiateViewControllerWithIdentifier:@"RegistrationViewController"];
                             self.registrationView.isFacebookLogin = YES;
+                            self.registrationView.userId = fbUser.objectId;
                             self.registrationView.fbData = (NSDictionary *)result;
                             [self.navigationController pushViewController:self.registrationView animated:YES];
 

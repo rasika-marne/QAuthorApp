@@ -204,8 +204,28 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     activeTextView = textView;
-    
+    if (textView == activeTextView)
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        self.view.frame = CGRectMake(self.view.frame.origin.x , (self.view.frame.origin.y - 60), self.view.frame.size.width, self.view.frame.size.height);
+        [UIView commitAnimations];
+    }
     //textView.text = @"";
+}
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    if (textView == activeTextView)
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        self.view.frame = CGRectMake(self.view.frame.origin.x , (self.view.frame.origin.y + 60), self.view.frame.size.width, self.view.frame.size.height);
+        [UIView commitAnimations];
+    }
 }
 - (IBAction)onClickExportBtn:(id)sender {
     count++;

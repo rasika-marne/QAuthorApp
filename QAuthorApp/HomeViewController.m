@@ -19,12 +19,13 @@
     [super viewDidLoad];
     self.bannerView.hidden = YES;
     count = -1;
+    pageNumber = 0;
+    booksArray = [[NSMutableArray alloc]init];
     [self navigationMethod];
     [self.view setBackgroundColor: RGB];
     self.bannerView.adUnitID = AD_Unit_id;
     self.bannerView.rootViewController = self;
-    
-    GADRequest *request = [GADRequest request];
+       GADRequest *request = [GADRequest request];
     [self.bannerView loadRequest:request];
     self.bookSegments.selectedSegmentIndex =0;
     myBooksClicked = NO;
@@ -173,7 +174,11 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    id tracker = [[GAI sharedInstance] defaultTracker];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor clearColor];
+    self.refreshControl.tintColor = [UIColor lightGrayColor];
+    [self.bookListTableView addSubview:self.refreshControl];
+       id tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Home Screen"];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     [super viewWillAppear:animated];
@@ -188,7 +193,15 @@
             if (!error) {
                 APP_DELEGATE.loggedInUser = [User convertPFObjectToUser:object forNote:YES];
                 if ([SelectedSegmentvalue isEqualToString:@"My Books"]) {
+                    
                     [self fetchMyBooks];
+                    [self.refreshControl addTarget:self
+                                            action:@selector(refershControlAction)
+                                  forControlEvents:UIControlEventValueChanged];
+                    
+                   // [self.refreshControl endRefreshing];
+                    
+
                     // self.bookSegments.selectedSegmentIndex = 1;
                     self.navigationController.navigationBar.hidden = NO;
                     self.navigationItem.title = @"My Books";
@@ -197,12 +210,25 @@
                 }
                 else if([SelectedSegmentvalue isEqualToString:@"Professional"]){
                     [self fetchProfessionalBooks];
+                    [self.refreshControl addTarget:self
+                                            action:@selector(refershControlAction)
+                                  forControlEvents:UIControlEventValueChanged];
+                    
+                   
+
                     self.navigationController.navigationBar.hidden = NO;
                     self.navigationItem.title = @"Professional";
                     self.bookSegments.hidden = NO;
                 }
                 else{
                     [self fetchAllBooks];
+                    [self.refreshControl addTarget:self
+                                            action:@selector(refershControlAction)
+                                  forControlEvents:UIControlEventValueChanged];
+                    
+                   // [self.refreshControl endRefreshing];
+                    
+
                     self.navigationController.navigationBar.hidden = NO;
                     self.navigationItem.title = @"Home";
                     self.bookSegments.hidden = NO;
@@ -222,6 +248,24 @@
     
    // [self fetchAuthors];
     
+}
+-(void)refershControlAction
+{
+    NSLog(@"\n\n\n UIRefreshControl \n\n\n");
+    self.refreshControl.attributedTitle = nil;
+    //pageNumber = pageNumber + 1;
+    if ([SelectedSegmentvalue isEqualToString:@"My Books"]) {
+        booksArray = [[NSMutableArray alloc]init];
+        pageNumber = 0;
+        [self fetchMyBooks];
+    }
+    else if([SelectedSegmentvalue isEqualToString:@"Professional"])
+    {
+        [self fetchProfessionalBooks];
+    }
+    else{
+        [self fetchAllBooks];
+    }
 }
 -(void)fetchMyFavorites{
    bObjectIdArr = [[NSMutableArray alloc]init];
@@ -286,10 +330,17 @@
 -(void)fetchProfessionalBooks{
     bObjectIdArr = [[NSMutableArray alloc]init];
     professionalClicked = YES;
-    PFQuery *query2 = [PFQuery queryWithClassName:BOOK];
-    [query2 whereKey:TYPE equalTo:@"Professional"];
-     [query2 includeKey:AUTHOR_ID];
-    [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    PFQuery *query = [PFQuery queryWithClassName:BOOK];
+    [query whereKey:TYPE equalTo:@"Professional"];
+    [query includeKey:AUTHOR_ID];
+
+   // [query orderByDescending:@"createdAt"];
+    [query setLimit:10];
+
+  //  PFQuery *query2 = [PFQuery queryWithClassName:BOOK];
+  //  [query2 whereKey:TYPE equalTo:@"Professional"];
+     //[query2 includeKey:AUTHOR_ID];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             [APP_DELEGATE stopActivityIndicator];
             NSMutableArray *results=[[NSMutableArray alloc] init];
@@ -301,6 +352,7 @@
                 NSLog(@"res cnt:%lu",(unsigned long)[results count]);
             }
             booksArray = results;
+             [self.refreshControl endRefreshing];
             if ([booksArray count]>0) {
                 
                 authorNamesArr = [[NSMutableArray alloc]init];
@@ -351,6 +403,9 @@
     [query2 whereKey:AUTHOR_ID equalTo:[PFUser currentUser]];
     [query2 includeKey:AUTHOR_ID];
     [query2 orderByDescending:NUMBER_OF_LIKES];
+    [query2 setLimit:10];
+    [query2 setSkip:pageNumber];
+
     [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             [APP_DELEGATE stopActivityIndicator];
@@ -362,7 +417,10 @@
                 NSLog(@"book obj:%@",events);
                 NSLog(@"res cnt:%lu",(unsigned long)[results count]);
             }
-            booksArray = results;
+            tempBooksArr = results;
+            [booksArray addObjectsFromArray:tempBooksArr];
+            pageNumber = [booksArray count];
+             [self.refreshControl endRefreshing];
             if ([booksArray count]>0) {
                 
                 authorNamesArr = [[NSMutableArray alloc]init];
@@ -490,15 +548,15 @@
     myBooksClicked = NO;
     professionalClicked = NO;
    // [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
+    tempBooksArr = [[NSMutableArray alloc]init];
     bObjectIdArr = [[NSMutableArray alloc]init];
-    booksArray = [[NSMutableArray alloc]init];
+    //booksArray = [[NSMutableArray alloc]init];
     searchResults = [[NSMutableArray alloc]init];
     authorNamesArr = [[NSMutableArray alloc]init];
    // cityArr = [[NSMutableArray alloc]init];
     bookObj = [Book createEmptyObject];
-    [bookObj fetchBookBlock:^(NSMutableArray *objects, NSError *error) {
-        
-        
+   // [bookObj fetchBookBlock:^(NSMutableArray *objects, NSError *error)
+    [bookObj fetchBookBlockForPage:pageNumber :^(NSMutableArray *objects, NSError *error) {
         if (!error) {
             
             NSLog(@"books arr cnt:%lu",(unsigned long)[objects count]);
@@ -514,41 +572,47 @@
             }
             else{
                 
-                
-                booksArray = objects;
+                tempBooksArr = objects;
+               // booksArray = [[tempBooksArr arrayByAddingObjectsFromArray:booksArray] mutableCopy];
+                [booksArray addObjectsFromArray:tempBooksArr];
+                pageNumber = [booksArray count];
                 searchResults = objects;
-               // __block int successcount;
-               // __block int failurecount;
-              //  successcount =0;
-              //  failurecount =0;
+                [self.refreshControl endRefreshing];
+                // __block int successcount;
+                // __block int failurecount;
+                //  successcount =0;
+                //  failurecount =0;
                 
                 for (Book *bObj in booksArray) {
                     [bObjectIdArr addObject:bObj.objectId];
                     User *userObj=[User convertPFObjectToUser:bObj.authorId forNote:NO];
-                       authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
-                                    ];
+                    authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
+                                 ];
                     [authorNamesArr addObject:authorName];
-                   
-                           // if ([authorNamesArr containsObject:authorName]) {
-                               // continue;                            }
-                           // else{
                     
-                            //}
+                    // if ([authorNamesArr containsObject:authorName]) {
+                    // continue;                            }
+                    // else{
+                    
+                    //}
                     
                     
                 }
-             //   NSLog(@"author arr cnt:%d",[authorNamesArr count]);
+                //   NSLog(@"author arr cnt:%d",[authorNamesArr count]);
                 //[searchResults addObjectsFromArray:cityArr];
                 NSLog(@"search res :%lu",(unsigned long)[searchResults count]);
                 [self.bookListTableView reloadData];
                 
                 
                 
-        }
+            }
             [APP_DELEGATE stopActivityIndicator];
             
         }
+
     }];
+        
+   
     
 
 }
@@ -842,7 +906,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     likeCount++;
     //send push notification to author if number of likes of his book crosses particular number
-    if (likeCount == 5) {
+    if (likeCount == 50) {
         User *userObj=[User convertPFObjectToUser:bookObj.authorId forNote:NO];
         PFQuery *pushQuery = [PFInstallation query];
         [pushQuery whereKey:@"userId" equalTo:userObj.objectId];
@@ -871,10 +935,12 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
      PFQuery *query1 = [PFQuery queryWithClassName:BOOK_LIKES];
     [query1 whereKey:LIKE_USER_ID equalTo:user.objectId];
      [query1 whereKey:LIKE_BOOK_ID equalTo:bookObj.objectId];
+    [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
     [query1 getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+         [APP_DELEGATE stopActivityIndicator];
         if (object) {
-            [sender setBackgroundImage:[UIImage imageNamed:@"like_g"] forState:UIControlStateNormal];
-            sender.enabled = NO;
+           // [sender setBackgroundImage:[UIImage imageNamed:@"like_g"] forState:UIControlStateNormal];
+           // sender.enabled = NO;
            // cell.likeButton.hidden = YES;
         }
         else{
@@ -882,31 +948,35 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
             likes.userId = user.objectId;
             [likes saveBookLikesBlock:^(id object, NSError *error) {
                 if (!error) {
+                    
                     NSLog(@"likes row inserted");
+                    PFQuery *query = [PFQuery queryWithClassName:BOOK];
+                    [query getObjectInBackgroundWithId:bookObj.objectId block:^(PFObject *gObj, NSError *error) {
+                        
+                        // Now let's update it with some new data. In this case, only cheatMode and score
+                        // will get sent to the cloud. playerName hasn't changed.
+                        gObj[NUMBER_OF_LIKES] = [NSNumber numberWithInteger:likeCount];
+                        [gObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if(!error){
+                               
+                                NSLog(@"book updated!!");
+                                // [APP_DELEGATE stopActivityIndicator];
+                                // [self onBack:nil];
+                                
+                                [self fetchAllBooks];
+                            }
+                            else
+                            {
+                                
+                            }
+                            
+                        }];
+                    }];
+
                 }
             }];
-            PFQuery *query = [PFQuery queryWithClassName:BOOK];
-            [query getObjectInBackgroundWithId:bookObj.objectId block:^(PFObject *gObj, NSError *error) {
-                
-                // Now let's update it with some new data. In this case, only cheatMode and score
-                // will get sent to the cloud. playerName hasn't changed.
-                gObj[NUMBER_OF_LIKES] = [NSNumber numberWithInteger:likeCount];
-                [gObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if(!error){
-                        NSLog(@"book updated!!");
-                        // [APP_DELEGATE stopActivityIndicator];
-                        // [self onBack:nil];
-                        
-                        [self fetchAllBooks];
-                    }
-                    else
-                    {
-                        
-                    }
-                    
-                }];
-                
-            }];
+            
+           
 
 
         }

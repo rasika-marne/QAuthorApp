@@ -11,8 +11,10 @@
 #import "User.h"
 #import "ViewController.h"
 #import "editProfileCustomeCell.h"
+#import "SWRevealViewController.h"
+#import "RearViewController.h"
 @class ViewController;
-@interface RegistrationViewController : UIViewController<UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate>{
+@interface RegistrationViewController : UIViewController<UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate,SWRevealViewControllerDelegate>{
     int movementDistance;
     BOOL countrySelected,authorSelected;
     NSMutableArray *userIdArr,*authorNameArr;
@@ -26,6 +28,7 @@
 @property (nonatomic, retain) UIPickerView *authorSelect;
 @property (nonatomic, retain) UIPickerView *countrySelect;
 @property (nonatomic, readwrite)  BOOL isFacebookLogin;
+@property (nonatomic, readwrite)  NSString *userId;
 @property (nonatomic, retain)  NSArray *pickerData;
 @property (nonatomic, retain)  NSDictionary *fbData;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;

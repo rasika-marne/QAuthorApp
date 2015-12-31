@@ -21,7 +21,7 @@
     fanObj = [FanFollowers createEmptyObject];
     [self navigationMethod];
     //self.navigationController.navigationBar.hidden = NO;
-    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all_user_active"] forState:UIControlStateNormal];
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all_auth_select"] forState:UIControlStateNormal];
 
     SWRevealViewController *revealController = [self revealViewController];
     UIImage *myImage = [UIImage imageNamed:@"menu-icon.png"];
@@ -38,15 +38,25 @@
         //[self fetchAuthors];
 
     [self tempFetchFollowings];
+        [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all_auth_select"] forState:UIControlStateNormal];
+        [self.followersButton setBackgroundImage:[UIImage imageNamed:@"Followers-1"] forState:UIControlStateNormal];
+        [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-1"] forState:UIControlStateNormal];
     }
     if ([SelectedSegmentvalue isEqualToString:@"Followers"]){
         [self fetchFollowers];
+        
+        [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all_auth"] forState:UIControlStateNormal];
+        [self.followersButton setBackgroundImage:[UIImage imageNamed:@"Followers_select"] forState:UIControlStateNormal];
+        [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-1"] forState:UIControlStateNormal];
         self.navigationItem.title = @"Followers";
         //self.segment.selectedSegmentIndex=1;
     }
     
     if ([SelectedSegmentvalue isEqualToString:@"Following"]){
         [self fetchFollowing];
+        [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all_auth"] forState:UIControlStateNormal];
+        [self.followersButton setBackgroundImage:[UIImage imageNamed:@"Followers-1"] forState:UIControlStateNormal];
+        [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following_select"] forState:UIControlStateNormal];
         self.navigationItem.title = @"Following";
        // self.segment.selectedSegmentIndex=2;
     }
@@ -84,18 +94,18 @@
     self.navigationController.navigationBar.barStyle =UIBarStyleBlack;
 }
 - (IBAction)onclickAuthorBtn:(id)sender {
-    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all_user_active"] forState:UIControlStateNormal];
-    [self.followersButton setBackgroundImage:[UIImage imageNamed:@"followers-unselected"] forState:UIControlStateNormal];
-    [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-unselected"] forState:UIControlStateNormal];
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all_auth_select"] forState:UIControlStateNormal];
+    [self.followersButton setBackgroundImage:[UIImage imageNamed:@"Followers-1"] forState:UIControlStateNormal];
+    [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-1"] forState:UIControlStateNormal];
     SelectedSegmentvalue=nil;
     SelectedSegmentvalue=@"Dashboard";
     self.navigationItem.title = @"Dashboard";
     [self fetchAuthors];}
 
 - (IBAction)onClickFollowersBtn:(id)sender {
-    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user_unselected"] forState:UIControlStateNormal];
-    [self.followersButton setBackgroundImage:[UIImage imageNamed:@"followers-1"] forState:UIControlStateNormal];
-    [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-unselected"] forState:UIControlStateNormal];
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all_auth"] forState:UIControlStateNormal];
+    [self.followersButton setBackgroundImage:[UIImage imageNamed:@"Followers_select"] forState:UIControlStateNormal];
+    [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-1"] forState:UIControlStateNormal];
     SelectedSegmentvalue=nil;
     SelectedSegmentvalue=@"Followers";
     self.navigationItem.title = @"Followers";
@@ -103,9 +113,9 @@
 }
 
 - (IBAction)onClickFollowingBtn:(id)sender {
-    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all-user_unselected"] forState:UIControlStateNormal];
-    [self.followersButton setBackgroundImage:[UIImage imageNamed:@"followers-unselected"] forState:UIControlStateNormal];
-    [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following-1"] forState:UIControlStateNormal];
+    [self.authorsButton setBackgroundImage:[UIImage imageNamed:@"all_auth"] forState:UIControlStateNormal];
+    [self.followersButton setBackgroundImage:[UIImage imageNamed:@"Followers-1"] forState:UIControlStateNormal];
+    [self.followingsButton setBackgroundImage:[UIImage imageNamed:@"following_select"] forState:UIControlStateNormal];
     SelectedSegmentvalue=nil;
     SelectedSegmentvalue=@"Following";
     [self fetchFollowing];
@@ -168,12 +178,12 @@
                     [APP_DELEGATE stopActivityIndicator];
                     NSLog(@"books arr cnt:%lu",(unsigned long)[objects count]);
                     if ([objects count]==0) {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                     /*   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
                                                                         message:@"No Data available."
                                                                        delegate:self
                                                               cancelButtonTitle:@"OK"
                                                               otherButtonTitles:nil];
-                        [alert show];
+                        [alert show];*/
                         
                     }
                     else{
@@ -227,7 +237,7 @@
             
                 if (self.autorsArray.count==0) {
                     
-                    [[[UIAlertView alloc]initWithTitle:@"alert" message:@"No data is available" delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"alert_ok_title", nil), nil]show];
+                  //  [[[UIAlertView alloc]initWithTitle:@"alert" message:@"No data is available" delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"alert_ok_title", nil), nil]show];
                     //[self.authorTableview reloadData];
                     
                     
@@ -278,7 +288,7 @@
         
             if (self.autorsArray.count==0) {
                 
-                [[[UIAlertView alloc]initWithTitle:@"alert" message:@"No data is available" delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"alert_ok_title", nil), nil]show];
+                //[[[UIAlertView alloc]initWithTitle:@"alert" message:@"No data is available" delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"alert_ok_title", nil), nil]show];
                 //[self.authorTableview reloadData];
                 
                 
@@ -360,12 +370,14 @@
             NSNumber *age = [[autorsArray objectAtIndex:indexPath.row] valueForKey:AGE];
             cell.ageLabel.text = [age stringValue];
             if ([[flagArray objectAtIndex:indexPath.row] isEqualToString:@"1"]) {
+                [cell.followBtn setBackgroundImage:[UIImage imageNamed:@"follow_button-select"] forState:UIControlStateNormal];
+               [cell.followBtn setTitleColor:RGB forState:UIControlStateNormal];
+                [cell.followBtn setTitle:@"Unfollow" forState:UIControlStateNormal];
                 
-                [cell.followBtn setTitle:@"-Unfollow" forState:UIControlStateNormal];
                 // [cell.followBtn addTarget:self action:@selector(UnFollow:) forControlEvents:UIControlEventTouchUpInside];
                 
             }else{
-                [cell.followBtn setTitle:@"+Follow" forState:UIControlStateNormal];
+                [cell.followBtn setTitle:@"Follow" forState:UIControlStateNormal];
               //  [cell.followBtn addTarget:self action:@selector(Follow:) forControlEvents:UIControlEventTouchUpInside];
             }
             cell.followBtn.tag = indexPath.row;
@@ -447,10 +459,11 @@
                     }
                     
                     if ([[flagArray objectAtIndex:indexPath.row] isEqualToString:@"1"]) {
-                        
-                        [cell.followBtn setTitle:@"-Unfollow" forState:UIControlStateNormal];
+                        [cell.followBtn setBackgroundImage:[UIImage imageNamed:@"follow_button-select"] forState:UIControlStateNormal];
+                        [cell.followBtn setTitleColor:RGB forState:UIControlStateNormal];
+                        [cell.followBtn setTitle:@"Unfollow" forState:UIControlStateNormal];
                     }else{
-                        [cell.followBtn setTitle:@"+Follow" forState:UIControlStateNormal];
+                        [cell.followBtn setTitle:@"Follow" forState:UIControlStateNormal];
                     }
                 }
             }];

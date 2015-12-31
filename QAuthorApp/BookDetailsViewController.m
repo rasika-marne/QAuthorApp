@@ -137,7 +137,7 @@
     
     NSString *emailTitle = bookObj1.title;
     NSString *messageBody = bookObj1.shortDesc;
-    NSArray *toRecipents = [NSArray arrayWithObject:@"rasikabs1@gmail.com"];
+    NSArray *toRecipents = [NSArray arrayWithObject:@""];
     
    
    

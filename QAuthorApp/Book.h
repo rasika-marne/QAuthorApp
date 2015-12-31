@@ -41,4 +41,5 @@ typedef void (^arrayResultBlock)(NSMutableArray *objects, NSError *error);
 +(Book *)createEmptyObject;
 -(void)saveBooksInBackground;
 -(void)fetchBookBlock:(arrayResultBlock)block;
+-(void)fetchBookBlockForPage:(int)pageNum :(arrayResultBlock)block;
 @end

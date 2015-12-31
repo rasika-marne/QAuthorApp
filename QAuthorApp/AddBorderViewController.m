@@ -17,14 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self navigationMethod];
-    [self.view setBackgroundColor: RGB];
+    self.title = @"Apply Border";
+   // [self.view setBackgroundColor: RGB];
     // Do any additional setup after loading the view.
 }
 -(void)navigationMethod{
     [self.view setBackgroundColor: RGB]; //will give a UIColor
     self.navigationItem.hidesBackButton = YES;
     self.navigationController.navigationBar.hidden = NO;
-    self.navigationItem.title = @"Choose Border";
+    self.navigationItem.title = @"Apply Border";
     self.navigationController.navigationBar.barTintColor =NAVIGATIONRGB;
     
     

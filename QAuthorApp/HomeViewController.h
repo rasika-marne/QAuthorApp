@@ -35,15 +35,17 @@
 @class EditBookTitleViewController;
 @class GADBannerView;
 @interface HomeViewController : GAITrackedViewController<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UISearchDisplayDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate>{
-    NSMutableArray *booksArray,*authorNamesArr,*searchResults,*filterdArray,*bObjectIdArr,*followingsArr;
+    NSMutableArray *booksArray,*authorNamesArr,*searchResults,*filterdArray,*bObjectIdArr,*followingsArr,*tempBooksArr;
     Book *bookObj;
-    int movementDistance;
+    int movementDistance,pageNumber;
     NSInteger likeCount,commentCount,count;
     NSString *authorName;
     AgeRange *ageRange;
     BOOL myBooksClicked,professionalClicked;
 }
 @property (weak, nonatomic) IBOutlet UILabel *authorOftheWeekLbl;
+@property (strong ,nonatomic)UIRefreshControl *refreshControl;
+
 @property (weak, nonatomic) IBOutlet GADBannerView *bannerView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar1;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *bookSegments;

@@ -117,10 +117,15 @@
 }
 -(void)fetchBookBlock:(arrayResultBlock)block
 {
+      // [query orderByDescending:@"createdAt"];
+   
+
     PFQuery *query=[PFQuery queryWithClassName:BOOK];
     [query includeKey:AUTHOR_ID];
     [query orderByDescending:NUMBER_OF_LIKES];
+    [query orderByDescending:CREATED_AT];
     [query whereKey:TYPE equalTo:@"Normal"];
+     [query setLimit:10];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSMutableArray *results=[[NSMutableArray alloc] init];
@@ -135,6 +140,31 @@
             block(nil,error);
         }
     }];
+}
+-(void)fetchBookBlockForPage:(int)pageNum :(arrayResultBlock)block{
+    NSLog(@"page num:%d",pageNum);
+    PFQuery *query=[PFQuery queryWithClassName:BOOK];
+    [query includeKey:AUTHOR_ID];
+    [query orderByDescending:NUMBER_OF_LIKES];
+    [query orderByDescending:CREATED_AT];
+    [query whereKey:TYPE equalTo:@"Normal"];
+    [query setLimit:10];
+    [query setSkip:pageNum];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSMutableArray *results=[[NSMutableArray alloc] init];
+            for (PFObject *obj in objects) {
+                Book *events=[Book convertPFObjectToBooks:obj];
+                //  User *author = [];
+                [results addObject:events];
+            }
+            block(results,nil);
+            
+        }else{
+            block(nil,error);
+        }
+    }];
+
 }
 
 @end

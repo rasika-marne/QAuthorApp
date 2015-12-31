@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/EditProfileViewController.m"
-            timestampString = "470557418.211151"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "551"
-            endingLineNumber = "551"
+            startingLineNumber = "612"
+            endingLineNumber = "612"
             landmarkName = "-fetchAllBooks"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
             landmarkName = "-onFinishBookBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "-onClickAddPagesBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "-onClickAddPagesBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -234,44 +234,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "573"
-            endingLineNumber = "573"
+            startingLineNumber = "634"
+            endingLineNumber = "634"
             landmarkName = "-alertView:clickedButtonAtIndex:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "506"
-            endingLineNumber = "506"
-            landmarkName = "-fetchAllBooks"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "515"
-            endingLineNumber = "515"
-            landmarkName = "-fetchAllBooks"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -362,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "-onClickAddPagesBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -378,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
             landmarkName = "-onClickAddPagesBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -410,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "481"
-            endingLineNumber = "481"
+            startingLineNumber = "537"
+            endingLineNumber = "537"
             landmarkName = "-fetchMyFeeds"
             landmarkType = "5">
          </BreakpointContent>
@@ -426,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "494"
-            endingLineNumber = "494"
+            startingLineNumber = "551"
+            endingLineNumber = "551"
             landmarkName = "-fetchAllBooks"
             landmarkType = "5">
          </BreakpointContent>
@@ -442,43 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "517"
-            endingLineNumber = "517"
-            landmarkName = "-fetchAllBooks"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "531"
-            endingLineNumber = "531"
-            landmarkName = "-fetchAllBooks"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "578"
-            endingLineNumber = "578"
+            startingLineNumber = "639"
+            endingLineNumber = "639"
             landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -490,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "590"
-            endingLineNumber = "590"
+            startingLineNumber = "651"
+            endingLineNumber = "651"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -506,11 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
             landmarkName = "-fetchProfessionalBooks"
             landmarkType = "5">
          </BreakpointContent>
@@ -522,11 +458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
             landmarkName = "-fetchMyBooks"
             landmarkType = "5">
          </BreakpointContent>
@@ -570,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "470142398.891514"
+            timestampString = "473250900.677528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "-pickerView:didSelectRow:inComponent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -586,11 +522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "470142398.891514"
+            timestampString = "473250900.677528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "-pickerView:didSelectRow:inComponent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -602,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "470142398.891514"
+            timestampString = "473250900.677528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "-pickerView:didSelectRow:inComponent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -618,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "470142398.891514"
+            timestampString = "473250900.677528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "-pickerView:didSelectRow:inComponent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -634,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1031"
-            endingLineNumber = "1031"
+            startingLineNumber = "1094"
+            endingLineNumber = "1094"
             landmarkName = "-mailComposeController:didFinishWithResult:error:"
             landmarkType = "5">
          </BreakpointContent>
@@ -650,11 +586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1075"
-            endingLineNumber = "1075"
+            startingLineNumber = "1138"
+            endingLineNumber = "1138"
             landmarkName = "-searchBar:textDidChange:"
             landmarkType = "5">
          </BreakpointContent>
@@ -666,12 +602,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "534"
-            endingLineNumber = "534"
-            landmarkName = "-fetchAllBooks"
+            startingLineNumber = "891"
+            endingLineNumber = "891"
+            landmarkName = "-btnEditClicked:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -682,27 +618,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "830"
-            endingLineNumber = "830"
-            landmarkName = "-btnBuyClicked:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "637"
-            endingLineNumber = "637"
+            startingLineNumber = "698"
+            endingLineNumber = "698"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -714,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "581"
-            endingLineNumber = "581"
+            startingLineNumber = "642"
+            endingLineNumber = "642"
             landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -752,22 +672,6 @@
             startingLineNumber = "205"
             endingLineNumber = "205"
             landmarkName = "-postCommentAction"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "510"
-            endingLineNumber = "510"
-            landmarkName = "-fetchAllBooks"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -826,11 +730,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "650"
-            endingLineNumber = "650"
+            startingLineNumber = "670"
+            endingLineNumber = "670"
             landmarkName = "-imageEditor:willDismissWithImageView:canceled:"
             landmarkType = "5">
          </BreakpointContent>
@@ -842,11 +746,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/RegistrationViewController.m"
-            timestampString = "470834878.491152"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
+            startingLineNumber = "578"
+            endingLineNumber = "578"
             landmarkName = "-onRegistrationButtonClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -858,12 +762,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/RegistrationViewController.m"
-            timestampString = "470834878.491152"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "568"
-            endingLineNumber = "568"
-            landmarkName = "-getStaffCellValue"
+            startingLineNumber = "703"
+            endingLineNumber = "703"
+            landmarkName = "-textFieldDidEndEditing:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -874,12 +778,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/RegistrationViewController.m"
-            timestampString = "470834878.491152"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "572"
-            endingLineNumber = "572"
-            landmarkName = "-getStaffCellValue"
+            startingLineNumber = "707"
+            endingLineNumber = "707"
+            landmarkName = "-textFieldDidEndEditing:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -890,11 +794,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473250900.677528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -938,11 +842,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "409"
-            endingLineNumber = "409"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
             landmarkName = "-fetchMyBooks"
             landmarkType = "5">
             <Locations>
@@ -986,11 +890,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
+            startingLineNumber = "488"
+            endingLineNumber = "488"
             landmarkName = "-fetchMyFeeds"
             landmarkType = "5">
          </BreakpointContent>
@@ -1002,11 +906,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/EditProfileViewController.m"
-            timestampString = "472456471.744194"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1018,11 +922,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/RegistrationViewController.m"
-            timestampString = "470834878.491152"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1162,11 +1066,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
             landmarkName = "-onFinishBookBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1178,11 +1082,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
             landmarkName = "-onFinishBookBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1194,11 +1098,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "652"
-            endingLineNumber = "652"
+            startingLineNumber = "713"
+            endingLineNumber = "713"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1290,11 +1194,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/DashboardViewController.m"
-            timestampString = "470753224.838637"
+            timestampString = "473085894.784564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "506"
-            endingLineNumber = "506"
+            startingLineNumber = "519"
+            endingLineNumber = "519"
             landmarkName = "-Follow:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1306,11 +1210,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/DashboardViewController.m"
-            timestampString = "470753224.838637"
+            timestampString = "473085894.784564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "374"
-            endingLineNumber = "374"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1322,11 +1226,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/DashboardViewController.m"
-            timestampString = "470753224.838637"
+            timestampString = "473085894.784564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "-tempFetchFollowings"
             landmarkType = "5">
          </BreakpointContent>
@@ -1338,11 +1242,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/DashboardViewController.m"
-            timestampString = "470753224.838637"
+            timestampString = "473085894.784564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1354,11 +1258,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/DashboardViewController.m"
-            timestampString = "470753224.838637"
+            timestampString = "473085894.784564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1370,11 +1274,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/DashboardViewController.m"
-            timestampString = "470753224.838637"
+            timestampString = "473085894.784564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "395"
-            endingLineNumber = "395"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1418,11 +1322,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "614"
-            endingLineNumber = "614"
+            startingLineNumber = "675"
+            endingLineNumber = "675"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1434,11 +1338,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/EditProfileViewController.m"
-            timestampString = "472456471.744194"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1514,11 +1418,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "785"
-            endingLineNumber = "785"
+            startingLineNumber = "846"
+            endingLineNumber = "846"
             landmarkName = "-animateTextField:up:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1530,11 +1434,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "781"
-            endingLineNumber = "781"
+            startingLineNumber = "842"
+            endingLineNumber = "842"
             landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1546,11 +1450,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/EditProfileViewController.m"
-            timestampString = "472461606.188482"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "857"
-            endingLineNumber = "857"
+            startingLineNumber = "895"
+            endingLineNumber = "895"
             landmarkName = "-getStaffCellValue"
             landmarkType = "5">
          </BreakpointContent>
@@ -1562,43 +1466,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "892"
-            endingLineNumber = "892"
-            landmarkName = "-btnLikeClicked:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "882"
-            endingLineNumber = "882"
-            landmarkName = "-btnLikeClicked:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "904"
-            endingLineNumber = "904"
+            startingLineNumber = "943"
+            endingLineNumber = "943"
             landmarkName = "-btnLikeClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1690,11 +1562,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "704"
-            endingLineNumber = "704"
+            startingLineNumber = "765"
+            endingLineNumber = "765"
             landmarkName = "-scrollViewDidEndDecelerating:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1706,11 +1578,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473250900.677528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1754,11 +1626,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/EditProfileViewController.m"
-            timestampString = "472461606.188482"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "877"
-            endingLineNumber = "877"
+            startingLineNumber = "915"
+            endingLineNumber = "915"
             landmarkName = "-getStaffCellValue"
             landmarkType = "5">
          </BreakpointContent>
@@ -1770,11 +1642,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/EditProfileViewController.m"
-            timestampString = "472461606.188482"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1786,11 +1658,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/EditProfileViewController.m"
-            timestampString = "472461606.188482"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "814"
-            endingLineNumber = "814"
+            startingLineNumber = "852"
+            endingLineNumber = "852"
             landmarkName = "-getStaffCellValue"
             landmarkType = "5">
          </BreakpointContent>
@@ -1802,11 +1674,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "589"
-            endingLineNumber = "589"
+            startingLineNumber = "650"
+            endingLineNumber = "650"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1834,11 +1706,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/SignUpViewController.m"
-            timestampString = "472471989.135879"
+            timestampString = "473146254.43204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "@implementation SignUpViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1882,11 +1754,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/SignUpViewController.m"
-            timestampString = "472471989.135879"
+            timestampString = "473146254.43204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
             landmarkName = "@implementation SignUpViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1898,11 +1770,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/SignUpViewController.m"
-            timestampString = "472471989.135879"
+            timestampString = "473146254.43204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "@implementation SignUpViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1914,11 +1786,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/SignUpViewController.m"
-            timestampString = "472471989.135879"
+            timestampString = "473146254.43204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "@implementation SignUpViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1930,11 +1802,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/SignUpViewController.m"
-            timestampString = "472471989.135879"
+            timestampString = "473146254.43204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "@implementation SignUpViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1946,11 +1818,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/SignUpViewController.m"
-            timestampString = "472471989.135879"
+            timestampString = "473146254.43204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "@implementation SignUpViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1962,11 +1834,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/SignUpViewController.m"
-            timestampString = "472471989.135879"
+            timestampString = "473146254.43204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "312"
-            endingLineNumber = "312"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
             landmarkName = "@implementation SignUpViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1978,11 +1850,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/SignUpViewController.m"
-            timestampString = "472471989.135879"
+            timestampString = "473146254.43204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "@implementation SignUpViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1994,11 +1866,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/SignUpViewController.m"
-            timestampString = "472471989.135879"
+            timestampString = "473146254.43204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
             landmarkName = "@implementation SignUpViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -2074,11 +1946,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "598"
-            endingLineNumber = "598"
+            startingLineNumber = "618"
+            endingLineNumber = "618"
             landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2090,59 +1962,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CreateBookViewController viewWillAppear:]"
-                  moduleName = "QAuthorApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rasika/Rasika/AuthorApp/QAuthorApp/QAuthorApp/CreateBookViewController.m"
-                  timestampString = "472479511.976998"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "76">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__43-[CreateBookViewController viewWillAppear:]_block_invoke"
-                  moduleName = "QAuthorApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rasika/Rasika/AuthorApp/QAuthorApp/QAuthorApp/CreateBookViewController.m"
-                  timestampString = "472479511.977341"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "46">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "625"
-            endingLineNumber = "625"
+            startingLineNumber = "645"
+            endingLineNumber = "645"
             landmarkName = "-imageEditor:didFinishEdittingWithImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2154,11 +1978,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "-onFinishBookBtn:"
             landmarkType = "5">
             <Locations>
@@ -2170,11 +1994,11 @@
                   moduleName = "QAuthorApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rasika/Rasika/AuthorApp/QAuthorApp/QAuthorApp/CreateBookViewController.m"
-                  timestampString = "472479511.980335"
+                  timestampString = "473255774.251673"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "361"
-                  endingLineNumber = "361"
+                  startingLineNumber = "381"
+                  endingLineNumber = "381"
                   offsetFromSymbolStart = "2288">
                </Location>
                <Location
@@ -2185,11 +2009,11 @@
                   moduleName = "QAuthorApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rasika/Rasika/AuthorApp/QAuthorApp/QAuthorApp/CreateBookViewController.m"
-                  timestampString = "472479511.980691"
+                  timestampString = "473255774.252065"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "361"
-                  endingLineNumber = "361"
+                  startingLineNumber = "381"
+                  endingLineNumber = "381"
                   offsetFromSymbolStart = "42">
                </Location>
             </Locations>
@@ -2202,11 +2026,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "-onFinishBookBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2218,39 +2042,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "356"
-            endingLineNumber = "356"
-            landmarkName = "-onFinishBookBtn:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
-            landmarkName = "-onFinishBookBtn:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "376"
@@ -2266,11 +2058,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
+            timestampString = "473235418.463421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
+            landmarkName = "-onFinishBookBtn:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QAuthorApp/CreateBookViewController.m"
+            timestampString = "473235418.463421"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
+            landmarkName = "-onFinishBookBtn:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QAuthorApp/CreateBookViewController.m"
+            timestampString = "473235418.463421"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
             landmarkName = "-onFinishBookBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2362,11 +2186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "809"
-            endingLineNumber = "809"
+            startingLineNumber = "870"
+            endingLineNumber = "870"
             landmarkName = "-btnEditClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2378,11 +2202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "819"
-            endingLineNumber = "819"
+            startingLineNumber = "880"
+            endingLineNumber = "880"
             landmarkName = "-btnEditClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2394,11 +2218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/HomeViewController.m"
-            timestampString = "472461936.859664"
+            timestampString = "473256740.239368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "822"
-            endingLineNumber = "822"
+            startingLineNumber = "883"
+            endingLineNumber = "883"
             landmarkName = "-btnEditClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2464,22 +2288,6 @@
             startingLineNumber = "159"
             endingLineNumber = "159"
             landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QAuthorApp/CreateBookViewController.m"
-            timestampString = "472478294.690965"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "-presentImageEditor"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2554,11 +2362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/SignUpViewController.m"
-            timestampString = "472390264.536803"
+            timestampString = "473146254.43204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "-getFbData"
             landmarkType = "5">
          </BreakpointContent>
@@ -2586,11 +2394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/SignUpViewController.m"
-            timestampString = "472390264.536803"
+            timestampString = "473146254.43204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "-getFbData"
             landmarkType = "5">
          </BreakpointContent>
@@ -2602,11 +2410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/EditProfileViewController.m"
-            timestampString = "472458914.083808"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2618,11 +2426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/EditProfileViewController.m"
-            timestampString = "472459011.185924"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2634,11 +2442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/EditProfileViewController.m"
-            timestampString = "472461606.188482"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2650,11 +2458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/EditProfileViewController.m"
-            timestampString = "472460787.953373"
+            timestampString = "473234815.820593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2694,7 +2502,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QAuthorApp/BookTitleViewController.m"
@@ -2816,6 +2624,118 @@
             startingLineNumber = "480"
             endingLineNumber = "480"
             landmarkName = "-imageEditor:didDismissWithImageView:canceled:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QAuthorApp/HomeViewController.m"
+            timestampString = "473256740.239368"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "898"
+            endingLineNumber = "898"
+            landmarkName = "-btnLikeClicked:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QAuthorApp/HomeViewController.m"
+            timestampString = "473256740.239368"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "546"
+            endingLineNumber = "546"
+            landmarkName = "-fetchAllBooks"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QAuthorApp/HomeViewController.m"
+            timestampString = "473250900.677528"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "-refershControlAction"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QAuthorApp/HomeViewController.m"
+            timestampString = "473256740.239368"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "557"
+            endingLineNumber = "557"
+            landmarkName = "-fetchAllBooks"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[HomeViewController fetchAllBooks]"
+                  moduleName = "QAuthorApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rasika/Rasika/AuthorApp/QAuthorApp/QAuthorApp/HomeViewController.m"
+                  timestampString = "473250076.299096"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "549"
+                  endingLineNumber = "549"
+                  offsetFromSymbolStart = "600">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__35-[HomeViewController fetchAllBooks]_block_invoke"
+                  moduleName = "QAuthorApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rasika/Rasika/AuthorApp/QAuthorApp/QAuthorApp/HomeViewController.m"
+                  timestampString = "473250076.299448"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "549"
+                  endingLineNumber = "549"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QAuthorApp/Book.m"
+            timestampString = "473250058.122054"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "-fetchBookBlockForPage::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

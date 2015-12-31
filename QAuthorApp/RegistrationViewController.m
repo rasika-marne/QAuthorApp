@@ -13,16 +13,17 @@
 @end
 
 @implementation RegistrationViewController
-@synthesize pickerData,countrySelect,authorSelect,isFacebookLogin,fbData;
+@synthesize pickerData,countrySelect,authorSelect,isFacebookLogin,fbData,userId;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self navigationMethod];
      [self.view setBackgroundColor: RGB];
     if (isFacebookLogin == YES) {
-        fbName = [fbData objectForKey:@"name"];
-        NSArray *arr = [fbName componentsSeparatedByString:@" "];
-        fbFName = [arr objectAtIndex:0];
-        fbLName = [arr objectAtIndex:1];
+       // fbName = [fbData objectForKey:@"name"];
+       // NSArray *arr = [fbName componentsSeparatedByString:@" "];
+        fbFName = [fbData objectForKey:@"first_name"];
+        fbLName = [fbData objectForKey:@"last_name"];
+
         fbEmail = [fbData objectForKey:@"email"];
         fbId = [fbData objectForKey:@"id"];
         NSDictionary *data = [fbData objectForKey:@"picture"];
@@ -33,7 +34,9 @@
         self.profilePicImg.image = fbImage;
     }
     authorNameArr = [[NSMutableArray alloc]init];
+    [authorNameArr addObject:@"Other"];
     NSMutableArray * countriesArray = [[NSMutableArray alloc] init];
+    //[countriesArray addObject:@"Other"];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier: @"en_US"];
     
     NSArray *countryArray = [NSLocale ISOCountryCodes];
@@ -112,136 +115,214 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *simpleTableIdentifier = @"editProfileCustomeCell";
-    
-    self.cell = (editProfileCustomeCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (self.cell == nil) {
+   // NSString *CellIdentifier = [NSString stringWithFormat:@"%d,%d",indexPath.section,indexPath.row];
+
+   editProfileCustomeCell *cell = (editProfileCustomeCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    if (cell == nil) {
         
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"editProfileCustomeCell" owner:self options:nil];
-        self.cell = [nib objectAtIndex:0];
+        cell = [nib objectAtIndex:0];
         
     }
     UIView* bview = [[UIView alloc] init];
     bview.backgroundColor = [UIColor clearColor];
     [tableView setBackgroundView:bview];
-    self.cell.backgroundColor=[UIColor clearColor];
-    self.cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    cell.backgroundColor=[UIColor clearColor];
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
     if(indexPath.row ==0)
     {
-        self.cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.tag=indexPath.row;
+        
         if (isFacebookLogin == YES) {
-            self.cell.editTxtFld.text = fbFName;
+           // self.cell.userInteractionEnabled = NO;
+            cell.editTxtFld.text = fbFName;
         }
         else
-            self.cell.editTxtFld.placeholder=@"First name*";
-        self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
+        {
+            cell.editTxtFld.placeholder=@"First name*";
+            
+        }
+        cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
         
         
     } else if (indexPath.row ==1) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.tag=indexPath.row;
         if (isFacebookLogin == YES) {
-            self.cell.editTxtFld.text = fbLName;
+          //  self.cell.userInteractionEnabled = NO;
+            cell.editTxtFld.text = fbLName;
         }
         else
-            self.cell.editTxtFld.placeholder=@"Last Name*";
+            cell.editTxtFld.placeholder=@"Last Name*";
         
-         self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
+         cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
         
     } else if (indexPath.row == 2) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.tag=indexPath.row;
         if (isFacebookLogin == YES) {
-            self.cell.editTxtFld.text = fbEmail;
+           // self.cell.userInteractionEnabled = NO;
+            cell.editTxtFld.text = fbEmail;
         }
         else
-            self.cell.editTxtFld.placeholder=@"Email (Username)*";
+            cell.editTxtFld.placeholder=@"Email (Username)*";
         
 
         
-        self.cell.iconImage.image=[UIImage imageNamed:@"email"];
+        cell.iconImage.image=[UIImage imageNamed:@"email"];
         
     }
     else if (indexPath.row == 3) {
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.placeholder=@"Password*";
+
+        if (isFacebookLogin == YES) {
+            // self.cell.userInteractionEnabled = NO;
+            cell.editTxtFld.text=@"Password*";
+            cell.editTxtFld.textColor = [UIColor grayColor];
+        }
+        else{
+            cell.editTxtFld.secureTextEntry = YES;
+        }
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Password*";
-        self.cell.editTxtFld.secureTextEntry = YES;
-        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
+        
+       // cell.editTxtFld.secureTextEntry = YES;
+        cell.iconImage.image=[UIImage imageNamed:@"locl"];
     }else if (indexPath.row == 4) {
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.placeholder=@"Confirm Password*";
+        if (isFacebookLogin == YES) {
+            // self.cell.userInteractionEnabled = NO;
+            cell.editTxtFld.text=@"Confirm Password*";
+            cell.editTxtFld.textColor = [UIColor grayColor];
+        }
+        else{
+            cell.editTxtFld.secureTextEntry = YES;
+        }
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Confirm Password*";
-        self.cell.editTxtFld.secureTextEntry = YES;
-        self.cell.iconImage.image=[UIImage imageNamed:@"locl"];
+              // cell.editTxtFld.secureTextEntry = YES;
+        cell.iconImage.image=[UIImage imageNamed:@"locl"];
         
     }
     else if (indexPath.row== 5) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Child Age*";
-        self.cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.placeholder=@"Child Age*";
+        if (isFacebookLogin == YES) {
+            // self.cell.userInteractionEnabled = NO;
+            cell.editTxtFld.text=@"Child Age*";
+            
+            cell.editTxtFld.textColor = [UIColor grayColor];
+
+        }
+        
+                cell.iconImage.image=[UIImage imageNamed:@"user-icon"];
         
         //self.createStaffCell.nameTxtFld.text=self.txtUserRole;
     } else if (indexPath.row == 6) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Country*";
-        self.cell.editTxtFld.inputView = countrySelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"location"];
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.placeholder=@"Country*";
+        if (isFacebookLogin == YES) {
+            cell.editTxtFld.text=@"Country*";
+            cell.editTxtFld.textColor = [UIColor grayColor];
+        }
+        
+        cell.editTxtFld.inputView = countrySelect;
+        cell.iconImage.image=[UIImage imageNamed:@"location"];
         
     } else if (indexPath.row == 7) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"City*";
-        self.cell.iconImage.image=[UIImage imageNamed:@"city"];
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.placeholder=@"City*";
+        if (isFacebookLogin == YES) {
+            cell.editTxtFld.text=@"City*";
+            cell.editTxtFld.textColor = [UIColor grayColor];
+        }
+        
+        cell.iconImage.image=[UIImage imageNamed:@"city"];
         
     }else if (indexPath.row == 8) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Language";
-        self.cell.iconImage.image=[UIImage imageNamed:@"language"];
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.placeholder=@"Language";
+        if (isFacebookLogin == YES) {
+            cell.editTxtFld.text=@"Language";
+            cell.editTxtFld.textColor = [UIColor grayColor];
+        }
+        
+
+        cell.iconImage.image=[UIImage imageNamed:@"language"];
         
     }else if (indexPath.row == 9) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Favorite Author 1";
-        self.cell.editTxtFld.inputView = authorSelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.placeholder=@"Favorite Author 1";
+        if (isFacebookLogin == YES) {
+            cell.editTxtFld.text=@"Favorite Author 1";
+            cell.editTxtFld.textColor = [UIColor grayColor];
+
+        }
+        cell.editTxtFld.inputView = authorSelect;
+        cell.iconImage.image=[UIImage imageNamed:@"author"];
         
         
     }else if (indexPath.row == 10) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Favorite Author 2";
-        self.cell.editTxtFld.inputView = authorSelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.placeholder=@"Favorite Author 2";
+        if (isFacebookLogin == YES) {
+            cell.editTxtFld.text=@"Favorite Author 2";
+            cell.editTxtFld.textColor = [UIColor grayColor];
+            
+        }
+        cell.editTxtFld.inputView = authorSelect;
+        cell.iconImage.image=[UIImage imageNamed:@"author"];
         
     }else if (indexPath.row == 11) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"Favorite Author 3";
-        self.cell.editTxtFld.inputView = authorSelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.placeholder=@"Favorite Author 3";
+        if (isFacebookLogin == YES) {
+            cell.editTxtFld.text=@"Favorite Author 3";
+            cell.editTxtFld.textColor = [UIColor grayColor];
+            
+        }
+        
+        cell.editTxtFld.inputView = authorSelect;
+        cell.iconImage.image=[UIImage imageNamed:@"author"];
     }else if (indexPath.row == 12) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"New Author 1";
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.placeholder=@"New Author 1";
+        if (isFacebookLogin == YES) {
+            cell.editTxtFld.text=@"New Author 1";
+            cell.editTxtFld.textColor = [UIColor grayColor];
+            
+        }
+       
         //  self.cell.editTxtFld.inputView = authorSelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        cell.iconImage.image=[UIImage imageNamed:@"author"];
         
         
     }else if (indexPath.row == 13) {
         
-        self.cell.editTxtFld.tag=indexPath.row;
-        self.cell.editTxtFld.placeholder=@"New Author 2";
+        cell.editTxtFld.tag=indexPath.row;
+        cell.editTxtFld.placeholder=@"New Author 2";
+        if (isFacebookLogin == YES) {
+            cell.editTxtFld.text=@"New Author 2";
+            cell.editTxtFld.textColor = [UIColor grayColor];
+        }
+
+        
         //self.cell.editTxtFld.inputView = authorSelect;
-        self.cell.iconImage.image=[UIImage imageNamed:@"author"];
+        cell.iconImage.image=[UIImage imageNamed:@"author"];
         
     }
     
     
-    return self.cell;
+    return cell;
     // 8796218363
 }
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView; {
@@ -275,30 +356,59 @@
     if (pickerView.tag == 11) {
         self.txtCountry=@"";
         self.txtCountry= [pickerData objectAtIndex:row];
-        self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
-        self.cell.editTxtFld.text=self.txtCountry;
+        self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
+        self.cell.editTxtFld.text=[pickerData objectAtIndex:row];
     }
     else if (pickerView.tag == 12){
-        
+        NSString *selectedOption = [authorNameArr objectAtIndex:row];
+       
         if (selectedIndex == 9 ) {
             self.txtfavAuth1=@"";
-            self.txtfavAuth1= [authorNameArr objectAtIndex:row];
-            self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
-            self.cell.editTxtFld.text=self.txtfavAuth1;
+
+              self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
+            if ([selectedOption isEqualToString:@"Other"]) {
+                self.cell.editTxtFld.inputView = nil;
+            }
+            else{
+                self.txtfavAuth1= [authorNameArr objectAtIndex:row];
+                
+                self.cell.editTxtFld.text=self.txtfavAuth1;
+
+            }
+            
+            
+            
             
         }
         else if (selectedIndex == 10 ) {
-            self.txtFavAuth2=@"";
-            self.txtFavAuth2= [authorNameArr objectAtIndex:row];
+             self.txtFavAuth2=@"";
             self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]];
-            self.cell.editTxtFld.text=self.txtFavAuth2;
+            if ([selectedOption isEqualToString:@"Other"]) {
+                self.cell.editTxtFld.inputView = nil;
+            }
+            else{
+                self.txtFavAuth2= [authorNameArr objectAtIndex:row];
+                //  self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]];
+                self.cell.editTxtFld.text=self.txtFavAuth2;
+            }
+            
             
         }
         else if (selectedIndex == 11 ) {
             self.txtFavAuth3=@"";
-            self.txtFavAuth3= [authorNameArr objectAtIndex:row];
             self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:11 inSection:0]];
-            self.cell.editTxtFld.text=self.txtFavAuth3;
+            if ([selectedOption isEqualToString:@"Other"]) {
+                self.cell.editTxtFld.inputView = nil;
+            }
+            else{
+                self.txtFavAuth3= [authorNameArr objectAtIndex:row];
+                //  self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]];
+                self.cell.editTxtFld.text=self.txtFavAuth3;
+            }
+
+          //  self.txtFavAuth3= [authorNameArr objectAtIndex:row];
+           // self.cell = (editProfileCustomeCell*)[self.registrationTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:11 inSection:0]];
+          //  self.cell.editTxtFld.text=self.txtFavAuth3;
             
         }
         
@@ -373,7 +483,105 @@
 
 - (IBAction)onRegistrationButtonClick:(id)sender
 {
-    [self getStaffCellValue];
+    
+    if (isFacebookLogin == YES) {
+        // PFUser *user1 = [PFUser currentUser];
+        PFQuery *query = [PFUser query];
+        [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
+        [query getObjectInBackgroundWithId:userId block:^(PFObject *object, NSError *error) {
+            if (!error) {
+                [APP_DELEGATE stopActivityIndicator];
+                NSLog(@"obj:%@",object);
+                NSLog(@"age:%@ \ncity:%@ \n country:%@",self.txtAge,self.txtCity,self.txtCountry);
+                //   UIImage *image = [self scaleAndRotateImage:self.profilePicImg.image];
+                // NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
+                //  PFFile *file = [PFFile fileWithName:@"ProfilePic.jpg" data:imageData];
+                // [object setObject:file forKey:PROFILE_PIC];
+                // [picker dismissViewControllerAnimated:YES completion:nil];
+                //  [object setObject:self.txtEmailId forKey:EMAIL_ID];
+                //  [object setObject:self.txtEmailId forKey:USERNAME];
+                
+                [object setObject:[NSNumber numberWithInt:[self.txtAge intValue]] forKey:AGE];
+                
+                [object setObject:self.txtCity forKey:CITY];
+                [object setObject:self.txtCountry forKey:COUNTRY];
+                [object setObject:self.txtLang forKey:LANGUAGE];
+                if (self.txtfavAuth1 == nil){
+                    self.txtfavAuth1 = @"";
+                    //[object setObject:self.txtfavAuth1 forKey:FAVORITE_AUTHOR1];
+                }
+                if (self.txtFavAuth2 == nil) {
+                    self.txtFavAuth2 = @"";
+                    
+                }
+                if (self.txtFavAuth3 == nil) {
+                    self.txtFavAuth3 = @"";
+                }
+                
+                [object setObject:self.txtfavAuth1 forKey:FAVORITE_AUTHOR1];
+                [object setObject:self.txtFavAuth2 forKey:FAVORITE_AUTHOR2];
+                [object setObject:self.txtFavAuth3 forKey:FAVORITE_AUTHOR3];
+                if (self.txtNewAuth1 == nil) {
+                    self.txtNewAuth1 = @"";
+                }
+                
+                if (self.txtNewAuth2 == nil) {
+                    self.txtNewAuth2 = @"";
+                }
+                
+                
+                [object setObject:self.txtNewAuth1 forKey:NEW_AUTHOR1];
+                //[object setObject:self.txtFirstName forKey:FIRST_NAME];
+                
+                [object setObject:self.txtNewAuth2 forKey:NEW_AUTHOR2];
+                
+                //  [object setObject:self.txtLastName forKey:LAST_NAME];
+                
+                
+                [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    [APP_DELEGATE stopActivityIndicator];
+                    if (!error) {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                        message:@"Profile created!!!"
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                        UIStoryboard *storyboard;
+                        if (IPAD) {
+                            storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+                        }
+                        else
+                            storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        
+                        // UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        HomeViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+                        
+                        UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+                        RearViewController *rearViewController = [[RearViewController alloc] init];
+                        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+                        SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:nav frontViewController:frontNavigationController];
+                        revealController.delegate = self;
+                        [self presentViewController:revealController animated:NO completion:nil];
+
+                    }
+                    else{
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                        message:@"ERROR!!!"
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                    }
+                    
+                }];
+            }
+        }];
+        
+        
+    }
+    else{
+        [self getStaffCellValue];
     if ([self.txtEmailId isEqualToString:@""]&&[self.txtAge isEqualToString:@""]&&[self.txtCountry isEqualToString:@""]&&[self.txtCity isEqualToString:@""]&& [self.txtPassword isEqualToString:@""]&&[self.txtConfirmPass isEqualToString:@""]&&[self.txtFirstName isEqualToString:@""]&&[self.txtLastName isEqualToString:@""]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
                                                         message:@"Fields with * sign are compulsory fields."
@@ -396,6 +604,8 @@
         [alert show];
     }
     else{
+       
+        
         [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
         
         User *user=[User createEmptyUser];
@@ -444,7 +654,7 @@
                 [alert show];
             }
         }];
-        
+      }
     }
 }
 -(void)logButtonPress:(UIButton *)button{
@@ -465,7 +675,8 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     
     selectedIndex = textField.tag;
-    // [textField setText:@""];
+    
+     [textField setText:@""];
     
     [self animateTextField: textField up: YES];
 }
@@ -490,7 +701,22 @@
     
     
     [self animateTextField: textField up: NO];
-    
+    if (selectedIndex == 5) {
+        self.txtAge = textField.text;
+        
+    }
+    else if (selectedIndex == 7){
+        self.txtCity = textField.text;
+    }
+    else if(selectedIndex == 8){
+        self.txtLang = textField.text;
+    }
+    else if (selectedIndex == 12){
+        self.txtNewAuth1 = textField.text;
+    }
+    else if (selectedIndex == 13){
+        self.txtNewAuth2 = textField.text;
+    }
 }
 - (void)animateTextField:(UITextField*)textField up:(BOOL)up {
     
@@ -529,13 +755,13 @@
         movementDistance = 240;
     }
     else if (textField.tag == 12) {
-        movementDistance = 280;
+        movementDistance = 250;
     }
     else if (textField.tag == 13) {
-        movementDistance = 320;
+        movementDistance = 280;
     }
     else if (textField.tag == 14) {
-        movementDistance = 360;
+        movementDistance = 300;
     }
     else {
         movementDistance = 00;
@@ -566,11 +792,11 @@
                 if (indexPath.row==0) {
                     
                     self.txtFirstName=[[NSString alloc]initWithFormat:@"%@",txtField.text];
-                    
-                }if (indexPath.row==1) {
+                }
+                if (indexPath.row==1) {
                     
                     self.txtLastName=[[NSString alloc]initWithFormat:@"%@",txtField.text];
-                    
+
                     
                 }if (indexPath.row==2) {
                     
@@ -579,63 +805,80 @@
                     
                 }if (indexPath.row==3) {
                     
-                    self.txtAge=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    // self.txtAge=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     
                 }if (indexPath.row==4) {
-                   
-                    self.txtCountry=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    
+                    //self.txtCountry=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     
                 }if (indexPath.row==5) {
                     
-                    self.txtCity=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    self.txtAge=[[NSString alloc]initWithFormat:@"%@",txtField.text];
                     
                     
                     
                 }if (indexPath.row==6) {
                     
-                    self.txtLang=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    self.txtCountry=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    
+                    
+                    
                     
                 }
                 if (indexPath.row==7) {
                     
+                    self.txtCity=[[NSString alloc]initWithFormat:@"%@",txtField.text];
                     
-                  //  self.txtfavAuth1=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    
+                    //self.txtfavAuth1=[[NSString alloc]initWithFormat:@"%@",txtField.text];
                     
                 }
                 if (indexPath.row==8) {
-                  
-                   // self.txtFavAuth2=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    self.txtLang=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    
+                    // self.txtFavAuth2=[[NSString alloc]initWithFormat:@"%@",txtField.text];
                     
                 }
                 if (indexPath.row==9) {
                     
-                   // self.txtFavAuth3=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    //self.txtFavAuth3=[[NSString alloc]initWithFormat:@"%@",txtField.text];
                     
                 }
                 if (indexPath.row==10) {
                     
-                    self.txtNewAuth1=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    //  self.txtNewAuth1=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                 }
                 if (indexPath.row==11) {
-                   
-                    self.txtNewAuth2=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    
+                    // self.txtNewAuth2=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                 }
                 
                 
                 if (indexPath.row==12) {
+                    self.txtNewAuth1=[[NSString alloc]initWithFormat:@"%@",txtField.text];
                     
-                    self.txtPassword=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    
+                    
+                    //self.txtPassword=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                 }
                 if (indexPath.row==13) {
                     
-                    self.txtConfirmPass=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    self.txtNewAuth2=[[NSString alloc]initWithFormat:@"%@",txtField.text];
+                    
+                    //self.txtConfirmPass=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                 }
+                // End of isKindofClass
+                
+            
+        
+
+        
                 // End of isKindofClass
             } // End of Cell Sub View
         }

@@ -156,7 +156,7 @@
         }
         else if (row == 4)
         {
-            cell.lblname.text = @"Followings";
+            cell.lblname.text = @"Following";
 
             cell.imageVw.image = [UIImage imageNamed:@"follwing"];
         }
