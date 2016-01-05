@@ -15,7 +15,7 @@
 @end
 
 @implementation ExcCommentViewController
-@synthesize commentDetailArray,datearray;
+@synthesize commentDetailArray,datearray,booksArr;
 #pragma mark -
 #pragma mark - LifeCycle Methods
 
@@ -90,7 +90,7 @@
         cell.nameLabel.text=[[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
       //  cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@",[user valueForKey:FIRST_NAME],[user valueForKey:LAST_NAME]];
         cell.doneBtn.hidden=NO;
-        [cell.doneBtn setTitle:@"Done" forState:UIControlStateNormal];
+        [cell.doneBtn setTitle:@"Cancel" forState:UIControlStateNormal];
         [cell.doneBtn addTarget:self action:@selector(commentDoneAction) forControlEvents:UIControlEventTouchUpInside];
         
         cell.postcommentBtn.hidden=NO;
@@ -185,7 +185,7 @@
     
     [self getCellValue];
     if ([self.txtCommentStr length]==0) {
-        [[[UIAlertView alloc]initWithTitle:@"Alert" message:@"Please enter some comment" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil]show];
+        [[[UIAlertView alloc]initWithTitle:@"Alert" message:@"Please enter the comment" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil]show];
         
     } else {
         
@@ -199,7 +199,8 @@
         bComment.comment = commentStr;
         [bComment saveBookCommentsBlock:^(id object, NSError *error) {
             if (!error) {
-                [[[UIAlertView alloc]initWithTitle:@"alert" message:@"Comment Posted!!!" delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"alert_ok_title", nil), nil]show];
+                isCommentPosted = YES;
+                [[[UIAlertView alloc]initWithTitle:@"alert" message:@"Comment is Posted!!!" delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil]show];
                 PFQuery *query = [PFQuery queryWithClassName:BOOK];
                 [query getObjectInBackgroundWithId:SELECTEDBOOKID block:^(PFObject *gObj, NSError *error) {
                     NSInteger count = [gObj[NUMBER_OF_COMMENTS] integerValue];
@@ -210,6 +211,19 @@
                     [gObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                         if(!error){
                             NSLog(@"book updated!!");
+                            for (int i=0;i<[booksArr1 count];i++) {
+                                Book *bObj1 = [booksArr objectAtIndex:i];
+                                //NSLog(@"\nbObj id:%@ \n gObj id:%@",bObj1.objectId,gObj.objectId);
+                                if ([bObj1.objectId isEqualToString:gObj.objectId]) {
+                                    Book *bObj = [Book convertPFObjectToBooks:gObj];
+                                    [booksArr1 replaceObjectAtIndex:i withObject:bObj];
+                                    
+                                    break;
+                                }
+                                
+                            }
+                          //  [self.bookListTableView reloadData];
+                             [self dismissViewControllerAnimated:YES completion:nil];
                             // [APP_DELEGATE stopActivityIndicator];
                             // [self onBack:nil];
                             
@@ -267,7 +281,7 @@
     }
 }
 -(void)commentDoneAction {
-    
+    isCommentPosted = NO;
     [self dismissViewControllerAnimated:YES completion:nil];
  }
 

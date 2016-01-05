@@ -547,10 +547,61 @@
 
 - (IBAction)onPhotoTap:(id)sender
 {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Add image" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Gallary",@"Choose Template", nil];
-    [sheet showInView:self.view.window];
+   // UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary;
 
+    //UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Add image" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Gallary",@"Choose Template", nil];
+   // [sheet showInView:self.view.window];
+    UIAlertController *selectAS = [UIAlertController alertControllerWithTitle:@"Add image" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
+    UIAlertAction *opt1 = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //Don't have to call another method, just put your action 1 code here. This is the power of completion handlers creating a more structured outline
+        UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary;
+        if([UIImagePickerController isSourceTypeAvailable:type]){
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+                type = UIImagePickerControllerSourceTypeCamera;
+            }
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.allowsEditing = NO;
+            picker.delegate   = self;
+            picker.sourceType = type;
+            
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+
+    }];
+    
+    UIAlertAction *opt2 = [UIAlertAction actionWithTitle:@"Photo Gallary" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //Don't have to call another method, just put your action 2 code here. This is the power of completion handlers creating a more structured outline
+        UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary;
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.allowsEditing = NO;
+            picker.delegate   = self;
+            picker.sourceType = type;
+            
+            [self presentViewController:picker animated:YES completion:nil];
+        
+
+    }];
+    UIAlertAction *opt3 = [UIAlertAction actionWithTitle:@"Choose Template" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIStoryboard *storyboard;
+        if (IPAD) {
+            storyboard=[UIStoryboard storyboardWithName:@"Main-ipad" bundle:nil];
+        }
+        else
+            storyboard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        // UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.chooseTemplateVC = (ChooseTemplateViewController *) [storyboard instantiateViewControllerWithIdentifier:@"ChooseTemplateViewController"];
+        [self  presentViewController:self.chooseTemplateVC animated:YES completion:nil];
+
+        //Don't have to call another method, just put your action 2 code here. This is the power of completion handlers creating a more structured outline
+    }];
+    [selectAS addAction:opt1];
+    [selectAS addAction:opt2];
+    [selectAS addAction:opt3];
+    [self presentViewController:selectAS animated:YES completion:nil];
+
 }
 #pragma mark- Actionsheet delegate
 

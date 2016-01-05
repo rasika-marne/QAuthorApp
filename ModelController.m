@@ -59,7 +59,7 @@
  */
 
 @implementation ModelController
-@synthesize bookId;
+@synthesize bookId,bookCreatedBy;
 -(void)dealloc {
     if( self.pdf != NULL ) CGPDFDocumentRelease( self.pdf );
 }
@@ -90,6 +90,7 @@
 {
     // Create a new view controller and pass suitable data.
     DataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"DataViewController"];
+    dataViewController.bookCreatedBy = bookCreatedBy;
     dataViewController.pageNumber = (int)index + 1;
     dataViewController.pdf = self.pdf;
       return dataViewController;

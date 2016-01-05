@@ -35,7 +35,7 @@
 @class EditBookTitleViewController;
 @class GADBannerView;
 @interface HomeViewController : GAITrackedViewController<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UISearchDisplayDelegate,UIActionSheetDelegate,MFMailComposeViewControllerDelegate>{
-    NSMutableArray *booksArray,*authorNamesArr,*searchResults,*filterdArray,*bObjectIdArr,*followingsArr,*tempBooksArr;
+    NSMutableArray *booksArray,*authorNamesArr,*searchResults,*filterdArray,*bObjectIdArr,*followingsArr,*tempBooksArr,*bookLikeIds;
     Book *bookObj;
     int movementDistance,pageNumber;
     NSInteger likeCount,commentCount,count;
@@ -43,6 +43,9 @@
     AgeRange *ageRange;
     BOOL myBooksClicked,professionalClicked;
 }
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *dividerTopCon;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ageBarTopCon;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarTopCon;
 @property (weak, nonatomic) IBOutlet UILabel *authorOftheWeekLbl;
 @property (strong ,nonatomic)UIRefreshControl *refreshControl;
 

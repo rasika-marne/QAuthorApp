@@ -21,7 +21,7 @@
    
 
     [self navigationMethod];
-        bookDetailsArray = [[NSMutableArray alloc]init];
+            bookDetailsArray = [[NSMutableArray alloc]init];
     bookDet = [BookDetails createEmptyObject];
        self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     self.pageViewController.delegate = self;
@@ -88,6 +88,7 @@
     if (!_modelController) {
         _modelController = [[ModelController alloc] init];
         _modelController.bookId = bookObj2.objectId;
+        _modelController.bookCreatedBy = bookObj2.created_by;
     }
     return _modelController;
 }

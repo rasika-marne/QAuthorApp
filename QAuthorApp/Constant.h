@@ -57,9 +57,11 @@
 #define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 NSString *SELECTEDBOOKID,*SelectedSegmentvalue;
 NSInteger borderImageFlag;
+NSMutableArray *booksArr1;
 //static NSString *const kGAIScreenName = @"Screen";
 UIImage *selectedTemplate;
 UIImage *selectedBorder;
+BOOL isCommentPosted;
 typedef void (^UserIdResultBlock)(id object, NSError *error);
 #define KMessageCount @"messageCnt"
 //---------- User Constant -------//
@@ -108,6 +110,8 @@ typedef void (^UserIdResultBlock)(id object, NSError *error);
 #define PRICE               @"price"
 #define CREATED_AT          @"createdAt"
 #define BORDER_ID           @"borderId"
+#define CREATED_BY           @"created_by"
+
 
 
 //---------- BookDetails Constant -------//

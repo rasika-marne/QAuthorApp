@@ -29,6 +29,7 @@ typedef void (^arrayResultBlock)(NSMutableArray *objects, NSError *error);
 @property (nonatomic, strong) PFFile *coverPic;
 @property (nonatomic, strong) PFFile *pdfFile;
 @property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSString *created_by;
 @property (nonatomic, strong) NSNumber *ageFrom;
 @property (nonatomic, strong) NSNumber *ageTo;
 @property (nonatomic, strong) NSNumber *noOfLikes;

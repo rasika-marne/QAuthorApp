@@ -56,6 +56,7 @@
     
 }
 @property (nonatomic, strong) BookDetails *bookDetails;
+@property (nonatomic, strong) NSString* bookCreatedBy;
 - (DataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(DataViewController *)viewController;
 @property CGPDFDocumentRef pdf;

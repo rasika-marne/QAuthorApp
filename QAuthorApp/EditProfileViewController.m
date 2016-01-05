@@ -582,7 +582,7 @@
     
     selectedIndex = textField.tag;
    
-    // [textField setText:@""];
+     [textField setText:@""];
     
     [self animateTextField: textField up: YES];
 }
@@ -856,16 +856,16 @@
                 
                 if (indexPath.row==0) {
                     
-                    self.txtFirstName=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    self.txtFirstName=[[NSString alloc]initWithFormat:@"%@",[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                 }if (indexPath.row==1) {
                     
-                    self.txtLastName=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    self.txtLastName=[[NSString alloc]initWithFormat:@"%@",[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     
                 }if (indexPath.row==2) {
                     
-                    self.txtEmailId=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    self.txtEmailId=[[NSString alloc]initWithFormat:@"%@",[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     
                 }if (indexPath.row==3) {
@@ -880,13 +880,13 @@
                     
                 }if (indexPath.row==5) {
                     
-                    self.txtAge=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    self.txtAge=[[NSString alloc]initWithFormat:@"%@",[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     
                     
                 }if (indexPath.row==6) {
                     
-                    self.txtCountry=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    self.txtCountry=[[NSString alloc]initWithFormat:@"%@",[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
 
                     
@@ -894,14 +894,14 @@
                 }
                 if (indexPath.row==7) {
                     
-                    self.txtCity=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    self.txtCity=[[NSString alloc]initWithFormat:@"%@",[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
 
                     //self.txtfavAuth1=[[NSString alloc]initWithFormat:@"%@",txtField.text];
                     
                 }
                 if (indexPath.row==8) {
-                    self.txtLang=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    self.txtLang=[[NSString alloc]initWithFormat:@"%@",[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     // self.txtFavAuth2=[[NSString alloc]initWithFormat:@"%@",txtField.text];
                     
@@ -924,7 +924,7 @@
                 
                 
                 if (indexPath.row==12) {
-                    self.txtNewAuth1=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    self.txtNewAuth1=[[NSString alloc]initWithFormat:@"%@",[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
 
                     
@@ -933,7 +933,7 @@
                 }
                 if (indexPath.row==13) {
                     
-                    self.txtNewAuth2=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
+                    self.txtNewAuth2=[[NSString alloc]initWithFormat:@"%@",[userData valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     
                     //self.txtConfirmPass=[[NSString alloc]initWithFormat:@"%@",[dictionary valueForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
                     

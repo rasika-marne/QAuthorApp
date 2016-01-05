@@ -24,4 +24,5 @@
 @property (weak, nonatomic) IBOutlet UITableView *excCommentTableView;
 @property (strong,nonatomic)NSString *currentDateNTimeSTR,*txtNameStr,*txtCommentStr;
 @property (strong,nonatomic)NSMutableArray *commentListArray,*commentDetailArray,*datearray;
+@property (strong,nonatomic)NSMutableArray *booksArr;
 @end

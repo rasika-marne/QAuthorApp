@@ -9,7 +9,7 @@
 #import "Book.h"
 
 @implementation Book
-@synthesize title,genre,authorId,status,shortDesc,type,createdAt,borderId;
+@synthesize title,genre,authorId,status,shortDesc,type,createdAt,borderId,created_by;
 @synthesize coverPic,noOfComments,noOfLikes,ageFrom,ageTo,pdfFile,eCommerceUrl,price,authorName;
 
 +(Book *)createEmptyObject{
@@ -36,6 +36,7 @@
     note.borderId = IS_POPULATED_STRING([pobj objectForKey:BORDER_ID])?[pobj objectForKey:BORDER_ID]:@"";
     note.eCommerceUrl = IS_POPULATED_STRING([pobj objectForKey:ECOMMERCE_URL])?[pobj objectForKey:ECOMMERCE_URL]:@"";
     note.price = IS_POPULATED_STRING([pobj objectForKey:PRICE])?[pobj objectForKey:PRICE]:@"";
+    note.created_by = IS_POPULATED_STRING([pobj objectForKey:CREATED_BY])?[pobj objectForKey:CREATED_BY]:@"";
 
     note.shortDesc = IS_POPULATED_STRING([pobj objectForKey:SHORT_DESC])?[pobj objectForKey:SHORT_DESC]:@"";
 
@@ -76,6 +77,7 @@
     [pObj setObject:IS_POPULATED_STRING(self.eCommerceUrl)?self.eCommerceUrl:@"" forKey:ECOMMERCE_URL];
     [pObj setObject:IS_POPULATED_STRING(self.authorName)?self.authorName:@"" forKey:AUTHOR_NAME];
     [pObj setObject:IS_POPULATED_STRING(self.shortDesc)?self.shortDesc:@"" forKey:SHORT_DESC];
+    [pObj setObject:IS_POPULATED_STRING(self.created_by)?self.created_by:@"" forKey:CREATED_BY];
 
    // [pObj setObject:[NSDate date] forKey:EVENTS_TIME];
     [pObj setObject:self.ageFrom?self.ageFrom:[NSNumber numberWithInt:0] forKey:AGE_FROM];

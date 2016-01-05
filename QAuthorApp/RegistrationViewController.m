@@ -717,6 +717,17 @@
     else if (selectedIndex == 13){
         self.txtNewAuth2 = textField.text;
     }
+    else if(selectedIndex == 9){
+        self.txtfavAuth1 = textField.text;
+    }
+    else if(selectedIndex == 10){
+        self.txtFavAuth2 = textField.text;
+
+    }
+    else if(selectedIndex == 11){
+        self.txtFavAuth3 = textField.text;
+
+    }
 }
 - (void)animateTextField:(UITextField*)textField up:(BOOL)up {
     

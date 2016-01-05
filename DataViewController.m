@@ -55,7 +55,7 @@
 @end
 
 @implementation DataViewController
-@synthesize audioFile,bookId;
+@synthesize audioFile,bookId,bookCreatedBy;
 -(void) dealloc {
     if( self.page != NULL ) CGPDFPageRelease( self.page );
 }
@@ -64,7 +64,19 @@
 {
     [super viewDidLoad];
     [self navigationMethod];
-   
+    if ([bookCreatedBy isEqualToString:@"WEBAPP"]) {
+        self.currentTimeSlider.hidden = YES;
+        self.playButton.hidden = YES;
+        self.duration.hidden = YES;
+        self.timeElapsed.hidden = YES;
+    }
+    else{
+        self.currentTimeSlider.hidden = NO;
+        self.playButton.hidden = NO;
+        self.duration.hidden = NO;
+        self.timeElapsed.hidden = NO;
+    }
+
 self.title=[NSString stringWithFormat:@"Page %d",self.pageNumber];
     // [self.view setBackgroundColor: RGB];
     if ([self.audioPlayer isPlaying] == YES) {

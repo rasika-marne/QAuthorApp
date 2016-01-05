@@ -303,7 +303,7 @@
             //[self displayTable:objects];
             
         } else {
-             [flagArray addObject:@"0"];
+            // [flagArray addObject:@"0"];
             // Log details of the failure
             /*UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:ALERT
              message:[error.userInfo objectForKey:NSLocalizedString(@"common_error_str", nil)]
@@ -556,6 +556,7 @@
     NSLog(@"Stop unFollowing");
    // NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
    // PFObject *obj = [autorsArray objectAtIndex:indexPath.row];
+    NSLog(@"user id:%@ \n followingId:%@",[[NSUserDefaults standardUserDefaults]objectForKey:USER_ID],followingId);
     [APP_DELEGATE startActivityIndicator:APP_DELEGATE.window];
     
     PFQuery *userQuery = [PFQuery queryWithClassName:FAN_FOLLOWERS];

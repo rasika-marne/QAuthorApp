@@ -59,6 +59,8 @@
 @property (nonatomic, strong) StoryAudioPlayer *audioPlayerObject;
 @property (nonatomic, strong) NSString* storySoundFilePath;
 @property (nonatomic, strong) NSString* bookId;
+@property (nonatomic, strong) NSString* bookCreatedBy;
+
 @property (strong) IBOutlet PDFScrollView* scrollView;
 @property (nonatomic, strong) YMCAudioPlayer *audioPlayer;
 @property (nonatomic, strong) PFFile *audioFile;
