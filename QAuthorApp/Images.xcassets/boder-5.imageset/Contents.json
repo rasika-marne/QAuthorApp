@@ -2,26 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "all_auth_select.png",
+      "filename" : "boder-5.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "all_auth_select@2x.png",
+      "filename" : "boder-5@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "all_auth_select@3x.png",
+      "filename" : "boder-5@3x.png",
       "scale" : "3x"
-    },
-    {
-      "idiom" : "ipad",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "ipad",
-      "scale" : "2x"
     }
   ],
   "info" : {

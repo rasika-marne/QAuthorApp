@@ -288,7 +288,8 @@ self.title=[NSString stringWithFormat:@"Page %d",self.pageNumber];
 
 -(void)viewWillAppear:(BOOL)animated {
     // Disable zooming if our pages are currently shown in landscape
-    if( self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown ) {
+   // [self.scrollView setUserInteractionEnabled:YES];
+    if( [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationPortrait || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationPortraitUpsideDown ) {
         [self.scrollView setUserInteractionEnabled:YES];
     } else {
         [self.scrollView setUserInteractionEnabled:NO];

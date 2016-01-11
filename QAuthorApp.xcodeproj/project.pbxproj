@@ -123,6 +123,8 @@
 		FD649F681C1704CB0079E524 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD649F671C1704CB0079E524 /* libz.tbd */; };
 		FD649F6A1C1704D70079E524 /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD649F691C1704D70079E524 /* libz.1.1.3.tbd */; };
 		FD649F6C1C1704E60079E524 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD649F6B1C1704E60079E524 /* libsqlite3.tbd */; };
+		FD7942511C3F832B00EC7440 /* border5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD7942501C3F832B00EC7440 /* border5.jpg */; };
+		FD7942531C3F88C300EC7440 /* template4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD7942521C3F88C300EC7440 /* template4.jpg */; };
 		FD7B8DF11BCBC6DD0065925D /* BookComment.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7B8DF01BCBC6DD0065925D /* BookComment.m */; };
 		FD7B8DF41BCBD53D0065925D /* BookLikes.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7B8DF31BCBD53D0065925D /* BookLikes.m */; };
 		FD7C6C9B1BBA887E00887E2D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7C6C9A1BBA887E00887E2D /* AdSupport.framework */; };
@@ -157,6 +159,7 @@
 		FDBB130F1C3BB7060020E865 /* template2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FDBB130C1C3BB7060020E865 /* template2.jpg */; };
 		FDBB13101C3BB7060020E865 /* template3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FDBB130D1C3BB7060020E865 /* template3.jpg */; };
 		FDCDD8E31C1FEA1B009104AF /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDCDD8E21C1FEA1B009104AF /* Parse.framework */; };
+		FDCF7A6F1C43781800B1621A /* template5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FDCF7A6E1C43781800B1621A /* template5.jpg */; };
 		FDE4D8BD1BC63BB600BFB646 /* BookDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE4D8BC1BC63BB500BFB646 /* BookDetailsViewController.m */; };
 		FDE4D8C51BC682C100BFB646 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE4D8C41BC682C100BFB646 /* QuickLook.framework */; };
 		FDED84F51BC7C661000FA50B /* editProfileCustomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDED84F41BC7C661000FA50B /* editProfileCustomeCell.m */; };
@@ -367,6 +370,8 @@
 		FD649F671C1704CB0079E524 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		FD649F691C1704D70079E524 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		FD649F6B1C1704E60079E524 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		FD7942501C3F832B00EC7440 /* border5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = border5.jpg; sourceTree = "<group>"; };
+		FD7942521C3F88C300EC7440 /* template4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = template4.jpg; sourceTree = "<group>"; };
 		FD7B8DEF1BCBC6DD0065925D /* BookComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookComment.h; sourceTree = "<group>"; };
 		FD7B8DF01BCBC6DD0065925D /* BookComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookComment.m; sourceTree = "<group>"; };
 		FD7B8DF21BCBD53D0065925D /* BookLikes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookLikes.h; sourceTree = "<group>"; };
@@ -420,6 +425,7 @@
 		FDBB130C1C3BB7060020E865 /* template2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = template2.jpg; sourceTree = "<group>"; };
 		FDBB130D1C3BB7060020E865 /* template3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = template3.jpg; sourceTree = "<group>"; };
 		FDCDD8E21C1FEA1B009104AF /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		FDCF7A6E1C43781800B1621A /* template5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = template5.jpg; sourceTree = "<group>"; };
 		FDE4D8BB1BC63BB500BFB646 /* BookDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailsViewController.h; sourceTree = "<group>"; };
 		FDE4D8BC1BC63BB500BFB646 /* BookDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailsViewController.m; sourceTree = "<group>"; };
 		FDE4D8C41BC682C100BFB646 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
@@ -980,6 +986,8 @@
 		FD85DF431C1590510034A9B0 /* Template_images */ = {
 			isa = PBXGroup;
 			children = (
+				FDCF7A6E1C43781800B1621A /* template5.jpg */,
+				FD7942521C3F88C300EC7440 /* template4.jpg */,
 				FDBB130B1C3BB7060020E865 /* template1.jpg */,
 				FDBB130C1C3BB7060020E865 /* template2.jpg */,
 				FDBB130D1C3BB7060020E865 /* template3.jpg */,
@@ -990,6 +998,7 @@
 		FD85DF5D1C15AC9E0034A9B0 /* border_images */ = {
 			isa = PBXGroup;
 			children = (
+				FD7942501C3F832B00EC7440 /* border5.jpg */,
 				FDBB13031C3BB6EC0020E865 /* border1.jpg */,
 				FDBB13041C3BB6EC0020E865 /* border2.jpg */,
 				FDBB13051C3BB6EC0020E865 /* border3.jpg */,
@@ -1266,16 +1275,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD1367291BEB4AC300F9639F /* AvenirLTStd-Book.otf in Resources */,
+				FDCF7A6F1C43781800B1621A /* template5.jpg in Resources */,
 				FD1367271BEB4AC300F9639F /* AvenirLTStd-Black.otf in Resources */,
 				FDB99EB01C1ABE1C000BBAFF /* menu-icon.png in Resources */,
 				FD2CDCE41BB5078400AD50AF /* Main.storyboard in Resources */,
 				FD2CDCE91BB5078400AD50AF /* LaunchScreen.xib in Resources */,
 				FD03CDCA1BFC8DE600A438C3 /* GoogleService-Info.plist in Resources */,
 				FDB99EB11C1ABE1C000BBAFF /* menu-icon@2x.png in Resources */,
+				FD7942511C3F832B00EC7440 /* border5.jpg in Resources */,
 				FD1DABA71C046FC700D45379 /* Main-ipad.storyboard in Resources */,
 				FD2CDD911BB561B600AD50AF /* CLImageEditor.bundle in Resources */,
 				FDBB13071C3BB6EC0020E865 /* border1.jpg in Resources */,
 				FD9F7B8A1BC3E6F1002D629F /* RearViewController.xib in Resources */,
+				FD7942531C3F88C300EC7440 /* template4.jpg in Resources */,
 				FD317D5F1C1966E7001E9286 /* LibraryFile in Resources */,
 				FDBB130F1C3BB7060020E865 /* template2.jpg in Resources */,
 				FDBB13101C3BB7060020E865 /* template3.jpg in Resources */,

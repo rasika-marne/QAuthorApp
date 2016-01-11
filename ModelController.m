@@ -139,12 +139,42 @@
             bookObj = [Book convertPFObjectToBooks:object];
             PFFile *pdf = bookObj.pdfFile;
             bookPdf = pdf;
+            [bookPdf getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+                if(!error){
+                    CFDataRef myPDFData = (__bridge CFDataRef) data;
+                    CGDataProviderRef provider = CGDataProviderCreateWithCFData(myPDFData);
+                   self.pdf = CGPDFDocumentCreateWithProvider(provider);
+                    self.numberOfPages = (int)CGPDFDocumentGetNumberOfPages( self.pdf );
+                    if( self.numberOfPages % 2 ) self.numberOfPages++;
+                    [APP_DELEGATE stopActivityIndicator];
+                }
+                else{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR!!"
+                                                                    message:@"Book Cannot open!!!"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                     [APP_DELEGATE stopActivityIndicator];
+                }
+            }];
+          /*  NSLog(@"url:%@",bookPdf.url);
+            //Display PDF
+            //CFURLRef pdfURL = CFURLCreateWithFileSystemPath (NULL, (CFStringRef)bookPdf.url, kCFURLPOSIXPathStyle, FALSE);
             NSURL *pdfURL = [NSURL URLWithString:bookPdf.url];
             // NSURL *pdfURL = [[NSBundle mainBundle] URLForResource:@"input_pdf.pdf" withExtension:nil];
             self.pdf = CGPDFDocumentCreateWithURL( (__bridge CFURLRef) pdfURL );
+           // self.pdf = CGPDFDocumentCreateWithURL(  pdfURL );
+
+            if (self.pdf == NULL) // Check for non-NULL CGPDFDocRef
+            {
+                if (CGPDFDocumentIsEncrypted(self.pdf) == TRUE) // Encrypted
+                {
+                }
+            }
             self.numberOfPages = (int)CGPDFDocumentGetNumberOfPages( self.pdf );
-            if( self.numberOfPages % 2 ) self.numberOfPages++;
-            [APP_DELEGATE stopActivityIndicator];
+            if( self.numberOfPages % 2 ) self.numberOfPages++;*/
+           // [APP_DELEGATE stopActivityIndicator];
 
            // [self init];
             

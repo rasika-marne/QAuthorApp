@@ -126,7 +126,7 @@
     
     // Center the image as it becomes smaller than the size of the screen.
     
-    CGSize boundsSize = self.bounds.size;
+  /*  CGSize boundsSize = self.bounds.size;
         
     CGRect frameToCenter = self.tiledPDFView.frame;
     
@@ -153,7 +153,7 @@
      //To handle the interaction between CATiledLayer and high resolution screens, set the tiling view's contentScaleFactor to 1.0.
     // If this step were omitted, the content scale factor would be 2.0 on high resolution screens, which would cause the CATiledLayer to ask for tiles of the wrong scale.
     
-    self.tiledPDFView.contentScaleFactor = 1.0;
+    self.tiledPDFView.contentScaleFactor = 1.0;*/
 }
 
 

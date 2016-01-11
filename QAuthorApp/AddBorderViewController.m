@@ -113,7 +113,7 @@
 -(void)selectBorder{
     
     selectedBorder = [[UIImage alloc]init];
-    selectedBorder = [UIImage imageNamed:[NSString stringWithFormat:@"border%d.jpg",borderImageFlag]];
+    selectedBorder = [UIImage imageNamed:[NSString stringWithFormat:@"border%ld.jpg",(long)borderImageFlag]];
     
     [self dismissViewControllerAnimated:YES completion:nil];
     

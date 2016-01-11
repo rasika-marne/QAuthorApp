@@ -36,6 +36,7 @@
    // [self setupMenuBarButtonItems];
     ageRange = [AgeRange createEmptyObject];
     pickerData = [[NSMutableArray alloc]init];
+    [pickerData addObject:@"None"];
    // NSLog(@"user age:%d",[user.age intValue]);
     // NSArray *rangeArr;
     [ageRange fetchAgeRangeBlock:^(NSMutableArray *objects, NSError *error) {
@@ -123,58 +124,66 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
 {
     //Write the required logic here that should happen after you select a row in Picker View.
-    self.ageRangeTextField.text = [pickerData objectAtIndex:row];
-    [[self view]endEditing:YES];
-    NSArray *arr = [self.ageRangeTextField.text componentsSeparatedByString:@"-"];
-    NSString *ageFrom = [arr objectAtIndex:0];
-    NSString *ageTo = [arr objectAtIndex:1];
-    PFQuery *query2 = [PFQuery queryWithClassName:BOOK];
-    [query2 whereKey:AGE_FROM equalTo:[NSNumber numberWithInt:[ageFrom intValue]]];
-    [query2 whereKey:AGE_TO equalTo:[NSNumber numberWithInt:[ageTo intValue]]];
-    [query2 includeKey:AUTHOR_ID];
-    [query2 orderByDescending:NUMBER_OF_LIKES];
-
-    //[query2 includeKey:AUTHOR_ID];
-    [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        NSMutableArray *results=[[NSMutableArray alloc] init];
-        for (PFObject *obj in objects) {
-            Book *events=[Book convertPFObjectToBooks:obj];
-            //  User *author = [];
-            [results addObject:events];
-            NSLog(@"book obj:%@",events);
-            NSLog(@"res cnt:%lu",(unsigned long)[results count]);
-        }
-        booksArray = results;
-        if ([booksArray count]>0) {
-            authorNamesArr = [[NSMutableArray alloc]init];
-            for (Book *bObj in booksArray) {
-                User *userObj=[User convertPFObjectToUser:bObj.authorId forNote:NO];
-                authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
-                             ];
-                // if ([authorNamesArr containsObject:authorName]) {
-                // continue;                            }
-                // else{
-                [authorNamesArr addObject:authorName];
-                //}
-                
+    if ([[pickerData objectAtIndex:row] isEqualToString:@"None"]) {
+        self.ageRangeTextField.text = @"";
+        [[self view]endEditing:YES];
+    }
+    else{
+        self.ageRangeTextField.text = [pickerData objectAtIndex:row];
+        [[self view]endEditing:YES];
+        NSArray *arr = [self.ageRangeTextField.text componentsSeparatedByString:@"-"];
+        NSString *ageFrom = [arr objectAtIndex:0];
+        NSString *ageTo = [arr objectAtIndex:1];
+        PFQuery *query2 = [PFQuery queryWithClassName:BOOK];
+        [query2 whereKey:AGE_FROM equalTo:[NSNumber numberWithInt:[ageFrom intValue]]];
+        [query2 whereKey:AGE_TO equalTo:[NSNumber numberWithInt:[ageTo intValue]]];
+        [query2 includeKey:AUTHOR_ID];
+        [query2 orderByDescending:NUMBER_OF_LIKES];
+        
+        //[query2 includeKey:AUTHOR_ID];
+        [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            NSMutableArray *results=[[NSMutableArray alloc] init];
+            for (PFObject *obj in objects) {
+                Book *events=[Book convertPFObjectToBooks:obj];
+                //  User *author = [];
+                [results addObject:events];
+                NSLog(@"book obj:%@",events);
+                NSLog(@"res cnt:%lu",(unsigned long)[results count]);
+            }
+            booksArray = results;
+            if ([booksArray count]>0) {
+                authorNamesArr = [[NSMutableArray alloc]init];
+                for (Book *bObj in booksArray) {
+                    User *userObj=[User convertPFObjectToUser:bObj.authorId forNote:NO];
+                    authorName =[NSString stringWithFormat:@"%@ %@",userObj.firstName,userObj.lastName
+                                 ];
+                    // if ([authorNamesArr containsObject:authorName]) {
+                    // continue;                            }
+                    // else{
+                    [authorNamesArr addObject:authorName];
+                    //}
+                    
+                    
+                }
+                [self.bookListTableView reloadData];
+            }
+            else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                message:@"No books right now."
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                alert.tag = 11;
+                [alert show];
                 
             }
-            [self.bookListTableView reloadData];
-        }
-        else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"No books right now."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            alert.tag = 11;
-            [alert show];
+            
+            NSLog(@"my books cnt:%lu",(unsigned long)[booksArray count]);
+        }];
 
-        }
-        
-        NSLog(@"my books cnt:%lu",(unsigned long)[booksArray count]);
-    }];
-    //    [languageSelect removeFromSuperview];
+
+    }
+           //    [languageSelect removeFromSuperview];
 }
 
 -(void)viewWillAppear:(BOOL)animated {

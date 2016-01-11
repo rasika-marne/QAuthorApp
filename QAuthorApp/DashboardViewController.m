@@ -28,7 +28,7 @@
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     
-    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+    UIBarButtonItem *leftRevealButtonItem = [[UIBarButtonItem alloc] initWithImage:myImage style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
     
 
     self.navigationItem.leftBarButtonItem = leftRevealButtonItem;
@@ -285,6 +285,7 @@
                     
                 }
             }
+            NSLog(@"flag Arr:%@",flagArray);
         
             if (self.autorsArray.count==0) {
                 
@@ -370,6 +371,13 @@
             NSNumber *age = [[autorsArray objectAtIndex:indexPath.row] valueForKey:AGE];
             cell.ageLabel.text = [age stringValue];
             if ([[flagArray objectAtIndex:indexPath.row] isEqualToString:@"1"]) {
+                cell.followBtn.selected = YES;
+                
+            }
+            else{
+                 cell.followBtn.selected = NO;
+            }
+         /*   if ([[flagArray objectAtIndex:indexPath.row] isEqualToString:@"1"]) {
                 [cell.followBtn setBackgroundImage:[UIImage imageNamed:@"follow_button-select"] forState:UIControlStateNormal];
                [cell.followBtn setTitleColor:RGB forState:UIControlStateNormal];
                 [cell.followBtn setTitle:@"Unfollow" forState:UIControlStateNormal];
@@ -377,9 +385,11 @@
                 // [cell.followBtn addTarget:self action:@selector(UnFollow:) forControlEvents:UIControlEventTouchUpInside];
                 
             }else{
+                [cell.followBtn setBackgroundImage:[UIImage imageNamed:@"follow_button"] forState:UIControlStateNormal];
+                [cell.followBtn setTitleColor:RGB forState:UIControlStateNormal];
                 [cell.followBtn setTitle:@"Follow" forState:UIControlStateNormal];
               //  [cell.followBtn addTarget:self action:@selector(Follow:) forControlEvents:UIControlEventTouchUpInside];
-            }
+            }*/
             cell.followBtn.tag = indexPath.row;
     }
         if ([SelectedSegmentvalue isEqualToString:@"Followers"]) {
@@ -457,14 +467,24 @@
                             }
                         }];
                     }
-                    
                     if ([[flagArray objectAtIndex:indexPath.row] isEqualToString:@"1"]) {
+                        cell.followBtn.selected = YES;
+                        
+                    }
+                    else{
+                        cell.followBtn.selected = NO;
+                    }
+
+                  /*  if ([[flagArray objectAtIndex:indexPath.row] isEqualToString:@"1"]) {
                         [cell.followBtn setBackgroundImage:[UIImage imageNamed:@"follow_button-select"] forState:UIControlStateNormal];
                         [cell.followBtn setTitleColor:RGB forState:UIControlStateNormal];
                         [cell.followBtn setTitle:@"Unfollow" forState:UIControlStateNormal];
                     }else{
+                        [cell.followBtn setBackgroundImage:[UIImage imageNamed:@"follow_button"] forState:UIControlStateNormal];
+                        [cell.followBtn setTitleColor:RGB forState:UIControlStateNormal];
+
                         [cell.followBtn setTitle:@"Follow" forState:UIControlStateNormal];
-                    }
+                    }*/
                 }
             }];
             
